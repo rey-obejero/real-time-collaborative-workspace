@@ -1,7 +1,9 @@
 using System.Security.Claims;
 using KnowledgeManagementApp.Api.Application.Dtos;
+using KnowledgeManagementApp.Api.Application.Features.Workspaces;
 using KnowledgeManagementApp.Api.Application.Interfaces;
 using KnowledgeManagementApp.Api.Web.Extensions;
+using KnowledgeManagementApp.Api.Web.Features.Workspaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -56,6 +58,28 @@ public class WorkspaceController : ControllerBase
         var result = await _workspaceService.RetrieveAsync(userId);
 
         return result.ToActionResult<IEnumerable<WorkspaceResultDto>>(value => Ok(value));
+    }
+
+    [Authorize]
+    [HttpPost("{workspaceId:Guid}/members", Name = "AddWorkspaceMember")]
+    [ProducesResponseType<WorkspaceMemberDto>(StatusCodes.Status201Created)]
+    [ProducesResponseType<ProblemDetails>(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType<ProblemDetails>(StatusCodes.Status403Forbidden)]
+    [ProducesResponseType<ProblemDetails>(StatusCodes.Status404NotFound)]
+    public async Task<IActionResult> AddWorkspaceMember(
+        [FromRoute] Guid workspaceId,
+        [FromBody] AddWorkspaceMemberRequestDto request
+    )
+    {
+        var result = await _workspaceService.AddWorkspaceMemberAsync(
+            workspaceId,
+            request.UserId,
+            request.Role
+        );
+
+        return result.ToActionResult<WorkspaceMemberDto>(value =>
+            StatusCode(StatusCodes.Status201Created, value)
+        );
     }
 
     [Authorize]

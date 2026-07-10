@@ -11,6 +11,7 @@ public static class ServiceCollectionExtensions
     {
         services.AddScoped<IAuthenticationService, AuthenticationService>();
         services.AddScoped<IWorkspaceService, WorkspaceService>();
+        services.AddScoped<IPermissionService, PermissionService>();
         services.AddScoped<IEntryService, EntryService>();
 
         services.AddScoped<IUserMapper, UserMapper>();

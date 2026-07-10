@@ -26,6 +26,7 @@ public static class ResultExtensions
             ErrorType.Validation => new BadRequestObjectResult(error),
             ErrorType.NotFound => new NotFoundObjectResult(error),
             ErrorType.Conflict => new ConflictObjectResult(error),
+            ErrorType.Forbidden => new ObjectResult(error) { StatusCode = 403 },
             _ => new ObjectResult(error) { StatusCode = 500 },
         };
     }

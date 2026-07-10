@@ -2,6 +2,7 @@ using KnowledgeManagementApp.Api.Application.Interfaces;
 using KnowledgeManagementApp.Api.Domain.Interfaces;
 using KnowledgeManagementApp.Api.Infrastructure.Auth;
 using KnowledgeManagementApp.Api.Infrastructure.Persistence;
+using KnowledgeManagementApp.Api.Infrastructure.Persistence.Repositories;
 using KnowledgeManagementApp.Api.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -35,6 +36,9 @@ public static class InfrastructureServiceExtensions
 
         services.AddScoped<IUserRepository, UserRepository>();
         services.AddScoped<IWorkspaceRepository, WorkspaceRepository>();
+        services.AddScoped<IWorkspaceMemberRepository, WorkspaceMemberRepository>();
+        services.AddScoped<IRoleRepository, RoleRepository>();
+        services.AddScoped<IPermissionRepository, PermissionRepository>();
         services.AddScoped<IEntryRepository, EntryRepository>();
 
         services.Configure<JwtOptions>(configuration.GetSection(("Jwt")));

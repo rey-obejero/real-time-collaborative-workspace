@@ -1,4 +1,5 @@
 using KnowledgeManagementApp.Api.Application.Dtos;
+using KnowledgeManagementApp.Api.Application.Features.Workspaces;
 using KnowledgeManagementApp.Api.Application.Interfaces;
 using KnowledgeManagementApp.Api.Application.Mappers;
 using KnowledgeManagementApp.Api.Domain.Entities;
@@ -10,11 +11,26 @@ namespace KnowledgeManagementApp.Api.Application.Services;
 public class WorkspaceService : IWorkspaceService
 {
     private readonly IWorkspaceRepository _workspaceRepository;
+    private readonly IWorkspaceMemberRepository _workspaceMemberRepository;
+    private readonly IRoleRepository _roleRepository;
+    private readonly IUserContext _userContext;
+    private readonly IPermissionService _permissionService;
     private readonly IUnitOfWork _unitOfWork;
 
-    public WorkspaceService(IWorkspaceRepository workspaceRepository, IUnitOfWork unitOfWork)
+    public WorkspaceService(
+        IWorkspaceRepository workspaceRepository,
+        IWorkspaceMemberRepository workspaceMemberRepository,
+        IRoleRepository roleRepository,
+        IUserContext userContext,
+        IPermissionService permissionService,
+        IUnitOfWork unitOfWork
+    )
     {
         _workspaceRepository = workspaceRepository;
+        _workspaceMemberRepository = workspaceMemberRepository;
+        _roleRepository = roleRepository;
+        _userContext = userContext;
+        _permissionService = permissionService;
         _unitOfWork = unitOfWork;
     }
 
@@ -29,14 +45,29 @@ public class WorkspaceService : IWorkspaceService
             return Result<WorkspaceResultDto>.Failure(WorkspaceErrors.WorkspaceNameExists);
         }
 
-        var result = await _workspaceRepository.AddAsync(
-            new Workspace() { UserId = userId, Name = name }
+        var workspace = new Workspace() { UserId = userId, Name = name };
+        await _workspaceRepository.AddAsync(workspace);
+
+        var ownerRole = await _roleRepository.FindByNameAsync("Owner");
+        if (ownerRole is null)
+        {
+            return Result<WorkspaceResultDto>.Failure(WorkspaceMemberErrors.RoleNotFound);
+        }
+
+        await _workspaceMemberRepository.AddAsync(
+            new WorkspaceMember()
+            {
+                WorkspaceId = workspace.Id,
+                UserId = userId,
+                RoleId = ownerRole.Id,
+            }
         );
+
         await _unitOfWork.SaveChangesAsync();
 
         var mapper = new WorkspaceMapper();
 
-        return Result<WorkspaceResultDto>.Success(mapper.WorkspaceToWorkspaceResultDto(result));
+        return Result<WorkspaceResultDto>.Success(mapper.WorkspaceToWorkspaceResultDto(workspace));
     }
 
     public async Task<Result<IEnumerable<WorkspaceResultDto>>> RetrieveAsync(
@@ -67,5 +98,64 @@ public class WorkspaceService : IWorkspaceService
         var mapper = new WorkspaceMapper();
 
         return Result<WorkspaceResultDto>.Success(mapper.WorkspaceToWorkspaceResultDto(result));
+    }
+
+    public async Task<Result<WorkspaceMemberDto>> AddWorkspaceMemberAsync(
+        Guid workspaceId,
+        Guid targetUserId,
+        string role,
+        CancellationToken cancellationToken = default
+    )
+    {
+        var workspace = await _workspaceRepository.FindByIdAsync(workspaceId);
+        if (workspace is null)
+        {
+            return Result<WorkspaceMemberDto>.Failure(WorkspaceErrors.NotFound);
+        }
+
+        var currentUserId = _userContext.UserId;
+
+        var currentMembership = await _workspaceMemberRepository.FindByWorkspaceAndUserAsync(
+            workspaceId,
+            currentUserId
+        );
+        if (currentMembership is null)
+        {
+            return Result<WorkspaceMemberDto>.Failure(WorkspaceMemberErrors.UserNotMember);
+        }
+
+        if (!await _permissionService.HasPermissionAsync(currentUserId, workspaceId, Permissions.MembersManage.Name))
+        {
+            return Result<WorkspaceMemberDto>.Failure(WorkspaceMemberErrors.InsufficientPermission);
+        }
+
+        var existingMembership = await _workspaceMemberRepository.FindByWorkspaceAndUserAsync(
+            workspaceId,
+            targetUserId
+        );
+        if (existingMembership is not null)
+        {
+            return Result<WorkspaceMemberDto>.Failure(WorkspaceMemberErrors.AlreadyMember);
+        }
+
+        var targetRole = await _roleRepository.FindByNameAsync(role);
+        if (targetRole is null)
+        {
+            return Result<WorkspaceMemberDto>.Failure(WorkspaceMemberErrors.RoleNotFound);
+        }
+
+        var member = new WorkspaceMember()
+        {
+            WorkspaceId = workspaceId,
+            UserId = targetUserId,
+            RoleId = targetRole.Id,
+        };
+        await _workspaceMemberRepository.AddAsync(member);
+
+        await _unitOfWork.SaveChangesAsync();
+
+        return Result<WorkspaceMemberDto>.Success(
+            new WorkspaceMemberDto(member.Id, member.WorkspaceId, member.UserId, targetRole.Name)
+        );
     }
 }

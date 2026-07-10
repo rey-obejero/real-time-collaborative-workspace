@@ -21,5 +21,17 @@ public class KnowledgeManagementAppDbContext : IdentityDbContext<ApplicationUser
         modelBuilder.Entity<Workspace>();
 
         modelBuilder.Entity<Entry>();
+
+        modelBuilder.Entity<Role>();
+
+        modelBuilder.Entity<WorkspaceMember>();
+
+        modelBuilder.Entity<Permission>();
+
+        modelBuilder.Entity<RolePermission>();
+
+        modelBuilder.ApplyConfigurationsFromAssembly(
+            typeof(KnowledgeManagementAppDbContext).Assembly
+        );
     }
 }

@@ -1,4 +1,6 @@
 using System.Text;
+using KnowledgeManagementApp.Api.Application.Interfaces;
+using KnowledgeManagementApp.Api.Web.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using NSwag.Generation.Processors.Security;
@@ -53,6 +55,9 @@ public static class WebServiceExtensions
             });
 
         services.AddAuthorization();
+
+        services.AddHttpContextAccessor();
+        services.AddScoped<IUserContext, UserContext>();
 
         services.AddOpenApiDocument(config =>
         {

@@ -21,7 +21,8 @@ public class WorkspaceRepository : BaseRepository<Workspace>, IWorkspaceReposito
     {
         return await _dbSet
             .AsNoTracking()
-            .Where(workspace => workspace.UserId == userId)
+            .Where(workspace => _dbContext.Set<WorkspaceMember>()
+                .Any(member => member.WorkspaceId == workspace.Id && member.UserId == userId))
             .ToListAsync();
     }
 

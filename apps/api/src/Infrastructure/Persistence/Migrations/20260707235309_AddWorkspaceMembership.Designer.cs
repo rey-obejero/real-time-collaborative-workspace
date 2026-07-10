@@ -3,6 +3,7 @@ using System;
 using KnowledgeManagementApp.Api.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace KnowledgeManagementApp.Api.Infrastructure.Persistence.Migrations
 {
     [DbContext(typeof(KnowledgeManagementAppDbContext))]
-    partial class KnowledgeManagementAppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260707235309_AddWorkspaceMembership")]
+    partial class AddWorkspaceMembership
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -76,56 +79,6 @@ namespace KnowledgeManagementApp.Api.Infrastructure.Persistence.Migrations
                         .IsUnique();
 
                     b.ToTable("Permission");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("3b97e8de-04a8-4ae9-8836-997975e4b113"),
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "entries:read"
-                        },
-                        new
-                        {
-                            Id = new Guid("ffbce3f0-bf63-4f8a-b0d2-9d33c58faa91"),
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "entries:create"
-                        },
-                        new
-                        {
-                            Id = new Guid("d6470d94-f1ed-4f16-96e5-0005b50c497c"),
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "entries:update"
-                        },
-                        new
-                        {
-                            Id = new Guid("4caaacd1-8765-4929-89be-b6bb71d30e9e"),
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "entries:delete"
-                        },
-                        new
-                        {
-                            Id = new Guid("6f6b9bcf-29b1-4599-af3b-de7b9ddaa7ad"),
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "members:read"
-                        },
-                        new
-                        {
-                            Id = new Guid("daa5c99f-42b2-4319-8fc9-742097361d15"),
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "members:manage"
-                        },
-                        new
-                        {
-                            Id = new Guid("bd671330-80a4-4f8c-a9fb-5c7d436ca669"),
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "workspace:manage"
-                        },
-                        new
-                        {
-                            Id = new Guid("6cfc23d8-fbce-435d-960d-1c58979a5008"),
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "workspace:delete"
-                        });
                 });
 
             modelBuilder.Entity("KnowledgeManagementApp.Api.Domain.Entities.Role", b =>
@@ -147,32 +100,6 @@ namespace KnowledgeManagementApp.Api.Infrastructure.Persistence.Migrations
                         .IsUnique();
 
                     b.ToTable("Role");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("ab6df8d1-1dcb-443a-90f7-875a09f85bc9"),
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Viewer"
-                        },
-                        new
-                        {
-                            Id = new Guid("23123b2c-c866-4a81-ad0c-f46a6a064abf"),
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Collaborator"
-                        },
-                        new
-                        {
-                            Id = new Guid("66c6f395-b8b8-4d9c-9fe2-54749440997d"),
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Administrator"
-                        },
-                        new
-                        {
-                            Id = new Guid("6c8ca538-d3cb-46e3-bf32-1e692f16013c"),
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Owner"
-                        });
                 });
 
             modelBuilder.Entity("KnowledgeManagementApp.Api.Domain.Entities.RolePermission", b =>
@@ -198,148 +125,6 @@ namespace KnowledgeManagementApp.Api.Infrastructure.Persistence.Migrations
                         .IsUnique();
 
                     b.ToTable("RolePermission");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("1fb33824-a0d5-4be5-a14a-2709e4483485"),
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PermissionId = new Guid("3b97e8de-04a8-4ae9-8836-997975e4b113"),
-                            RoleId = new Guid("6c8ca538-d3cb-46e3-bf32-1e692f16013c")
-                        },
-                        new
-                        {
-                            Id = new Guid("b74745b9-fd0e-4491-9b3c-933d9b9ab696"),
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PermissionId = new Guid("ffbce3f0-bf63-4f8a-b0d2-9d33c58faa91"),
-                            RoleId = new Guid("6c8ca538-d3cb-46e3-bf32-1e692f16013c")
-                        },
-                        new
-                        {
-                            Id = new Guid("06aa38ac-cdc9-491c-ab8e-3b9623063632"),
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PermissionId = new Guid("d6470d94-f1ed-4f16-96e5-0005b50c497c"),
-                            RoleId = new Guid("6c8ca538-d3cb-46e3-bf32-1e692f16013c")
-                        },
-                        new
-                        {
-                            Id = new Guid("33e937f3-99bb-4f94-addf-51b57ce51d92"),
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PermissionId = new Guid("4caaacd1-8765-4929-89be-b6bb71d30e9e"),
-                            RoleId = new Guid("6c8ca538-d3cb-46e3-bf32-1e692f16013c")
-                        },
-                        new
-                        {
-                            Id = new Guid("36b882ab-685d-452d-88dd-4a78ad05a305"),
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PermissionId = new Guid("6f6b9bcf-29b1-4599-af3b-de7b9ddaa7ad"),
-                            RoleId = new Guid("6c8ca538-d3cb-46e3-bf32-1e692f16013c")
-                        },
-                        new
-                        {
-                            Id = new Guid("4b0e960c-a5c8-4fb7-9dff-d58b0d8a5eac"),
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PermissionId = new Guid("daa5c99f-42b2-4319-8fc9-742097361d15"),
-                            RoleId = new Guid("6c8ca538-d3cb-46e3-bf32-1e692f16013c")
-                        },
-                        new
-                        {
-                            Id = new Guid("ef3c39b9-a08e-48c6-a0c7-4df267c21f34"),
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PermissionId = new Guid("bd671330-80a4-4f8c-a9fb-5c7d436ca669"),
-                            RoleId = new Guid("6c8ca538-d3cb-46e3-bf32-1e692f16013c")
-                        },
-                        new
-                        {
-                            Id = new Guid("fd327e95-da08-4b2f-931c-6d464a74c5f7"),
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PermissionId = new Guid("6cfc23d8-fbce-435d-960d-1c58979a5008"),
-                            RoleId = new Guid("6c8ca538-d3cb-46e3-bf32-1e692f16013c")
-                        },
-                        new
-                        {
-                            Id = new Guid("c19c24d4-bedd-4cb4-9796-6f88299b5f69"),
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PermissionId = new Guid("3b97e8de-04a8-4ae9-8836-997975e4b113"),
-                            RoleId = new Guid("66c6f395-b8b8-4d9c-9fe2-54749440997d")
-                        },
-                        new
-                        {
-                            Id = new Guid("a89dbe19-e767-4e36-bf41-41448fb51580"),
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PermissionId = new Guid("ffbce3f0-bf63-4f8a-b0d2-9d33c58faa91"),
-                            RoleId = new Guid("66c6f395-b8b8-4d9c-9fe2-54749440997d")
-                        },
-                        new
-                        {
-                            Id = new Guid("bce99ee3-daa7-4e3e-87bc-78d79d16e94b"),
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PermissionId = new Guid("d6470d94-f1ed-4f16-96e5-0005b50c497c"),
-                            RoleId = new Guid("66c6f395-b8b8-4d9c-9fe2-54749440997d")
-                        },
-                        new
-                        {
-                            Id = new Guid("d48056fb-63ab-4d1f-b31a-7e62df40cfdc"),
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PermissionId = new Guid("4caaacd1-8765-4929-89be-b6bb71d30e9e"),
-                            RoleId = new Guid("66c6f395-b8b8-4d9c-9fe2-54749440997d")
-                        },
-                        new
-                        {
-                            Id = new Guid("821eba2b-7e27-4dff-bed4-d18e499171a7"),
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PermissionId = new Guid("6f6b9bcf-29b1-4599-af3b-de7b9ddaa7ad"),
-                            RoleId = new Guid("66c6f395-b8b8-4d9c-9fe2-54749440997d")
-                        },
-                        new
-                        {
-                            Id = new Guid("5fde4a63-a323-4576-8b12-1e545dddb9c3"),
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PermissionId = new Guid("daa5c99f-42b2-4319-8fc9-742097361d15"),
-                            RoleId = new Guid("66c6f395-b8b8-4d9c-9fe2-54749440997d")
-                        },
-                        new
-                        {
-                            Id = new Guid("50f13ec4-e14d-4b1f-b674-7c3b47fd2546"),
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PermissionId = new Guid("bd671330-80a4-4f8c-a9fb-5c7d436ca669"),
-                            RoleId = new Guid("66c6f395-b8b8-4d9c-9fe2-54749440997d")
-                        },
-                        new
-                        {
-                            Id = new Guid("bab35ea7-6656-4dd6-82ec-3d52ae8520fd"),
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PermissionId = new Guid("3b97e8de-04a8-4ae9-8836-997975e4b113"),
-                            RoleId = new Guid("23123b2c-c866-4a81-ad0c-f46a6a064abf")
-                        },
-                        new
-                        {
-                            Id = new Guid("eff38bc1-1751-44da-802f-68b74204f45f"),
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PermissionId = new Guid("ffbce3f0-bf63-4f8a-b0d2-9d33c58faa91"),
-                            RoleId = new Guid("23123b2c-c866-4a81-ad0c-f46a6a064abf")
-                        },
-                        new
-                        {
-                            Id = new Guid("1822074e-32ed-4c1e-bb2d-4df33b8c4dca"),
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PermissionId = new Guid("d6470d94-f1ed-4f16-96e5-0005b50c497c"),
-                            RoleId = new Guid("23123b2c-c866-4a81-ad0c-f46a6a064abf")
-                        },
-                        new
-                        {
-                            Id = new Guid("19cf2b62-49a7-43e2-b650-24dafe7a9936"),
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PermissionId = new Guid("4caaacd1-8765-4929-89be-b6bb71d30e9e"),
-                            RoleId = new Guid("23123b2c-c866-4a81-ad0c-f46a6a064abf")
-                        },
-                        new
-                        {
-                            Id = new Guid("931825a0-877b-41f0-8ab6-1c97115391d1"),
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PermissionId = new Guid("3b97e8de-04a8-4ae9-8836-997975e4b113"),
-                            RoleId = new Guid("ab6df8d1-1dcb-443a-90f7-875a09f85bc9")
-                        });
                 });
 
             modelBuilder.Entity("KnowledgeManagementApp.Api.Domain.Entities.User", b =>

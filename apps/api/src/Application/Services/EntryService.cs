@@ -1,7 +1,9 @@
 using KnowledgeManagementApp.Api.Application.Dtos;
+using KnowledgeManagementApp.Api.Application.Features.Workspaces;
 using KnowledgeManagementApp.Api.Application.Interfaces;
 using KnowledgeManagementApp.Api.Application.Mappers;
 using KnowledgeManagementApp.Api.Domain.Entities;
+using KnowledgeManagementApp.Api.Domain.Errors;
 using KnowledgeManagementApp.Api.Domain.Interfaces;
 
 namespace KnowledgeManagementApp.Api.Application.Services;
@@ -9,11 +11,17 @@ namespace KnowledgeManagementApp.Api.Application.Services;
 public class EntryService : IEntryService
 {
     private readonly IEntryRepository _entryRepository;
+    private readonly IPermissionService _permissionService;
     private readonly IUnitOfWork _unitOfWork;
 
-    public EntryService(IEntryRepository entryRepository, IUnitOfWork unitOfWork)
+    public EntryService(
+        IEntryRepository entryRepository,
+        IPermissionService permissionService,
+        IUnitOfWork unitOfWork
+    )
     {
         _entryRepository = entryRepository;
+        _permissionService = permissionService;
         _unitOfWork = unitOfWork;
     }
 
@@ -23,6 +31,17 @@ public class EntryService : IEntryService
         CancellationToken cancellationToken
     )
     {
+        if (
+            !await _permissionService.HasPermissionAsync(
+                userId,
+                request.WorkspaceId,
+                Permissions.EntriesCreate.Name
+            )
+        )
+        {
+            return Result<EntryResultDto>.Failure(WorkspaceMemberErrors.InsufficientPermission);
+        }
+
         var entry = new Entry()
         {
             UserId = userId,
@@ -32,7 +51,7 @@ public class EntryService : IEntryService
             Content = request.Content,
             CreatedAt = DateTime.UtcNow,
         };
-        var result = await _entryRepository.AddAsync(entry);
+        await _entryRepository.AddAsync(entry);
         await _unitOfWork.SaveChangesAsync();
 
         var mapper = new EntryMapper();
@@ -57,10 +76,20 @@ public class EntryService : IEntryService
         CancellationToken cancellationToken = default
     )
     {
-        var result = await _entryRepository.FindByIdAsync(request.Id);
+        var entry = await _entryRepository.FindByIdAsync(request.Id);
+        if (entry is null)
+        {
+            return Result<EntryResultDto>.Failure(Error.NotFound("ENTRY_NOT_FOUND", "Entry not found."));
+        }
+
+        if (!await _permissionService.HasPermissionAsync(userId, entry.WorkspaceId, Permissions.EntriesRead.Name))
+        {
+            return Result<EntryResultDto>.Failure(WorkspaceMemberErrors.InsufficientPermission);
+        }
+
         var mapper = new EntryMapper();
 
-        return Result<EntryResultDto>.Success(mapper.EntryToEntryResultDto(result));
+        return Result<EntryResultDto>.Success(mapper.EntryToEntryResultDto(entry));
     }
 
     public async Task<Result> UpdateEntryAsync(
@@ -70,6 +99,16 @@ public class EntryService : IEntryService
     )
     {
         var entry = await _entryRepository.FindByIdAsync(request.Id);
+        if (entry is null)
+        {
+            return Result.Failure(Error.NotFound("ENTRY_NOT_FOUND", "Entry not found."));
+        }
+
+        if (!await _permissionService.HasPermissionAsync(userId, entry.WorkspaceId, Permissions.EntriesUpdate.Name))
+        {
+            return Result.Failure(WorkspaceMemberErrors.InsufficientPermission);
+        }
+
         entry.Type = request.Type;
         entry.Title = request.Title;
         entry.Content = request.Content;

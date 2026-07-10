@@ -1,4 +1,5 @@
 using KnowledgeManagementApp.Api.Application.Dtos;
+using KnowledgeManagementApp.Api.Application.Features.Workspaces;
 
 namespace KnowledgeManagementApp.Api.Application.Interfaces;
 
@@ -18,6 +19,13 @@ public interface IWorkspaceService
     Task<Result<WorkspaceResultDto>> FindByIdAsync(
         Guid userId,
         Guid id,
+        CancellationToken cancellationToken = default
+    );
+
+    Task<Result<WorkspaceMemberDto>> AddWorkspaceMemberAsync(
+        Guid workspaceId,
+        Guid targetUserId,
+        string role,
         CancellationToken cancellationToken = default
     );
 }
