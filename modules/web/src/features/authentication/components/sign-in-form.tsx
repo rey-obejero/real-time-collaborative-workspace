@@ -24,11 +24,11 @@ export const SignInForm = () => {
   } = useForm<SignInFormData>({
     resolver: zodResolver(signInSchema),
   });
+  const navigate = useNavigate();
 
   const onSubmit = async (data: SignInFormData) => {
     const response = await signIn(data);
     if (response?.success) {
-      const navigate = useNavigate();
       navigate(paths.app.home.getHref());
     }
   };
