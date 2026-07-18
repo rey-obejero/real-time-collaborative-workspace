@@ -1,7 +1,8 @@
 .DEFAULT_GOAL := help
 
-WEB_DIRECTORY := ./apps/web/
-API_DIRECTORY := ./apps/api/src/
+SOURCE_DIRECTORY := modules
+WEB_DIRECTORY := $(SOURCE_DIRECTORY)/web
+API_DIRECTORY := $(SOURCE_DIRECTORY)/api/src
 
 .PHONY: help
 help: ## Display usage instructions
