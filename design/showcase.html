@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Component Showcase</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="./index.css" />
+</head>
+
+<body
+  class="h-full bg-background text-foreground font-sans"
+  x-data="showcasePage()"
+  :class="{ 'dark': isDarkMode }"
+>
+  <div class="max-w-6xl mx-auto p-6 md:p-10 space-y-12">
+
+    <!-- HEADER -->
+    <header class="flex items-center justify-between pb-6 border-b border-foreground/5">
+      <div>
+        <h1 class="text-2xl font-bold tracking-tight text-foreground">Component Showcase</h1>
+        <p class="text-xs text-muted-foreground mt-1">Token-mapped design system. All values resolve from <code class="font-mono text-[10px] px-1.5 py-0.5 bg-secondary rounded-sm">index.css</code>.</p>
+      </div>
+      <div class="flex items-center gap-2">
+        <button x-data="themeToggle()" @click="toggle()" class="px-3 py-1.5 text-xs font-semibold rounded-md bg-secondary text-secondary-foreground hover:bg-secondary/70 cursor-pointer" :aria-pressed="isDark">
+          <span x-text="isDark ? 'Light' : 'Dark'"></span>
+        </button>
+      </div>
+    </header>
+
+    <!-- BUTTONS -->
+    <section class="space-y-4">
+      <h2 class="text-sm font-bold text-foreground uppercase tracking-wider">Button</h2>
+
+      <div class="space-y-3">
+        <p class="text-[10px] text-muted-foreground font-semibold uppercase tracking-widest">Variants</p>
+        <div class="flex flex-wrap items-center gap-3">
+          <button x-data="button('primary', 'md')" :class="classes()">Primary</button>
+          <button x-data="button('secondary', 'md')" :class="classes()">Secondary</button>
+          <button x-data="button('ghost', 'md')" :class="classes()">Ghost</button>
+          <button x-data="button('outline', 'md')" :class="classes()">Outline</button>
+          <button x-data="button('destructive', 'md')" :class="classes()">Destructive</button>
+          <button x-data="button('link', 'md')" :class="classes()">Link</button>
+        </div>
+      </div>
+
+      <div class="space-y-3">
+        <p class="text-[10px] text-muted-foreground font-semibold uppercase tracking-widest">Sizes</p>
+        <div class="flex flex-wrap items-center gap-3">
+          <button x-data="button('primary', 'sm')" :class="classes()">Small</button>
+          <button x-data="button('primary', 'md')" :class="classes()">Medium</button>
+          <button x-data="button('primary', 'lg')" :class="classes()">Large</button>
+          <button x-data="button('primary', 'icon')" :class="classes()">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" /></svg>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ICON BUTTONS -->
+    <section class="space-y-4">
+      <h2 class="text-sm font-bold text-foreground uppercase tracking-wider">Icon Button</h2>
+      <div class="flex flex-wrap items-center gap-3">
+        <button x-data="iconButton('ghost', 'md')" :class="classes()" title="Ghost">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m0 13.5V21M4.5 12h2.25m13.5 0H21" /></svg>
+        </button>
+        <button x-data="iconButton('primary', 'md')" :class="classes()" title="Primary">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
+        </button>
+        <button x-data="iconButton('destructive', 'md')" :class="classes()" title="Destructive">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9" /></svg>
+        </button>
+      </div>
+    </section>
+
+    <!-- BADGES -->
+    <section class="space-y-4">
+      <h2 class="text-sm font-bold text-foreground uppercase tracking-wider">Badge</h2>
+      <div class="flex flex-wrap items-center gap-3">
+        <span x-data="badge('default')" :class="classes()">Default</span>
+        <span x-data="badge('primary')" :class="classes()">Primary</span>
+        <span x-data="badge('secondary')" :class="classes()">Secondary</span>
+        <span x-data="badge('destructive')" :class="classes()">Destructive</span>
+        <span x-data="badge('outline')" :class="classes()">Outline</span>
+      </div>
+    </section>
+
+    <!-- SEPARATOR -->
+    <section class="space-y-4">
+      <h2 class="text-sm font-bold text-foreground uppercase tracking-wider">Separator</h2>
+      <div class="flex items-center gap-6 h-12">
+        <div class="flex-1" x-data="separator('horizontal')">
+          <div :class="classes()"></div>
+        </div>
+        <div class="h-12" x-data="separator('vertical')">
+          <div :class="classes()"></div>
+        </div>
+        <div class="flex-1" x-data="separator('horizontal')">
+          <div :class="classes()"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CARDS -->
+    <section class="space-y-4">
+      <h2 class="text-sm font-bold text-foreground uppercase tracking-wider">Card</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div x-data="card('default')" :class="classes()">
+          <p class="text-xs font-bold text-foreground">Default</p>
+          <p class="text-[11px] text-muted-foreground mt-1">shadow-xs + radius-lg</p>
+        </div>
+        <div x-data="card('elevated')" :class="classes()">
+          <p class="text-xs font-bold text-foreground">Elevated</p>
+          <p class="text-[11px] text-muted-foreground mt-1">shadow-md + radius-lg</p>
+        </div>
+        <div x-data="card('flat')" :class="classes()">
+          <p class="text-xs font-bold text-foreground">Flat</p>
+          <p class="text-[11px] text-muted-foreground mt-1">no shadow + radius-md</p>
+        </div>
+        <div
+          x-data="card('feature')"
+          @mouseenter="hovered = true"
+          @mouseleave="hovered = false"
+          :class="classes()"
+        >
+          <p class="text-xs font-bold text-foreground">Feature</p>
+          <p class="text-[11px] text-muted-foreground mt-1">transparent + hover surface</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- NAV ITEMS -->
+    <section class="space-y-4">
+      <h2 class="text-sm font-bold text-foreground uppercase tracking-wider">Nav Item</h2>
+      <div class="flex flex-wrap items-center gap-3">
+        <a x-data="navItem('Default', '#', false)" :class="classes()" href="#">Default</a>
+        <a x-data="navItem('Active', '#', true)" :class="classes()" href="#">Active</a>
+      </div>
+    </section>
+
+    <!-- BRAND -->
+    <section class="space-y-4">
+      <h2 class="text-sm font-bold text-foreground uppercase tracking-wider">Brand</h2>
+      <div class="flex flex-wrap items-center gap-4">
+        <a x-data="brand('sm')" :class="containerClasses()" href="#">
+          <span :class="avatarClasses()">S</span>
+          <span class="text-xs font-bold tracking-tight text-foreground">Small</span>
+        </a>
+        <a x-data="brand('md')" :class="containerClasses()" href="#">
+          <span :class="avatarClasses()">M</span>
+          <span class="text-xs font-bold tracking-tight text-foreground">Medium</span>
+        </a>
+        <a x-data="brand('lg')" :class="containerClasses()" href="#">
+          <span :class="avatarClasses()">L</span>
+          <span class="text-xs font-bold tracking-tight text-foreground">Large</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- FEATURE CARDS -->
+    <section class="space-y-4">
+      <h2 class="text-sm font-bold text-foreground uppercase tracking-wider">Feature Card</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div
+          x-data="featureCard('01', 'Structured wikis', 'Build schemas, link entries, and surface contextually relevant notes in seconds.')"
+          @mouseenter="hovered = true"
+          @mouseleave="hovered = false"
+          :class="classes()"
+        >
+          <div :class="avatarClasses()">01</div>
+          <h3 class="text-sm font-bold text-foreground mb-2">Structured wikis</h3>
+          <p class="text-xs text-muted-foreground leading-relaxed">Build schemas, link entries, and surface contextually relevant notes in seconds.</p>
+        </div>
+        <div
+          x-data="featureCard('02', 'Spatial layouts', 'Border-free composition using surface contrast and soft elevation tiers.')"
+          @mouseenter="hovered = true"
+          @mouseleave="hovered = false"
+          :class="classes()"
+        >
+          <div :class="avatarClasses()">02</div>
+          <h3 class="text-sm font-bold text-foreground mb-2">Spatial layouts</h3>
+          <p class="text-xs text-muted-foreground leading-relaxed">Border-free composition using surface contrast and soft elevation tiers.</p>
+        </div>
+        <div
+          x-data="featureCard('03', 'Inline discussions', 'Highlight any text fragment to start a discussion anchored to that exact passage.')"
+          @mouseenter="hovered = true"
+          @mouseleave="hovered = false"
+          :class="classes()"
+        >
+          <div :class="avatarClasses()">03</div>
+          <h3 class="text-sm font-bold text-foreground mb-2">Inline discussions</h3>
+          <p class="text-xs text-muted-foreground leading-relaxed">Highlight any text fragment to start a discussion anchored to that exact passage.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- TOKENS -->
+    <section class="space-y-4">
+      <h2 class="text-sm font-bold text-foreground uppercase tracking-wider">Token Reference</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <!-- Radius -->
+        <div class="bg-card rounded-lg p-6 shadow-xs space-y-3">
+          <p class="text-[10px] font-bold text-muted-foreground uppercase tracking-widest">Radius</p>
+          <div class="flex items-end gap-3">
+            <div class="space-y-1 text-center">
+              <div class="h-12 w-12 bg-primary rounded-sm mx-auto"></div>
+              <p class="text-[10px] font-mono">rounded-sm</p>
+            </div>
+            <div class="space-y-1 text-center">
+              <div class="h-12 w-12 bg-primary rounded-md mx-auto"></div>
+              <p class="text-[10px] font-mono">rounded-md</p>
+            </div>
+            <div class="space-y-1 text-center">
+              <div class="h-12 w-12 bg-primary rounded-lg mx-auto"></div>
+              <p class="text-[10px] font-mono">rounded-lg</p>
+            </div>
+            <div class="space-y-1 text-center">
+              <div class="h-12 w-12 bg-primary rounded-full mx-auto"></div>
+              <p class="text-[10px] font-mono">rounded-full</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Shadow -->
+        <div class="bg-card rounded-lg p-6 shadow-xs space-y-3">
+          <p class="text-[10px] font-bold text-muted-foreground uppercase tracking-widest">Shadow</p>
+          <div class="flex items-end gap-3">
+            <div class="space-y-1 text-center">
+              <div class="h-12 w-12 bg-card rounded-md shadow-xs mx-auto"></div>
+              <p class="text-[10px] font-mono">shadow-xs</p>
+            </div>
+            <div class="space-y-1 text-center">
+              <div class="h-12 w-12 bg-card rounded-md shadow-sm mx-auto"></div>
+              <p class="text-[10px] font-mono">shadow-sm</p>
+            </div>
+            <div class="space-y-1 text-center">
+              <div class="h-12 w-12 bg-card rounded-md shadow-md mx-auto"></div>
+              <p class="text-[10px] font-mono">shadow-md</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Color tokens -->
+        <div class="bg-card rounded-lg p-6 shadow-xs space-y-3">
+          <p class="text-[10px] font-bold text-muted-foreground uppercase tracking-widest">Color</p>
+          <div class="grid grid-cols-2 gap-2">
+            <div class="flex items-center gap-2"><div class="h-5 w-5 rounded-sm bg-background border border-foreground/10"></div><span class="text-[10px] font-mono">background</span></div>
+            <div class="flex items-center gap-2"><div class="h-5 w-5 rounded-sm bg-foreground"></div><span class="text-[10px] font-mono">foreground</span></div>
+            <div class="flex items-center gap-2"><div class="h-5 w-5 rounded-sm bg-card border border-foreground/10"></div><span class="text-[10px] font-mono">card</span></div>
+            <div class="flex items-center gap-2"><div class="h-5 w-5 rounded-sm bg-popover border border-foreground/10"></div><span class="text-[10px] font-mono">popover</span></div>
+            <div class="flex items-center gap-2"><div class="h-5 w-5 rounded-sm bg-primary"></div><span class="text-[10px] font-mono">primary</span></div>
+            <div class="flex items-center gap-2"><div class="h-5 w-5 rounded-sm bg-secondary"></div><span class="text-[10px] font-mono">secondary</span></div>
+            <div class="flex items-center gap-2"><div class="h-5 w-5 rounded-sm bg-muted"></div><span class="text-[10px] font-mono">muted</span></div>
+            <div class="flex items-center gap-2"><div class="h-5 w-5 rounded-sm bg-accent"></div><span class="text-[10px] font-mono">accent</span></div>
+            <div class="flex items-center gap-2"><div class="h-5 w-5 rounded-sm bg-destructive"></div><span class="text-[10px] font-mono">destructive</span></div>
+            <div class="flex items-center gap-2"><div class="h-5 w-5 rounded-sm bg-input border border-foreground/10"></div><span class="text-[10px] font-mono">input</span></div>
+            <div class="flex items-center gap-2"><div class="h-5 w-5 rounded-sm bg-sidebar border border-foreground/10"></div><span class="text-[10px] font-mono">sidebar</span></div>
+            <div class="flex items-center gap-2"><div class="h-5 w-5 rounded-sm bg-sidebar-accent"></div><span class="text-[10px] font-mono">sidebar-accent</span></div>
+          </div>
+        </div>
+
+        <!-- Surfaces (composed) -->
+        <div class="bg-card rounded-lg p-6 shadow-xs space-y-3">
+          <p class="text-[10px] font-bold text-muted-foreground uppercase tracking-widest">Surfaces</p>
+          <div class="space-y-2">
+            <div class="bg-background p-3 rounded-md text-[10px]">background surface</div>
+            <div class="bg-card p-3 rounded-md text-[10px]">card surface</div>
+            <div class="bg-secondary/40 p-3 rounded-md text-[10px]">secondary surface</div>
+            <div class="bg-accent p-3 rounded-md text-[10px]">accent surface</div>
+            <div class="bg-muted p-3 rounded-md text-[10px]">muted surface</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="pt-6 border-t border-foreground/5 text-center">
+      <p class="text-[10px] text-muted-foreground">All components powered by Alpine.js + token-mapped Tailwind v4 utilities.</p>
+    </footer>
+
+  </div>
+
+  <script type="module" src="./src/main.js"></script>
+  <script>
+    function showcasePage() {
+      return {
+        isDarkMode: false,
+        init() {
+          try {
+            this.isDarkMode = localStorage.getItem("cozyspace-theme") === "dark";
+            if (this.isDarkMode) document.documentElement.classList.add("dark");
+          } catch (_) {}
+        },
+      };
+    }
+  </script>
+</body>
+</html>
