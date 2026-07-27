@@ -1,0 +1,1258 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full" x-data="workspace()" :class="{ 'dark': isDarkMode }">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Entries Workspace</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Geist+Mono:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,500;0,6..72,600;1,6..72,500&display=swap" rel="stylesheet">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"DM Sans"', 'system-ui', 'sans-serif'],
+            mono: ['"Geist Mono"', 'ui-monospace', 'monospace'],
+            serif: ['"Newsreader"', 'Georgia', 'serif'],
+          },
+          borderRadius: {
+            lg: 'var(--radius)',
+            md: 'calc(var(--radius) - 2px)',
+            sm: 'calc(var(--radius) - 4px)',
+          },
+          colors: {
+            border: 'var(--border)',
+            input: 'var(--input)',
+            ring: 'var(--ring)',
+            background: 'var(--background)',
+            foreground: 'var(--foreground)',
+            primary: {
+              DEFAULT: 'var(--primary)',
+              foreground: 'var(--primary-foreground)',
+            },
+            secondary: {
+              DEFAULT: 'var(--secondary)',
+              foreground: 'var(--secondary-foreground)',
+            },
+            destructive: {
+              DEFAULT: 'var(--destructive)',
+              foreground: 'var(--destructive-foreground)',
+            },
+            muted: {
+              DEFAULT: 'var(--muted)',
+              foreground: 'var(--muted-foreground)',
+            },
+            accent: {
+              DEFAULT: 'var(--accent)',
+              foreground: 'var(--accent-foreground)',
+            },
+            popover: {
+              DEFAULT: 'var(--popover)',
+              foreground: 'var(--popover-foreground)',
+            },
+            card: {
+              DEFAULT: 'var(--card)',
+              foreground: 'var(--card-foreground)',
+            },
+          },
+        }
+      }
+    }
+  </script>
+
+  <style>
+    :root {
+      --background: #f4f1ec;
+      --foreground: #1a1814;
+      --card: #ebe6dc;
+      --card-foreground: #1a1814;
+      --popover: #fbf8f2;
+      --popover-foreground: #1a1814;
+      --primary: #a14b2a;
+      --primary-foreground: #f4f1ec;
+      --secondary: #e6dfd2;
+      --secondary-foreground: #1a1814;
+      --muted: #8a8275;
+      --muted-foreground: #5a544a;
+      --accent: #a14b2a14;
+      --accent-foreground: #1a1814;
+      --destructive: #8a2a1a;
+      --destructive-foreground: #f4f1ec;
+      --border: #1a181410;
+      --input: #ebe6dc;
+      --ring: #a14b2a;
+      --radius: 0.25rem;
+    }
+
+    .dark {
+      --background: #0c0c0d;
+      --foreground: #ece8df;
+      --card: #131316;
+      --card-foreground: #ece8df;
+      --popover: #18181c;
+      --popover-foreground: #ece8df;
+      --primary: #e8a96b;
+      --primary-foreground: #0c0c0d;
+      --secondary: #1f1f24;
+      --secondary-foreground: #ece8df;
+      --muted: #5e5a52;
+      --muted-foreground: #9a9388;
+      --accent: #e8a96b18;
+      --accent-foreground: #ece8df;
+      --destructive: #d96a52;
+      --destructive-foreground: #ece8df;
+      --border: #ece8df12;
+      --input: #18181c;
+      --ring: #e8a96b;
+    }
+
+    *, *::before, *::after {
+      transition: background-color 0.18s ease, color 0.15s ease, border-color 0.18s ease, transform 0.15s ease;
+    }
+
+    body {
+      font-feature-settings: "ss01", "cv11";
+      letter-spacing: -0.005em;
+    }
+
+    .mono-label {
+      font-family: 'Geist Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-weight: 500;
+    }
+
+    .index-num {
+      font-family: 'Geist Mono', monospace;
+      font-size: 10px;
+      font-weight: 500;
+    }
+
+    .divider-v { width: 1px; background: var(--border); }
+
+    .prose-readable {
+      font-family: 'Newsreader', Georgia, serif;
+      font-size: 15px;
+      line-height: 1.65;
+    }
+
+    .nav-row {
+      position: relative;
+      color: var(--muted-foreground);
+    }
+    .nav-row::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 4px;
+      bottom: 4px;
+      width: 2px;
+      background: transparent;
+      transition: background 0.15s ease;
+    }
+    .nav-row:hover { color: var(--foreground); }
+    .nav-row.active { color: var(--primary); }
+    .nav-row.active::before { background: var(--primary); }
+
+    .row-item {
+      position: relative;
+      transition: background 0.15s ease;
+    }
+    .row-item::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: transparent;
+      transition: background 0.15s ease;
+    }
+    .row-item:hover { background: var(--accent); }
+    .row-item:hover::before { background: var(--primary); }
+    .row-item.active { background: var(--accent); }
+    .row-item.active::before { background: var(--primary); }
+
+    .ghost-btn {
+      border: 1px solid var(--border);
+      color: var(--foreground);
+      background: transparent;
+    }
+    .ghost-btn:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+
+    .primary-btn {
+      background: var(--primary);
+      color: var(--primary-foreground);
+      border: 1px solid var(--primary);
+    }
+    .primary-btn:hover { filter: brightness(1.05); }
+
+    .field-tab {
+      color: var(--muted-foreground);
+      border-bottom: 1px solid transparent;
+      padding-bottom: 4px;
+    }
+    .field-tab:hover { color: var(--foreground); }
+    .field-tab.active {
+      color: var(--foreground);
+      border-bottom-color: var(--primary);
+    }
+
+    .section-tab {
+      color: var(--muted-foreground);
+      border-bottom: 2px solid transparent;
+    }
+    .section-tab:hover { color: var(--foreground); }
+    .section-tab.active {
+      color: var(--primary);
+      border-bottom-color: var(--primary);
+    }
+
+    .scroll-thin::-webkit-scrollbar { width: 6px; height: 6px; }
+    .scroll-thin::-webkit-scrollbar-thumb { background: var(--border); }
+    .scroll-thin::-webkit-scrollbar-track { background: transparent; }
+
+    #floating-format-menu {
+      pointer-events: none;
+      opacity: 0;
+      transform: translateY(4px);
+      transition: opacity 0.12s ease, transform 0.12s ease;
+    }
+    #floating-format-menu.show {
+      pointer-events: auto;
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    #slash-command-menu { display: none; position: absolute; z-index: 50; }
+
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+    input:focus, textarea:focus, [contenteditable]:focus {
+      outline: none;
+    }
+
+    .focus-ring:focus-within {
+      border-color: var(--ring) !important;
+    }
+  </style>
+</head>
+
+<body class="h-full overflow-hidden font-sans select-none bg-background text-foreground">
+
+  <div class="h-full w-full flex overflow-hidden relative bg-popover">
+
+    <aside class="w-64 shrink-0 flex flex-col h-full bg-card border-r border-border">
+      <div class="px-5 pt-5 pb-3 flex items-center justify-between border-b border-border">
+        <button @click="isLibraryDropdownOpen = !isLibraryDropdownOpen" class="flex items-center gap-2.5 group">
+          <span class="w-5 h-5 flex items-center justify-center mono-label bg-foreground text-popover">K</span>
+          <span class="text-[13px] font-semibold tracking-tight" x-text="currentLibrary">Personal Space</span>
+          <svg class="w-3 h-3 transition text-muted" :class="isLibraryDropdownOpen ? 'rotate-180' : ''" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+          </svg>
+        </button>
+      </div>
+
+      <div x-show="isLibraryDropdownOpen" @click.outside="isLibraryDropdownOpen = false" x-transition class="mx-4 mt-3 absolute z-20 bg-popover border border-border">
+        <div class="px-4 py-3 border-b border-border">
+          <p class="mono-label text-muted">Workspaces</p>
+        </div>
+        <button @click="selectLibrary('Personal Space')" class="w-full text-left px-4 py-2.5 text-[12px] flex items-center justify-between hover:bg-accent" :class="currentLibrary === 'Personal Space' ? 'text-primary' : ''">
+          <span>Personal Space</span>
+          <span class="index-num text-muted" x-show="currentLibrary === 'Personal Space'">01</span>
+        </button>
+        <button @click="selectLibrary('Engineering Wiki')" class="w-full text-left px-4 py-2.5 text-[12px] flex items-center justify-between hover:bg-accent" :class="currentLibrary === 'Engineering Wiki' ? 'text-primary' : ''">
+          <span>Engineering Wiki</span>
+          <span class="index-num text-muted" x-show="currentLibrary === 'Engineering Wiki'">02</span>
+        </button>
+        <div class="h-px bg-border"></div>
+        <button @click="openSettingsModal()" class="w-full text-left px-4 py-2.5 text-[12px] flex items-center gap-2 hover:bg-accent text-muted-foreground">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.324.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 011.37.49l1.296 2.247a1.125 1.125 0 01-.26 1.43l-1.003.828c-.293.241-.438.613-.43.992a7.723 7.723 0 010 .255c-.008.378.137.75.43.991l1.004.827c.424.35.534.954.26 1.43l-1.298 2.247a1.125 1.125 0 01-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.47 6.47 0 01-.22.128c-.331.183-.581.495-.644.869l-.213 1.281c-.09.543-.56.94-1.11.94h-2.594c-.55 0-1.019-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 01-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 01-1.369-.49l-1.297-2.247a1.125 1.125 0 01.26-1.43l1.004-.827c.292-.24.437-.613.43-.991a6.932 6.932 0 010-.255c.007-.38-.138-.751-.43-.992l-1.004-.827a1.125 1.125 0 01-.26-1.43l1.297-2.247a1.125 1.125 0 011.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.086.22-.128.332-.183.582-.495.644-.869l.214-1.28z" />
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+          </svg>
+          <span>Preferences</span>
+        </button>
+      </div>
+
+      <div class="flex-1 overflow-y-auto no-scrollbar">
+
+        <div class="px-5 pt-5 pb-2">
+          <button @click="openSearchModal()" class="ghost-btn w-full flex items-center gap-2.5 px-3 py-2 text-[12px] focus-ring text-muted-foreground">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+            </svg>
+            <span>Search</span>
+            <span class="ml-auto mono-label text-muted opacity-60">⌘K</span>
+          </button>
+        </div>
+
+        <div class="px-5 pt-1 pb-5">
+          <button @click="createNewEntry()" class="primary-btn w-full flex items-center justify-between px-3 py-2 text-[12px] font-semibold">
+            <span class="flex items-center gap-2.5">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+              </svg>
+              <span>New Entry</span>
+            </span>
+            <span class="mono-label opacity-70">N</span>
+          </button>
+        </div>
+
+        <div class="px-2 pt-3 border-t border-border">
+          <p class="mono-label px-3 pb-2 text-muted">— Schemas</p>
+          <ul class="space-y-0.5">
+            <li>
+              <button @click="selectNavTab('pages')" :class="{ 'active': activeTab === 'pages' }" class="nav-row w-full flex items-center gap-3 pl-4 pr-3 py-2 text-[12px]">
+                <span class="index-num w-5 text-muted">01</span>
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+                </svg>
+                <span class="font-medium">Pages</span>
+                <span class="ml-auto index-num text-muted" x-text="entries.filter(e => !e.deleted).length">0</span>
+              </button>
+            </li>
+            <li>
+              <button @click="selectNavTab('bin')" :class="{ 'active': activeTab === 'bin' }" class="nav-row w-full flex items-center gap-3 pl-4 pr-3 py-2 text-[12px]">
+                <span class="index-num w-5 text-muted">02</span>
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
+                </svg>
+                <span class="font-medium">Bin</span>
+                <span class="ml-auto index-num text-muted" x-text="entries.filter(e => e.deleted).length">0</span>
+              </button>
+            </li>
+          </ul>
+        </div>
+
+        <div class="px-5 pt-6 pb-2">
+          <p class="mono-label pb-2 text-muted">— Recent</p>
+          <ul class="space-y-1">
+            <template x-for="item in entries.filter(e => !e.deleted).slice(0, 3)" :key="item.id">
+              <li>
+                <button @click="loadEntryToEditor(item.id)" class="w-full text-left pl-3 pr-2 py-1.5 text-[11px] truncate hover:text-primary text-muted-foreground">
+                  <span class="index-num mr-2 text-muted" x-text="item.id"></span>
+                  <span x-text="item.title || 'Untitled'"></span>
+                </button>
+              </li>
+            </template>
+          </ul>
+        </div>
+      </div>
+
+      <div class="px-5 py-4 border-t border-border">
+        <div class="flex items-center gap-3">
+          <span class="w-7 h-7 flex items-center justify-center mono-label bg-foreground text-popover">ME</span>
+          <div class="min-w-0 flex-1">
+            <p class="text-[12px] font-semibold truncate" x-text="userName">My Profile</p>
+            <p class="index-num truncate text-muted">admin@cozyspace.co</p>
+          </div>
+          <span class="index-num text-primary">●</span>
+        </div>
+      </div>
+    </aside>
+
+    <main class="flex-1 flex flex-col h-full overflow-hidden relative">
+
+      <header class="h-14 px-6 flex items-center justify-between shrink-0 bg-popover border-b border-border">
+        <div class="flex items-center gap-4">
+          <div class="flex items-center gap-2.5">
+            <span class="index-num text-muted">/</span>
+            <span class="text-[12px] font-semibold uppercase tracking-wider text-foreground" x-text="headerTitle">Pages</span>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-2">
+          <span class="index-num hidden md:inline text-muted" x-text="`${filteredEntries.length} ITEMS`">0 ITEMS</span>
+          <div class="divider-v h-4 mx-1"></div>
+          <button @click="isDarkMode = !isDarkMode" class="ghost-btn w-8 h-8 flex items-center justify-center focus-ring" title="Toggle theme">
+            <svg x-show="!isDarkMode" class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z" />
+            </svg>
+            <svg x-show="isDarkMode" class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m0 13.5V21m-7.5-9h2.25m13.5 0H21m-3.75-5.25l1.59-1.59M5.81 18.19l-1.59 1.59m0-13.5l1.59 1.59m11.38 11.38l1.59 1.59M12 7.5a4.5 4.5 0 100 9 4.5 4.5 0 000-9z" />
+            </svg>
+          </button>
+          <button @click="toggleConversations()" class="ghost-btn w-8 h-8 flex items-center justify-center focus-ring relative" title="Discussions">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.12 2.9 2.78 2.9h12.94c1.66 0 2.78-1.3 2.78-2.9V6.4c0-1.6-1.12-2.9-2.78-2.9H5.53c-1.66 0-2.78 1.3-2.78 2.9v10.32z" />
+            </svg>
+            <span x-show="hasUnreadDiscussions" class="absolute top-1.5 right-1.5 w-1.5 h-1.5 rounded-full bg-primary"></span>
+          </button>
+        </div>
+      </header>
+
+      <div class="flex-1 flex flex-col overflow-hidden relative">
+
+        <div x-show="activeView === 'list'" class="flex-1 flex flex-col h-full overflow-y-auto no-scrollbar">
+          <div class="max-w-4xl w-full mx-auto px-10 py-10 space-y-8">
+
+            <div class="space-y-3 pb-2 border-b border-border">
+              <div class="flex items-baseline justify-between">
+                <h1 class="font-serif text-[36px] leading-[1.05] tracking-tight text-foreground" x-text="activeTab === 'pages' ? 'Pages' : 'Bin'">Pages</h1>
+                <span class="mono-label text-muted" x-text="activeTab.toUpperCase()">PAGES</span>
+              </div>
+              <p class="text-[12px] max-w-md text-muted-foreground">
+                <span x-show="activeTab === 'pages'">A long-form collection of notes, drafts, and reading material. Indexed by entry number.</span>
+                <span x-show="activeTab === 'bin'">Recently trashed entries. Restore or clear permanently.</span>
+              </p>
+            </div>
+
+            <div>
+              <div class="flex items-center justify-between pb-2 mb-1 border-b border-border">
+                <span class="mono-label text-muted">№ Index</span>
+                <span class="mono-label text-muted">Date</span>
+              </div>
+
+              <template x-if="filteredEntries.length === 0">
+                <div class="py-16 text-center">
+                  <p class="mono-label pb-2 text-muted">— Empty</p>
+                  <p class="text-[12px] text-muted-foreground">This section currently has no entries.</p>
+                </div>
+              </template>
+
+              <ul class="divide-y divide-border">
+                <template x-for="item in filteredEntries" :key="item.id">
+                  <li class="row-item" :class="{ 'active': currentSelectedId === item.id }" @click="activeTab === 'pages' && loadEntryToEditor(item.id)">
+                    <div class="flex items-center gap-5 py-3.5 px-3 cursor-pointer">
+                      <span class="index-num w-7 text-right text-muted" x-text="item.id"></span>
+                      <div class="flex-1 min-w-0">
+                        <p class="text-[13px] font-semibold leading-snug truncate text-foreground" x-text="item.title || 'Untitled Document'"></p>
+                        <p class="text-[11px] mt-0.5 truncate text-muted-foreground" x-text="(item.content || '').replace(/<[^>]*>/g, '').slice(0, 110)"></p>
+                      </div>
+                      <span class="text-[11px] font-mono shrink-0 text-muted" x-text="formatDate(item.date)"></span>
+                      <div class="flex items-center gap-1 shrink-0" @click.stop>
+                        <template x-if="activeTab === 'pages'">
+                          <button @click="trashPage(item.id)" class="ghost-btn w-7 h-7 flex items-center justify-center focus-ring" title="Move to bin">
+                            <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                              <path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
+                            </svg>
+                          </button>
+                        </template>
+                        <template x-if="activeTab === 'bin'">
+                          <button @click="restorePage(item.id)" class="ghost-btn w-7 h-7 flex items-center justify-center focus-ring" title="Restore">
+                            <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                              <path stroke-linecap="round" stroke-linejoin="round" d="M9 15L3 9m0 0l6-6M3 9h12a6 6 0 010 12h-3" />
+                            </svg>
+                          </button>
+                        </template>
+                      </div>
+                    </div>
+                  </li>
+                </template>
+              </ul>
+            </div>
+
+            <button @click="createNewEntry()" class="ghost-btn w-full flex items-center justify-center gap-2 py-3 text-[12px] font-semibold focus-ring">
+              <span class="text-[14px] font-mono">+</span>
+              <span>Compose new entry</span>
+            </button>
+          </div>
+        </div>
+
+        <div x-show="activeView === 'editor'" class="flex-1 flex flex-col h-full overflow-hidden">
+
+          <div class="flex items-center justify-between px-10 py-2 shrink-0 bg-card border-b border-border">
+            <button @click="exitToListView()" class="flex items-center gap-2 text-[11px] mono-label hover:text-primary text-muted-foreground">
+              <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+              </svg>
+              <span>← Back to Index</span>
+            </button>
+            <div class="flex items-center gap-3">
+              <span class="mono-label text-muted" x-text="`№ ${currentSelectedId || '—'}`">№ —</span>
+              <span class="divider-v h-3"></span>
+              <span class="mono-label text-muted" x-text="formatDate(new Date())"></span>
+            </div>
+          </div>
+
+          <div class="flex-1 overflow-y-auto no-scrollbar" @click="handleEditorClick($event)">
+            <div class="max-w-3xl w-full mx-auto px-10 py-12">
+
+              <div class="space-y-6 pb-6 border-b border-border">
+                <input type="text"
+                       x-model="editorTitle"
+                       @input="syncEditorTitle()"
+                       placeholder="Untitled Document"
+                       class="w-full font-serif text-[44px] leading-[1.05] tracking-tight bg-transparent border-none outline-none text-foreground">
+
+                <div class="flex items-center gap-6 text-[11px]">
+                  <button @click="activeEditorSection = 'fields'" :class="{ 'active': activeEditorSection === 'fields' }" class="field-tab mono-label">Properties</button>
+                  <button @click="activeEditorSection = 'docs'" :class="{ 'active': activeEditorSection === 'docs' }" class="field-tab mono-label">Documents <span class="ml-1 opacity-60">(0)</span></button>
+                </div>
+
+                <div x-show="activeEditorSection === 'fields'" class="grid grid-cols-2 md:grid-cols-3 gap-x-6 gap-y-3 pt-2">
+                  <div class="space-y-1">
+                    <p class="mono-label text-muted">Status</p>
+                    <p class="text-[12px] font-semibold text-primary">● Draft</p>
+                  </div>
+                  <div class="space-y-1">
+                    <p class="mono-label text-muted">Assignee</p>
+                    <p class="text-[12px] font-semibold text-foreground">My Profile</p>
+                  </div>
+                  <template x-for="(prop, index) in customProperties" :key="index">
+                    <div class="space-y-1">
+                      <p class="mono-label text-muted" x-text="prop.label"></p>
+                      <p class="text-[12px] font-semibold text-foreground" x-text="prop.value"></p>
+                    </div>
+                  </template>
+                  <button @click="addNewEditorProperty()" class="self-end text-[10px] mono-label hover:text-primary col-span-full text-left text-muted">+ Add property</button>
+                </div>
+              </div>
+
+              <div class="relative pt-8">
+                <div id="editor-content-body"
+                     contenteditable="true"
+                     @input="syncEditorContent()"
+                     @keyup="handleEditorKeyUp($event)"
+                     @mouseup="handleSelectionChange($event)"
+                     class="prose-readable w-full bg-transparent border-none outline-none text-foreground"
+                     placeholder="Begin writing or press / for blocks...">
+                </div>
+              </div>
+
+              <div class="mt-12 pt-4 flex items-center justify-between border-t border-border">
+                <span class="mono-label text-muted" x-text="syncStatus">SAVED</span>
+                <div class="flex items-center gap-4 mono-label text-muted">
+                  <span x-text="charCount">0 CHARS</span>
+                  <span x-text="wordCount">0 WORDS</span>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </main>
+
+    <aside :class="isConversationsPanelOpen ? 'w-80 shrink-0' : 'w-0 overflow-hidden shrink-0'" style="background: var(--card); border-left: 1px solid var(--border); transition: width 0.3s ease;">
+      <div class="w-80 h-full flex flex-col">
+
+        <div class="h-14 px-5 flex items-center justify-between shrink-0 border-b border-border">
+          <div class="flex items-center gap-2.5">
+            <svg class="w-3.5 h-3.5 text-primary" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.12 2.9 2.78 2.9h12.94c1.66 0 2.78-1.3 2.78-2.9V6.4c0-1.6-1.12-2.9-2.78-2.9H5.53c-1.66 0-2.78 1.3-2.78 2.9v10.32z" />
+            </svg>
+            <span class="mono-label text-foreground">Discussions</span>
+            <span class="index-num text-muted" x-text="`(${discussions.length})`">0</span>
+          </div>
+          <button @click="toggleConversations()" class="ghost-btn w-7 h-7 flex items-center justify-center focus-ring">
+            <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+
+        <template x-if="selectedDiscussionId === null">
+          <div class="flex-1 overflow-y-auto no-scrollbar">
+            <p class="mono-label px-5 py-3 text-muted border-b border-border">— Active threads</p>
+            <ul class="divide-y divide-border">
+              <template x-for="chat in discussions" :key="chat.id">
+                <li class="row-item" @click="selectedDiscussionId = chat.id">
+                  <div class="px-5 py-3.5 cursor-pointer">
+                    <div class="flex items-baseline justify-between mb-1.5">
+                      <span class="text-[12px] font-semibold leading-none text-foreground" x-text="chat.title"></span>
+                      <span class="index-num text-primary">●</span>
+                    </div>
+                    <p class="text-[11px] truncate leading-relaxed text-muted-foreground" x-text="chat.preview"></p>
+                  </div>
+                </li>
+              </template>
+            </ul>
+          </div>
+        </template>
+
+        <template x-if="selectedDiscussionId !== null">
+          <div class="flex-1 flex flex-col overflow-hidden">
+            <div class="px-5 py-2.5 flex items-center gap-2 shrink-0 bg-popover border-b border-border">
+              <button @click="selectedDiscussionId = null" class="ghost-btn w-7 h-7 flex items-center justify-center focus-ring">
+                <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+                </svg>
+              </button>
+              <span class="text-[12px] font-semibold truncate" x-text="activeDiscussion ? activeDiscussion.title : ''"></span>
+            </div>
+
+            <div id="messages-canvas" class="flex-1 overflow-y-auto no-scrollbar px-5 py-4 space-y-4">
+              <template x-for="(msg, idx) in (activeDiscussion ? activeDiscussion.messages : [])" :key="idx">
+                <div class="space-y-1.5">
+                  <div class="flex items-center gap-2">
+                    <span class="index-num text-primary" x-text="`${msg.sender === 'Me' ? '→' : '←'} ${msg.sender.toUpperCase()}`"></span>
+                    <span class="text-[9px] mono-label text-muted">14:32</span>
+                  </div>
+                  <p class="text-[12px] leading-relaxed pl-3" :class="msg.sender === 'Me' ? 'text-foreground border-l-2 border-primary' : 'text-muted-foreground border-l-2 border-border'" x-text="msg.text"></p>
+                </div>
+              </template>
+            </div>
+
+            <div class="p-4 shrink-0 border-t border-border">
+              <div class="ghost-btn flex items-center gap-2 px-3 py-2 focus-ring">
+                <span class="mono-label text-primary">›</span>
+                <input type="text"
+                       x-model="chatReplyInput"
+                       @keydown.enter="submitChatReply()"
+                       placeholder="Reply..."
+                       class="flex-1 bg-transparent border-none outline-none text-[12px] text-foreground">
+                <button @click="submitChatReply()" class="mono-label hover:text-primary text-muted">↵</button>
+              </div>
+            </div>
+          </div>
+        </template>
+
+      </div>
+    </aside>
+
+  </div>
+
+  <div id="floating-format-menu" class="absolute z-50 px-1.5 py-1 flex items-center gap-0.5 select-none bg-popover border border-border">
+    <button @click="formatSelection('bold')" class="w-7 h-7 flex items-center justify-center text-[12px] font-bold hover:bg-accent text-foreground">B</button>
+    <button @click="formatSelection('italic')" class="w-7 h-7 flex items-center justify-center text-[12px] italic hover:bg-accent text-foreground">I</button>
+    <button @click="formatSelection('strikeThrough')" class="w-7 h-7 flex items-center justify-center text-[12px] line-through hover:bg-accent text-foreground">S</button>
+    <button @click="formatSelection('code')" class="w-7 h-7 flex items-center justify-center text-[10px] font-mono hover:bg-accent text-foreground">&lt;/&gt;</button>
+    <div class="divider-v h-4 mx-0.5"></div>
+    <button @click="createDiscussionFromSelection()" class="px-2.5 h-7 flex items-center gap-1.5 text-[10px] mono-label hover:bg-accent text-primary">
+      <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M7.5 8.25h9m-9 3H12" />
+      </svg>
+      <span>Discuss</span>
+    </button>
+  </div>
+
+  <div id="slash-command-menu" class="w-56 p-1 select-none bg-popover border border-border">
+    <div class="px-3 py-1.5 mono-label text-muted border-b border-border">— Blocks</div>
+    <button @click="insertBlockType('h1')" class="w-full text-left px-3 py-2 text-[12px] flex items-center gap-2.5 hover:bg-accent text-foreground">
+      <span class="mono-label w-6 text-muted">H1</span>
+      <span>Heading 1</span>
+    </button>
+    <button @click="insertBlockType('h2')" class="w-full text-left px-3 py-2 text-[12px] flex items-center gap-2.5 hover:bg-accent text-foreground">
+      <span class="mono-label w-6 text-muted">H2</span>
+      <span>Heading 2</span>
+    </button>
+    <button @click="insertBlockType('list')" class="w-full text-left px-3 py-2 text-[12px] flex items-center gap-2.5 hover:bg-accent text-foreground">
+      <span class="mono-label w-6 text-muted">•</span>
+      <span>Bullet list</span>
+    </button>
+    <button @click="insertBlockType('quote')" class="w-full text-left px-3 py-2 text-[12px] flex items-center gap-2.5 hover:bg-accent text-foreground">
+      <span class="mono-label w-6 text-muted">❝</span>
+      <span>Quote block</span>
+    </button>
+  </div>
+
+  <div x-show="isSettingsModalOpen"
+       x-transition:enter="transition ease-out duration-200"
+       x-transition:enter-start="opacity-0"
+       x-transition:enter-end="opacity-100"
+       x-transition:leave="transition ease-in duration-150"
+       x-transition:leave-start="opacity-100"
+       x-transition:leave-end="opacity-0"
+       class="fixed inset-0 z-40 flex items-center justify-center p-6">
+    <div @click="closeSettingsModal()" class="absolute inset-0 bg-black/55 backdrop-blur-sm"></div>
+
+    <div class="relative w-full max-w-2xl flex flex-col z-10 h-[80vh] max-h-[640px] bg-popover border border-border">
+
+      <div class="sticky top-0 z-10 px-7 py-5 shrink-0 bg-popover border-b border-border">
+        <div class="flex items-center justify-between mb-4">
+          <div>
+            <p class="mono-label pb-1 text-muted">— Workspace</p>
+            <h2 class="text-[18px] font-serif font-semibold text-foreground">Preferences</h2>
+          </div>
+          <button @click="closeSettingsModal()" class="ghost-btn w-8 h-8 flex items-center justify-center focus-ring">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+
+        <div class="flex items-center gap-1">
+          <button @click="scrollToSection('sec-general')"
+                  :class="activeSettingsSection === 'sec-general' ? 'section-tab active' : 'section-tab'"
+                  class="mono-label px-3 py-1.5">
+            <span class="mr-1.5">01</span>General
+          </button>
+          <button @click="scrollToSection('sec-members')"
+                  :class="activeSettingsSection === 'sec-members' ? 'section-tab active' : 'section-tab'"
+                  class="mono-label px-3 py-1.5">
+            <span class="mr-1.5">02</span>Members <span class="ml-1.5" x-text="`(${members.length})`">3</span>
+          </button>
+          <button @click="scrollToSection('sec-advanced')"
+                  :class="activeSettingsSection === 'sec-advanced' ? 'section-tab active' : 'section-tab'"
+                  class="mono-label px-3 py-1.5">
+            <span class="mr-1.5">03</span>Advanced
+          </button>
+        </div>
+      </div>
+
+      <div id="modal-scroll-canvas" class="flex-1 overflow-y-auto p-7 space-y-10 no-scrollbar scroll-smooth">
+
+        <section id="sec-general" class="settings-section space-y-5">
+          <div>
+            <p class="mono-label pb-1 text-primary">§ 01</p>
+            <h4 class="text-[15px] font-serif font-semibold text-foreground">General</h4>
+            <p class="text-[11px] mt-1 text-muted-foreground">Identity parameters for this workspace.</p>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div class="space-y-1.5">
+              <label class="mono-label text-muted">Workspace Name</label>
+              <input type="text" x-model="workspaceNameInput" class="ghost-btn w-full px-3 py-2 text-[12px] font-semibold focus-ring text-foreground">
+            </div>
+            <div class="space-y-1.5">
+              <label class="mono-label text-muted">Namespace</label>
+              <input type="text" value="personal.any" class="ghost-btn w-full px-3 py-2 text-[12px] font-semibold focus-ring text-foreground">
+            </div>
+          </div>
+        </section>
+
+        <section id="sec-members" class="settings-section space-y-5">
+          <div class="flex items-end justify-between">
+            <div>
+              <p class="mono-label pb-1 text-primary">§ 02</p>
+              <h4 class="text-[15px] font-serif font-semibold text-foreground">Members</h4>
+              <p class="text-[11px] mt-1 text-muted-foreground">Visibility and permission rules.</p>
+            </div>
+            <button @click="isInviteBoxExpanded = !isInviteBoxExpanded" class="ghost-btn px-3 py-1.5 text-[11px] mono-label focus-ring">+ Invite</button>
+          </div>
+
+          <div x-show="isInviteBoxExpanded" x-transition class="p-3 space-y-2 bg-card border border-border">
+            <div class="flex gap-2">
+              <input x-model="inviteEmail" type="email" placeholder="teammate@email.co" class="ghost-btn flex-1 px-3 py-1.5 text-[12px] focus-ring text-foreground">
+              <button @click="addMember()" class="primary-btn px-3.5 py-1.5 text-[11px] mono-label">Send</button>
+            </div>
+          </div>
+
+          <ul class="divide-y divide-border">
+            <template x-for="m in members" :key="m.email">
+              <li class="flex items-center justify-between gap-4 py-3">
+                <div class="flex items-center gap-3 min-w-0">
+                  <span class="w-7 h-7 flex items-center justify-center mono-label bg-card text-foreground" x-text="m.initials">ME</span>
+                  <div class="truncate">
+                    <p class="text-[12px] font-semibold leading-tight text-foreground" x-text="m.name"></p>
+                    <p class="text-[10px] font-mono text-muted" x-text="m.email"></p>
+                  </div>
+                </div>
+                <span class="px-2.5 py-1 mono-label bg-card text-foreground border border-border" x-text="m.role">OWNER</span>
+              </li>
+            </template>
+          </ul>
+        </section>
+
+        <section id="sec-advanced" class="settings-section space-y-5 pb-8">
+          <div>
+            <p class="mono-label pb-1 text-primary">§ 03</p>
+            <h4 class="text-[15px] font-serif font-semibold text-foreground">Advanced</h4>
+            <p class="text-[11px] mt-1 text-muted-foreground">Foundation diagnostics and exports.</p>
+          </div>
+          <div class="divide-y divide-border border border-border">
+            <div class="flex justify-between items-center px-4 py-3 text-[12px]">
+              <span class="mono-label text-muted">Design System</span>
+              <span class="font-semibold text-foreground">Editorial Mono · v2</span>
+            </div>
+            <div class="flex justify-between items-center px-4 py-3 text-[12px]">
+              <span class="mono-label text-muted">Theming</span>
+              <span class="font-semibold text-foreground">OKLCH Token Pair</span>
+            </div>
+            <div class="flex justify-between items-center px-4 py-3 text-[12px]">
+              <span class="mono-label text-muted">Storage</span>
+              <span class="font-semibold text-foreground">PostgreSQL 18</span>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <div class="px-7 py-4 flex justify-end gap-2 shrink-0 bg-card border-t border-border">
+        <button @click="closeSettingsModal()" class="ghost-btn px-4 py-2 text-[11px] mono-label focus-ring">Cancel</button>
+        <button @click="saveWorkspaceSettings()" class="primary-btn px-4 py-2 text-[11px] mono-label">Save Changes</button>
+      </div>
+    </div>
+  </div>
+
+  <div x-show="isSearchModalOpen"
+       x-transition
+       class="fixed inset-0 z-50 flex items-start justify-center p-4 pt-24">
+    <div @click.outside="closeSearchModal()" class="absolute inset-0 bg-black/50 backdrop-blur-sm"></div>
+
+    <div class="relative w-full max-w-lg z-10 bg-popover border border-border">
+      <div class="px-4 py-2 flex items-center gap-3 border-b border-border">
+        <span class="mono-label text-primary">›</span>
+        <input type="text"
+               x-ref="searchInput"
+               x-model="searchQuery"
+               placeholder="Search entries..."
+               class="flex-1 bg-transparent border-none outline-none text-[14px] font-semibold py-2 text-foreground">
+        <span class="mono-label text-muted">ESC</span>
+      </div>
+
+      <div class="max-h-80 overflow-y-auto no-scrollbar">
+        <template x-if="searchResults.length === 0">
+          <div class="px-4 py-10 text-center">
+            <p class="mono-label pb-1 text-muted">— Empty</p>
+            <p class="text-[12px] text-muted-foreground">No results located.</p>
+          </div>
+        </template>
+        <ul class="divide-y divide-border">
+          <template x-for="item in searchResults" :key="item.id">
+            <li @click="closeSearchModal(); loadEntryToEditor(item.id)" class="row-item cursor-pointer">
+              <div class="px-4 py-2.5 flex items-center gap-3">
+                <span class="index-num text-muted" x-text="item.id"></span>
+                <span class="text-[12px] font-semibold truncate flex-1 text-foreground" x-text="item.title || 'Untitled'"></span>
+                <span class="index-num text-muted">PAGES</span>
+              </div>
+            </li>
+          </template>
+        </ul>
+      </div>
+
+      <div class="px-4 py-2 flex items-center justify-between border-t border-border">
+        <span class="index-num text-muted">Type to filter</span>
+        <span class="index-num text-muted" x-text="`${searchResults.length} RESULTS`">0 RESULTS</span>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('alpine:init', () => {
+      Alpine.data('workspace', () => ({
+        isDarkMode: true,
+        activeTab: 'pages',
+        activeView: 'list',
+        currentSelectedId: null,
+        isConversationsPanelOpen: false,
+        hasUnreadDiscussions: true,
+        selectedDiscussionId: null,
+        isLibraryDropdownOpen: false,
+        isSettingsModalOpen: false,
+        isSearchModalOpen: false,
+        searchQuery: '',
+        activeEditorSection: 'fields',
+        isInviteBoxExpanded: false,
+        inviteEmail: '',
+        workspaceNameInput: 'Personal Space',
+        currentLibrary: 'Personal Space',
+        userName: 'My Profile',
+        editorTitle: '',
+        editorContent: '',
+        syncStatus: 'SAVED',
+        charCount: '0 CHARS',
+        wordCount: '0 WORDS',
+        activeSettingsSection: 'sec-general',
+        chatReplyInput: '',
+        customProperties: [],
+
+        entries: [
+          { id: "01", title: "Entry title — primary heading", content: "Short body preview. The list view truncates to ~110 chars for the index row. Replace with real copy in the variant.", date: new Date(2026, 6, 12), deleted: false },
+          { id: "02", title: "Entry title — secondary", content: "Short body preview. Each entry gets a one-liner for the index row. Tailor per variant.", date: new Date(2026, 6, 9), deleted: false },
+          { id: "03", title: "Entry title — tertiary", content: "Short body preview. Variants may add HTML formatting here to test prose styles.", date: new Date(2026, 6, 3), deleted: false },
+          { id: "04", title: "Entry title — quaternary", content: "Short body preview. Useful for testing long-title truncation behavior.", date: new Date(2026, 5, 28), deleted: false }
+        ],
+
+        discussions: [
+          {
+            id: 1,
+            title: "Discussion thread title",
+            preview: "Sender: short preview text...",
+            messages: [
+              { sender: "Jane", text: "Sample message — replace per variant." },
+              { sender: "Me", text: "Sample reply — replace per variant." }
+            ]
+          }
+        ],
+
+        members: [
+          { name: "My Profile", email: "admin@cozyspace.co", initials: "ME", role: "OWNER" }
+        ],
+
+        MONTHS: ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"],
+
+        init() {
+          window.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+              this.closeSearchModal();
+              this.closeSettingsModal();
+              this.hideFloatingFormatMenu();
+              this.hideSlashMenu();
+            }
+            if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+              e.preventDefault();
+              this.openSearchModal();
+            }
+          });
+
+          this.$nextTick(() => {
+            const canvas = document.getElementById('modal-scroll-canvas');
+            if (canvas) {
+              canvas.addEventListener('scroll', () => {
+                const sections = document.querySelectorAll('.settings-section');
+                sections.forEach(sec => {
+                  const top = sec.offsetTop - canvas.offsetTop - 50;
+                  if (canvas.scrollTop >= top) {
+                    this.activeSettingsSection = sec.id;
+                  }
+                });
+              });
+            }
+          });
+        },
+
+        get headerTitle() {
+          if (this.activeView === 'editor') {
+            return (this.editorTitle || 'Untitled Document').toUpperCase();
+          }
+          return this.activeTab === 'pages' ? 'Pages' : 'Bin';
+        },
+
+        get filteredEntries() {
+          return this.activeTab === 'pages'
+            ? this.entries.filter(e => !e.deleted)
+            : this.entries.filter(e => e.deleted);
+        },
+
+        get searchResults() {
+          const query = this.searchQuery.toLowerCase();
+          if (!query) return this.entries.filter(e => !e.deleted);
+          return this.entries.filter(e => !e.deleted && (e.title || '').toLowerCase().includes(query));
+        },
+
+        get activeDiscussion() {
+          return this.discussions.find(c => c.id === this.selectedDiscussionId) || null;
+        },
+
+        formatDate(dateObj) {
+          const day = dateObj.getDate();
+          const dayStr = day < 10 ? '0' + day : day;
+          const monthStr = this.MONTHS[dateObj.getMonth()];
+          const year = dateObj.getFullYear();
+          return `${dayStr} ${monthStr} ${year}`;
+        },
+
+        selectNavTab(tabName) {
+          this.activeTab = tabName;
+          this.exitToListView();
+        },
+
+        loadEntryToEditor(id) {
+          const entry = this.entries.find(e => e.id === id);
+          if (!entry) return;
+
+          this.currentSelectedId = id;
+          this.activeView = 'editor';
+          this.editorTitle = entry.title || '';
+
+          this.$nextTick(() => {
+            const body = document.getElementById('editor-content-body');
+            if (body) body.innerHTML = entry.content || '';
+            this.updateCounts();
+          });
+
+          this.triggerStatusSaveFeedback();
+        },
+
+        exitToListView() {
+          this.activeView = 'list';
+          this.currentSelectedId = null;
+          this.hideFloatingFormatMenu();
+          this.hideSlashMenu();
+        },
+
+        syncEditorTitle() {
+          if (!this.currentSelectedId) return;
+          const entry = this.entries.find(e => e.id === this.currentSelectedId);
+          if (entry) {
+            entry.title = this.editorTitle;
+            this.triggerStatusSaveFeedback();
+          }
+        },
+
+        syncEditorContent() {
+          if (!this.currentSelectedId) return;
+          const body = document.getElementById('editor-content-body');
+          if (!body) return;
+          const entry = this.entries.find(e => e.id === this.currentSelectedId);
+          if (entry) {
+            entry.content = body.innerHTML;
+            this.updateCounts();
+            this.triggerStatusSaveFeedback();
+          }
+        },
+
+        updateCounts() {
+          const body = document.getElementById('editor-content-body');
+          if (!body) return;
+          const text = body.innerText || body.textContent || '';
+          const count = text.length;
+          const words = text.trim() === "" ? 0 : text.trim().split(/\s+/).length;
+
+          this.charCount = `${count} ${count === 1 ? 'CHAR' : 'CHARS'}`;
+          this.wordCount = `${words} ${words === 1 ? 'WORD' : 'WORDS'}`;
+        },
+
+        triggerStatusSaveFeedback() {
+          this.syncStatus = "SAVING...";
+          setTimeout(() => {
+            this.syncStatus = "SAVED";
+          }, 1200);
+        },
+
+        addNewEditorProperty() {
+          const labels = ["CATEGORY", "TOPIC", "PRIORITY", "REVIEWER"];
+          const values = ["Documentation", "Design Rules", "High", "Jane"];
+          if (this.customProperties.length >= 4) return;
+
+          const randIndex = Math.floor(Math.random() * labels.length);
+          this.customProperties.push({
+            label: labels[randIndex],
+            value: values[randIndex]
+          });
+          this.triggerStatusSaveFeedback();
+        },
+
+        handleSelectionChange(e) {
+          if (this.activeView !== 'editor') return;
+
+          const selection = window.getSelection();
+          const text = selection.toString().trim();
+
+          if (!text) {
+            this.hideFloatingFormatMenu();
+            return;
+          }
+
+          const range = selection.getRangeAt(0);
+          const rects = range.getClientRects();
+
+          if (rects.length > 0) {
+            const topRect = rects[0];
+            const menu = document.getElementById('floating-format-menu');
+            if (menu) {
+              const menuWidth = menu.offsetWidth || 230;
+              const left = (topRect.left + topRect.width / 2) - menuWidth / 2 + window.scrollX;
+              const top = topRect.top - 40 + window.scrollY;
+
+              menu.style.left = `${left}px`;
+              menu.style.top = `${top}px`;
+              menu.classList.add('show');
+            }
+          }
+        },
+
+        hideFloatingFormatMenu() {
+          const menu = document.getElementById('floating-format-menu');
+          if (menu) menu.classList.remove('show');
+        },
+
+        formatSelection(command) {
+          document.execCommand(command, false, null);
+          this.syncEditorContent();
+          this.hideFloatingFormatMenu();
+        },
+
+        createDiscussionFromSelection() {
+          const selectionText = window.getSelection().toString().trim();
+          if (!selectionText) return;
+
+          if (!this.isConversationsPanelOpen) {
+            this.toggleConversations();
+          }
+
+          this.selectedDiscussionId = 1;
+
+          setTimeout(() => {
+            this.chatReplyInput = `Discussing: "${selectionText}" — `;
+          }, 200);
+
+          this.hideFloatingFormatMenu();
+        },
+
+        handleEditorKeyUp(e) {
+          if (e.key === '/') {
+            this.showSlashMenu();
+          } else if (e.key === 'Escape' || e.key === 'Backspace') {
+            this.hideSlashMenu();
+          }
+        },
+
+        showSlashMenu() {
+          const selection = window.getSelection();
+          if (!selection.rangeCount) return;
+
+          const range = selection.getRangeAt(0);
+          const rects = range.getClientRects();
+          const menu = document.getElementById('slash-command-menu');
+
+          if (menu && rects.length > 0) {
+            const rect = rects[0];
+            menu.style.display = 'block';
+            menu.style.left = `${rect.left + window.scrollX}px`;
+            menu.style.top = `${rect.bottom + 8 + window.scrollY}px`;
+          }
+        },
+
+        hideSlashMenu() {
+          const menu = document.getElementById('slash-command-menu');
+          if (menu) menu.style.display = 'none';
+        },
+
+        insertBlockType(type) {
+          const body = document.getElementById('editor-content-body');
+          if (!body) return;
+
+          let currentHTML = body.innerHTML;
+          if (currentHTML.endsWith('/')) {
+            currentHTML = currentHTML.slice(0, -1);
+          } else if (currentHTML.endsWith('/<br>')) {
+            currentHTML = currentHTML.slice(0, -5);
+          }
+
+          let insertedBlock = "";
+          if (type === 'h1') {
+            insertedBlock = `<h1 style="font-family: Newsreader, serif; font-size: 28px; font-weight: 600; margin: 24px 0 8px; color: var(--foreground);">Heading 1</h1>`;
+          } else if (type === 'h2') {
+            insertedBlock = `<h2 style="font-family: Newsreader, serif; font-size: 20px; font-weight: 600; margin: 16px 0 6px; color: var(--foreground);">Heading 2</h2>`;
+          } else if (type === 'list') {
+            insertedBlock = `<ul style="list-style: disc; padding-left: 20px; margin: 8px 0;"><li>List item</li></ul>`;
+          } else if (type === 'quote') {
+            insertedBlock = `<blockquote style="border-left: 2px solid var(--primary); padding: 4px 0 4px 16px; margin: 12px 0; font-style: italic; color: var(--muted-foreground);">"Quote content."</blockquote>`;
+          }
+
+          body.innerHTML = currentHTML + insertedBlock;
+          this.hideSlashMenu();
+          this.syncEditorContent();
+          body.focus();
+        },
+
+        handleEditorClick(e) {
+          const formatMenu = document.getElementById('floating-format-menu');
+          if (formatMenu && !formatMenu.contains(e.target)) {
+            setTimeout(() => {
+              if (!window.getSelection().toString().trim()) {
+                this.hideFloatingFormatMenu();
+              }
+            }, 50);
+          }
+        },
+
+        trashPage(id) {
+          const page = this.entries.find(e => e.id === id);
+          if (page) page.deleted = true;
+        },
+
+        restorePage(id) {
+          const page = this.entries.find(e => e.id === id);
+          if (page) page.deleted = false;
+        },
+
+        createNewEntry() {
+          const nextId = (this.entries.length + 1).toString().padStart(2, '0');
+          const newObj = {
+            id: nextId,
+            title: "Untitled Document",
+            content: "Press / to insert blocks. Highlight any text for formatting options.",
+            date: new Date(),
+            deleted: false
+          };
+
+          this.entries.push(newObj);
+          this.loadEntryToEditor(nextId);
+        },
+
+        toggleConversations() {
+          this.isConversationsPanelOpen = !this.isConversationsPanelOpen;
+          if (this.isConversationsPanelOpen) {
+            this.hasUnreadDiscussions = false;
+          }
+        },
+
+        submitChatReply() {
+          if (!this.chatReplyInput.trim() || this.selectedDiscussionId === null) return;
+          const chat = this.discussions.find(c => c.id === this.selectedDiscussionId);
+          if (chat) {
+            const text = this.chatReplyInput.trim();
+            chat.messages.push({ sender: "Me", text });
+            chat.preview = `Me: ${text}`;
+            this.chatReplyInput = '';
+
+            this.$nextTick(() => {
+              const canvas = document.getElementById('messages-canvas');
+              if (canvas) canvas.scrollTop = canvas.scrollHeight;
+            });
+          }
+        },
+
+        openSettingsModal() {
+          this.isLibraryDropdownOpen = false;
+          this.isSettingsModalOpen = true;
+        },
+
+        closeSettingsModal() {
+          this.isSettingsModalOpen = false;
+        },
+
+        addMember() {
+          if (!this.inviteEmail.trim()) return;
+
+          const userEmail = this.inviteEmail.trim();
+          const name = userEmail.split('@')[0];
+          const initials = name.slice(0, 2).toUpperCase();
+
+          this.members.push({
+            name,
+            email: userEmail,
+            initials,
+            role: "MEMBER"
+          });
+
+          this.inviteEmail = '';
+          this.isInviteBoxExpanded = false;
+        },
+
+        scrollToSection(sectionId) {
+          this.activeSettingsSection = sectionId;
+          const element = document.getElementById(sectionId);
+          const canvas = document.getElementById('modal-scroll-canvas');
+          if (element && canvas) {
+            canvas.scrollTo({
+              top: element.offsetTop - canvas.offsetTop - 24,
+              behavior: 'smooth'
+            });
+          }
+        },
+
+        saveWorkspaceSettings() {
+          if (this.workspaceNameInput.trim()) {
+            this.currentLibrary = this.workspaceNameInput.trim();
+          }
+          this.closeSettingsModal();
+        },
+
+        selectLibrary(name) {
+          this.currentLibrary = name;
+          this.isLibraryDropdownOpen = false;
+        },
+
+        openSearchModal() {
+          this.isSearchModalOpen = true;
+          this.$nextTick(() => {
+            if (this.$refs.searchInput) this.$refs.searchInput.focus();
+          });
+        },
+
+        closeSearchModal() {
+          this.isSearchModalOpen = false;
+          this.searchQuery = '';
+        }
+      }));
+    });
+  </script>
+</body>
+</html>
