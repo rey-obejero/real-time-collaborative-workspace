@@ -1206,6 +1206,7 @@
                   <div
                     id="editor-content-body"
                     contenteditable="true"
+                    spellcheck="false"
                     @input="syncEditorContent()"
                     @keyup="handleEditorKeyUp($event)"
                     @mouseup="handleSelectionChange($event)"
@@ -2259,8 +2260,6 @@
 
           formatDate(dateObj) {
             if (!dateObj) return "";
-            const day = dateObj.getDate();
-            const dayStr = day < 10 ? "0" + day : day;
             const months = [
               "Jan",
               "Feb",
@@ -2275,7 +2274,14 @@
               "Nov",
               "Dec",
             ];
-            return `${months[dateObj.getMonth()]} ${dayStr}, ${dateObj.getFullYear()}`;
+            const day = dateObj.getDate();
+            const mmm = months[dateObj.getMonth()];
+            const now = new Date();
+            if (dateObj.getFullYear() === now.getFullYear()) {
+              return `${mmm} ${day}`;
+            }
+            const dayStr = day < 10 ? "0" + day : day;
+            return `${mmm} ${dayStr}, ${dateObj.getFullYear()}`;
           },
 
           formatRelativeTime(dateObj) {
