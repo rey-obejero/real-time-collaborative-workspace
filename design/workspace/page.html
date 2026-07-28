@@ -185,6 +185,7 @@
       }
       .row-item.active {
         background: var(--accent);
+        box-shadow: inset 2px 0 0 0 var(--foreground);
       }
 
       .ghost-btn {
@@ -270,8 +271,8 @@
       }
 
       .status-dot {
-        width: 6px;
-        height: 6px;
+        width: 8px;
+        height: 8px;
         border-radius: 50%;
         flex-shrink: 0;
       }
@@ -1609,7 +1610,7 @@
               <h4 class="text-[13px] font-semibold text-foreground">Members</h4>
               <button
                 @click="isInviteBoxExpanded = !isInviteBoxExpanded"
-                class="ghost-btn px-2.5 py-1 text-[11px] font-medium rounded-md focus-ring"
+                class="ghost-btn px-3 py-1.5 text-[12px] font-medium rounded-md focus-ring"
               >
                 + Invite
               </button>
@@ -1693,7 +1694,7 @@
                     </div>
                   </div>
                   <button
-                    class="text-[11px] text-muted-foreground hover:text-foreground px-2 py-1 rounded"
+                    class="ghost-btn px-2.5 py-1 text-[11px] font-medium rounded-md focus-ring"
                   >
                     Edit
                   </button>
@@ -1706,7 +1707,7 @@
             <h4 class="text-[13px] font-semibold text-foreground">Advanced</h4>
             <div class="space-y-0.5">
               <div
-                class="flex justify-between items-center px-3 py-2 text-[12px] rounded-md bg-secondary"
+                class="flex justify-between items-center px-3 py-2 text-[12px] rounded-md"
               >
                 <span
                   class="text-[10px] uppercase tracking-wider font-semibold text-muted-foreground"
@@ -1717,7 +1718,7 @@
                 >
               </div>
               <div
-                class="flex justify-between items-center px-3 py-2 text-[12px] rounded-md bg-secondary"
+                class="flex justify-between items-center px-3 py-2 text-[12px] rounded-md"
               >
                 <span
                   class="text-[10px] uppercase tracking-wider font-semibold text-muted-foreground"
@@ -1726,7 +1727,7 @@
                 <span class="font-medium text-foreground">PostgreSQL 18</span>
               </div>
               <div
-                class="flex justify-between items-center px-3 py-2 text-[12px] rounded-md bg-secondary"
+                class="flex justify-between items-center px-3 py-2 text-[12px] rounded-md"
               >
                 <span
                   class="text-[10px] uppercase tracking-wider font-semibold text-muted-foreground"
