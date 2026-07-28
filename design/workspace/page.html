@@ -1079,6 +1079,20 @@
                   ></span>
                 </span>
                 <span x-text="formatDate(new Date())"></span>
+                <span
+                  class="flex items-center gap-1.5"
+                  x-show="activeView === 'editor'"
+                  x-transition.opacity
+                >
+                  <span
+                    class="status-dot"
+                    :style="syncStatus === 'SAVING...' ? 'background: var(--muted-foreground)' : 'background: var(--foreground)'"
+                  ></span>
+                  <span
+                    class="font-mono uppercase tracking-wider"
+                    x-text="syncStatus"
+                  ></span>
+                </span>
               </div>
             </div>
 
@@ -1213,21 +1227,6 @@
                     class="prose-readable w-full bg-transparent border-none outline-none text-foreground"
                     placeholder="Press / to insert blocks..."
                   ></div>
-                </div>
-
-                <div
-                  class="mt-12 pt-4 border-t border-border flex items-center justify-between text-[11px] text-muted-foreground"
-                >
-                  <span
-                    class="font-mono uppercase tracking-wider"
-                    x-text="syncStatus"
-                    >SAVED</span
-                  >
-                  <div class="flex items-center gap-3 font-mono tabular-nums">
-                    <span x-text="charCount">0 chars</span>
-                    <span x-text="wordCount">0 words</span>
-                    <span x-text="readingTime">0 min read</span>
-                  </div>
                 </div>
               </div>
             </div>
@@ -1867,9 +1866,6 @@
           editorTitle: "",
           editorContent: "",
           syncStatus: "SAVED",
-          charCount: "0 chars",
-          wordCount: "0 words",
-          readingTime: "0 min read",
           activeSettingsSection: "sec-general",
           chatReplyInput: "",
 
@@ -2338,7 +2334,6 @@
             this.$nextTick(() => {
               const body = document.getElementById("editor-content-body");
               if (body) body.innerHTML = entry.content || "";
-              this.updateCounts();
             });
 
             this.triggerStatusSaveFeedback();
@@ -2371,23 +2366,8 @@
             );
             if (entry) {
               entry.content = body.innerHTML;
-              this.updateCounts();
               this.triggerStatusSaveFeedback();
             }
-          },
-
-          updateCounts() {
-            const body = document.getElementById("editor-content-body");
-            if (!body) return;
-            const text = body.innerText || body.textContent || "";
-            const chars = text.length;
-            const words =
-              text.trim() === "" ? 0 : text.trim().split(/\s+/).length;
-            const mins = Math.max(1, Math.round(words / 200));
-
-            this.charCount = `${chars} ${chars === 1 ? "char" : "chars"}`;
-            this.wordCount = `${words} ${words === 1 ? "word" : "words"}`;
-            this.readingTime = `${mins} min read`;
           },
 
           triggerStatusSaveFeedback() {
