@@ -1,0 +1,267 @@
+<div
+  x-show="isSettingsModalOpen"
+  x-transition:enter="transition ease-out duration-150"
+  x-transition:enter-start="opacity-0"
+  x-transition:enter-end="opacity-100"
+  x-transition:leave="transition ease-in duration-100"
+  x-transition:leave-start="opacity-100"
+  x-transition:leave-end="opacity-0"
+  class="fixed inset-0 z-40 flex items-center justify-center p-6"
+>
+  <div
+    @click="closeSettingsModal()"
+    class="absolute inset-0 bg-black/20"
+  ></div>
+
+  <div
+    class="relative w-full max-w-2xl flex flex-col z-10 h-[80vh] max-h-[640px] bg-popover border border-border rounded-lg overflow-hidden"
+  >
+    <div class="px-7 py-5 shrink-0 border-b border-border">
+      <div class="flex items-center justify-between mb-4">
+        <div>
+          <p class="text-[11px] text-muted-foreground mb-0.5">Workspace</p>
+          <h2
+            class="text-[18px] font-semibold tracking-tight text-foreground"
+          >
+            Settings
+          </h2>
+        </div>
+        <button
+          @click="closeSettingsModal()"
+          class="w-7 h-7 flex items-center justify-center rounded-md hover:bg-accent focus-ring"
+        >
+          <svg
+            class="w-3.5 h-3.5"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.75"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M6 18L18 6M6 6l12 12"
+            />
+          </svg>
+        </button>
+      </div>
+
+      <div class="flex items-center gap-3 border-b border-border -mb-px">
+        <button
+          @click="scrollToSection('sec-general')"
+          :class="activeSettingsSection === 'sec-general' ? 'field-tab active' : 'field-tab'"
+          class="px-2 pb-2 text-[12px] font-medium"
+        >
+          General
+        </button>
+        <button
+          @click="scrollToSection('sec-members')"
+          :class="activeSettingsSection === 'sec-members' ? 'field-tab active' : 'field-tab'"
+          class="px-2 pb-2 text-[12px] font-medium"
+        >
+          Members
+          <span
+            class="ml-1 text-muted-foreground"
+            x-text="`(${members.length})`"
+            >0</span
+          >
+        </button>
+        <button
+          @click="scrollToSection('sec-schemas')"
+          :class="activeSettingsSection === 'sec-schemas' ? 'field-tab active' : 'field-tab'"
+          class="px-2 pb-2 text-[12px] font-medium"
+        >
+          Schemas
+        </button>
+        <button
+          @click="scrollToSection('sec-advanced')"
+          :class="activeSettingsSection === 'sec-advanced' ? 'field-tab active' : 'field-tab'"
+          class="px-2 pb-2 text-[12px] font-medium"
+        >
+          Advanced
+        </button>
+      </div>
+    </div>
+
+    <div
+      id="modal-scroll-canvas"
+      class="flex-1 overflow-y-auto no-scrollbar scroll-smooth px-7 py-6 space-y-8"
+    >
+      <section id="sec-general" class="settings-section space-y-4">
+        <h4 class="text-[13px] font-semibold text-foreground">General</h4>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div class="space-y-1.5">
+            <label class="text-[11px] font-medium text-muted-foreground"
+              >Workspace Name</label
+            >
+            <input
+              type="text"
+              x-model="workspaceNameInput"
+              class="ghost-btn w-full px-3 py-1.5 text-[12px] font-medium rounded-md focus-ring text-foreground"
+            />
+          </div>
+          <div class="space-y-1.5">
+            <label class="text-[11px] font-medium text-muted-foreground"
+              >Namespace</label
+            >
+            <input
+              type="text"
+              value="personal.any"
+              class="ghost-btn w-full px-3 py-1.5 text-[12px] font-medium rounded-md focus-ring text-foreground"
+            />
+          </div>
+        </div>
+      </section>
+
+      <section id="sec-members" class="settings-section space-y-4">
+        <div class="flex items-end justify-between">
+          <h4 class="text-[13px] font-semibold text-foreground">Members</h4>
+          <button
+            @click="isInviteBoxExpanded = !isInviteBoxExpanded"
+            class="ghost-btn px-3 py-1.5 text-[12px] font-medium rounded-md focus-ring"
+          >
+            + Invite
+          </button>
+        </div>
+        <div
+          x-show="isInviteBoxExpanded"
+          x-transition
+          class="p-2 space-y-2 rounded-md bg-secondary"
+        >
+          <div class="flex gap-2">
+            <input
+              x-model="inviteEmail"
+              type="email"
+              placeholder="teammate@email.co"
+              class="ghost-btn flex-1 px-3 py-1.5 text-[12px] rounded-md focus-ring text-foreground"
+            />
+            <button
+              @click="addMember()"
+              class="primary-btn px-3 py-1.5 text-[11px] font-medium rounded-md"
+            >
+              Send
+            </button>
+          </div>
+        </div>
+        <ul class="space-y-0.5">
+          <template x-for="m in members" :key="m.email">
+            <li
+              class="flex items-center justify-between gap-3 py-2 px-2 rounded-md hover:bg-accent"
+            >
+              <div class="flex items-center gap-2 min-w-0">
+                <span class="avatar-chip" x-text="m.initials">ME</span>
+                <div class="truncate">
+                  <p
+                    class="text-[12px] font-semibold leading-tight text-foreground"
+                    x-text="m.name"
+                  ></p>
+                  <p
+                    class="text-[10px] text-muted-foreground"
+                    x-text="m.email"
+                  ></p>
+                </div>
+              </div>
+              <span
+                class="text-[10px] uppercase tracking-wider font-semibold text-muted-foreground"
+                x-text="m.role"
+                >OWNER</span
+              >
+            </li>
+          </template>
+        </ul>
+      </section>
+
+      <section id="sec-schemas" class="settings-section space-y-4">
+        <div>
+          <h4 class="text-[13px] font-semibold text-foreground">Schemas</h4>
+          <p class="text-[11px] mt-1 text-muted-foreground">
+            Object types defined in this workspace.
+          </p>
+        </div>
+        <ul class="space-y-0.5">
+          <template x-for="schema in schemas" :key="schema.id">
+            <li
+              class="flex items-center justify-between gap-3 py-2.5 px-2 rounded-md hover:bg-accent"
+            >
+              <div class="flex items-center gap-2 min-w-0">
+                <span
+                  x-html="getTypeIconSvg(schema.id)"
+                  class="w-4 h-4 flex items-center text-muted-foreground"
+                ></span>
+                <div>
+                  <p
+                    class="text-[12px] font-semibold leading-tight text-foreground"
+                    x-text="schema.name"
+                  ></p>
+                  <p
+                    class="text-[10px] text-muted-foreground font-mono"
+                    x-text="schema.id + ' · ' + countByType(schema.id) + ' entries'"
+                  >
+                    page · 0 entries
+                  </p>
+                </div>
+              </div>
+              <button
+                class="ghost-btn px-2.5 py-1 text-[11px] font-medium rounded-md focus-ring"
+              >
+                Edit
+              </button>
+            </li>
+          </template>
+        </ul>
+      </section>
+
+      <section id="sec-advanced" class="settings-section space-y-4 pb-4">
+        <h4 class="text-[13px] font-semibold text-foreground">Advanced</h4>
+        <div class="space-y-0.5">
+          <div
+            class="flex justify-between items-center px-3 py-2 text-[12px] rounded-md"
+          >
+            <span
+              class="text-[10px] uppercase tracking-wider font-semibold text-muted-foreground"
+              >Data Model</span
+            >
+            <span class="font-medium text-foreground"
+              >Schemas / Entries</span
+            >
+          </div>
+          <div
+            class="flex justify-between items-center px-3 py-2 text-[12px] rounded-md"
+          >
+            <span
+              class="text-[10px] uppercase tracking-wider font-semibold text-muted-foreground"
+              >Storage</span
+            >
+            <span class="font-medium text-foreground">PostgreSQL 18</span>
+          </div>
+          <div
+            class="flex justify-between items-center px-3 py-2 text-[12px] rounded-md"
+          >
+            <span
+              class="text-[10px] uppercase tracking-wider font-semibold text-muted-foreground"
+              >Auth</span
+            >
+            <span class="font-medium text-foreground">JWT</span>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <div
+      class="px-7 py-3 flex justify-end gap-2 shrink-0 border-t border-border"
+    >
+      <button
+        @click="closeSettingsModal()"
+        class="ghost-btn px-3 py-1.5 text-[12px] font-medium rounded-md focus-ring"
+      >
+        Cancel
+      </button>
+      <button
+        @click="saveWorkspaceSettings()"
+        class="primary-btn px-3 py-1.5 text-[12px] font-medium rounded-md"
+      >
+        Save
+      </button>
+    </div>
+  </div>
+</div>

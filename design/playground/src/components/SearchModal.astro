@@ -1,0 +1,83 @@
+<div
+  x-show="isSearchModalOpen"
+  x-transition
+  class="fixed inset-0 z-50 flex items-start justify-center p-4 pt-24"
+>
+  <div
+    @click.outside="closeSearchModal()"
+    class="absolute inset-0 bg-black/15"
+  ></div>
+
+  <div
+    class="relative w-full max-w-lg z-10 bg-popover border border-border rounded-lg overflow-hidden"
+  >
+    <div class="px-4 py-3 flex items-center gap-3 border-b border-border">
+      <svg
+        class="w-4 h-4 text-muted-foreground"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.75"
+        viewBox="0 0 24 24"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
+        />
+      </svg>
+      <input
+        type="text"
+        x-ref="searchInput"
+        x-model="searchQuery"
+        placeholder="Search or ask anything..."
+        class="flex-1 bg-transparent border-none outline-none text-[13px] font-medium py-1 text-foreground"
+      />
+      <span class="text-[10px] font-mono text-muted-foreground">ESC</span>
+    </div>
+
+    <div class="max-h-80 overflow-y-auto no-scrollbar">
+      <template x-if="searchResults.length === 0">
+        <div class="px-4 py-10 text-center">
+          <p
+            class="text-[11px] uppercase tracking-wider pb-1 text-muted-foreground"
+          >
+            No results
+          </p>
+          <p class="text-[12px] text-muted-foreground">
+            Try a different query.
+          </p>
+        </div>
+      </template>
+      <ul class="p-1 space-y-0.5">
+        <template x-for="item in searchResults" :key="item.id">
+          <li
+            @click="closeSearchModal(); loadEntryToEditor(item.id)"
+            class="row-item rounded-md cursor-pointer"
+          >
+            <div class="px-3 py-2 flex items-center gap-3">
+              <span
+                x-html="getTypeIconSvg(item.type)"
+                class="w-4 h-4 flex items-center text-muted-foreground"
+              ></span>
+              <span
+                class="text-[12px] font-medium truncate flex-1 text-foreground"
+                x-text="item.title || 'Untitled'"
+              ></span>
+              <span
+                class="text-[10px] text-muted-foreground uppercase tracking-wider"
+                x-text="getSchemaName(item.type)"
+              ></span>
+            </div>
+          </li>
+        </template>
+      </ul>
+    </div>
+
+    <div
+      class="px-4 py-2 flex items-center justify-between text-[10px] text-muted-foreground border-t border-border font-mono"
+    >
+      <span>↑↓ navigate · ↵ open</span>
+      <span x-text="`${searchResults.length} results`">0 results</span>
+    </div>
+  </div>
+</div>

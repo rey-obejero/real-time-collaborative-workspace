@@ -1,0 +1,22 @@
+---
+import "../styles/global.css";
+---
+<!doctype html>
+<html lang="en" class="h-full" x-data="workspace()" :class="{ 'dark': isDarkMode }">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Workspace</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <script defer src="/scripts/workspace.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  </head>
+  <body class="h-full overflow-hidden font-sans select-none text-foreground">
+    <slot />
+  </body>
+</html>

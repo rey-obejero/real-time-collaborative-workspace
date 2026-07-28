@@ -1,17 +1,29 @@
 ---
-
+import WorkspaceLayout from "../layouts/WorkspaceLayout.astro";
+import Sidebar from "../components/Sidebar.astro";
+import MainHeader from "../components/MainHeader.astro";
+import ListView from "../components/ListView.astro";
+import EditorView from "../components/EditorView.astro";
+import Conversations from "../components/Conversations.astro";
+import FloatingToolbar from "../components/FloatingToolbar.astro";
+import SlashMenu from "../components/SlashMenu.astro";
+import SettingsModal from "../components/SettingsModal.astro";
+import SearchModal from "../components/SearchModal.astro";
 ---
-
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<WorkspaceLayout>
+  <div class="h-full w-full flex bg-background">
+    <Sidebar />
+    <main class="flex-1 flex flex-col h-full overflow-hidden">
+      <MainHeader />
+      <div class="flex-1 flex flex-col overflow-hidden relative">
+        <ListView />
+        <EditorView />
+      </div>
+    </main>
+    <Conversations />
+    <FloatingToolbar />
+    <SlashMenu />
+    <SettingsModal />
+    <SearchModal />
+  </div>
+</WorkspaceLayout>

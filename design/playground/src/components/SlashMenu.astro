@@ -1,0 +1,45 @@
+<div
+  id="slash-command-menu"
+  class="w-64 p-1 select-none bg-popover border border-border rounded-md"
+>
+  <div
+    class="px-3 py-1.5 text-[10px] uppercase tracking-wider font-semibold text-muted-foreground"
+  >
+    Blocks
+  </div>
+  <button
+    @click="insertBlockType('h1')"
+    class="w-full text-left px-3 py-1.5 text-[12px] flex items-center gap-3 rounded hover:bg-accent text-foreground"
+  >
+    <span class="text-[10px] font-mono text-muted-foreground">H1</span>
+    <span>Heading 1</span>
+  </button>
+  <button
+    @click="insertBlockType('h2')"
+    class="w-full text-left px-3 py-1.5 text-[12px] flex items-center gap-3 rounded hover:bg-accent text-foreground"
+  >
+    <span class="text-[10px] font-mono text-muted-foreground">H2</span>
+    <span>Heading 2</span>
+  </button>
+  <button
+    @click="insertBlockType('h3')"
+    class="w-full text-left px-3 py-1.5 text-[12px] flex items-center gap-3 rounded hover:bg-accent text-foreground"
+  >
+    <span class="text-[10px] font-mono text-muted-foreground">H3</span>
+    <span>Heading 3</span>
+  </button>
+  <button
+    @click="insertBlockType('list')"
+    class="w-full text-left px-3 py-1.5 text-[12px] flex items-center gap-3 rounded hover:bg-accent text-foreground"
+  >
+    <span class="text-[10px] font-mono text-muted-foreground">•</span>
+    <span>Bullet list</span>
+  </button>
+  <button
+    @click="insertBlockType('quote')"
+    class="w-full text-left px-3 py-1.5 text-[12px] flex items-center gap-3 rounded hover:bg-accent text-foreground"
+  >
+    <span class="text-[10px] font-mono text-muted-foreground">❝</span>
+    <span>Quote</span>
+  </button>
+</div>
