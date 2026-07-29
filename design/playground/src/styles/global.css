@@ -301,6 +301,11 @@ textarea:focus,
   border-radius: 9999px;
 }
 
+iconify-icon {
+  display: inline-flex;
+  align-items: center;
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

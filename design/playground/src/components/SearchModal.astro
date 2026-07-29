@@ -1,6 +1,9 @@
+---
+import Icon from "./Icon.astro";
+---
 <div
   x-show="isSearchModalOpen"
-  x-transition
+  x-transition.opacity.duration.150
   class="fixed inset-0 z-50 flex items-start justify-center p-4 pt-24"
 >
   <div
@@ -12,19 +15,7 @@
     class="relative w-full max-w-lg z-10 bg-popover border border-border rounded-lg overflow-hidden"
   >
     <div     class="px-4 py-3 flex items-center gap-3">
-      <svg
-        class="w-4 h-4 text-muted-foreground"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="1.75"
-        viewBox="0 0 24 24"
-      >
-        <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
-        />
-      </svg>
+      <Icon name="search" class="w-4 h-4 text-muted-foreground" />
       <input
         type="text"
         x-ref="searchInput"
@@ -55,10 +46,8 @@
             class="row-item cursor-pointer"
           >
             <div class="px-3 py-2 flex items-center gap-3">
-              <span
-                x-html="getTypeIconSvg(item.type)"
-                class="w-4 h-4 flex items-center text-muted-foreground"
-              ></span>
+              <iconify-icon x-show="tweaks.iconSet !== 'custom'" :icon="getIconName(item.type)" class="w-4 h-4 text-muted-foreground"></iconify-icon>
+              <span x-show="tweaks.iconSet === 'custom'" x-html="getCustomIconSvg(item.type)" class="inline-flex items-center w-4 h-4 text-muted-foreground"></span>
               <span
                 class="text-[14px] font-medium truncate flex-1 text-foreground"
                 x-text="item.title || 'Untitled'"

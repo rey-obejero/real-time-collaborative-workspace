@@ -1,3 +1,6 @@
+---
+import Icon from "./Icon.astro";
+---
 <div
   x-show="isSettingsModalOpen"
   x-transition:enter="transition ease-out duration-150"
@@ -30,19 +33,7 @@
           @click="closeSettingsModal()"
           class="w-7 h-7 flex items-center justify-center rounded-full hover:bg-secondary focus-ring"
         >
-          <svg
-            class="w-3.5 h-3.5"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="1.75"
-            viewBox="0 0 24 24"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M6 18L18 6M6 6l12 12"
-            />
-          </svg>
+          <Icon name="x" class="w-3.5 h-3.5" />
         </button>
       </div>
 
@@ -177,10 +168,8 @@
               class="flex items-center justify-between gap-3 py-2.5 px-2 rounded-full hover:bg-secondary"
             >
               <div class="flex items-center gap-2 min-w-0">
-                <span
-                  x-html="getTypeIconSvg(schema.id)"
-                  class="w-4 h-4 flex items-center text-muted-foreground"
-                ></span>
+                <iconify-icon x-show="tweaks.iconSet !== 'custom'" :icon="getIconName(schema.id)" class="w-4 h-4 text-muted-foreground"></iconify-icon>
+                <span x-show="tweaks.iconSet === 'custom'" x-html="getCustomIconSvg(schema.id)" class="inline-flex items-center w-4 h-4 text-muted-foreground"></span>
                 <div>
                   <p
                     class="text-[14px] font-medium leading-tight text-foreground"
