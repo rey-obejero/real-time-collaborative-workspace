@@ -53,6 +53,7 @@
   --input: #ffffff;
   --ring: rgba(59, 130, 246, 0.5);
   --radius: 0.75rem;
+  --hairline-strong: #d4d4d4;
 
   --type-page: #737373;
   --type-task: #737373;
@@ -332,17 +333,17 @@ iconify-icon {
 
 .tweaks-chips-bordered .property-chip {
   background: var(--background);
-  border: 1px solid #d4d4d4;
+  border: 1px solid var(--hairline-strong);
 }
 
 .tweaks-chips-bordered .tag-pill {
   background: var(--background);
-  border: 1px solid #e5e5e5;
+  border: 1px solid var(--border);
 }
 
 .tweaks-chips-bordered .type-pill {
   background: var(--background);
-  border: 1px solid #e5e5e5;
+  border: 1px solid var(--border);
 }
 
 .tweaks-status-label .status-dot {
