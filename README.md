@@ -102,6 +102,8 @@ information on the web client.
 ### Front-End
 
 - **[alan2207/bulletproof-react](https://github.com/alan2207/bulletproof-react):** Front-end architecture principles
+- **[DiceBear](https://www.dicebear.com):** API-ready customizable avatars
+- **[Formito](https://formito.com/tools):** Logo and favicon tools
 
 ### UI/UX
 
