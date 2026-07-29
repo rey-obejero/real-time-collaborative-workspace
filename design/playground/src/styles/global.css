@@ -163,6 +163,7 @@ body {
 .field-tab.active {
   color: var(--foreground);
   border-bottom-color: var(--foreground);
+  font-weight: 500;
 }
 
 .section-tab {

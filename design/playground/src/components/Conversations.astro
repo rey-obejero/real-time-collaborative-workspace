@@ -1,6 +1,6 @@
 <section
   :class="isConversationsPanelOpen ? 'w-80 shrink-0 flex' : 'w-0 shrink-0 hidden'"
-  style="transition: width 0.25s ease"
+  style="transition: width 0.15s ease"
 >
   <div
     class="w-80 h-full flex flex-col border-l border-border bg-background overflow-hidden"
@@ -8,7 +8,7 @@
     <div
       class="h-14 px-5 flex items-center justify-between shrink-0"
     >
-      <div class="flex items-center gap-2 text-[14px] font-semibold">
+      <div class="flex items-center gap-2 text-[14px] font-medium">
         <span>Conversations</span>
         <span
           class="text-muted-foreground"
@@ -52,7 +52,7 @@
               <div class="px-3 py-2.5">
                 <div class="flex items-baseline justify-between mb-1">
                   <span
-                    class="text-[14px] font-semibold leading-[1.5] text-foreground"
+                    class="text-[14px] font-medium leading-[1.5] text-foreground"
                     x-text="chat.title"
                   ></span>
                   <span class="status-dot"></span>
@@ -92,7 +92,7 @@
             </svg>
           </button>
           <span
-            class="text-[14px] font-semibold truncate"
+            class="text-[14px] font-medium truncate"
             x-text="activeDiscussion ? activeDiscussion.title : ''"
           ></span>
         </div>

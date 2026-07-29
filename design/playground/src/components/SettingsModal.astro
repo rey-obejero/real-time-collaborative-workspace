@@ -81,7 +81,7 @@
       class="flex-1 overflow-y-auto no-scrollbar scroll-smooth px-7 py-6 space-y-8"
     >
       <section id="sec-general" class="settings-section space-y-4">
-        <h4 class="text-[14px] font-semibold text-foreground">General</h4>
+        <h4 class="text-[14px] font-medium text-foreground">General</h4>
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
           <div class="space-y-1.5">
             <label class="text-[12px] font-medium text-muted-foreground"
@@ -108,7 +108,7 @@
 
       <section id="sec-members" class="settings-section space-y-4">
         <div class="flex items-end justify-between">
-          <h4 class="text-[14px] font-semibold text-foreground">Members</h4>
+          <h4 class="text-[14px] font-medium text-foreground">Members</h4>
           <button
             @click="isInviteBoxExpanded = !isInviteBoxExpanded"
             class="ghost-btn px-3 py-1.5 text-[12px] font-medium focus-ring"
@@ -145,7 +145,7 @@
                 <span class="avatar-chip" x-text="m.initials">ME</span>
                 <div class="truncate">
                   <p
-                    class="text-[14px] font-semibold leading-tight text-foreground"
+                    class="text-[14px] font-medium leading-tight text-foreground"
                     x-text="m.name"
                   ></p>
                   <p
@@ -166,7 +166,7 @@
 
       <section id="sec-schemas" class="settings-section space-y-4">
         <div>
-          <h4 class="text-[14px] font-semibold text-foreground">Schemas</h4>
+          <h4 class="text-[14px] font-medium text-foreground">Schemas</h4>
           <p class="text-[12px] mt-1 text-muted-foreground">
             Object types defined in this workspace.
           </p>
@@ -183,7 +183,7 @@
                 ></span>
                 <div>
                   <p
-                    class="text-[14px] font-semibold leading-tight text-foreground"
+                    class="text-[14px] font-medium leading-tight text-foreground"
                     x-text="schema.name"
                   ></p>
                   <p

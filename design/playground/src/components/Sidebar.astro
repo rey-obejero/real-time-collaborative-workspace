@@ -107,27 +107,14 @@
         />
       </svg>
       <span>Search</span>
-      <span class="ml-auto text-[12px] opacity-60">CTRL + k</span>
+      <span class="ml-auto text-[12px] opacity-60">CTRL K</span>
     </button>
     <div class="relative" @click.outside="isNewMenuOpen = false">
       <button
         @click="isNewMenuOpen = !isNewMenuOpen"
         class="primary-btn w-full flex items-center justify-center gap-1.5 px-2.5 py-1.5 text-[14px] font-medium"
       >
-        <svg
-          class="w-3 h-3"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2.5"
-          viewBox="0 0 24 24"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="M12 4.5v15m7.5-7.5h-15"
-          />
-        </svg>
-        <span>New</span>
+        <span>Create</span>
         <svg
           class="w-3 h-3 ml-0.5 opacity-60"
           :class="isNewMenuOpen ? 'rotate-180' : ''"
