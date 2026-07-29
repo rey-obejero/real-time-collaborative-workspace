@@ -3,7 +3,7 @@
   class="flex-1 flex flex-col h-full overflow-hidden"
 >
   <div
-    class="h-12 px-6 flex items-center justify-between shrink-0 border-b border-border"
+    class="h-12 px-6 flex items-center justify-between shrink-0"
   >
     <button
       @click="exitToListView()"
@@ -46,7 +46,7 @@
           :style="syncStatus === 'SAVING...' ? 'background: var(--muted-foreground)' : 'background: var(--foreground)'"
         ></span>
         <span
-          class="font-mono uppercase tracking-wider"
+          class="uppercase tracking-wider"
           x-text="syncStatus"
         ></span>
       </span>
@@ -58,7 +58,7 @@
     @click="handleEditorClick($event)"
   >
     <div class="max-w-2xl w-full mx-auto px-8 py-8">
-      <div class="space-y-4 pb-6 border-b border-border">
+      <div class="space-y-4 pb-6">
         <div
           class="flex items-center gap-2 text-[12px] font-medium text-muted-foreground"
         >
@@ -72,7 +72,7 @@
           x-model="editorTitle"
           @input="syncEditorTitle()"
           placeholder="Untitled"
-          class="w-full text-[32px] leading-[1.1] tracking-tight font-semibold bg-transparent border-none outline-none text-foreground"
+          class="w-full text-[30px] leading-[1.2] font-medium bg-transparent border-none outline-none text-foreground font-display"
         />
 
         <div
@@ -106,7 +106,7 @@
           <template x-if="activeEntry?.due">
             <div class="property-chip">
               <span class="label">Due</span>
-              <span class="value font-mono" x-text="activeEntry.due"></span>
+              <span class="value capitalize" x-text="activeEntry.due"></span>
             </div>
           </template>
 
@@ -114,7 +114,7 @@
             <div class="property-chip">
               <span class="label">Timeline</span>
               <span
-                class="value font-mono"
+                class="value"
                 x-text="`${activeEntry.start} → ${activeEntry.end}`"
               ></span>
             </div>
@@ -124,7 +124,7 @@
             <div class="property-chip">
               <span class="label">URL</span>
               <span
-                class="value font-mono text-[11px] truncate max-w-[200px]"
+                class="value text-[12px] truncate max-w-[200px]"
                 x-text="activeEntry.url"
               ></span>
             </div>

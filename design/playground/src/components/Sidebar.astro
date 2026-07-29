@@ -61,7 +61,6 @@
         >
         <span>Engineering Wiki</span>
       </button>
-      <div class="h-px bg-border mx-2"></div>
       <button
         @click="openSettingsModal()"
         class="w-full text-left px-3 py-2 text-[14px] flex items-center gap-2 hover:bg-accent text-muted-foreground rounded-full"
@@ -108,7 +107,7 @@
         />
       </svg>
       <span>Quick Action</span>
-      <span class="ml-auto text-[10px] font-mono opacity-60">⌘K</span>
+      <span class="ml-auto text-[12px] opacity-60">⌘K</span>
     </button>
     <div class="relative" @click.outside="isNewMenuOpen = false">
       <button
@@ -167,7 +166,6 @@
             <span x-text="schema.name"></span>
           </button>
         </template>
-        <div class="h-px bg-border my-1 mx-2"></div>
         <div
           class="px-3 pt-1 pb-1 text-[12px] font-medium text-muted-foreground"
         >
@@ -192,7 +190,7 @@
           </svg>
           <span>New Schema</span>
           <span
-            class="ml-auto text-[10px] font-mono uppercase tracking-wider"
+            class="ml-auto text-[12px]"
             >soon</span
           >
         </button>
@@ -229,7 +227,7 @@
             </svg>
             <span>All</span>
             <span
-              class="ml-auto text-[10px] font-mono tabular-nums opacity-70"
+              class="ml-auto text-[12px] tabular-nums opacity-70"
               x-text="totalEntryCount"
               >0</span
             >
@@ -256,7 +254,7 @@
             </svg>
             <span>Recent</span>
             <span
-              class="ml-auto text-[10px] font-mono tabular-nums opacity-70"
+              class="ml-auto text-[12px] tabular-nums opacity-70"
               x-text="entries.length"
               >0</span
             >
@@ -283,7 +281,7 @@
             </svg>
             <span>Drafts</span>
             <span
-              class="ml-auto text-[10px] font-mono tabular-nums opacity-70"
+              class="ml-auto text-[12px] tabular-nums opacity-70"
               x-text="countByStatus('draft')"
               >0</span
             >
@@ -310,7 +308,7 @@
             </svg>
             <span>In Progress</span>
             <span
-              class="ml-auto text-[10px] font-mono tabular-nums opacity-70"
+              class="ml-auto text-[12px] tabular-nums opacity-70"
               x-text="countByStatus('doing') + countByStatus('active')"
               >0</span
             >
@@ -339,7 +337,7 @@
               ></span>
               <span x-text="schema.name"></span>
               <span
-                class="ml-auto text-[10px] font-mono tabular-nums opacity-70"
+                class="ml-auto text-[12px] tabular-nums opacity-70"
                 x-text="countByType(schema.id)"
                 >0</span
               >
@@ -380,7 +378,7 @@
     </div>
   </div>
 
-  <div class="px-3 py-3 border-t border-border">
+  <div class="px-3 py-3">
     <div
       class="flex items-center gap-2 px-2 py-1.5 rounded-full hover:bg-accent cursor-pointer"
     >

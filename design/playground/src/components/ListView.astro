@@ -60,7 +60,7 @@
 
       <div class="tweak-card border border-border rounded-lg overflow-hidden bg-card">
       <div
-        class="grid grid-cols-[20px_1fr_120px_140px_80px] items-center gap-3 px-3 py-2 border-b border-border bg-secondary"
+        class="grid grid-cols-[20px_1fr_120px_140px_80px] items-center gap-3 px-3 py-2 bg-secondary"
       >
         <div></div>
         <div
@@ -88,7 +88,7 @@
       <template x-if="filteredEntries.length === 0">
         <div class="px-6 py-12 text-center">
           <p
-            class="text-[11px] uppercase tracking-wider pb-1 text-muted-foreground"
+            class="text-[12px] pb-1 text-muted-foreground"
           >
             No entries
           </p>
@@ -113,7 +113,7 @@
                 class="w-4 h-4 flex items-center text-muted-foreground"
               ></span>
               <span
-                class="text-[13px] font-medium truncate text-foreground"
+                class="text-[14px] font-medium truncate text-foreground"
                 x-text="item.title || 'Untitled'"
               ></span>
               <span
@@ -150,7 +150,7 @@
                 </template>
               </div>
               <span
-                class="text-[12px] font-mono tabular-nums text-right text-muted-foreground"
+                class="text-[12px] tabular-nums text-right text-muted-foreground"
                 x-text="formatRelativeTime(item.updatedAt)"
               ></span>
             </div>

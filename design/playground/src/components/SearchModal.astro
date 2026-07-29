@@ -11,7 +11,7 @@
   <div
     class="relative w-full max-w-lg z-10 bg-popover border border-border rounded-lg overflow-hidden"
   >
-    <div class="px-4 py-3 flex items-center gap-3 border-b border-border">
+    <div     class="px-4 py-3 flex items-center gap-3">
       <svg
         class="w-4 h-4 text-muted-foreground"
         fill="none"
@@ -32,7 +32,7 @@
         placeholder="Search or ask anything..."
         class="flex-1 bg-transparent border-none outline-none text-[14px] font-medium py-1 text-foreground"
       />
-      <span class="text-[10px] font-mono text-muted-foreground">ESC</span>
+      <span class="text-[12px] text-muted-foreground">ESC</span>
     </div>
 
     <div class="max-h-80 overflow-y-auto no-scrollbar">
@@ -64,7 +64,7 @@
                 x-text="item.title || 'Untitled'"
               ></span>
               <span
-                class="text-[10px] text-muted-foreground uppercase tracking-wider"
+                class="text-[12px] text-muted-foreground"
                 x-text="getSchemaName(item.type)"
               ></span>
             </div>
@@ -74,7 +74,7 @@
     </div>
 
     <div
-      class="px-4 py-2 flex items-center justify-between text-[10px] text-muted-foreground border-t border-border font-mono"
+      class="px-4 py-2 flex items-center justify-between text-[12px] text-muted-foreground"
     >
       <span>↑↓ navigate · ↵ open</span>
       <span x-text="`${searchResults.length} results`">0 results</span>
