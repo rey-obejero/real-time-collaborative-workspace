@@ -1,6 +1,3 @@
----
-import Icon from "./Icon.astro";
----
 <div
   x-show="isSettingsModalOpen"
   x-transition:enter="transition ease-out duration-150"
@@ -33,7 +30,8 @@ import Icon from "./Icon.astro";
           @click="closeSettingsModal()"
           class="w-7 h-7 flex items-center justify-center rounded-full hover:bg-secondary focus-ring"
         >
-          <Icon name="x" class="w-3.5 h-3.5" />
+          <iconify-icon x-show="tweaks.iconSet !== 'custom'" :icon="getIconName('x')" class="w-3.5 h-3.5 inline-flex items-center"></iconify-icon>
+            <span x-show="tweaks.iconSet === 'custom'" x-html="getCustomIconSvg('x')" class="inline-flex items-center justify-center w-3.5 h-3.5"></span>
         </button>
       </div>
 

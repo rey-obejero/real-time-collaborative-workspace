@@ -1,9 +1,0 @@
----
-const { name } = Astro.props;
-const passedClass = Astro.props.class || "w-4 h-4";
-const cls = `${passedClass} inline-flex items-center`.trim();
----
-<span class={cls}>
-  <iconify-icon x-show="tweaks.iconSet !== 'custom'" :icon="getIconName('{name}')" class="w-full h-full"></iconify-icon>
-  <span x-show="tweaks.iconSet === 'custom'" x-html="getCustomIconSvg('{name}')" class="inline-flex items-center justify-center w-full h-full"></span>
-</span>

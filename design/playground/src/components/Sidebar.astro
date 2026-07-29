@@ -1,6 +1,3 @@
----
-import Icon from "./Icon.astro";
----
 <aside
       class="w-80 shrink-0 flex flex-col h-full border-r border-border bg-background"
 >
@@ -19,7 +16,10 @@ import Icon from "./Icon.astro";
         x-text="currentLibrary"
         >Personal Space</span
       >
-      <Icon name="chevron-down" class="w-3 h-3 ml-auto text-muted-foreground transition" :class="isLibraryDropdownOpen ? 'rotate-180' : ''" />
+      <span class="ml-auto text-muted-foreground transition inline-flex items-center" :class="isLibraryDropdownOpen ? 'rotate-180' : ''">
+            <iconify-icon x-show="tweaks.iconSet !== 'custom'" :icon="getIconName('chevron-down')" class="w-3 h-3 inline-flex items-center"></iconify-icon>
+            <span x-show="tweaks.iconSet === 'custom'" x-html="getCustomIconSvg('chevron-down')" class="inline-flex items-center justify-center w-3 h-3"></span>
+          </span>
     </button>
 
     <div
@@ -55,7 +55,8 @@ import Icon from "./Icon.astro";
         @click="openSettingsModal()"
         class="w-full text-left px-3 py-2 text-[14px] flex items-center gap-2 hover:bg-accent text-muted-foreground rounded-full"
       >
-        <Icon name="settings" class="w-3.5 h-3.5" />
+        <iconify-icon x-show="tweaks.iconSet !== 'custom'" :icon="getIconName('settings')" class="w-3.5 h-3.5 inline-flex items-center"></iconify-icon>
+              <span x-show="tweaks.iconSet === 'custom'" x-html="getCustomIconSvg('settings')" class="inline-flex items-center justify-center w-3.5 h-3.5"></span>
         <span>Settings</span>
       </button>
     </div>
@@ -66,7 +67,8 @@ import Icon from "./Icon.astro";
       @click="openSearchModal()"
       class="ghost-btn w-full flex items-center gap-2 px-2.5 py-1.5 text-[14px] focus-ring text-muted-foreground"
     >
-      <Icon name="search" class="w-3.5 h-3.5" />
+      <iconify-icon x-show="tweaks.iconSet !== 'custom'" :icon="getIconName('search')" class="w-3.5 h-3.5 inline-flex items-center"></iconify-icon>
+              <span x-show="tweaks.iconSet === 'custom'" x-html="getCustomIconSvg('search')" class="inline-flex items-center justify-center w-3.5 h-3.5"></span>
       <span>Search</span>
       <span class="ml-auto text-[12px] opacity-60">Ctrl K</span>
     </button>
@@ -76,7 +78,10 @@ import Icon from "./Icon.astro";
         class="primary-btn w-full flex items-center justify-center gap-1.5 px-2.5 py-1.5 text-[14px] font-medium"
       >
         <span>Create</span>
-        <Icon name="chevron-down" class="w-3 h-3 ml-0.5 opacity-60" :class="isNewMenuOpen ? 'rotate-180' : ''" />
+        <span class="ml-0.5 opacity-60 transition inline-flex items-center" :class="isNewMenuOpen ? 'rotate-180' : ''">
+                      <iconify-icon x-show="tweaks.iconSet !== 'custom'" :icon="getIconName('chevron-down')" class="w-3 h-3 inline-flex items-center"></iconify-icon>
+                      <span x-show="tweaks.iconSet === 'custom'" x-html="getCustomIconSvg('chevron-down')" class="inline-flex items-center justify-center w-3 h-3"></span>
+                    </span>
       </button>
 
       <div
@@ -108,7 +113,8 @@ import Icon from "./Icon.astro";
           disabled
           class="w-full text-left px-3 py-1.5 text-[14px] flex items-center gap-2 opacity-50 cursor-not-allowed text-muted-foreground rounded-full"
         >
-          <Icon name="plus" class="w-3.5 h-3.5" />
+          <iconify-icon x-show="tweaks.iconSet !== 'custom'" :icon="getIconName('plus')" class="w-3.5 h-3.5 inline-flex items-center"></iconify-icon>
+                          <span x-show="tweaks.iconSet === 'custom'" x-html="getCustomIconSvg('plus')" class="inline-flex items-center justify-center w-3.5 h-3.5"></span>
           <span>New Schema</span>
           <span
             class="ml-auto text-[12px]"
@@ -133,7 +139,8 @@ import Icon from "./Icon.astro";
             :class="{ 'active': activeCollection === 'all' }"
             class="nav-row w-full flex items-center gap-2 px-2 py-2.5 text-[14px] font-medium"
           >
-            <Icon name="grid" class="w-3.5 h-3.5" />
+            <iconify-icon x-show="tweaks.iconSet !== 'custom'" :icon="getIconName('grid')" class="w-3.5 h-3.5 inline-flex items-center"></iconify-icon>
+                    <span x-show="tweaks.iconSet === 'custom'" x-html="getCustomIconSvg('grid')" class="inline-flex items-center justify-center w-3.5 h-3.5"></span>
             <span>All</span>
             <span
               class="ml-auto text-[12px] tabular-nums opacity-70"
@@ -148,7 +155,8 @@ import Icon from "./Icon.astro";
             :class="{ 'active': activeCollection === 'recent' }"
             class="nav-row w-full flex items-center gap-2 px-2 py-2.5 text-[14px] font-medium"
           >
-            <Icon name="clock" class="w-3.5 h-3.5" />
+            <iconify-icon x-show="tweaks.iconSet !== 'custom'" :icon="getIconName('clock')" class="w-3.5 h-3.5 inline-flex items-center"></iconify-icon>
+                    <span x-show="tweaks.iconSet === 'custom'" x-html="getCustomIconSvg('clock')" class="inline-flex items-center justify-center w-3.5 h-3.5"></span>
             <span>Recent</span>
             <span
               class="ml-auto text-[12px] tabular-nums opacity-70"
@@ -199,7 +207,8 @@ import Icon from "./Icon.astro";
           <button
             class="nav-row w-full flex items-center gap-2 px-2 py-2.5 text-[14px] font-medium"
           >
-            <Icon name="trash" class="w-3.5 h-3.5" />
+            <iconify-icon x-show="tweaks.iconSet !== 'custom'" :icon="getIconName('trash')" class="w-3.5 h-3.5 inline-flex items-center"></iconify-icon>
+                    <span x-show="tweaks.iconSet === 'custom'" x-html="getCustomIconSvg('trash')" class="inline-flex items-center justify-center w-3.5 h-3.5"></span>
             <span>Trash</span>
           </button>
         </li>
