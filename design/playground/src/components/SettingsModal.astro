@@ -30,8 +30,7 @@
           @click="closeSettingsModal()"
           class="w-7 h-7 flex items-center justify-center rounded-full hover:bg-secondary focus-ring"
         >
-          <iconify-icon x-show="tweaks.iconSet !== 'custom'" :icon="getIconName('x')" class="w-3.5 h-3.5 inline-flex items-center"></iconify-icon>
-            <span x-show="tweaks.iconSet === 'custom'" x-html="getCustomIconSvg('x')" class="inline-flex items-center justify-center w-3.5 h-3.5"></span>
+          <iconify-icon :icon="getIconName('x')" class="w-3.5 h-3.5"></iconify-icon>
         </button>
       </div>
 
@@ -166,8 +165,7 @@
               class="flex items-center justify-between gap-3 py-2.5 px-2 rounded-full hover:bg-secondary"
             >
               <div class="flex items-center gap-2 min-w-0">
-                <iconify-icon x-show="tweaks.iconSet !== 'custom'" :icon="getIconName(schema.id)" class="w-4 h-4 text-muted-foreground"></iconify-icon>
-                <span x-show="tweaks.iconSet === 'custom'" x-html="getCustomIconSvg(schema.id)" class="inline-flex items-center w-4 h-4 text-muted-foreground"></span>
+                <iconify-icon :icon="getIconName(schema.id)" class="w-4 h-4 text-muted-foreground"></iconify-icon>
                 <div>
                   <p
                     class="text-[14px] font-medium leading-tight text-foreground"

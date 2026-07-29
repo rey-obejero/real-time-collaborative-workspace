@@ -23,7 +23,7 @@ document.addEventListener("alpine:init", () => {
       sidebarFill: "canvas",
       chipStyle: "soft",
       statusStyle: "dot",
-      iconSet: "custom",
+      iconSet: "feather",
     },
     workspaceNameInput: "Personal Space",
     currentLibrary: "Personal Space",
@@ -381,50 +381,6 @@ document.addEventListener("alpine:init", () => {
       return s ? s.description : "";
     },
 
-    getTypeIconSvg(typeId) {
-      const set = this.tweaks.iconSet;
-      const SVG = (p) =>
-        `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${p}</svg>`;
-      const all = {
-        custom: {
-          page: SVG('<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M10 13h4M10 17h4"/>'),
-          task: SVG('<circle cx="12" cy="12" r="9"/><path d="m9 12 2 2 4-4"/>'),
-          project: SVG('<path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/>'),
-          note: SVG('<path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/>'),
-          bookmark: SVG('<path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"/>'),
-        },
-        feather: {
-          page: SVG('<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/>'),
-          task: SVG('<path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>'),
-          project: SVG('<path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/>'),
-          note: SVG('<path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/>'),
-          bookmark: SVG('<path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"/>'),
-        },
-        heroicons: {
-          page: SVG('<path d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9z"/>'),
-          task: SVG('<path d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z"/>'),
-          project: SVG('<path d="M2.25 12.75V12A2.25 2.25 0 0 1 4.5 9.75h15A2.25 2.25 0 0 1 21.75 12v.75m-8.69-6.44-2.12-2.12a1.5 1.5 0 0 0-1.061-.44H4.5A2.25 2.25 0 0 0 2.25 6v12a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18V9a2.25 2.25 0 0 0-2.25-2.25h-5.379a1.5 1.5 0 0 1-1.06-.44z"/>'),
-          note: SVG('<path d="M16.5 3.75V16.5L12 14.25 7.5 16.5V3.75m9 0H18A2.25 2.25 0 0 1 20.25 6v12A2.25 2.25 0 0 1 18 20.25H6A2.25 2.25 0 0 1 3.75 18V6A2.25 2.25 0 0 1 6 3.75h1.5m9 0h-9"/>'),
-          bookmark: SVG('<path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"/>'),
-        },
-        phosphor: {
-          page: SVG('<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><line x1="10" y1="9" x2="8" y2="9"/>'),
-          task: SVG('<path d="M9.5 12.5l2 2 5-5"/><path d="M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z"/>'),
-          project: SVG('<path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/>'),
-          note: SVG('<path d="M8 6h8M8 10h8M8 14h5"/><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/>'),
-          bookmark: SVG('<path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"/>'),
-        },
-        hugeicons: {
-          page: SVG('<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M10 13h4M10 17h4"/><path d="M8 9h1"/>'),
-          task: SVG('<circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/>'),
-          project: SVG('<path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/><path d="M9 7v2h3"/>'),
-          note: SVG('<path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/><path d="M15.5 6.5l2 2"/>'),
-          bookmark: SVG('<path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"/>'),
-        },
-      };
-      return (all[set] && all[set][typeId]) || (all.custom[typeId]) || "";
-    },
-
     getIconName(name) {
       const set = this.tweaks.iconSet;
       const map = {
@@ -532,40 +488,34 @@ document.addEventListener("alpine:init", () => {
           pencil: "hugeicons:pencil-edit-01",
           discuss: "hugeicons:chatting-01",
         },
+        mage: {
+          search: "mage:search",
+          chat: "mage:message-square",
+          settings: "mage:settings",
+          tweaks: "mage:sliders",
+          moon: "mage:moon",
+          sun: "mage:sun",
+          "chevron-down": "mage:chevron-down",
+          "chevron-left": "mage:chevron-left",
+          x: "mage:x",
+          plus: "mage:plus",
+          grid: "mage:grid",
+          clock: "mage:clock",
+          trash: "mage:trash",
+          sort: "mage:arrow-up-down",
+          filter: "mage:filter",
+          send: "mage:send",
+          sparkles: "mage:sparkles",
+          page: "mage:file-text",
+          task: "mage:check-square",
+          project: "mage:folder",
+          note: "mage:edit",
+          bookmark: "mage:bookmark",
+          pencil: "mage:pencil",
+          discuss: "mage:message-square",
+        },
       };
       return (map[set] && map[set][name]) || "";
-    },
-
-    getCustomIconSvg(name) {
-      const SVG = (p) =>
-        `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${p}</svg>`;
-      const custom = {
-        search: SVG('<circle cx="10" cy="10" r="7"/><path d="m21 21-5-5"/>'),
-        chat: SVG('<path d="M21 12a9 9 0 0 1-9 9H3l3-3a9 9 0 0 1 6-15 9 9 0 0 1 9 9z"/>'),
-        settings: SVG('<circle cx="12" cy="12" r="3"/><path d="M12 1v2m0 18v2M1 12h2m18 0h2M4.22 4.22l1.42 1.42m12.72 12.72l1.42 1.42M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>'),
-        tweaks: SVG('<path d="M4 21v-4m-2 0h4M4 5v8M20 21v-6m-2 0h4M10 21V9m-2 0h4m-4 0V5m6 16V13m-2 0h4"/>'),
-        moon: SVG('<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>'),
-        sun: SVG('<circle cx="12" cy="12" r="5"/><path d="M12 1v2m0 18v2M1 12h2m18 0h2M4.22 4.22l1.42 1.42m12.72 12.72l1.42 1.42M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>'),
-        "chevron-down": SVG('<path d="m6 9 6 6 6-6"/>'),
-        "chevron-left": SVG('<path d="m15 18-6-6 6-6"/>'),
-        x: SVG('<path d="M18 6 6 18M6 6l12 12"/>'),
-        plus: SVG('<path d="M12 5v14M5 12h14"/>'),
-        grid: SVG('<rect x="4" y="4" width="7" height="7" rx="1"/><rect x="13" y="4" width="7" height="7" rx="1"/><rect x="4" y="13" width="7" height="7" rx="1"/><rect x="13" y="13" width="7" height="7" rx="1"/>'),
-        clock: SVG('<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/>'),
-        trash: SVG('<path d="M3 6h18M8 6V4a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v2"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6M14 11v6"/>'),
-        sort: SVG('<path d="M8 3v18M16 5v14"/><path d="m5 7 3-4 3 4"/><path d="m13 17 3 4 3-4"/>'),
-        filter: SVG('<path d="M4 7h16"/><path d="M7 12h10"/><path d="M10 17h4"/>'),
-        send: SVG('<path d="M22 2 11 13M22 2l-7 20-4-9-9-4Z"/>'),
-        sparkles: SVG('<path d="M12 3v18M3 12h18M8.5 8.5l7 7M8.5 15.5l7-7"/>'),
-        page: SVG('<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M10 13h4M10 17h4"/>'),
-        task: SVG('<circle cx="12" cy="12" r="9"/><path d="m9 12 2 2 4-4"/>'),
-        project: SVG('<path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/>'),
-        note: SVG('<path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/>'),
-        bookmark: SVG('<path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"/>'),
-        pencil: SVG('<path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/>'),
-        discuss: SVG('<path d="M21 12a9 9 0 0 1-9 9H3l3-3a9 9 0 0 1 6-15 9 9 0 0 1 9 9z"/>'),
-      };
-      return custom[name] || "";
     },
 
     formatDate(dateObj) {
@@ -879,7 +829,7 @@ document.addEventListener("alpine:init", () => {
         sidebarFill: "canvas",
         chipStyle: "soft",
         statusStyle: "dot",
-        iconSet: "custom",
+        iconSet: "feather",
       };
     },
   }));

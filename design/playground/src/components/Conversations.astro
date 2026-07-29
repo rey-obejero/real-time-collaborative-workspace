@@ -20,8 +20,7 @@
         @click="toggleConversations()"
         class="w-7 h-7 flex items-center justify-center rounded-full hover:bg-secondary focus-ring"
       >
-        <iconify-icon x-show="tweaks.iconSet !== 'custom'" :icon="getIconName('x')" class="w-3.5 h-3.5 inline-flex items-center"></iconify-icon>
-              <span x-show="tweaks.iconSet === 'custom'" x-html="getCustomIconSvg('x')" class="inline-flex items-center justify-center w-3.5 h-3.5"></span>
+        <iconify-icon :icon="getIconName('x')" class="w-3.5 h-3.5"></iconify-icon>
       </button>
     </div>
 
@@ -66,8 +65,7 @@
             @click="selectedDiscussionId = null"
             class="w-7 h-7 flex items-center justify-center rounded-full hover:bg-secondary focus-ring"
           >
-            <iconify-icon x-show="tweaks.iconSet !== 'custom'" :icon="getIconName('chevron-left')" class="w-3.5 h-3.5 inline-flex items-center"></iconify-icon>
-            <span x-show="tweaks.iconSet === 'custom'" x-html="getCustomIconSvg('chevron-left')" class="inline-flex items-center justify-center w-3.5 h-3.5"></span>
+            <iconify-icon :icon="getIconName('chevron-left')" class="w-3.5 h-3.5"></iconify-icon>
           </button>
           <span
             class="text-[14px] font-medium truncate"
@@ -114,8 +112,7 @@
               @click="submitChatReply()"
               class="w-6 h-6 flex items-center justify-center rounded-full bg-foreground text-background hover:opacity-90"
             >
-              <iconify-icon x-show="tweaks.iconSet !== 'custom'" :icon="getIconName('send')" class="w-3 h-3 inline-flex items-center"></iconify-icon>
-                <span x-show="tweaks.iconSet === 'custom'" x-html="getCustomIconSvg('send')" class="inline-flex items-center justify-center w-3 h-3"></span>
+              <iconify-icon :icon="getIconName('send')" class="w-3 h-3"></iconify-icon>
             </button>
           </div>
         </div>

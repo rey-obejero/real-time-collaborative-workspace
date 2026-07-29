@@ -12,12 +12,10 @@
       title="Toggle theme"
     >
       <span x-show="!isDarkMode" class="inline-flex items-center w-3.5 h-3.5">
-          <iconify-icon x-show="tweaks.iconSet !== 'custom'" :icon="getIconName('moon')" class="w-full h-full"></iconify-icon>
-          <span x-show="tweaks.iconSet === 'custom'" x-html="getCustomIconSvg('moon')" class="inline-flex items-center justify-center w-full h-full"></span>
+          <iconify-icon :icon="getIconName('moon')" class="w-full h-full"></iconify-icon>
         </span>
       <span x-show="isDarkMode" class="inline-flex items-center w-3.5 h-3.5">
-          <iconify-icon x-show="tweaks.iconSet !== 'custom'" :icon="getIconName('sun')" class="w-full h-full"></iconify-icon>
-          <span x-show="tweaks.iconSet === 'custom'" x-html="getCustomIconSvg('sun')" class="inline-flex items-center justify-center w-full h-full"></span>
+          <iconify-icon :icon="getIconName('sun')" class="w-full h-full"></iconify-icon>
         </span>
     </button>
     <button
@@ -25,8 +23,7 @@
       class="w-7 h-7 flex items-center justify-center rounded-full hover:bg-secondary focus-ring relative"
       title="Discussions"
     >
-      <iconify-icon x-show="tweaks.iconSet !== 'custom'" :icon="getIconName('chat')" class="w-3.5 h-3.5 inline-flex items-center"></iconify-icon>
-          <span x-show="tweaks.iconSet === 'custom'" x-html="getCustomIconSvg('chat')" class="inline-flex items-center justify-center w-3.5 h-3.5"></span>
+      <iconify-icon :icon="getIconName('chat')" class="w-3.5 h-3.5"></iconify-icon>
       <span
         x-show="hasUnreadDiscussions"
         class="absolute top-1 right-1 status-dot"
@@ -36,8 +33,7 @@
     <button
       class="ask-ai-pill flex items-center gap-1.5 px-2.5 py-1 text-[14px] font-medium"
     >
-      <iconify-icon x-show="tweaks.iconSet !== 'custom'" :icon="getIconName('sparkles')" class="w-3 h-3 inline-flex items-center"></iconify-icon>
-          <span x-show="tweaks.iconSet === 'custom'" x-html="getCustomIconSvg('sparkles')" class="inline-flex items-center justify-center w-3 h-3"></span>
+      <iconify-icon :icon="getIconName('sparkles')" class="w-3.5 h-3.5"></iconify-icon>
       <span>Ask AI</span>
     </button>
   </div>

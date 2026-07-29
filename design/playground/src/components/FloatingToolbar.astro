@@ -31,8 +31,7 @@
     @click="createDiscussionFromSelection()"
     class="px-2.5 h-7 flex items-center gap-1 text-[12px] font-medium rounded-full hover:bg-secondary text-foreground"
   >
-    <iconify-icon x-show="tweaks.iconSet !== 'custom'" :icon="getIconName('discuss')" class="w-3 h-3 inline-flex items-center"></iconify-icon>
-        <span x-show="tweaks.iconSet === 'custom'" x-html="getCustomIconSvg('discuss')" class="inline-flex items-center justify-center w-3 h-3"></span>
+    <iconify-icon :icon="getIconName('discuss')" class="w-3 h-3"></iconify-icon>
     <span>Discuss</span>
   </button>
 </div>

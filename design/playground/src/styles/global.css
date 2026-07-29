@@ -361,3 +361,7 @@ iconify-icon {
   font-weight: 500;
   text-transform: capitalize;
 }
+
+.ask-ai-pill iconify-icon svg {
+  stroke-width: 2px;
+}

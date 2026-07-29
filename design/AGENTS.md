@@ -56,30 +56,21 @@ Import in `WorkspaceLayout.astro`:
 <script>import 'iconify-icon';</script>
 ```
 
-**Pattern — inline dual-element (no Astro wrapper component):**
+**Pattern — single `<iconify-icon>` element (no Astro wrapper, no custom SVGs):**
 
 ```astro
-<iconify-icon
-  x-show="tweaks.iconSet !== 'custom'"
-  :icon="getIconName('search')"
-  class="w-3.5 h-3.5 inline-flex items-center">
-</iconify-icon>
-<span
-  x-show="tweaks.iconSet === 'custom'"
-  x-html="getCustomIconSvg('search')"
-  class="inline-flex items-center justify-center w-3.5 h-3.5">
-</span>
+<iconify-icon :icon="getIconName('search')" class="w-3.5 h-3.5"></iconify-icon>
 ```
 
-Do not wrap in Astro component — dimension collapse, breaks `currentColor`.
+Do not wrap in Astro component — dimension collapse, breaks `currentColor`. The `display: inline-flex; align-items: center;` is handled globally in CSS.
 
-Icons toggleable: Custom → Feather → Heroicons → Phosphor → HugeIcons. Mappings in `workspace.js`.
+Sets: Feather (default) → Heroicons → Phosphor → HugeIcons → Mage. Mappings in `workspace.js`.
 
 ## Rules
 
 1. **`pnpm`, never `npm`.**
 2. **Packages over CDNs.** No `<script src>` for packages available via pnpm.
-3. **No Astro icon wrapper.** Inline `iconify-icon` + custom SVG `<span>` directly.
+3. **No Astro icon wrapper.** Single `<iconify-icon>` element, never wrapped in an Astro component.
 4. **No hardcoded colors.** CSS variables or Tailwind semantic tokens.
 5. **No shadows, no gradients, no hover transforms.**
 6. **Font sizes from token scale:** 30 / 24 / 20 / 16 / 14 / 12px.
