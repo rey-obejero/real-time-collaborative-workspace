@@ -1,10 +1,10 @@
 <aside
-  class="w-80 shrink-0 flex flex-col h-full border-r border-border bg-card"
+      class="w-80 shrink-0 flex flex-col h-full border-r border-border bg-background"
 >
   <div class="px-3 pt-3 pb-2">
     <button
       @click="isLibraryDropdownOpen = !isLibraryDropdownOpen"
-      class="w-full flex items-center gap-2 px-2 py-1.5 rounded-md hover:bg-accent"
+      class="w-full flex items-center gap-2 px-2 py-1.5 rounded-full hover:bg-accent"
     >
       <img
         src="https://api.dicebear.com/10.x/initials/svg?initialsVariant=alt:1&lettersVariant=single:0&backgroundColor=000000&textColor=ffffff&seed=Personal%20Space"
@@ -12,7 +12,7 @@
         class="w-5 h-5 rounded"
       />
       <span
-        class="text-[13px] font-semibold tracking-tight gradient-text"
+        class="text-[14px] font-medium text-foreground"
         x-text="currentLibrary"
         >Personal Space</span
       >
@@ -36,12 +36,12 @@
       x-show="isLibraryDropdownOpen"
       @click.outside="isLibraryDropdownOpen = false"
       x-transition
-      class="absolute z-20 mt-1 w-56 ml-3 rounded-md border border-border bg-popover overflow-hidden"
+      class="absolute z-20 mt-1 w-56 ml-3 rounded-lg border border-border bg-popover overflow-hidden"
     >
       <button
         @click="selectLibrary('Personal Space')"
         :class="currentLibrary === 'Personal Space' ? 'bg-accent' : ''"
-        class="w-full text-left px-3 py-2 text-[12px] flex items-center gap-2 hover:bg-accent"
+        class="w-full text-left px-3 py-2 text-[14px] flex items-center gap-2 hover:bg-accent rounded-full"
       >
         <img
           src="https://api.dicebear.com/7.x/initials/svg?seed=Personal%20Space"
@@ -53,7 +53,7 @@
       <button
         @click="selectLibrary('Engineering Wiki')"
         :class="currentLibrary === 'Engineering Wiki' ? 'bg-accent' : ''"
-        class="w-full text-left px-3 py-2 text-[12px] flex items-center gap-2 hover:bg-accent"
+        class="w-full text-left px-3 py-2 text-[14px] flex items-center gap-2 hover:bg-accent rounded-full"
       >
         <span
           class="w-4 h-4 rounded bg-foreground text-background flex items-center justify-center text-[9px] font-semibold"
@@ -64,7 +64,7 @@
       <div class="h-px bg-border mx-2"></div>
       <button
         @click="openSettingsModal()"
-        class="w-full text-left px-3 py-2 text-[12px] flex items-center gap-2 hover:bg-accent text-muted-foreground"
+        class="w-full text-left px-3 py-2 text-[14px] flex items-center gap-2 hover:bg-accent text-muted-foreground rounded-full"
       >
         <svg
           class="w-3.5 h-3.5"
@@ -92,7 +92,7 @@
   <div class="px-3 pb-2 space-y-1">
     <button
       @click="openSearchModal()"
-      class="ghost-btn w-full flex items-center gap-2 px-2.5 py-1.5 text-[12px] rounded-md focus-ring text-muted-foreground"
+      class="ghost-btn w-full flex items-center gap-2 px-2.5 py-1.5 text-[14px] focus-ring text-muted-foreground"
     >
       <svg
         class="w-3.5 h-3.5"
@@ -113,7 +113,7 @@
     <div class="relative" @click.outside="isNewMenuOpen = false">
       <button
         @click="isNewMenuOpen = !isNewMenuOpen"
-        class="primary-btn w-full flex items-center justify-center gap-1.5 px-2.5 py-1.5 text-[12px] font-semibold rounded-md"
+        class="primary-btn w-full flex items-center justify-center gap-1.5 px-2.5 py-1.5 text-[14px] font-medium"
       >
         <svg
           class="w-3 h-3"
@@ -148,17 +148,17 @@
       <div
         x-show="isNewMenuOpen"
         x-transition
-        class="absolute top-full left-0 right-0 mt-1 z-30 bg-popover border border-border rounded-md overflow-hidden"
+        class="absolute top-full left-0 right-0 mt-1 z-30 bg-popover border border-border rounded-lg overflow-hidden"
       >
         <div
-          class="px-3 pt-2 pb-1 text-[10px] uppercase tracking-wider font-semibold text-muted-foreground"
+          class="px-3 pt-2 pb-1 text-[12px] font-medium text-muted-foreground"
         >
           Entries
         </div>
         <template x-for="schema in schemas" :key="schema.id">
           <button
             @click="createNewEntryOfType(schema.id); isNewMenuOpen = false"
-            class="w-full text-left px-3 py-1.5 text-[12px] flex items-center gap-2 hover:bg-accent text-foreground"
+            class="w-full text-left px-3 py-1.5 text-[14px] flex items-center gap-2 hover:bg-accent text-foreground rounded-full"
           >
             <span
               x-html="getTypeIconSvg(schema.id)"
@@ -169,13 +169,13 @@
         </template>
         <div class="h-px bg-border my-1 mx-2"></div>
         <div
-          class="px-3 pt-1 pb-1 text-[10px] uppercase tracking-wider font-semibold text-muted-foreground"
+          class="px-3 pt-1 pb-1 text-[12px] font-medium text-muted-foreground"
         >
           Schemas
         </div>
         <button
           disabled
-          class="w-full text-left px-3 py-1.5 text-[12px] flex items-center gap-2 opacity-50 cursor-not-allowed text-muted-foreground"
+          class="w-full text-left px-3 py-1.5 text-[14px] flex items-center gap-2 opacity-50 cursor-not-allowed text-muted-foreground rounded-full"
         >
           <svg
             class="w-3.5 h-3.5"
@@ -203,7 +203,7 @@
   <div class="flex-1 overflow-y-auto no-scrollbar">
     <div class="px-3 pt-3 pb-1">
       <p
-        class="text-[10px] font-semibold tracking-wider uppercase px-2 mb-1 text-muted-foreground"
+        class="text-[12px] font-medium text-muted-foreground px-2 mb-1"
       >
         Collection
       </p>
@@ -212,7 +212,7 @@
           <button
             @click="selectCollection('all')"
             :class="{ 'active': activeCollection === 'all' }"
-            class="nav-row w-full flex items-center gap-2 px-2 py-2.5 text-[12px] font-medium rounded-md"
+            class="nav-row w-full flex items-center gap-2 px-2 py-2.5 text-[14px] font-medium"
           >
             <svg
               class="w-3.5 h-3.5"
@@ -239,7 +239,7 @@
           <button
             @click="selectCollection('recent')"
             :class="{ 'active': activeCollection === 'recent' }"
-            class="nav-row w-full flex items-center gap-2 px-2 py-2.5 text-[12px] font-medium rounded-md"
+            class="nav-row w-full flex items-center gap-2 px-2 py-2.5 text-[14px] font-medium"
           >
             <svg
               class="w-3.5 h-3.5"
@@ -266,7 +266,7 @@
           <button
             @click="selectCollection('drafts')"
             :class="{ 'active': activeCollection === 'drafts' }"
-            class="nav-row w-full flex items-center gap-2 px-2 py-2.5 text-[12px] font-medium rounded-md"
+            class="nav-row w-full flex items-center gap-2 px-2 py-2.5 text-[14px] font-medium"
           >
             <svg
               class="w-3.5 h-3.5"
@@ -293,7 +293,7 @@
           <button
             @click="selectCollection('in-progress')"
             :class="{ 'active': activeCollection === 'in-progress' }"
-            class="nav-row w-full flex items-center gap-2 px-2 py-2.5 text-[12px] font-medium rounded-md"
+            class="nav-row w-full flex items-center gap-2 px-2 py-2.5 text-[14px] font-medium"
           >
             <svg
               class="w-3.5 h-3.5"
@@ -321,7 +321,7 @@
 
     <div class="px-3 pt-4 pb-1">
       <p
-        class="text-[10px] font-semibold tracking-wider uppercase px-2 mb-1 text-muted-foreground"
+        class="text-[12px] font-medium text-muted-foreground px-2 mb-1"
       >
         Schemas
       </p>
@@ -331,7 +331,7 @@
             <button
               @click="selectSchema(schema.id)"
               :class="{ 'active': activeSchema === schema.id }"
-              class="nav-row schema-row w-full flex items-center gap-2 px-2 py-2.5 text-[12px] font-medium rounded-md"
+              class="nav-row schema-row w-full flex items-center gap-2 px-2 py-2.5 text-[14px] font-medium"
             >
               <span
                 x-html="getTypeIconSvg(schema.id)"
@@ -351,14 +351,14 @@
 
     <div class="px-3 pt-4 pb-1">
       <p
-        class="text-[10px] font-semibold tracking-wider uppercase px-2 mb-1 text-muted-foreground"
+        class="text-[12px] font-medium text-muted-foreground px-2 mb-1"
       >
         Archive
       </p>
       <ul class="space-y-0.5">
         <li>
           <button
-            class="nav-row w-full flex items-center gap-2 px-2 py-2.5 text-[12px] font-medium rounded-md"
+            class="nav-row w-full flex items-center gap-2 px-2 py-2.5 text-[14px] font-medium"
           >
             <svg
               class="w-3.5 h-3.5"
@@ -382,15 +382,15 @@
 
   <div class="px-3 py-3 border-t border-border">
     <div
-      class="flex items-center gap-2 px-2 py-1.5 rounded-md hover:bg-accent cursor-pointer"
+      class="flex items-center gap-2 px-2 py-1.5 rounded-full hover:bg-accent cursor-pointer"
     >
       <span
         class="w-6 h-6 flex items-center justify-center rounded-full bg-secondary text-foreground text-[9px] font-semibold"
         >ME</span
       >
       <div class="min-w-0 flex-1">
-        <p class="text-[11px] font-semibold truncate">My Profile</p>
-        <p class="text-[10px] truncate text-muted-foreground">
+        <p class="text-[14px] font-medium truncate">My Profile</p>
+        <p class="text-[12px] truncate text-muted-foreground">
           admin@cozyspace.co
         </p>
       </div>

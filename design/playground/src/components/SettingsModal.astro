@@ -19,16 +19,16 @@
     <div class="px-7 py-5 shrink-0 border-b border-border">
       <div class="flex items-center justify-between mb-4">
         <div>
-          <p class="text-[11px] text-muted-foreground mb-0.5">Workspace</p>
+          <p class="text-[12px] text-muted-foreground mb-0.5">Workspace</p>
           <h2
-            class="text-[18px] font-semibold tracking-tight text-foreground"
+            class="text-[20px] font-display font-semibold tracking-tight text-foreground"
           >
             Settings
           </h2>
         </div>
         <button
           @click="closeSettingsModal()"
-          class="w-7 h-7 flex items-center justify-center rounded-md hover:bg-accent focus-ring"
+          class="w-7 h-7 flex items-center justify-center rounded-full hover:bg-secondary focus-ring"
         >
           <svg
             class="w-3.5 h-3.5"
@@ -50,14 +50,14 @@
         <button
           @click="scrollToSection('sec-general')"
           :class="activeSettingsSection === 'sec-general' ? 'field-tab active' : 'field-tab'"
-          class="px-2 pb-2 text-[12px] font-medium"
+          class="px-2 pb-2 text-[14px] font-medium"
         >
           General
         </button>
         <button
           @click="scrollToSection('sec-members')"
           :class="activeSettingsSection === 'sec-members' ? 'field-tab active' : 'field-tab'"
-          class="px-2 pb-2 text-[12px] font-medium"
+          class="px-2 pb-2 text-[14px] font-medium"
         >
           Members
           <span
@@ -69,14 +69,14 @@
         <button
           @click="scrollToSection('sec-schemas')"
           :class="activeSettingsSection === 'sec-schemas' ? 'field-tab active' : 'field-tab'"
-          class="px-2 pb-2 text-[12px] font-medium"
+          class="px-2 pb-2 text-[14px] font-medium"
         >
           Schemas
         </button>
         <button
           @click="scrollToSection('sec-advanced')"
           :class="activeSettingsSection === 'sec-advanced' ? 'field-tab active' : 'field-tab'"
-          class="px-2 pb-2 text-[12px] font-medium"
+          class="px-2 pb-2 text-[14px] font-medium"
         >
           Advanced
         </button>
@@ -88,26 +88,26 @@
       class="flex-1 overflow-y-auto no-scrollbar scroll-smooth px-7 py-6 space-y-8"
     >
       <section id="sec-general" class="settings-section space-y-4">
-        <h4 class="text-[13px] font-semibold text-foreground">General</h4>
+        <h4 class="text-[14px] font-semibold text-foreground">General</h4>
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
           <div class="space-y-1.5">
-            <label class="text-[11px] font-medium text-muted-foreground"
+            <label class="text-[12px] font-medium text-muted-foreground"
               >Workspace Name</label
             >
             <input
               type="text"
               x-model="workspaceNameInput"
-              class="ghost-btn w-full px-3 py-1.5 text-[12px] font-medium rounded-md focus-ring text-foreground"
+              class=" ghost-btn w-full px-3 py-1.5 text-[12px] font-medium focus-ring text-foreground"
             />
           </div>
           <div class="space-y-1.5">
-            <label class="text-[11px] font-medium text-muted-foreground"
+            <label class="text-[12px] font-medium text-muted-foreground"
               >Namespace</label
             >
             <input
               type="text"
               value="personal.any"
-              class="ghost-btn w-full px-3 py-1.5 text-[12px] font-medium rounded-md focus-ring text-foreground"
+              class=" ghost-btn w-full px-3 py-1.5 text-[12px] font-medium focus-ring text-foreground"
             />
           </div>
         </div>
@@ -115,10 +115,10 @@
 
       <section id="sec-members" class="settings-section space-y-4">
         <div class="flex items-end justify-between">
-          <h4 class="text-[13px] font-semibold text-foreground">Members</h4>
+          <h4 class="text-[14px] font-semibold text-foreground">Members</h4>
           <button
             @click="isInviteBoxExpanded = !isInviteBoxExpanded"
-            class="ghost-btn px-3 py-1.5 text-[12px] font-medium rounded-md focus-ring"
+            class="ghost-btn px-3 py-1.5 text-[12px] font-medium focus-ring"
           >
             + Invite
           </button>
@@ -126,18 +126,18 @@
         <div
           x-show="isInviteBoxExpanded"
           x-transition
-          class="p-2 space-y-2 rounded-md bg-secondary"
+          class="p-2 space-y-2 rounded-lg bg-secondary"
         >
           <div class="flex gap-2">
             <input
               x-model="inviteEmail"
               type="email"
               placeholder="teammate@email.co"
-              class="ghost-btn flex-1 px-3 py-1.5 text-[12px] rounded-md focus-ring text-foreground"
+              class="ghost-btn flex-1 px-3 py-1.5 text-[12px] focus-ring text-foreground"
             />
             <button
               @click="addMember()"
-              class="primary-btn px-3 py-1.5 text-[11px] font-medium rounded-md"
+              class="primary-btn px-3 py-1.5 text-[12px] font-medium"
             >
               Send
             </button>
@@ -146,13 +146,13 @@
         <ul class="space-y-0.5">
           <template x-for="m in members" :key="m.email">
             <li
-              class="flex items-center justify-between gap-3 py-2 px-2 rounded-md hover:bg-accent"
+              class="flex items-center justify-between gap-3 py-2 px-2 rounded-full hover:bg-secondary"
             >
               <div class="flex items-center gap-2 min-w-0">
                 <span class="avatar-chip" x-text="m.initials">ME</span>
                 <div class="truncate">
                   <p
-                    class="text-[12px] font-semibold leading-tight text-foreground"
+                    class="text-[14px] font-semibold leading-tight text-foreground"
                     x-text="m.name"
                   ></p>
                   <p
@@ -162,7 +162,7 @@
                 </div>
               </div>
               <span
-                class="text-[10px] uppercase tracking-wider font-semibold text-muted-foreground"
+                class="text-[12px] font-medium text-muted-foreground"
                 x-text="m.role"
                 >OWNER</span
               >
@@ -173,15 +173,15 @@
 
       <section id="sec-schemas" class="settings-section space-y-4">
         <div>
-          <h4 class="text-[13px] font-semibold text-foreground">Schemas</h4>
-          <p class="text-[11px] mt-1 text-muted-foreground">
+          <h4 class="text-[14px] font-semibold text-foreground">Schemas</h4>
+          <p class="text-[12px] mt-1 text-muted-foreground">
             Object types defined in this workspace.
           </p>
         </div>
         <ul class="space-y-0.5">
           <template x-for="schema in schemas" :key="schema.id">
             <li
-              class="flex items-center justify-between gap-3 py-2.5 px-2 rounded-md hover:bg-accent"
+              class="flex items-center justify-between gap-3 py-2.5 px-2 rounded-full hover:bg-secondary"
             >
               <div class="flex items-center gap-2 min-w-0">
                 <span
@@ -190,7 +190,7 @@
                 ></span>
                 <div>
                   <p
-                    class="text-[12px] font-semibold leading-tight text-foreground"
+                    class="text-[14px] font-semibold leading-tight text-foreground"
                     x-text="schema.name"
                   ></p>
                   <p
@@ -202,7 +202,7 @@
                 </div>
               </div>
               <button
-                class="ghost-btn px-2.5 py-1 text-[11px] font-medium rounded-md focus-ring"
+                class="ghost-btn px-2.5 py-1 text-[12px] font-medium focus-ring"
               >
                 Edit
               </button>
@@ -212,13 +212,13 @@
       </section>
 
       <section id="sec-advanced" class="settings-section space-y-4 pb-4">
-        <h4 class="text-[13px] font-semibold text-foreground">Advanced</h4>
+        <h4 class="text-[14px] font-semibold text-foreground">Advanced</h4>
         <div class="space-y-0.5">
           <div
-            class="flex justify-between items-center px-3 py-2 text-[12px] rounded-md"
+            class="flex justify-between items-center px-3 py-2 text-[14px]"
           >
             <span
-              class="text-[10px] uppercase tracking-wider font-semibold text-muted-foreground"
+              class="text-[12px] font-medium text-muted-foreground"
               >Data Model</span
             >
             <span class="font-medium text-foreground"
@@ -226,19 +226,19 @@
             >
           </div>
           <div
-            class="flex justify-between items-center px-3 py-2 text-[12px] rounded-md"
+            class="flex justify-between items-center px-3 py-2 text-[14px]"
           >
             <span
-              class="text-[10px] uppercase tracking-wider font-semibold text-muted-foreground"
+              class="text-[12px] font-medium text-muted-foreground"
               >Storage</span
             >
             <span class="font-medium text-foreground">PostgreSQL 18</span>
           </div>
           <div
-            class="flex justify-between items-center px-3 py-2 text-[12px] rounded-md"
+            class="flex justify-between items-center px-3 py-2 text-[14px]"
           >
             <span
-              class="text-[10px] uppercase tracking-wider font-semibold text-muted-foreground"
+              class="text-[12px] font-medium text-muted-foreground"
               >Auth</span
             >
             <span class="font-medium text-foreground">JWT</span>
@@ -252,13 +252,13 @@
     >
       <button
         @click="closeSettingsModal()"
-        class="ghost-btn px-3 py-1.5 text-[12px] font-medium rounded-md focus-ring"
+        class="ghost-btn px-3 py-1.5 text-[14px] font-medium focus-ring"
       >
         Cancel
       </button>
       <button
         @click="saveWorkspaceSettings()"
-        class="primary-btn px-3 py-1.5 text-[12px] font-medium rounded-md"
+        class="primary-btn px-3 py-1.5 text-[14px] font-medium"
       >
         Save
       </button>

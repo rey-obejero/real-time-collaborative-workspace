@@ -6,13 +6,13 @@
     <div class="flex items-end justify-between mb-6">
       <div>
         <h1
-          class="text-[24px] leading-[1.1] tracking-tight font-semibold text-foreground"
+          class="text-[24px] leading-[1.33] font-semibold font-display text-foreground"
           x-text="listHeaderTitle"
         >
           All
         </h1>
         <p
-          class="text-[12px] mt-1 text-muted-foreground"
+          class="text-[14px] mt-1 text-muted-foreground"
           x-text="listHeaderSubtitle"
         >
           All entries across schemas
@@ -20,7 +20,7 @@
       </div>
       <div class="flex items-center gap-1">
         <button
-          class="ghost-btn flex items-center gap-1.5 px-2.5 py-1 text-[11px] font-medium rounded-md"
+          class="ghost-btn flex items-center gap-1.5 px-2.5 py-1 text-[14px] font-medium"
         >
           <svg
             class="w-3 h-3"
@@ -38,7 +38,7 @@
           <span>Sort</span>
         </button>
         <button
-          class="ghost-btn flex items-center gap-1.5 px-2.5 py-1 text-[11px] font-medium rounded-md"
+          class="ghost-btn flex items-center gap-1.5 px-2.5 py-1 text-[14px] font-medium"
         >
           <svg
             class="w-3 h-3"
@@ -58,28 +58,28 @@
       </div>
     </div>
 
-    <div class="border border-border rounded-md overflow-hidden bg-card">
+    <div class="border border-border rounded-lg overflow-hidden bg-card">
       <div
-        class="grid grid-cols-[20px_1fr_120px_140px_80px] items-center gap-3 px-3 py-2 border-b border-border bg-secondary/40"
+        class="grid grid-cols-[20px_1fr_120px_140px_80px] items-center gap-3 px-3 py-2 border-b border-border bg-secondary"
       >
         <div></div>
         <div
-          class="text-[10px] uppercase tracking-wider font-semibold text-muted-foreground"
+          class="text-[12px] font-medium text-muted-foreground"
         >
           Title
         </div>
         <div
-          class="text-[10px] uppercase tracking-wider font-semibold text-muted-foreground"
+          class="text-[12px] font-medium text-muted-foreground"
         >
           Status
         </div>
         <div
-          class="text-[10px] uppercase tracking-wider font-semibold text-muted-foreground"
+          class="text-[12px] font-medium text-muted-foreground"
         >
           Tags
         </div>
         <div
-          class="text-[10px] uppercase tracking-wider font-semibold text-muted-foreground text-right"
+          class="text-[12px] font-medium text-muted-foreground text-right"
         >
           Updated
         </div>
@@ -117,7 +117,7 @@
                 x-text="item.title || 'Untitled'"
               ></span>
               <span
-                class="text-[11px] flex items-center gap-1.5 text-muted-foreground"
+                class="text-[12px] flex items-center gap-1.5 text-muted-foreground"
                 x-show="item.status"
               >
                 <span
@@ -127,7 +127,7 @@
                 <span class="capitalize" x-text="item.status"></span>
               </span>
               <span
-                class="text-[11px] flex items-center gap-1 truncate text-muted-foreground"
+                class="text-[12px] flex items-center gap-1 truncate text-muted-foreground"
                 x-show="!item.status"
               ></span>
               <div class="flex items-center gap-1 overflow-hidden">
@@ -139,13 +139,13 @@
                 </template>
                 <template x-if="(item.tags || []).length > 2">
                   <span
-                    class="text-[10px] text-muted-foreground"
+                    class="text-[12px] text-muted-foreground"
                     x-text="`+${item.tags.length - 2}`"
                   ></span>
                 </template>
               </div>
               <span
-                class="text-[11px] font-mono tabular-nums text-right text-muted-foreground"
+                class="text-[12px] font-mono tabular-nums text-right text-muted-foreground"
                 x-text="formatRelativeTime(item.updatedAt)"
               ></span>
             </div>
@@ -156,7 +156,7 @@
 
     <button
       @click="createNewEntryOfType()"
-      class="ghost-btn mt-3 w-full flex items-center justify-center gap-2 py-2 text-[12px] font-medium rounded-md focus-ring"
+      class="ghost-btn mt-3 w-full flex items-center justify-center gap-2 py-2 text-[14px] font-medium focus-ring"
     >
       <span class="text-[14px]">+</span>
       <span>New entry</span>

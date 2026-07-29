@@ -3,12 +3,12 @@
   style="transition: width 0.25s ease"
 >
   <div
-    class="w-80 h-full flex flex-col border-l border-border bg-card overflow-hidden"
+    class="w-80 h-full flex flex-col border-l border-border bg-background overflow-hidden"
   >
     <div
       class="h-14 px-5 flex items-center justify-between shrink-0 border-b border-border"
     >
-      <div class="flex items-center gap-2 text-[12px] font-semibold">
+      <div class="flex items-center gap-2 text-[14px] font-semibold">
         <span>Conversations</span>
         <span
           class="text-muted-foreground font-mono"
@@ -18,7 +18,7 @@
       </div>
       <button
         @click="toggleConversations()"
-        class="w-7 h-7 flex items-center justify-center rounded-md hover:bg-accent focus-ring"
+        class="w-7 h-7 flex items-center justify-center rounded-full hover:bg-secondary focus-ring"
       >
         <svg
           class="w-3.5 h-3.5"
@@ -39,26 +39,26 @@
     <template x-if="selectedDiscussionId === null">
       <div class="flex-1 overflow-y-auto no-scrollbar">
         <p
-          class="text-[10px] uppercase tracking-wider font-semibold px-5 py-3 text-muted-foreground"
+          class="text-[12px] font-medium px-5 py-3 text-muted-foreground"
         >
           Active
         </p>
         <ul class="px-2 space-y-0.5">
           <template x-for="chat in discussions" :key="chat.id">
             <li
-              class="row-item rounded-md cursor-pointer"
+              class="row-item cursor-pointer"
               @click="selectedDiscussionId = chat.id"
             >
               <div class="px-3 py-2.5">
                 <div class="flex items-baseline justify-between mb-1">
                   <span
-                    class="text-[12px] font-semibold leading-none text-foreground"
+                    class="text-[14px] font-semibold leading-none text-foreground"
                     x-text="chat.title"
                   ></span>
                   <span class="status-dot"></span>
                 </div>
                 <p
-                  class="text-[11px] truncate leading-relaxed text-muted-foreground"
+                  class="text-[12px] truncate leading-relaxed text-muted-foreground"
                   x-text="chat.preview"
                 ></p>
               </div>
@@ -75,7 +75,7 @@
         >
           <button
             @click="selectedDiscussionId = null"
-            class="w-7 h-7 flex items-center justify-center rounded-md hover:bg-accent focus-ring"
+            class="w-7 h-7 flex items-center justify-center rounded-full hover:bg-secondary focus-ring"
           >
             <svg
               class="w-3.5 h-3.5"
@@ -92,7 +92,7 @@
             </svg>
           </button>
           <span
-            class="text-[12px] font-semibold truncate"
+            class="text-[14px] font-semibold truncate"
             x-text="activeDiscussion ? activeDiscussion.title : ''"
           ></span>
         </div>
@@ -109,12 +109,12 @@
               :class="msg.sender === 'Me' ? 'flex flex-col items-end' : 'space-y-1'"
             >
               <p
-                class="text-[10px] uppercase tracking-wider font-semibold mb-1 text-muted-foreground"
+                class="text-[12px] font-medium mb-1 text-muted-foreground"
                 x-text="msg.sender === 'Me' ? 'You' : msg.sender"
               ></p>
               <p
                 class="text-[12px] leading-relaxed max-w-[85%]"
-                :class="msg.sender === 'Me' ? 'px-3 py-1.5 rounded-md bg-foreground text-background' : 'text-foreground'"
+                :class="msg.sender === 'Me' ? 'px-3 py-1.5 rounded-full bg-foreground text-background' : 'text-foreground'"
                 x-text="msg.text"
               ></p>
             </div>
@@ -123,7 +123,7 @@
 
         <div class="p-3 shrink-0 border-t border-border">
           <div
-            class="ghost-btn flex items-center gap-2 px-3 py-1.5 rounded-md focus-ring"
+            class="ghost-btn flex items-center gap-2 px-3 py-1.5 rounded-full focus-ring"
           >
             <input
               type="text"
@@ -134,7 +134,7 @@
             />
             <button
               @click="submitChatReply()"
-              class="w-6 h-6 flex items-center justify-center rounded bg-foreground text-background hover:opacity-90"
+              class="w-6 h-6 flex items-center justify-center rounded-full bg-foreground text-background hover:opacity-90"
             >
               <svg
                 class="w-3 h-3"
