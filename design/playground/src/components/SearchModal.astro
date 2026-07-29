@@ -5,7 +5,7 @@
 >
   <div
     @click.outside="closeSearchModal()"
-    class="absolute inset-0 bg-black/15"
+    class="absolute inset-0 bg-black/20"
   ></div>
 
   <div
@@ -39,11 +39,11 @@
       <template x-if="searchResults.length === 0">
         <div class="px-4 py-10 text-center">
           <p
-            class="text-[12px] font-medium pb-1 text-muted-foreground"
+            class="text-[14px] font-medium pb-1 text-muted-foreground"
           >
             No results
           </p>
-          <p class="text-[14px] text-muted-foreground">
+          <p class="text-[12px] text-muted-foreground">
             Try a different query.
           </p>
         </div>

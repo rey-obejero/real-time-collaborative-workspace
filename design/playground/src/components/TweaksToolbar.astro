@@ -29,7 +29,7 @@
     </div>
 
     <div class="space-y-1.5">
-      <span class="text-[12px]" style="color: #525252">Density</span>
+      <span class="text-[12px] text-muted-foreground">Density</span>
       <div class="flex gap-1.5">
         <button
           @click="toggleTweak('density', 'default')"
@@ -47,7 +47,7 @@
     <div class="border-t border-border"></div>
 
     <div class="space-y-1.5">
-      <span class="text-[12px]" style="color: #525252">Card Edge</span>
+      <span class="text-[12px] text-muted-foreground">Card Edge</span>
       <div class="flex gap-1.5">
         <button
           @click="toggleTweak('cardEdge', 'hairline')"
@@ -65,7 +65,7 @@
     <div class="border-t border-border"></div>
 
     <div class="space-y-1.5">
-      <span class="text-[12px]" style="color: #525252">Sidebar Fill</span>
+      <span class="text-[12px] text-muted-foreground">Sidebar Fill</span>
       <div class="flex gap-1.5">
         <button
           @click="toggleTweak('sidebarFill', 'canvas')"
@@ -83,7 +83,7 @@
     <div class="border-t border-border"></div>
 
     <div class="space-y-1.5">
-      <span class="text-[12px]" style="color: #525252">Chips</span>
+      <span class="text-[12px] text-muted-foreground">Chips</span>
       <div class="flex gap-1.5">
         <button
           @click="toggleTweak('chipStyle', 'soft')"
@@ -101,7 +101,7 @@
     <div class="border-t border-border"></div>
 
     <div class="space-y-1.5">
-      <span class="text-[12px]" style="color: #525252">Status</span>
+      <span class="text-[12px] text-muted-foreground">Status</span>
       <div class="flex gap-1.5">
         <button
           @click="toggleTweak('statusStyle', 'dot')"
@@ -119,8 +119,7 @@
     <div class="border-t border-border pt-2">
       <button
         @click="resetTweaks()"
-        class="text-[12px] underline-offset-2 hover:underline"
-        style="color: #737373"
+        class="text-[12px] underline-offset-2 hover:underline text-muted-foreground"
       >Reset defaults</button>
     </div>
   </div>

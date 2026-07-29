@@ -1,6 +1,11 @@
 <header
   class="h-14 px-6 flex items-center justify-between shrink-0 border-b border-border"
 >
+  <div class="flex items-center gap-1.5 text-[14px] text-muted-foreground">
+    <span class="text-foreground font-medium" x-text="headerCrumb">All</span>
+  </div>
+
+  <div class="flex items-center gap-2">
     <button
       @click="isDarkMode = !isDarkMode"
       class="w-7 h-7 flex items-center justify-center rounded-full hover:bg-accent focus-ring"
@@ -35,12 +40,6 @@
         />
       </svg>
     </button>
-
-  <div class="flex items-center gap-1.5 text-[14px] text-muted-foreground">
-    <span class="text-foreground font-medium" x-text="headerCrumb">All</span>
-  </div>
-
-  <div class="flex items-center gap-2">
     <button
       @click="toggleConversations()"
       class="w-7 h-7 flex items-center justify-center rounded-full hover:bg-secondary focus-ring relative"
@@ -62,6 +61,7 @@
       <span
         x-show="hasUnreadDiscussions"
         class="absolute top-1 right-1 status-dot"
+        style="background: var(--foreground)"
       ></span>
     </button>
     <button
