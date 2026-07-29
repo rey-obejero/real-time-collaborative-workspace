@@ -317,3 +317,51 @@ textarea:focus,
     transition-duration: 0.01ms !important;
   }
 }
+
+/* --- Design Tweaks --- */
+
+.tweaks-compact .nav-row,
+.tweaks-compact .row-item > div {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+.tweaks-card-flat .tweak-card {
+  border: none;
+}
+
+.tweaks-sidebar-soft aside {
+  background: var(--secondary);
+}
+
+.tweaks-chips-bordered .property-chip {
+  background: var(--background);
+  border: 1px solid #d4d4d4;
+}
+
+.tweaks-chips-bordered .tag-pill {
+  background: var(--background);
+  border: 1px solid #e5e5e5;
+}
+
+.tweaks-chips-bordered .type-pill {
+  background: var(--background);
+  border: 1px solid #e5e5e5;
+}
+
+.tweaks-status-label .status-dot {
+  display: none;
+}
+
+.tweaks-status-label .status-label-only {
+  display: inline-flex;
+}
+
+.status-label-only {
+  display: none;
+  padding: 2px 8px;
+  border-radius: 9999px;
+  font-size: 12px;
+  font-weight: 500;
+  text-transform: capitalize;
+}

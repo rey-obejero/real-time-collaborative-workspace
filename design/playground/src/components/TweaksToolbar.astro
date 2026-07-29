@@ -1,0 +1,127 @@
+<div
+  class="fixed bottom-6 right-6 z-[60] select-none"
+  @click.outside="tweaksOpen = false"
+  @keydown.escape.window="tweaksOpen = false"
+>
+  <button
+    x-show="!tweaksOpen"
+    @click="tweaksOpen = true"
+    class="ghost-btn w-9 h-9 flex items-center justify-center rounded-full"
+    title="Design tweaks"
+  >
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6h9.75M10.5 6a1.5 1.5 0 11-3 0m3 0a1.5 1.5 0 10-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-9.75 0h9.75" />
+    </svg>
+  </button>
+
+  <div
+    x-show="tweaksOpen"
+    x-transition.opacity.duration.150
+    class="bg-popover border border-border rounded-lg p-4 w-[240px] space-y-3"
+  >
+    <div class="flex items-center justify-between">
+      <span class="text-[14px] font-medium text-foreground">Tweaks</span>
+      <button @click="tweaksOpen = false" class="w-6 h-6 flex items-center justify-center rounded-full hover:bg-secondary text-muted-foreground">
+        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+    </div>
+
+    <div class="space-y-1.5">
+      <span class="text-[12px]" style="color: #525252">Density</span>
+      <div class="flex gap-1.5">
+        <button
+          @click="toggleTweak('density', 'default')"
+          :class="tweaks.density === 'default' ? 'primary-btn' : 'ghost-btn'"
+          class="flex-1 h-7 flex items-center justify-center text-[12px] font-medium rounded-full"
+        >Default</button>
+        <button
+          @click="toggleTweak('density', 'compact')"
+          :class="tweaks.density === 'compact' ? 'primary-btn' : 'ghost-btn'"
+          class="flex-1 h-7 flex items-center justify-center text-[12px] font-medium rounded-full"
+        >Compact</button>
+      </div>
+    </div>
+
+    <div class="border-t border-border"></div>
+
+    <div class="space-y-1.5">
+      <span class="text-[12px]" style="color: #525252">Card Edge</span>
+      <div class="flex gap-1.5">
+        <button
+          @click="toggleTweak('cardEdge', 'hairline')"
+          :class="tweaks.cardEdge === 'hairline' ? 'primary-btn' : 'ghost-btn'"
+          class="flex-1 h-7 flex items-center justify-center text-[12px] font-medium rounded-full"
+        >Hairline</button>
+        <button
+          @click="toggleTweak('cardEdge', 'flat')"
+          :class="tweaks.cardEdge === 'flat' ? 'primary-btn' : 'ghost-btn'"
+          class="flex-1 h-7 flex items-center justify-center text-[12px] font-medium rounded-full"
+        >Flat</button>
+      </div>
+    </div>
+
+    <div class="border-t border-border"></div>
+
+    <div class="space-y-1.5">
+      <span class="text-[12px]" style="color: #525252">Sidebar Fill</span>
+      <div class="flex gap-1.5">
+        <button
+          @click="toggleTweak('sidebarFill', 'canvas')"
+          :class="tweaks.sidebarFill === 'canvas' ? 'primary-btn' : 'ghost-btn'"
+          class="flex-1 h-7 flex items-center justify-center text-[12px] font-medium rounded-full"
+        >White</button>
+        <button
+          @click="toggleTweak('sidebarFill', 'soft')"
+          :class="tweaks.sidebarFill === 'soft' ? 'primary-btn' : 'ghost-btn'"
+          class="flex-1 h-7 flex items-center justify-center text-[12px] font-medium rounded-full"
+        >Soft</button>
+      </div>
+    </div>
+
+    <div class="border-t border-border"></div>
+
+    <div class="space-y-1.5">
+      <span class="text-[12px]" style="color: #525252">Chips</span>
+      <div class="flex gap-1.5">
+        <button
+          @click="toggleTweak('chipStyle', 'soft')"
+          :class="tweaks.chipStyle === 'soft' ? 'primary-btn' : 'ghost-btn'"
+          class="flex-1 h-7 flex items-center justify-center text-[12px] font-medium rounded-full"
+        >Soft</button>
+        <button
+          @click="toggleTweak('chipStyle', 'bordered')"
+          :class="tweaks.chipStyle === 'bordered' ? 'primary-btn' : 'ghost-btn'"
+          class="flex-1 h-7 flex items-center justify-center text-[12px] font-medium rounded-full"
+        >Bordered</button>
+      </div>
+    </div>
+
+    <div class="border-t border-border"></div>
+
+    <div class="space-y-1.5">
+      <span class="text-[12px]" style="color: #525252">Status</span>
+      <div class="flex gap-1.5">
+        <button
+          @click="toggleTweak('statusStyle', 'dot')"
+          :class="tweaks.statusStyle === 'dot' ? 'primary-btn' : 'ghost-btn'"
+          class="flex-1 h-7 flex items-center justify-center text-[12px] font-medium rounded-full"
+        >Dot</button>
+        <button
+          @click="toggleTweak('statusStyle', 'label')"
+          :class="tweaks.statusStyle === 'label' ? 'primary-btn' : 'ghost-btn'"
+          class="flex-1 h-7 flex items-center justify-center text-[12px] font-medium rounded-full"
+        >Label</button>
+      </div>
+    </div>
+
+    <div class="border-t border-border pt-2">
+      <button
+        @click="resetTweaks()"
+        class="text-[12px] underline-offset-2 hover:underline"
+        style="color: #737373"
+      >Reset defaults</button>
+    </div>
+  </div>
+</div>

@@ -58,7 +58,7 @@
       </div>
     </div>
 
-    <div class="border border-border rounded-lg overflow-hidden bg-card">
+      <div class="tweak-card border border-border rounded-lg overflow-hidden bg-card">
       <div
         class="grid grid-cols-[20px_1fr_120px_140px_80px] items-center gap-3 px-3 py-2 border-b border-border bg-secondary"
       >
@@ -120,11 +120,16 @@
                 class="text-[12px] flex items-center gap-1.5 text-muted-foreground"
                 x-show="item.status"
               >
-                <span
-                  class="status-dot"
-                  :style="`background: var(--status-${item.status})`"
-                ></span>
-                <span class="capitalize" x-text="item.status"></span>
+              <span
+                class="status-dot"
+                :style="`background: var(--status-${item.status})`"
+              ></span>
+              <span
+                class="status-label-only"
+                :style="`background: var(--status-${item.status})`"
+                x-text="item.status"
+              ></span>
+              <span class="capitalize" x-text="item.status"></span>
               </span>
               <span
                 class="text-[12px] flex items-center gap-1 truncate text-muted-foreground"

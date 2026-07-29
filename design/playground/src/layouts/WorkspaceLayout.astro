@@ -16,7 +16,16 @@ import "../styles/global.css";
     <script defer src="/scripts/workspace.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
   </head>
-  <body class="h-full overflow-hidden select-none text-foreground">
+  <body
+    class="h-full overflow-hidden select-none text-foreground"
+    :class="{
+      'tweaks-compact': tweaks.density === 'compact',
+      'tweaks-card-flat': tweaks.cardEdge === 'flat',
+      'tweaks-sidebar-soft': tweaks.sidebarFill === 'soft',
+      'tweaks-chips-bordered': tweaks.chipStyle === 'bordered',
+      'tweaks-status-label': tweaks.statusStyle === 'label'
+    }"
+  >
     <slot />
   </body>
 </html>

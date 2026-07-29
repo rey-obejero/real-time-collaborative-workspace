@@ -16,6 +16,8 @@ document.addEventListener("alpine:init", () => {
     activeEditorSection: "fields",
     isInviteBoxExpanded: false,
     inviteEmail: "",
+    tweaksOpen: false,
+    tweaks: { density: "default", cardEdge: "hairline", sidebarFill: "canvas", chipStyle: "soft", statusStyle: "dot" },
     workspaceNameInput: "Personal Space",
     currentLibrary: "Personal Space",
     editorTitle: "",
@@ -349,5 +351,7 @@ document.addEventListener("alpine:init", () => {
     selectLibrary(name) { this.currentLibrary = name; this.isLibraryDropdownOpen = false; },
     openSearchModal() { this.isSearchModalOpen = true; this.$nextTick(() => { if (this.$refs.searchInput) this.$refs.searchInput.focus(); }); },
     closeSearchModal() { this.isSearchModalOpen = false; this.searchQuery = ""; },
+    toggleTweak(key, value) { this.tweaks[key] = value; },
+    resetTweaks() { this.tweaks = { density: "default", cardEdge: "hairline", sidebarFill: "canvas", chipStyle: "soft", statusStyle: "dot" }; },
   }));
 });
