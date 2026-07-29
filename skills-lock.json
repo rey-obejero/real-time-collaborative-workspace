@@ -25,12 +25,6 @@
       "skillPath": "skills/productivity/grill-me/SKILL.md",
       "computedHash": "f321507f77702a54af1db66549ec1685fc625390d06c57d7949cdcda8eb1b5c7"
     },
-    "impeccable": {
-      "source": "pbakaus/impeccable",
-      "sourceType": "github",
-      "skillPath": ".agents/skills/impeccable/SKILL.md",
-      "computedHash": "76e374fd0acb10959d8cb3375e9682f1681ba72d069cdf7d253c0c53293aeed7"
-    },
     "shadcn": {
       "source": "shadcn/ui",
       "sourceType": "github",
