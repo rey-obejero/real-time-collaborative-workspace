@@ -73,13 +73,6 @@
         >
           Schemas
         </button>
-        <button
-          @click="scrollToSection('sec-advanced')"
-          :class="activeSettingsSection === 'sec-advanced' ? 'field-tab active' : 'field-tab'"
-          class="px-2 pb-2 text-[14px] font-medium"
-        >
-          Advanced
-        </button>
       </div>
     </div>
 
@@ -211,40 +204,6 @@
         </ul>
       </section>
 
-      <section id="sec-advanced" class="settings-section space-y-4 pb-4">
-        <h4 class="text-[14px] font-semibold text-foreground">Advanced</h4>
-        <div class="space-y-0.5">
-          <div
-            class="flex justify-between items-center px-3 py-2 text-[14px]"
-          >
-            <span
-              class="text-[12px] font-medium text-muted-foreground"
-              >Data Model</span
-            >
-            <span class="font-medium text-foreground"
-              >Schemas / Entries</span
-            >
-          </div>
-          <div
-            class="flex justify-between items-center px-3 py-2 text-[14px]"
-          >
-            <span
-              class="text-[12px] font-medium text-muted-foreground"
-              >Storage</span
-            >
-            <span class="font-medium text-foreground">PostgreSQL 18</span>
-          </div>
-          <div
-            class="flex justify-between items-center px-3 py-2 text-[14px]"
-          >
-            <span
-              class="text-[12px] font-medium text-muted-foreground"
-              >Auth</span
-            >
-            <span class="font-medium text-foreground">JWT</span>
-          </div>
-        </div>
-      </section>
     </div>
 
     <div

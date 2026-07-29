@@ -51,15 +51,15 @@
         <span>Personal Space</span>
       </button>
       <button
-        @click="selectLibrary('Engineering Wiki')"
-        :class="currentLibrary === 'Engineering Wiki' ? 'bg-accent' : ''"
+        @click="selectLibrary('Team Space')"
+        :class="currentLibrary === 'Team Space' ? 'bg-accent' : ''"
         class="w-full text-left px-3 py-2 text-[14px] flex items-center gap-2 hover:bg-accent rounded-full"
       >
         <span
           class="w-4 h-4 rounded bg-foreground text-background flex items-center justify-center text-[9px] font-semibold"
           >E</span
         >
-        <span>Engineering Wiki</span>
+        <span>Team Space</span>
       </button>
       <button
         @click="openSettingsModal()"
@@ -106,8 +106,8 @@
           d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
         />
       </svg>
-      <span>Quick Action</span>
-      <span class="ml-auto text-[12px] opacity-60">⌘K</span>
+      <span>Search</span>
+      <span class="ml-auto text-[12px] opacity-60">CTRL + k</span>
     </button>
     <div class="relative" @click.outside="isNewMenuOpen = false">
       <button
@@ -203,7 +203,7 @@
       <p
         class="text-[12px] font-medium text-muted-foreground px-2 mb-1"
       >
-        Collection
+      Overview
       </p>
       <ul class="space-y-0.5">
         <li>
@@ -260,61 +260,7 @@
             >
           </button>
         </li>
-        <li>
-          <button
-            @click="selectCollection('drafts')"
-            :class="{ 'active': activeCollection === 'drafts' }"
-            class="nav-row w-full flex items-center gap-2 px-2 py-2.5 text-[14px] font-medium"
-          >
-            <svg
-              class="w-3.5 h-3.5"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="1.75"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"
-              />
-            </svg>
-            <span>Drafts</span>
-            <span
-              class="ml-auto text-[12px] tabular-nums opacity-70"
-              x-text="countByStatus('draft')"
-              >0</span
-            >
-          </button>
-        </li>
-        <li>
-          <button
-            @click="selectCollection('in-progress')"
-            :class="{ 'active': activeCollection === 'in-progress' }"
-            class="nav-row w-full flex items-center gap-2 px-2 py-2.5 text-[14px] font-medium"
-          >
-            <svg
-              class="w-3.5 h-3.5"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="1.75"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z"
-              />
-            </svg>
-            <span>In Progress</span>
-            <span
-              class="ml-auto text-[12px] tabular-nums opacity-70"
-              x-text="countByStatus('doing') + countByStatus('active')"
-              >0</span
-            >
-          </button>
-        </li>
-      </ul>
+        </ul>
     </div>
 
     <div class="px-3 pt-4 pb-1">
@@ -389,7 +335,7 @@
       <div class="min-w-0 flex-1">
         <p class="text-[14px] font-medium truncate">My Profile</p>
         <p class="text-[12px] truncate text-muted-foreground">
-          admin@cozyspace.co
+          john.die@example.com
         </p>
       </div>
     </div>
