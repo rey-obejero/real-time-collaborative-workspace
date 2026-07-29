@@ -1,10 +1,10 @@
-# Knowledge Management System
+# Real-Time Collaborative Workspace
 
 ## Project Overview
 
-Knowledge Management System is a personal knowledge management software (PKMS)
-application intended to serve as a "second brain." The application provides are
-structured way to classify and organize information, taking inspiration from well
+Workspace is a knowledge management system (KMS) platform intended to serve as a
+"second brain." The application provides are structured way to classify and
+organize information, taking inspiration from well
 known methodologies such as Project, Areas, Resources, and Archives (PARA) and the
 Gettings Things Done (GTD).
 
@@ -85,3 +85,25 @@ information on the web client.
 - [ ] Conversations
 - [ ] AI
   - [ ] Conversations assistant
+
+## Resources
+
+### AI
+
+- **[skills.sh](https://www.skills.sh):** Agent skills
+- **[maxbogo/awesome-ai-tools-for-ui](https://github.com/maxbogo/awesome-ai-tools-for-ui):** UI/UX tools for AI agents
+
+### Back-End
+
+- **[Common web application architectures](https://learn.microsoft.com/en-us/dotnet/architecture/modern-web-apps-azure/common-web-application-architectures):** Common back-end architectures
+- **[Clean architecture](https://devblogs.microsoft.com/ise/next-level-clean-architecture-boilerplate):** Clean architecture
+- **[ardalis/CleanArchitecture](https://github.com/ardalis/CleanArchitecture):** Back-end architecture
+
+### Front-End
+
+- **[alan2207/bulletproof-react](https://github.com/alan2207/bulletproof-react):** Front-end architecture principles
+
+### UI/UX
+
+- **[Dribbble](https://dribbble.com):** Design inspiration
+- **[VoltAgent/awesome-design-md](https://github.com/VoltAgent/awesome-design-md)**: Design system specifications in [DESIGN.md format](https://stitch.withgoogle.com/docs/design-md/overview)
