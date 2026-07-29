@@ -706,15 +706,15 @@ document.addEventListener("alpine:init", () => {
       else if (html.endsWith("/<br>")) html = html.slice(0, -5);
       let block = "";
       if (type === "h1")
-        block = `<h1 style="font-family: Geist, sans-serif; font-size: 24px; font-weight: 600; margin: 24px 0 8px; color: var(--foreground);">Heading 1</h1>`;
+        block = `<h1 style="font-family: var(--font-display); font-size: 24px; font-weight: 600; margin: 24px 0 8px; color: var(--foreground);">Heading 1</h1>`;
       else if (type === "h2")
-        block = `<h2 style="font-family: Geist, sans-serif; font-size: 18px; font-weight: 600; margin: 16px 0 6px; color: var(--foreground);">Heading 2</h2>`;
+        block = `<h2 style="font-family: var(--font-sans); font-size: 20px; font-weight: 500; margin: 20px 0 6px; color: var(--foreground);">Heading 2</h2>`;
       else if (type === "h3")
-        block = `<h3 style="font-family: Geist, sans-serif; font-size: 15px; font-weight: 600; margin: 12px 0 4px; color: var(--foreground);">Heading 3</h3>`;
+        block = `<h3 style="font-family: var(--font-sans); font-size: 16px; font-weight: 500; margin: 16px 0 4px; color: var(--foreground);">Heading 3</h3>`;
       else if (type === "list")
-        block = `<ul style="list-style: disc; padding-left: 20px; margin: 8px 0;"><li>List item</li></ul>`;
+        block = `<ul style="list-style: disc; padding-left: 20px; margin: 8px 0; font-size: 16px; line-height: 1.5;"><li>List item</li></ul>`;
       else if (type === "quote")
-        block = `<blockquote style="border-left: 2px solid var(--border); padding: 4px 0 4px 16px; margin: 12px 0; color: var(--muted-foreground);">"Quote content."</blockquote>`;
+        block = `<blockquote style="border-left: 2px solid var(--border); padding: 4px 0 4px 16px; margin: 12px 0; font-size: 16px; line-height: 1.5; color: var(--muted-foreground);">"Quote content."</blockquote>`;
       body.innerHTML = html + block;
       this.hideSlashMenu();
       this.syncEditorContent();
