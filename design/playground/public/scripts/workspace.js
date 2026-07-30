@@ -19,11 +19,12 @@ document.addEventListener("alpine:init", () => {
     tweaksOpen: false,
     tweaks: {
       density: "default",
-      cardEdge: "hairline",
+      cardEdge: "flat",
       sidebarFill: "canvas",
-      chipStyle: "soft",
+      chipStyle: "bordered",
       statusStyle: "dot",
       iconSet: "feather",
+      tableStyle: "default",
     },
     workspaceNameInput: "Personal Space",
     currentLibrary: "Personal Space",
@@ -822,15 +823,6 @@ document.addEventListener("alpine:init", () => {
     toggleTweak(key, value) {
       this.tweaks[key] = value;
     },
-    resetTweaks() {
-      this.tweaks = {
-        density: "default",
-        cardEdge: "hairline",
-        sidebarFill: "canvas",
-        chipStyle: "soft",
-        statusStyle: "dot",
-        iconSet: "feather",
-      };
-    },
+
   }));
 });
