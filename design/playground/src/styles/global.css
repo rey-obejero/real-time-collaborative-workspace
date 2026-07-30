@@ -23,6 +23,7 @@
   --color-accent-foreground: var(--accent-foreground);
   --color-destructive: var(--destructive);
   --color-destructive-foreground: var(--destructive-foreground);
+  --color-hover: var(--hover);
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
@@ -53,6 +54,7 @@
   --input: #ffffff;
   --ring: rgba(59, 130, 246, 0.5);
   --radius: 0.75rem;
+  --hover: #f0f0f0;
   --hairline-strong: #d4d4d4;
 
   --type-page: #737373;
@@ -93,6 +95,7 @@
   --border: #333333;
   --input: #171717;
   --ring: rgba(59, 130, 246, 0.5);
+  --hover: #262626;
 
   --status-todo: #333333;
   --status-doing: #a3a3a3;
@@ -116,8 +119,12 @@ body {
   border-radius: 9999px;
   cursor: pointer;
 }
+.nav-row:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.5);
+}
 .nav-row:hover {
-  background: var(--accent);
+  background: var(--hover);
   color: var(--foreground);
 }
 .nav-row.active {
@@ -140,7 +147,7 @@ body {
   border-radius: 9999px;
 }
 .ghost-btn:hover {
-  background: var(--accent);
+  background: var(--hover);
 }
 
 .primary-btn {

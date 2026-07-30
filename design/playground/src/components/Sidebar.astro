@@ -4,7 +4,7 @@
   <div class="px-3 pt-3 pb-4">
     <button
       @click="isLibraryDropdownOpen = !isLibraryDropdownOpen"
-      class="w-full flex items-center gap-2 px-2 py-1.5 rounded-full hover:bg-border cursor-pointer"
+      class="w-full flex items-center gap-2 px-2 py-1.5 rounded-full hover:bg-hover cursor-pointer"
     >
       <img
         src="https://api.dicebear.com/10.x/initials/svg?initialsVariant=alt:1&lettersVariant=single:0&backgroundColor=000000&textColor=ffffff&seed=Personal%20Space"
@@ -31,7 +31,7 @@
         <button
           @click="selectLibrary('Personal Space')"
           :class="currentLibrary === 'Personal Space' ? 'bg-accent' : ''"
-          class="w-full text-left px-3 py-2 text-[14px] flex items-center gap-2 hover:bg-accent rounded-full"
+          class="w-full text-left px-3 py-2 text-[14px] flex items-center gap-2 hover:bg-hover rounded-full"
         >
           <img
             src="https://api.dicebear.com/10.x/initials/svg?backgroundColor=000000&textColor=ffffff&seed=Personal%20Space"
@@ -43,7 +43,7 @@
         <button
           @click="selectLibrary('Team Space')"
           :class="currentLibrary === 'Team Space' ? 'bg-accent' : ''"
-          class="w-full text-left px-3 py-2 text-[14px] flex items-center gap-2 hover:bg-accent rounded-full"
+          class="w-full text-left px-3 py-2 text-[14px] flex items-center gap-2 hover:bg-hover rounded-full"
         >
           <img
             src="https://api.dicebear.com/10.x/initials/svg?backgroundColor=000000&textColor=ffffff&seed=Team%20Space"
@@ -54,7 +54,7 @@
         </button>
         <button
           @click="openSettingsModal()"
-          class="w-full text-left px-3 py-2 text-[14px] flex items-center gap-2 hover:bg-accent text-muted-foreground rounded-full"
+          class="w-full text-left px-3 py-2 text-[14px] flex items-center gap-2 hover:bg-hover text-muted-foreground rounded-full"
         >
           <iconify-icon icon="hugeicons:settings-01" class="w-3.5 h-3.5"></iconify-icon>
           <span>Settings</span>
@@ -66,7 +66,7 @@
   <div class="px-3 pb-2 space-y-1">
     <button
       @click="openSearchModal()"
-      class="ghost-btn w-full flex items-center gap-2 px-2.5 py-1.5 text-[14px] focus-ring text-muted-foreground hover:bg-border cursor-pointer"
+      class="ghost-btn w-full flex items-center gap-2 px-2.5 py-1.5 text-[14px] focus-ring text-muted-foreground hover:bg-hover cursor-pointer"
     >
       <iconify-icon icon="hugeicons:search-01" class="w-3.5 h-3.5"></iconify-icon>
       <span>Search</span>
@@ -92,7 +92,7 @@
         <template x-for="schema in schemas" :key="schema.id">
           <button
             @click="createNewEntryOfType(schema.id); isNewMenuOpen = false"
-            class="w-full text-left px-3 py-1.5 text-[14px] flex items-center gap-2 hover:bg-accent text-foreground rounded-full"
+            class="w-full text-left px-3 py-1.5 text-[14px] flex items-center gap-2 hover:bg-hover text-foreground rounded-full"
           >
             <iconify-icon :icon="({page:'hugeicons:file-01',task:'hugeicons:task-01',project:'hugeicons:folder-01',note:'hugeicons:note',bookmark:'hugeicons:bookmark-01'})[schema.id]" class="w-3.5 h-3.5 text-muted-foreground"></iconify-icon>
             <span x-text="schema.name"></span>
@@ -125,7 +125,7 @@
           <button
             @click="selectCollection('all')"
             :class="{ 'active': activeCollection === 'all' }"
-            class="nav-row w-full flex items-center gap-2 px-2 py-2.5 text-[14px] font-medium"
+            class="nav-row w-full flex items-center gap-2 px-2 py-3 text-[14px] font-medium"
           >
             <iconify-icon icon="hugeicons:grid" class="w-3.5 h-3.5"></iconify-icon>
             <span>All</span>
@@ -135,7 +135,7 @@
           <button
             @click="selectCollection('recent')"
             :class="{ 'active': activeCollection === 'recent' }"
-            class="nav-row w-full flex items-center gap-2 px-2 py-2.5 text-[14px] font-medium"
+            class="nav-row w-full flex items-center gap-2 px-2 py-3 text-[14px] font-medium"
           >
             <iconify-icon icon="hugeicons:clock-01" class="w-3.5 h-3.5"></iconify-icon>
             <span>Recent</span>
@@ -153,7 +153,7 @@
       <ul class="space-y-0.5">
         <li>
           <button
-            class="nav-row w-full flex items-center gap-2 px-2 py-2.5 text-[14px] font-medium"
+            class="nav-row w-full flex items-center gap-2 px-2 py-3 text-[14px] font-medium"
           >
             <iconify-icon icon="hugeicons:user" class="w-3.5 h-3.5 text-muted-foreground"></iconify-icon>
             <span>Personal</span>
@@ -161,7 +161,7 @@
         </li>
         <li>
           <button
-            class="nav-row w-full flex items-center gap-2 px-2 py-2.5 text-[14px] font-medium"
+            class="nav-row w-full flex items-center gap-2 px-2 py-3 text-[14px] font-medium"
           >
             <iconify-icon icon="hugeicons:briefcase-01" class="w-3.5 h-3.5 text-muted-foreground"></iconify-icon>
             <span>Work</span>
@@ -196,7 +196,7 @@
       <ul class="space-y-0.5">
         <li>
           <button
-            class="nav-row w-full flex items-center gap-2 px-2 py-2.5 text-[14px] font-medium"
+            class="nav-row w-full flex items-center gap-2 px-2 py-3 text-[14px] font-medium"
           >
             <iconify-icon icon="hugeicons:help-circle" class="w-3.5 h-3.5 text-muted-foreground"></iconify-icon>
             <span>Help</span>
@@ -204,7 +204,7 @@
         </li>
         <li>
           <button
-            class="nav-row w-full flex items-center gap-2 px-2 py-2.5 text-[14px] font-medium"
+            class="nav-row w-full flex items-center gap-2 px-2 py-3 text-[14px] font-medium"
           >
             <iconify-icon icon="hugeicons:delete-02" class="w-3.5 h-3.5 text-muted-foreground"></iconify-icon>
             <span>Trash</span>
@@ -216,7 +216,7 @@
 
   <div class="px-3 py-3">
     <div
-      class="flex items-center gap-2 px-2 py-1.5 rounded-full hover:bg-border cursor-pointer"
+      class="flex items-center gap-2 px-2 py-1.5 rounded-full hover:bg-hover cursor-pointer"
     >
       <img
         src="https://api.dicebear.com/10.x/initials/svg?initialsVariant=alt:1&lettersVariant=single:0&backgroundColor=000000&textColor=ffffff&seed=My%20Profile"
