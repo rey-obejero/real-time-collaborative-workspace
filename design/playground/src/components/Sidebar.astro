@@ -4,12 +4,12 @@
   <div class="px-3 pt-3 pb-4">
     <button
       @click="isLibraryDropdownOpen = !isLibraryDropdownOpen"
-      class="w-full flex items-center gap-2 px-2 py-1.5 rounded-full hover:bg-hover cursor-pointer"
+      class="tweak-action w-full flex items-center gap-2 px-2 py-1.5 rounded-full hover:bg-hover cursor-pointer"
     >
       <img
         src="https://api.dicebear.com/10.x/initials/svg?initialsVariant=alt:1&lettersVariant=single:0&backgroundColor=000000&textColor=ffffff&seed=Personal%20Space"
         alt="Personal Space"
-        class="w-5 h-5 rounded"
+        class="tweak-avatar w-5 h-5 rounded"
       />
       <span
         class="text-[14px] font-medium text-foreground"
@@ -17,7 +17,7 @@
         >Personal Space</span
       >
       <span class="ml-auto text-muted-foreground transition inline-flex items-center" :class="isLibraryDropdownOpen ? 'rotate-180' : ''">
-            <iconify-icon icon="hugeicons:arrow-down-01" class="w-3 h-3"></iconify-icon>
+            <iconify-icon :icon="getIconName('chevron-down')" class="w-3 h-3"></iconify-icon>
           </span>
     </button>
 
@@ -36,7 +36,7 @@
           <img
             src="https://api.dicebear.com/10.x/initials/svg?backgroundColor=000000&textColor=ffffff&seed=Personal%20Space"
             alt="Personal Space"
-            class="w-4 h-4 rounded"
+            class="tweak-avatar w-4 h-4 rounded"
           />
           <span>Personal Space</span>
         </button>
@@ -48,15 +48,22 @@
           <img
             src="https://api.dicebear.com/10.x/initials/svg?backgroundColor=000000&textColor=ffffff&seed=Team%20Space"
             alt="Team Space"
-            class="w-4 h-4 rounded"
+            class="tweak-avatar w-4 h-4 rounded"
           />
           <span>Team Space</span>
+        </button>
+        <button
+          @click="selectLibrary('New Workspace')"
+          class="w-full text-left px-3 py-2 text-[14px] flex items-center gap-2 hover:bg-hover text-muted-foreground rounded-full"
+        >
+          <iconify-icon :icon="getIconName('plus')" class="w-3.5 h-3.5"></iconify-icon>
+          <span>New Workspace</span>
         </button>
         <button
           @click="openSettingsModal()"
           class="w-full text-left px-3 py-2 text-[14px] flex items-center gap-2 hover:bg-hover text-muted-foreground rounded-full"
         >
-          <iconify-icon icon="hugeicons:settings-01" class="w-3.5 h-3.5"></iconify-icon>
+          <iconify-icon :icon="getIconName('settings')" class="w-3.5 h-3.5"></iconify-icon>
           <span>Settings</span>
         </button>
       </div>
@@ -66,21 +73,21 @@
   <div class="px-3 pb-2 space-y-1">
     <button
       @click="openSearchModal()"
-      class="ghost-btn w-full flex items-center gap-2 px-2.5 py-1.5 text-[14px] focus-ring text-muted-foreground hover:bg-hover cursor-pointer"
+      class="tweak-search ghost-btn w-full flex items-center gap-2 px-2.5 py-1.5 text-[14px] focus-ring cursor-pointer"
     >
-      <iconify-icon icon="hugeicons:search-01" class="w-3.5 h-3.5"></iconify-icon>
+      <iconify-icon :icon="getIconName('search')" class="tweak-icon w-3.5 h-3.5"></iconify-icon>
       <span>Search</span>
       <span class="ml-auto text-[12px] opacity-60">Ctrl K</span>
     </button>
     <div class="relative" @click.outside="isNewMenuOpen = false">
       <button
         @click="isNewMenuOpen = !isNewMenuOpen"
-        class="primary-btn w-full flex items-center px-2.5 py-1.5 text-[14px] cursor-pointer"
+        class="tweak-action create-btn primary-btn w-full flex items-center px-2.5 py-1.5 text-[14px] cursor-pointer"
       >
-        <iconify-icon icon="hugeicons:file-plus" class="w-4 h-4"></iconify-icon>
+        <iconify-icon :icon="getIconName('plus')" class="tweak-icon w-4 h-4"></iconify-icon>
         <span class="ml-2">Create</span>
         <span class="ml-auto transition inline-flex items-center" :class="isNewMenuOpen ? 'rotate-180' : ''">
-                      <iconify-icon icon="hugeicons:arrow-down-01" class="w-3 h-3 text-white"></iconify-icon>
+                      <iconify-icon :icon="getIconName('chevron-down')" class="w-3.5 h-3.5 text-white"></iconify-icon>
                     </span>
       </button>
 
@@ -94,20 +101,21 @@
             @click="createNewEntryOfType(schema.id); isNewMenuOpen = false"
             class="w-full text-left px-3 py-1.5 text-[14px] flex items-center gap-2 hover:bg-hover text-foreground rounded-full"
           >
-            <iconify-icon :icon="({page:'hugeicons:file-01',task:'hugeicons:task-01',project:'hugeicons:folder-01',note:'hugeicons:note',bookmark:'hugeicons:bookmark-01'})[schema.id]" class="w-3.5 h-3.5 text-muted-foreground"></iconify-icon>
+            <iconify-icon :icon="getIconName(schema.id)" class="tweak-icon w-3.5 h-3.5"></iconify-icon>
             <span x-text="schema.name"></span>
           </button>
         </template>
         <button
-          disabled
-          class="w-full text-left px-3 py-1.5 text-[14px] flex items-center gap-2 opacity-50 cursor-not-allowed text-muted-foreground rounded-full"
+          class="w-full text-left px-3 py-1.5 text-[14px] flex items-center gap-2 hover:bg-hover text-muted-foreground rounded-full"
         >
-          <iconify-icon icon="hugeicons:plus-sign" class="w-3.5 h-3.5"></iconify-icon>
+          <iconify-icon :icon="getIconName('plus')" class="tweak-icon w-3.5 h-3.5"></iconify-icon>
           <span>New Schema</span>
-          <span
-            class="ml-auto text-[12px]"
-            >soon</span
-          >
+        </button>
+        <button
+          class="w-full text-left px-3 py-1.5 text-[14px] flex items-center gap-2 hover:bg-hover text-muted-foreground rounded-full"
+        >
+          <iconify-icon :icon="getIconName('grid')" class="tweak-icon w-3.5 h-3.5"></iconify-icon>
+          <span>New Collection</span>
         </button>
       </div>
     </div>
@@ -125,9 +133,9 @@
           <button
             @click="selectCollection('all')"
             :class="{ 'active': activeCollection === 'all' }"
-            class="nav-row w-full flex items-center gap-2 px-2 py-3 text-[14px] font-medium"
+            class="tweak-action nav-row w-full flex items-center gap-2 px-2 py-3 text-[14px] font-medium"
           >
-            <iconify-icon icon="hugeicons:grid" class="w-3.5 h-3.5"></iconify-icon>
+            <iconify-icon :icon="getIconName('grid')" class="tweak-icon w-3.5 h-3.5"></iconify-icon>
             <span>All</span>
           </button>
         </li>
@@ -135,9 +143,9 @@
           <button
             @click="selectCollection('recent')"
             :class="{ 'active': activeCollection === 'recent' }"
-            class="nav-row w-full flex items-center gap-2 px-2 py-3 text-[14px] font-medium"
+            class="tweak-action nav-row w-full flex items-center gap-2 px-2 py-3 text-[14px] font-medium"
           >
-            <iconify-icon icon="hugeicons:clock-01" class="w-3.5 h-3.5"></iconify-icon>
+            <iconify-icon :icon="getIconName('clock')" class="tweak-icon w-3.5 h-3.5"></iconify-icon>
             <span>Recent</span>
           </button>
         </li>
@@ -153,17 +161,17 @@
       <ul class="space-y-0.5">
         <li>
           <button
-            class="nav-row w-full flex items-center gap-2 px-2 py-3 text-[14px] font-medium"
+            class="tweak-action nav-row w-full flex items-center gap-2 px-2 py-3 text-[14px] font-medium"
           >
-            <iconify-icon icon="hugeicons:user" class="w-3.5 h-3.5 text-muted-foreground"></iconify-icon>
+            <iconify-icon :icon="getIconName('user')" class="tweak-icon w-3.5 h-3.5"></iconify-icon>
             <span>Personal</span>
           </button>
         </li>
         <li>
           <button
-            class="nav-row w-full flex items-center gap-2 px-2 py-3 text-[14px] font-medium"
+            class="tweak-action nav-row w-full flex items-center gap-2 px-2 py-3 text-[14px] font-medium"
           >
-            <iconify-icon icon="hugeicons:briefcase-01" class="w-3.5 h-3.5 text-muted-foreground"></iconify-icon>
+            <iconify-icon :icon="getIconName('briefcase')" class="tweak-icon w-3.5 h-3.5"></iconify-icon>
             <span>Work</span>
           </button>
         </li>
@@ -182,9 +190,9 @@
             <button
               @click="selectSchema(schema.id)"
               :class="{ 'active': activeSchema === schema.id }"
-              class="nav-row schema-row w-full flex items-center gap-2 px-2 py-2.5 text-[14px] font-medium"
+              class="tweak-action nav-row schema-row w-full flex items-center gap-2 px-2 py-2.5 text-[14px] font-medium"
             >
-            <iconify-icon :icon="({page:'hugeicons:file-01',task:'hugeicons:task-01',project:'hugeicons:folder-01',note:'hugeicons:note',bookmark:'hugeicons:bookmark-01'})[schema.id]" class="w-3.5 h-3.5 text-muted-foreground"></iconify-icon>
+            <iconify-icon :icon="getIconName(schema.id)" class="tweak-icon w-3.5 h-3.5"></iconify-icon>
             <span x-text="schema.name"></span>
           </button>
         </li>
@@ -196,17 +204,17 @@
       <ul class="space-y-0.5">
         <li>
           <button
-            class="nav-row w-full flex items-center gap-2 px-2 py-3 text-[14px] font-medium"
+            class="tweak-action nav-row w-full flex items-center gap-2 px-2 py-3 text-[14px] font-medium"
           >
-            <iconify-icon icon="hugeicons:help-circle" class="w-3.5 h-3.5 text-muted-foreground"></iconify-icon>
+            <iconify-icon :icon="getIconName('help-circle')" class="tweak-icon w-3.5 h-3.5"></iconify-icon>
             <span>Help</span>
           </button>
         </li>
         <li>
           <button
-            class="nav-row w-full flex items-center gap-2 px-2 py-3 text-[14px] font-medium"
+            class="tweak-action nav-row w-full flex items-center gap-2 px-2 py-3 text-[14px] font-medium"
           >
-            <iconify-icon icon="hugeicons:delete-02" class="w-3.5 h-3.5 text-muted-foreground"></iconify-icon>
+            <iconify-icon :icon="getIconName('trash')" class="tweak-icon w-3.5 h-3.5"></iconify-icon>
             <span>Trash</span>
           </button>
         </li>
@@ -216,17 +224,17 @@
 
   <div class="px-3 py-3">
     <div
-      class="flex items-center gap-2 px-2 py-1.5 rounded-full hover:bg-hover cursor-pointer"
+      class="tweak-action flex items-center gap-2 px-2 py-1.5 rounded-full hover:bg-hover cursor-pointer"
     >
       <img
         src="https://api.dicebear.com/10.x/initials/svg?initialsVariant=alt:1&lettersVariant=single:0&backgroundColor=000000&textColor=ffffff&seed=My%20Profile"
         alt="My Profile"
-        class="w-6 h-6 rounded"
+        class="tweak-avatar w-6 h-6 rounded"
       />
       <div class="min-w-0 flex-1">
         <p class="text-[14px] font-medium truncate">My Profile</p>
       </div>
-      <iconify-icon icon="hugeicons:settings-01" class="w-3.5 h-3.5 text-muted-foreground"></iconify-icon>
+      <iconify-icon :icon="getIconName('settings')" class="tweak-icon w-3.5 h-3.5"></iconify-icon>
     </div>
   </div>
 </aside>

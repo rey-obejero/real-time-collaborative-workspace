@@ -24,7 +24,27 @@ import "../styles/global.css";
       'tweaks-card-flat': tweaks.cardEdge === 'flat',
       'tweaks-sidebar-soft': tweaks.sidebarFill === 'soft',
       'tweaks-chips-bordered': tweaks.chipStyle === 'bordered',
-      'tweaks-status-label': tweaks.statusStyle === 'label'
+      'tweaks-status-label': tweaks.statusStyle === 'label',
+      'tweaks-sidebar-height-low': tweaks.sidebarActionHeight === 'low',
+      'tweaks-sidebar-height-medium': tweaks.sidebarActionHeight === 'medium',
+      'tweaks-sidebar-height-high': tweaks.sidebarActionHeight === 'high',
+      'tweaks-sidebar-hover-low': tweaks.sidebarHover === 'low',
+      'tweaks-sidebar-hover-medium': tweaks.sidebarHover === 'medium',
+      'tweaks-sidebar-hover-high': tweaks.sidebarHover === 'high',
+      'tweaks-avatar-circle': tweaks.avatarShape === 'circle',
+      'tweaks-avatar-square': tweaks.avatarShape === 'square',
+      [`tweaks-search-${tweaks.searchShape}`]: true,
+      [`tweaks-search-bg-${tweaks.searchBg}`]: true,
+      [`tweaks-search-border-${tweaks.searchBorder}`]: true,
+      'tweaks-sidebar-pad-x-low': tweaks.sidebarPadX === 'low',
+      'tweaks-sidebar-pad-x-medium': tweaks.sidebarPadX === 'medium',
+      'tweaks-sidebar-pad-x-high': tweaks.sidebarPadX === 'high',
+      'tweaks-icon-size-sm': tweaks.iconSize === 'sm',
+      'tweaks-icon-size-md': tweaks.iconSize === 'md',
+      'tweaks-icon-size-lg': tweaks.iconSize === 'lg',
+      'tweaks-icon-stroke-thin': tweaks.iconStroke === 'thin',
+      'tweaks-icon-stroke-normal': tweaks.iconStroke === 'normal',
+      'tweaks-icon-stroke-thick': tweaks.iconStroke === 'thick',
     }"
   >
     <slot />

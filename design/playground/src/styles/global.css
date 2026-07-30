@@ -374,3 +374,133 @@ iconify-icon {
 .ask-ai-pill iconify-icon svg {
   stroke-width: 2px;
 }
+
+/* --- Sidebar Tweak Overrides --- */
+
+/* Sidebar action height (vertical padding) */
+.tweaks-sidebar-height-low .tweak-action {
+  padding-top: 0.375rem;
+  padding-bottom: 0.375rem;
+}
+.tweaks-sidebar-height-medium .tweak-action {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+.tweaks-sidebar-height-high .tweak-action {
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+}
+.tweaks-sidebar-pad-x-low .tweak-action {
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+}
+.tweaks-sidebar-pad-x-medium .tweak-action {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+.tweaks-sidebar-pad-x-high .tweak-action {
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+}
+
+/* Sidebar hover background intensity */
+.tweaks-sidebar-hover-high .tweak-action:hover {
+  background: var(--hover);
+}
+.tweaks-sidebar-hover-medium .tweak-action:hover {
+  background: #f5f5f5;
+}
+.dark .tweaks-sidebar-hover-medium .tweak-action:hover {
+  background: #2a2a2a;
+}
+.tweaks-sidebar-hover-low .tweak-action:hover {
+  background: #fafafa;
+}
+.dark .tweaks-sidebar-hover-low .tweak-action:hover {
+  background: #202020;
+}
+
+/* Avatar shape */
+.tweaks-avatar-circle .tweak-avatar {
+  border-radius: 9999px;
+}
+.tweaks-avatar-square .tweak-avatar {
+  border-radius: 0.25rem;
+}
+
+/* Search field styles — 3 independent axes */
+/* Shape */
+.tweaks-search-pill .tweak-search {
+  border-radius: 9999px;
+}
+.tweaks-search-rect .tweak-search {
+  border-radius: var(--radius-lg);
+}
+/* Background — white */
+.tweaks-search-bg-white .tweak-search {
+  background: var(--card);
+}
+.tweaks-search-bg-white .tweak-search:hover {
+  background: var(--card);
+}
+/* Background — muted */
+.tweaks-search-bg-muted .tweak-search {
+  background: var(--secondary);
+}
+.tweaks-search-bg-muted .tweak-search:hover {
+  background: var(--secondary);
+}
+/* Background — ghost */
+.tweaks-search-bg-ghost .tweak-search {
+  background: transparent;
+}
+.tweaks-search-bg-ghost .tweak-search:hover {
+  background: var(--hover);
+}
+/* Borders */
+.tweaks-search-border-hairline .tweak-search {
+  border: 1px solid var(--border);
+}
+.tweaks-search-border-none .tweak-search {
+  border: none;
+}
+
+/* Nav-row color on hover with sidebar hover tweaks */
+.tweaks-sidebar-hover-low .nav-row:hover,
+.tweaks-sidebar-hover-low .schema-row:hover,
+.tweaks-sidebar-hover-medium .nav-row:hover,
+.tweaks-sidebar-hover-medium .schema-row:hover,
+.tweaks-sidebar-hover-high .nav-row:hover,
+.tweaks-sidebar-hover-high .schema-row:hover {
+  color: var(--foreground);
+}
+
+/* Icon size */
+.tweaks-icon-size-sm .tweak-icon {
+  width: 0.75rem;
+  height: 0.75rem;
+}
+.tweaks-icon-size-md .tweak-icon {
+  width: 0.875rem;
+  height: 0.875rem;
+}
+.tweaks-icon-size-lg .tweak-icon {
+  width: 1rem;
+  height: 1rem;
+}
+
+/* Icon stroke width */
+.tweaks-icon-stroke-thin .tweak-icon svg {
+  stroke-width: 1px;
+}
+.tweaks-icon-stroke-normal .tweak-icon svg {
+  stroke-width: 1.5px;
+}
+.tweaks-icon-stroke-thick .tweak-icon svg {
+  stroke-width: 2px;
+}
+
+/* Create button — no hover background change */
+.create-btn:hover {
+  background: var(--primary);
+}
