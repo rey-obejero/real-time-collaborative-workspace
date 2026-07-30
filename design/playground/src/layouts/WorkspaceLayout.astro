@@ -39,14 +39,20 @@ import "../styles/global.css";
       'tweaks-sidebar-pad-x-low': tweaks.sidebarPadX === 'low',
       'tweaks-sidebar-pad-x-medium': tweaks.sidebarPadX === 'medium',
       'tweaks-sidebar-pad-x-high': tweaks.sidebarPadX === 'high',
-      'tweaks-icon-size-sm': tweaks.iconSize === 'sm',
-      'tweaks-icon-size-md': tweaks.iconSize === 'md',
-      'tweaks-icon-size-lg': tweaks.iconSize === 'lg',
-      'tweaks-icon-stroke-thin': tweaks.iconStroke === 'thin',
-      'tweaks-icon-stroke-normal': tweaks.iconStroke === 'normal',
-      'tweaks-icon-stroke-thick': tweaks.iconStroke === 'thick',
-    }"
-  >
+    'tweaks-icon-size-sm': tweaks.iconSize === 'sm',
+    'tweaks-icon-size-md': tweaks.iconSize === 'md',
+    'tweaks-icon-size-lg': tweaks.iconSize === 'lg',
+    'tweaks-element-bg-default': tweaks.elementBg === 'default',
+    'tweaks-element-bg-hover-low': tweaks.elementBg === 'hover-low',
+    'tweaks-element-bg-hover-medium': tweaks.elementBg === 'hover-medium',
+    'tweaks-element-bg-hover-high': tweaks.elementBg === 'hover-high',
+    'tweaks-element-icon-default': tweaks.elementIcon === 'default',
+    'tweaks-element-icon-hover-low': tweaks.elementIcon === 'hover-low',
+    'tweaks-element-icon-hover-medium': tweaks.elementIcon === 'hover-medium',
+    'tweaks-element-icon-hover-high': tweaks.elementIcon === 'hover-high',
+  }"
+  :style="`--tweak-stroke: ${['thin':'1','normal':'1.5','thick':'2'][tweaks.iconStroke] || '1.5'}`"
+>
     <slot />
   </body>
 </html>

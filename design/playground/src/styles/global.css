@@ -404,19 +404,19 @@ iconify-icon {
 }
 
 /* Sidebar hover background intensity */
-.tweaks-sidebar-hover-high .tweak-action:hover {
+.tweaks-sidebar-hover-high .tweak-action:not(.primary-btn):hover {
   background: var(--hover);
 }
-.tweaks-sidebar-hover-medium .tweak-action:hover {
+.tweaks-sidebar-hover-medium .tweak-action:not(.primary-btn):hover {
   background: #f5f5f5;
 }
-.dark .tweaks-sidebar-hover-medium .tweak-action:hover {
+.dark .tweaks-sidebar-hover-medium .tweak-action:not(.primary-btn):hover {
   background: #2a2a2a;
 }
-.tweaks-sidebar-hover-low .tweak-action:hover {
+.tweaks-sidebar-hover-low .tweak-action:not(.primary-btn):hover {
   background: #fafafa;
 }
-.dark .tweaks-sidebar-hover-low .tweak-action:hover {
+.dark .tweaks-sidebar-hover-low .tweak-action:not(.primary-btn):hover {
   background: #202020;
 }
 
@@ -443,18 +443,34 @@ iconify-icon {
 .tweaks-search-bg-white .tweak-search:hover {
   background: var(--card);
 }
-/* Background — muted */
-.tweaks-search-bg-muted .tweak-search {
-  background: var(--secondary);
-}
-.tweaks-search-bg-muted .tweak-search:hover {
-  background: var(--secondary);
-}
-/* Background — ghost */
-.tweaks-search-bg-ghost .tweak-search {
+/* Background — hover-low */
+.tweaks-search-bg-hover-low .tweak-search {
   background: transparent;
 }
-.tweaks-search-bg-ghost .tweak-search:hover {
+.tweaks-search-bg-hover-low .tweak-search:hover {
+  background: #fafafa;
+}
+.dark .tweaks-search-bg-hover-low .tweak-search:hover {
+  background: #202020;
+}
+/* Background — hover-medium */
+.tweaks-search-bg-hover-medium .tweak-search {
+  background: transparent;
+}
+.tweaks-search-bg-hover-medium .tweak-search:hover {
+  background: #f5f5f5;
+}
+.dark .tweaks-search-bg-hover-medium .tweak-search:hover {
+  background: #2a2a2a;
+}
+/* Background — hover-high */
+.tweaks-search-bg-hover-high .tweak-search {
+  background: transparent;
+}
+.tweaks-search-bg-hover-high .tweak-search:hover {
+  background: var(--hover);
+}
+.dark .tweaks-search-bg-hover-high .tweak-search:hover {
   background: var(--hover);
 }
 /* Borders */
@@ -477,30 +493,41 @@ iconify-icon {
 
 /* Icon size */
 .tweaks-icon-size-sm .tweak-icon {
-  width: 0.75rem;
-  height: 0.75rem;
+  width: 0.875rem !important;
+  height: 0.875rem !important;
 }
 .tweaks-icon-size-md .tweak-icon {
-  width: 0.875rem;
-  height: 0.875rem;
+  width: 1.125rem !important;
+  height: 1.125rem !important;
 }
 .tweaks-icon-size-lg .tweak-icon {
-  width: 1rem;
-  height: 1rem;
+  width: 1.25rem !important;
+  height: 1.25rem !important;
 }
 
 /* Icon stroke width */
-.tweaks-icon-stroke-thin .tweak-icon svg {
-  stroke-width: 1px;
-}
-.tweaks-icon-stroke-normal .tweak-icon svg {
-  stroke-width: 1.5px;
-}
-.tweaks-icon-stroke-thick .tweak-icon svg {
-  stroke-width: 2px;
+.tweak-icon svg, .tweak-icon svg * {
+  stroke-width: var(--tweak-stroke) !important;
 }
 
-/* Create button — no hover background change */
-.create-btn:hover {
-  background: var(--primary);
+/* Element hover backgrounds — 4 special sidebar elements */
+.tweaks-element-bg-default .tweak-special:hover { background: var(--hover); }
+.tweaks-element-bg-hover-low .tweak-special:hover { background: #fafafa; }
+.dark .tweaks-element-bg-hover-low .tweak-special:hover { background: #202020; }
+.tweaks-element-bg-hover-medium .tweak-special:hover { background: #f5f5f5; }
+.dark .tweaks-element-bg-hover-medium .tweak-special:hover { background: #2a2a2a; }
+.tweaks-element-bg-hover-high .tweak-special:hover { background: var(--hover); }
+
+/* Element icon/text colors on hover */
+.tweaks-element-icon-default .tweak-special:hover iconify-icon,
+.tweaks-element-icon-default .tweak-special:hover span {
+  color: var(--foreground);
 }
+.tweaks-element-icon-hover-low .tweak-special:hover iconify-icon,
+.tweaks-element-icon-hover-low .tweak-special:hover span { color: #525252; }
+.tweaks-element-icon-hover-medium .tweak-special:hover iconify-icon,
+.tweaks-element-icon-hover-medium .tweak-special:hover span { color: #404040; }
+.tweaks-element-icon-hover-high .tweak-special:hover iconify-icon,
+.tweaks-element-icon-hover-high .tweak-special:hover span { color: var(--foreground); }
+
+

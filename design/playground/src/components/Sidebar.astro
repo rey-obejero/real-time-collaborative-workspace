@@ -4,7 +4,7 @@
   <div class="px-3 pt-3 pb-4">
     <button
       @click="isLibraryDropdownOpen = !isLibraryDropdownOpen"
-      class="tweak-action w-full flex items-center gap-2 px-2 py-1.5 rounded-full hover:bg-hover cursor-pointer"
+      class="tweak-special tweak-action w-full flex items-center gap-2 px-2 py-1.5 rounded-full hover:bg-hover cursor-pointer"
     >
       <img
         src="https://api.dicebear.com/10.x/initials/svg?initialsVariant=alt:1&lettersVariant=single:0&backgroundColor=000000&textColor=ffffff&seed=Personal%20Space"
@@ -73,7 +73,7 @@
   <div class="px-3 pb-2 space-y-1">
     <button
       @click="openSearchModal()"
-      class="tweak-search ghost-btn w-full flex items-center gap-2 px-2.5 py-1.5 text-[14px] focus-ring cursor-pointer"
+      class="tweak-special tweak-search ghost-btn w-full flex items-center gap-2 px-2.5 py-1.5 text-[14px] focus-ring cursor-pointer"
     >
       <iconify-icon :icon="getIconName('search')" class="tweak-icon w-3.5 h-3.5"></iconify-icon>
       <span>Search</span>
@@ -82,7 +82,7 @@
     <div class="relative" @click.outside="isNewMenuOpen = false">
       <button
         @click="isNewMenuOpen = !isNewMenuOpen"
-        class="tweak-action create-btn primary-btn w-full flex items-center px-2.5 py-1.5 text-[14px] cursor-pointer"
+        class="tweak-special tweak-action create-btn primary-btn w-full flex items-center px-2.5 py-1.5 text-[14px] cursor-pointer"
       >
         <iconify-icon :icon="getIconName('plus')" class="tweak-icon w-4 h-4"></iconify-icon>
         <span class="ml-2">Create</span>
@@ -224,7 +224,7 @@
 
   <div class="px-3 py-3">
     <div
-      class="tweak-action flex items-center gap-2 px-2 py-1.5 rounded-full hover:bg-hover cursor-pointer"
+      class="tweak-special tweak-action flex items-center gap-2 px-2 py-1.5 rounded-full hover:bg-hover cursor-pointer"
     >
       <img
         src="https://api.dicebear.com/10.x/initials/svg?initialsVariant=alt:1&lettersVariant=single:0&backgroundColor=000000&textColor=ffffff&seed=My%20Profile"
