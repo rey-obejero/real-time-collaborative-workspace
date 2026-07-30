@@ -114,6 +114,7 @@ body {
 .nav-row {
   color: var(--muted-foreground);
   border-radius: 9999px;
+  cursor: pointer;
 }
 .nav-row:hover {
   background: var(--accent);

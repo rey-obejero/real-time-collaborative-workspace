@@ -1,10 +1,10 @@
 <aside
       class="w-80 shrink-0 flex flex-col h-full border-r border-border bg-background select-none"
 >
-  <div class="px-3 pt-3 pb-2">
+  <div class="px-3 pt-3 pb-4">
     <button
       @click="isLibraryDropdownOpen = !isLibraryDropdownOpen"
-      class="w-full flex items-center gap-2 px-2 py-1.5 rounded-full hover:bg-accent"
+      class="w-full flex items-center gap-2 px-2 py-1.5 rounded-full hover:bg-border cursor-pointer"
     >
       <img
         src="https://api.dicebear.com/10.x/initials/svg?initialsVariant=alt:1&lettersVariant=single:0&backgroundColor=000000&textColor=ffffff&seed=Personal%20Space"
@@ -21,49 +21,52 @@
           </span>
     </button>
 
-    <div
-      x-show="isLibraryDropdownOpen"
-      @click.outside="isLibraryDropdownOpen = false"
-      x-transition
-      class="absolute z-20 mt-1 w-56 ml-3 rounded-lg border border-border bg-popover overflow-hidden"
-    >
-      <button
-        @click="selectLibrary('Personal Space')"
-        :class="currentLibrary === 'Personal Space' ? 'bg-accent' : ''"
-        class="w-full text-left px-3 py-2 text-[14px] flex items-center gap-2 hover:bg-accent rounded-full"
+    <div class="relative">
+      <div
+        x-show="isLibraryDropdownOpen"
+        @click.outside="isLibraryDropdownOpen = false"
+        x-transition
+        class="absolute z-20 mt-1 left-0 right-0 rounded-lg border border-border bg-popover overflow-hidden"
       >
-        <img
-          src="https://api.dicebear.com/10.x/initials/svg?backgroundColor=000000&textColor=ffffff&seed=Personal%20Space"
-          alt="Personal Space"
-          class="w-4 h-4 rounded"
-        />
-        <span>Personal Space</span>
-      </button>
-      <button
-        @click="selectLibrary('Team Space')"
-        :class="currentLibrary === 'Team Space' ? 'bg-accent' : ''"
-        class="w-full text-left px-3 py-2 text-[14px] flex items-center gap-2 hover:bg-accent rounded-full"
-      >
-          <span
-            class="w-4 h-4 rounded bg-foreground text-background flex items-center justify-center text-[10px] font-semibold"
-            >E</span
+        <button
+          @click="selectLibrary('Personal Space')"
+          :class="currentLibrary === 'Personal Space' ? 'bg-accent' : ''"
+          class="w-full text-left px-3 py-2 text-[14px] flex items-center gap-2 hover:bg-accent rounded-full"
         >
-        <span>Team Space</span>
-      </button>
-      <button
-        @click="openSettingsModal()"
-        class="w-full text-left px-3 py-2 text-[14px] flex items-center gap-2 hover:bg-accent text-muted-foreground rounded-full"
-      >
-        <iconify-icon :icon="getIconName('settings')" class="w-3.5 h-3.5"></iconify-icon>
-        <span>Settings</span>
-      </button>
+          <img
+            src="https://api.dicebear.com/10.x/initials/svg?backgroundColor=000000&textColor=ffffff&seed=Personal%20Space"
+            alt="Personal Space"
+            class="w-4 h-4 rounded"
+          />
+          <span>Personal Space</span>
+        </button>
+        <button
+          @click="selectLibrary('Team Space')"
+          :class="currentLibrary === 'Team Space' ? 'bg-accent' : ''"
+          class="w-full text-left px-3 py-2 text-[14px] flex items-center gap-2 hover:bg-accent rounded-full"
+        >
+          <img
+            src="https://api.dicebear.com/10.x/initials/svg?backgroundColor=000000&textColor=ffffff&seed=Team%20Space"
+            alt="Team Space"
+            class="w-4 h-4 rounded"
+          />
+          <span>Team Space</span>
+        </button>
+        <button
+          @click="openSettingsModal()"
+          class="w-full text-left px-3 py-2 text-[14px] flex items-center gap-2 hover:bg-accent text-muted-foreground rounded-full"
+        >
+          <iconify-icon :icon="getIconName('settings')" class="w-3.5 h-3.5"></iconify-icon>
+          <span>Settings</span>
+        </button>
+      </div>
     </div>
   </div>
 
   <div class="px-3 pb-2 space-y-1">
     <button
       @click="openSearchModal()"
-      class="ghost-btn w-full flex items-center gap-2 px-2.5 py-1.5 text-[14px] focus-ring text-muted-foreground"
+      class="ghost-btn w-full flex items-center gap-2 px-2.5 py-1.5 text-[14px] focus-ring text-muted-foreground hover:bg-border cursor-pointer"
     >
       <iconify-icon :icon="getIconName('search')" class="w-3.5 h-3.5"></iconify-icon>
       <span>Search</span>
@@ -72,11 +75,12 @@
     <div class="relative" @click.outside="isNewMenuOpen = false">
       <button
         @click="isNewMenuOpen = !isNewMenuOpen"
-        class="primary-btn w-full flex items-center justify-center gap-1.5 px-2.5 py-1.5 text-[14px] font-medium"
+        class="primary-btn w-full flex items-center px-2.5 py-1.5 text-[14px] cursor-pointer"
       >
-        <span>Create</span>
-        <span class="ml-0.5 opacity-60 transition inline-flex items-center" :class="isNewMenuOpen ? 'rotate-180' : ''">
-                      <iconify-icon :icon="getIconName('chevron-down')" class="w-3 h-3"></iconify-icon>
+        <iconify-icon icon="feather:fe-plus" class="w-4 h-4"></iconify-icon>
+        <span class="ml-2">Create</span>
+        <span class="ml-auto transition inline-flex items-center" :class="isNewMenuOpen ? 'rotate-180' : ''">
+                      <iconify-icon icon="feather:chevron-down" class="w-3 h-3 text-white"></iconify-icon>
                     </span>
       </button>
 
@@ -85,11 +89,6 @@
         x-transition
         class="absolute top-full left-0 right-0 mt-1 z-30 bg-popover border border-border rounded-lg overflow-hidden"
       >
-        <div
-          class="px-3 pt-2 pb-1 text-[12px] font-medium text-muted-foreground"
-        >
-          Entries
-        </div>
         <template x-for="schema in schemas" :key="schema.id">
           <button
             @click="createNewEntryOfType(schema.id); isNewMenuOpen = false"
@@ -99,11 +98,6 @@
             <span x-text="schema.name"></span>
           </button>
         </template>
-        <div
-          class="px-3 pt-1 pb-1 text-[12px] font-medium text-muted-foreground"
-        >
-          Schemas
-        </div>
         <button
           disabled
           class="w-full text-left px-3 py-1.5 text-[14px] flex items-center gap-2 opacity-50 cursor-not-allowed text-muted-foreground rounded-full"
@@ -135,11 +129,6 @@
           >
             <iconify-icon :icon="getIconName('grid')" class="w-3.5 h-3.5"></iconify-icon>
             <span>All</span>
-            <span
-              class="ml-auto text-[12px] tabular-nums opacity-70"
-              x-text="totalEntryCount"
-              >0</span
-            >
           </button>
         </li>
         <li>
@@ -150,14 +139,35 @@
           >
             <iconify-icon :icon="getIconName('clock')" class="w-3.5 h-3.5"></iconify-icon>
             <span>Recent</span>
-            <span
-              class="ml-auto text-[12px] tabular-nums opacity-70"
-              x-text="entries.length"
-              >0</span
-            >
           </button>
         </li>
         </ul>
+    </div>
+
+    <div class="px-3 pt-4 pb-1">
+      <p
+        class="text-[12px] font-medium text-muted-foreground px-2 mb-1"
+      >
+        Collections
+      </p>
+      <ul class="space-y-0.5">
+        <li>
+          <button
+            class="nav-row w-full flex items-center gap-2 px-2 py-2.5 text-[14px] font-medium"
+          >
+            <iconify-icon icon="feather:user" class="w-3.5 h-3.5 text-muted-foreground"></iconify-icon>
+            <span>Personal</span>
+          </button>
+        </li>
+        <li>
+          <button
+            class="nav-row w-full flex items-center gap-2 px-2 py-2.5 text-[14px] font-medium"
+          >
+            <iconify-icon icon="feather:briefcase" class="w-3.5 h-3.5 text-muted-foreground"></iconify-icon>
+            <span>Work</span>
+          </button>
+        </li>
+      </ul>
     </div>
 
     <div class="px-3 pt-4 pb-1">
@@ -176,11 +186,6 @@
             >
               <iconify-icon :icon="getIconName(schema.id)" class="w-3.5 h-3.5 text-muted-foreground"></iconify-icon>
               <span x-text="schema.name"></span>
-              <span
-                class="ml-auto text-[12px] tabular-nums opacity-70"
-                x-text="countByType(schema.id)"
-                >0</span
-              >
             </button>
           </li>
         </template>
@@ -188,17 +193,20 @@
     </div>
 
     <div class="px-3 pt-4 pb-1">
-      <p
-        class="text-[12px] font-medium text-muted-foreground px-2 mb-1"
-      >
-        Archive
-      </p>
       <ul class="space-y-0.5">
         <li>
           <button
             class="nav-row w-full flex items-center gap-2 px-2 py-2.5 text-[14px] font-medium"
           >
-            <iconify-icon :icon="getIconName('trash')" class="w-3.5 h-3.5"></iconify-icon>
+            <iconify-icon icon="feather:help-circle" class="w-3.5 h-3.5 text-muted-foreground"></iconify-icon>
+            <span>Help</span>
+          </button>
+        </li>
+        <li>
+          <button
+            class="nav-row w-full flex items-center gap-2 px-2 py-2.5 text-[14px] font-medium"
+          >
+            <iconify-icon :icon="getIconName('trash')" class="w-3.5 h-3.5 text-muted-foreground"></iconify-icon>
             <span>Trash</span>
           </button>
         </li>
@@ -208,18 +216,17 @@
 
   <div class="px-3 py-3">
     <div
-      class="flex items-center gap-2 px-2 py-1.5 rounded-full hover:bg-accent cursor-pointer"
+      class="flex items-center gap-2 px-2 py-1.5 rounded-full hover:bg-border cursor-pointer"
     >
-      <span
-        class="w-6 h-6 flex items-center justify-center rounded-full bg-secondary text-foreground text-[10px] font-semibold"
-        >ME</span
-      >
+      <img
+        src="https://api.dicebear.com/10.x/initials/svg?initialsVariant=alt:1&lettersVariant=single:0&backgroundColor=000000&textColor=ffffff&seed=My%20Profile"
+        alt="My Profile"
+        class="w-6 h-6 rounded"
+      />
       <div class="min-w-0 flex-1">
         <p class="text-[14px] font-medium truncate">My Profile</p>
-        <p class="text-[12px] truncate text-muted-foreground">
-          john.die@example.com
-        </p>
       </div>
+      <iconify-icon :icon="getIconName('settings')" class="w-3.5 h-3.5 text-muted-foreground"></iconify-icon>
     </div>
   </div>
 </aside>
