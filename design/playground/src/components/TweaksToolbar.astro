@@ -101,20 +101,6 @@
         </div>
 
         <div>
-          <p class="text-[12px] font-medium text-foreground mb-2">Search Color</p>
-          <div class="flex gap-1">
-            <template x-for="(label, val) in { white: 'White', 'hover-low': 'Low', 'hover-medium': 'Med', 'hover-high': 'High' }">
-              <button
-                @click="toggleTweak('searchBg', val)"
-                :class="tweaks.searchBg === val ? 'bg-primary text-primary-foreground' : 'bg-secondary text-muted-foreground hover:bg-accent'"
-                class="flex-1 px-2 py-1 text-[12px] rounded-full cursor-pointer"
-                x-text="label"
-              ></button>
-            </template>
-          </div>
-        </div>
-
-        <div>
           <p class="text-[12px] font-medium text-foreground mb-2">Search Border</p>
           <div class="flex gap-1">
             <button
@@ -131,82 +117,12 @@
         </div>
 
         <div>
-          <p class="text-[12px] font-medium text-foreground mb-2">Icon Size</p>
-          <div class="flex gap-1">
-            <button
-              @click="toggleTweak('iconSize', 'sm')"
-              :class="tweaks.iconSize === 'sm' ? 'bg-primary text-primary-foreground' : 'bg-secondary text-muted-foreground hover:bg-accent'"
-              class="flex-1 px-2 py-1 text-[12px] rounded-full cursor-pointer"
-            >Sm</button>
-            <button
-              @click="toggleTweak('iconSize', 'md')"
-              :class="tweaks.iconSize === 'md' ? 'bg-primary text-primary-foreground' : 'bg-secondary text-muted-foreground hover:bg-accent'"
-              class="flex-1 px-2 py-1 text-[12px] rounded-full cursor-pointer"
-            >Md</button>
-            <button
-              @click="toggleTweak('iconSize', 'lg')"
-              :class="tweaks.iconSize === 'lg' ? 'bg-primary text-primary-foreground' : 'bg-secondary text-muted-foreground hover:bg-accent'"
-              class="flex-1 px-2 py-1 text-[12px] rounded-full cursor-pointer"
-            >Lg</button>
-          </div>
-        </div>
-
-        <div>
-          <p class="text-[12px] font-medium text-foreground mb-2">Icon Stroke</p>
-          <div class="flex gap-1">
-            <button
-              @click="toggleTweak('iconStroke', 'thin')"
-              :class="tweaks.iconStroke === 'thin' ? 'bg-primary text-primary-foreground' : 'bg-secondary text-muted-foreground hover:bg-accent'"
-              class="flex-1 px-2 py-1 text-[12px] rounded-full cursor-pointer"
-            >Thin</button>
-            <button
-              @click="toggleTweak('iconStroke', 'normal')"
-              :class="tweaks.iconStroke === 'normal' ? 'bg-primary text-primary-foreground' : 'bg-secondary text-muted-foreground hover:bg-accent'"
-              class="flex-1 px-2 py-1 text-[12px] rounded-full cursor-pointer"
-            >Normal</button>
-            <button
-              @click="toggleTweak('iconStroke', 'thick')"
-              :class="tweaks.iconStroke === 'thick' ? 'bg-primary text-primary-foreground' : 'bg-secondary text-muted-foreground hover:bg-accent'"
-              class="flex-1 px-2 py-1 text-[12px] rounded-full cursor-pointer"
-            >Thick</button>
-          </div>
-        </div>
-
-        <div>
           <p class="text-[12px] font-medium text-foreground mb-2">Action Pad X</p>
           <div class="flex gap-1">
             <template x-for="(label, val) in { low: 'Low', medium: 'Med', high: 'High' }">
               <button
                 @click="toggleTweak('sidebarPadX', val)"
                 :class="tweaks.sidebarPadX === val ? 'bg-primary text-primary-foreground' : 'bg-secondary text-muted-foreground hover:bg-accent'"
-                class="flex-1 px-2 py-1 text-[12px] rounded-full cursor-pointer"
-                x-text="label"
-              ></button>
-            </template>
-          </div>
-        </div>
-
-        <div>
-          <p class="text-[12px] font-medium text-foreground mb-2">Element Hover</p>
-          <div class="flex gap-1">
-            <template x-for="(label, val) in { default: 'Default', 'hover-low': 'Low', 'hover-medium': 'Med', 'hover-high': 'High' }">
-              <button
-                @click="toggleTweak('elementBg', val)"
-                :class="tweaks.elementBg === val ? 'bg-primary text-primary-foreground' : 'bg-secondary text-muted-foreground hover:bg-accent'"
-                class="flex-1 px-2 py-1 text-[12px] rounded-full cursor-pointer"
-                x-text="label"
-              ></button>
-            </template>
-          </div>
-        </div>
-
-        <div>
-          <p class="text-[12px] font-medium text-foreground mb-2">Icon Hover</p>
-          <div class="flex gap-1">
-            <template x-for="(label, val) in { default: 'Default', 'hover-low': 'Low', 'hover-medium': 'Med', 'hover-high': 'High' }">
-              <button
-                @click="toggleTweak('elementIcon', val)"
-                :class="tweaks.elementIcon === val ? 'bg-primary text-primary-foreground' : 'bg-secondary text-muted-foreground hover:bg-accent'"
                 class="flex-1 px-2 py-1 text-[12px] rounded-full cursor-pointer"
                 x-text="label"
               ></button>
