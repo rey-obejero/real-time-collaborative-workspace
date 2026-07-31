@@ -70,27 +70,29 @@
     </div>
   </div>
 
-  <div class="px-3 pb-2 space-y-1">
-    <button
-      @click="openSearchModal()"
-      class="tweak-special tweak-search ghost-btn w-full flex items-center gap-2 px-2.5 py-1.5 text-[14px] focus-ring cursor-pointer"
-    >
-      <iconify-icon :icon="getIconName('search')" class="tweak-icon w-3.5 h-3.5"></iconify-icon>
-      <span>Search</span>
-      <span class="ml-auto text-[12px] opacity-60">Ctrl K</span>
-    </button>
-    <div class="relative" @click.outside="isNewMenuOpen = false">
+
+
+  <div class="px-3 pb-2">
+    <div class="vp2-shell relative p-1" @click.outside="isNewMenuOpen = false">
+      <button
+        @click="openSearchModal()"
+        class="vp2-row w-full flex items-center gap-2 px-2.5 py-1.5 text-[14px] focus-ring cursor-pointer"
+      >
+        <iconify-icon :icon="getIconName('search')" class="w-3.5 h-3.5"></iconify-icon>
+        <span>Search</span>
+        <span class="vp2-kbd ml-auto">Ctrl K</span>
+      </button>
+      <div class="vp2-divider h-px my-1"></div>
       <button
         @click="isNewMenuOpen = !isNewMenuOpen"
-        class="tweak-special tweak-action create-btn primary-btn w-full flex items-center px-2.5 py-1.5 text-[14px] cursor-pointer"
+        class="vp2-row w-full flex items-center gap-2 px-2.5 py-1.5 text-[14px] cursor-pointer"
       >
-        <iconify-icon :icon="getIconName('plus')" class="tweak-icon w-4 h-4"></iconify-icon>
-        <span class="ml-2">Create</span>
+        <iconify-icon :icon="getIconName('add')" class="w-3.5 h-3.5"></iconify-icon>
+        <span>Create</span>
         <span class="ml-auto transition inline-flex items-center" :class="isNewMenuOpen ? 'rotate-180' : ''">
-                      <iconify-icon :icon="getIconName('chevron-down')" class="w-3.5 h-3.5 text-white"></iconify-icon>
-                    </span>
+          <iconify-icon :icon="getIconName('chevron-down')" class="w-3.5 h-3.5"></iconify-icon>
+        </span>
       </button>
-
       <div
         x-show="isNewMenuOpen"
         x-transition
@@ -101,25 +103,27 @@
             @click="createNewEntryOfType(schema.id); isNewMenuOpen = false"
             class="w-full text-left px-3 py-1.5 text-[14px] flex items-center gap-2 hover:bg-hover text-foreground rounded-full"
           >
-            <iconify-icon :icon="getIconName(schema.id)" class="tweak-icon w-3.5 h-3.5"></iconify-icon>
+            <iconify-icon :icon="getIconName(schema.id)" class="w-3.5 h-3.5"></iconify-icon>
             <span x-text="schema.name"></span>
           </button>
         </template>
         <button
           class="w-full text-left px-3 py-1.5 text-[14px] flex items-center gap-2 hover:bg-hover text-muted-foreground rounded-full"
         >
-          <iconify-icon :icon="getIconName('plus')" class="tweak-icon w-3.5 h-3.5"></iconify-icon>
+          <iconify-icon :icon="getIconName('plus')" class="w-3.5 h-3.5"></iconify-icon>
           <span>New Schema</span>
         </button>
         <button
           class="w-full text-left px-3 py-1.5 text-[14px] flex items-center gap-2 hover:bg-hover text-muted-foreground rounded-full"
         >
-          <iconify-icon :icon="getIconName('grid')" class="tweak-icon w-3.5 h-3.5"></iconify-icon>
+          <iconify-icon :icon="getIconName('grid')" class="w-3.5 h-3.5"></iconify-icon>
           <span>New Collection</span>
         </button>
       </div>
     </div>
   </div>
+
+
 
   <div class="flex-1 overflow-y-auto no-scrollbar">
     <div class="px-3 pt-3 pb-1">
