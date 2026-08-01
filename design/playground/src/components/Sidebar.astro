@@ -26,46 +26,48 @@
         x-show="isLibraryDropdownOpen"
         @click.outside="isLibraryDropdownOpen = false"
         x-transition
-        class="absolute z-20 mt-1 left-0 right-0 rounded-lg border border-border bg-popover overflow-hidden"
+        class="absolute top-full left-0 right-0 mt-1 z-30 rounded-lg overflow-hidden bg-background border border-border p-1.5"
       >
-        <button
-          @click="selectLibrary('Personal Space')"
-          :class="currentLibrary === 'Personal Space' ? 'bg-accent' : ''"
-          class="w-full text-left px-3 py-2 text-[14px] flex items-center gap-2 hover:bg-hover rounded-full"
-        >
-          <img
-            src="https://api.dicebear.com/10.x/initials/svg?backgroundColor=000000&textColor=ffffff&seed=Personal%20Space"
-            alt="Personal Space"
-            class="tweak-avatar w-4 h-4 rounded"
-          />
-          <span>Personal Space</span>
-        </button>
-        <button
-          @click="selectLibrary('Team Space')"
-          :class="currentLibrary === 'Team Space' ? 'bg-accent' : ''"
-          class="w-full text-left px-3 py-2 text-[14px] flex items-center gap-2 hover:bg-hover rounded-full"
-        >
-          <img
-            src="https://api.dicebear.com/10.x/initials/svg?backgroundColor=000000&textColor=ffffff&seed=Team%20Space"
-            alt="Team Space"
-            class="tweak-avatar w-4 h-4 rounded"
-          />
-          <span>Team Space</span>
-        </button>
-        <button
-          @click="selectLibrary('New Workspace')"
-          class="w-full text-left px-3 py-2 text-[14px] flex items-center gap-2 hover:bg-hover text-muted-foreground rounded-full"
-        >
-          <iconify-icon :icon="getIconName('plus')" class="w-3.5 h-3.5"></iconify-icon>
-          <span>New Workspace</span>
-        </button>
-        <button
-          @click="openSettingsModal()"
-          class="w-full text-left px-3 py-2 text-[14px] flex items-center gap-2 hover:bg-hover text-muted-foreground rounded-full"
-        >
-          <iconify-icon :icon="getIconName('settings')" class="w-3.5 h-3.5"></iconify-icon>
-          <span>Settings</span>
-        </button>
+        <div class="space-y-0.5">
+          <button
+            @click="selectLibrary('Personal Space')"
+            :class="currentLibrary === 'Personal Space' ? 'bg-accent' : ''"
+            class="w-full text-left px-3 py-1.5 text-[14px] flex items-center gap-2.5 hover:bg-hover rounded-lg"
+          >
+            <img
+              src="https://api.dicebear.com/10.x/initials/svg?backgroundColor=000000&textColor=ffffff&seed=Personal%20Space"
+              alt="Personal Space"
+              class="tweak-avatar w-4 h-4 rounded"
+            />
+            <span>Personal Space</span>
+          </button>
+          <button
+            @click="selectLibrary('Team Space')"
+            :class="currentLibrary === 'Team Space' ? 'bg-accent' : ''"
+            class="w-full text-left px-3 py-1.5 text-[14px] flex items-center gap-2.5 hover:bg-hover rounded-lg"
+          >
+            <img
+              src="https://api.dicebear.com/10.x/initials/svg?backgroundColor=000000&textColor=ffffff&seed=Team%20Space"
+              alt="Team Space"
+              class="tweak-avatar w-4 h-4 rounded"
+            />
+            <span>Team Space</span>
+          </button>
+          <button
+            @click="openSettingsModal()"
+            class="w-full text-left px-3 py-1.5 text-[14px] flex items-center gap-2.5 hover:bg-hover text-muted-foreground rounded-lg"
+          >
+            <iconify-icon :icon="getIconName('settings')" class="w-3.5 h-3.5"></iconify-icon>
+            <span>Settings</span>
+          </button>
+          <button
+            @click="selectLibrary('New Workspace')"
+            class="w-full text-left px-3 py-1.5 text-[14px] flex items-center gap-2.5 hover:bg-hover text-muted-foreground rounded-lg"
+          >
+            <iconify-icon :icon="getIconName('add')" class="w-3.5 h-3.5"></iconify-icon>
+            <span>New Workspace</span>
+          </button>
+        </div>
       </div>
     </div>
   </div>
@@ -96,29 +98,29 @@
       <div
         x-show="isNewMenuOpen"
         x-transition
-        class="absolute top-full left-0 right-0 mt-1 z-30 bg-popover border border-border rounded-lg overflow-hidden"
+        class="absolute top-full left-0 right-0 mt-1 z-30 rounded-lg overflow-hidden bg-background border border-border p-1.5"
       >
-        <template x-for="schema in schemas" :key="schema.id">
-          <button
-            @click="createNewEntryOfType(schema.id); isNewMenuOpen = false"
-            class="w-full text-left px-3 py-1.5 text-[14px] flex items-center gap-2 hover:bg-hover text-foreground rounded-full"
-          >
-            <iconify-icon :icon="getIconName(schema.id)" class="w-3.5 h-3.5"></iconify-icon>
-            <span x-text="schema.name"></span>
+        <div class="space-y-0.5">
+          <template x-for="schema in schemas" :key="schema.id">
+            <button
+              @click="createNewEntryOfType(schema.id); isNewMenuOpen = false"
+              class="w-full text-left px-3 py-1.5 text-[14px] flex items-center gap-2.5 hover:bg-hover text-foreground rounded-lg"
+            >
+              <iconify-icon :icon="getIconName(schema.id)" class="w-3.5 h-3.5"></iconify-icon>
+              <span x-text="schema.name"></span>
+            </button>
+          </template>
+        </div>
+        <div class="pt-2 space-y-0.5">
+          <button class="w-full text-left px-3 py-1.5 text-[14px] flex items-center gap-2.5 hover:bg-hover text-muted-foreground rounded-lg">
+            <iconify-icon :icon="getIconName('grid')" class="w-3.5 h-3.5"></iconify-icon>
+            <span>New Collection</span>
           </button>
-        </template>
-        <button
-          class="w-full text-left px-3 py-1.5 text-[14px] flex items-center gap-2 hover:bg-hover text-muted-foreground rounded-full"
-        >
-          <iconify-icon :icon="getIconName('plus')" class="w-3.5 h-3.5"></iconify-icon>
-          <span>New Schema</span>
-        </button>
-        <button
-          class="w-full text-left px-3 py-1.5 text-[14px] flex items-center gap-2 hover:bg-hover text-muted-foreground rounded-full"
-        >
-          <iconify-icon :icon="getIconName('grid')" class="w-3.5 h-3.5"></iconify-icon>
-          <span>New Collection</span>
-        </button>
+          <button class="w-full text-left px-3 py-1.5 text-[14px] flex items-center gap-2.5 hover:bg-hover text-muted-foreground rounded-lg">
+            <iconify-icon :icon="getIconName('add')" class="w-3.5 h-3.5"></iconify-icon>
+            <span>New Schema</span>
+          </button>
+        </div>
       </div>
     </div>
   </div>
@@ -127,79 +129,40 @@
 
   <div class="flex-1 overflow-y-auto no-scrollbar">
     <div class="px-3 pt-3 pb-1">
-      <p
-        class="text-[12px] font-medium text-muted-foreground px-2 mb-1"
-      >
-      Overview
-      </p>
+      <p class="text-[12px] font-medium text-muted-foreground px-2 mb-1">Overview</p>
       <ul class="space-y-0.5">
         <li>
-          <button
-            @click="selectCollection('pinned')"
-            :class="{ 'active': activeCollection === 'pinned' }"
-            class="tweak-action nav-row w-full flex items-center gap-2 px-2 py-3 text-[14px] font-medium"
-          >
+          <button @click="selectCollection('pinned')" :class="{ 'active': activeCollection === 'pinned' }" class="tweak-action nav-row w-full flex items-center gap-2 px-2 py-3 text-[14px] font-medium">
             <iconify-icon :icon="getIconName('pin')" class="tweak-icon w-3.5 h-3.5"></iconify-icon>
             <span>Pinned</span>
           </button>
         </li>
         <li>
-          <button
-            @click="selectCollection('recent')"
-            :class="{ 'active': activeCollection === 'recent' }"
-            class="tweak-action nav-row w-full flex items-center gap-2 px-2 py-3 text-[14px] font-medium"
-          >
+          <button @click="selectCollection('recent')" :class="{ 'active': activeCollection === 'recent' }" class="tweak-action nav-row w-full flex items-center gap-2 px-2 py-3 text-[14px] font-medium">
             <iconify-icon :icon="getIconName('clock')" class="tweak-icon w-3.5 h-3.5"></iconify-icon>
             <span>Recent</span>
           </button>
         </li>
         <li>
-          <button
-            @click="selectCollection('all')"
-            :class="{ 'active': activeCollection === 'all' }"
-            class="tweak-action nav-row w-full flex items-center gap-2 px-2 py-3 text-[14px] font-medium"
-          >
+          <button @click="selectCollection('all')" :class="{ 'active': activeCollection === 'all' }" class="tweak-action nav-row w-full flex items-center gap-2 px-2 py-3 text-[14px] font-medium">
             <iconify-icon :icon="getIconName('grid')" class="tweak-icon w-3.5 h-3.5"></iconify-icon>
             <span>All</span>
           </button>
         </li>
-        <li>
-          <button
-            @click="selectConversations()"
-            :class="{ 'active': activeView === 'conversations' }"
-            class="tweak-action nav-row w-full flex items-center gap-2 px-2 py-3 text-[14px] font-medium"
-          >
-            <iconify-icon :icon="getIconName('chat')" class="tweak-icon w-3.5 h-3.5"></iconify-icon>
-            <span>Conversations</span>
-            <span
-              x-show="hasUnreadDiscussions"
-              class="status-dot ml-auto"
-              style="background: var(--foreground)"
-            ></span>
-          </button>
-        </li>
-        </ul>
+      </ul>
     </div>
 
     <div class="px-3 pt-4 pb-1">
-      <p
-        class="text-[12px] font-medium text-muted-foreground px-2 mb-1"
-      >
-        Collections
-      </p>
+      <p class="text-[12px] font-medium text-muted-foreground px-2 mb-1">Collections</p>
       <ul class="space-y-0.5">
         <li>
-          <button
-            class="tweak-action nav-row w-full flex items-center gap-2 px-2 py-3 text-[14px] font-medium"
-          >
+          <button class="tweak-action nav-row w-full flex items-center gap-2 px-2 py-3 text-[14px] font-medium">
             <iconify-icon :icon="getIconName('user')" class="tweak-icon w-3.5 h-3.5"></iconify-icon>
             <span>Personal</span>
           </button>
         </li>
         <li>
-          <button
-            class="tweak-action nav-row w-full flex items-center gap-2 px-2 py-3 text-[14px] font-medium"
-          >
+          <button class="tweak-action nav-row w-full flex items-center gap-2 px-2 py-3 text-[14px] font-medium">
             <iconify-icon :icon="getIconName('briefcase')" class="tweak-icon w-3.5 h-3.5"></iconify-icon>
             <span>Work</span>
           </button>
@@ -208,41 +171,41 @@
     </div>
 
     <div class="px-3 pt-4 pb-1">
-      <p
-        class="text-[12px] font-medium text-muted-foreground px-2 mb-1"
-      >
-        Schemas
-      </p>
+      <p class="text-[12px] font-medium text-muted-foreground px-2 mb-1">Schemas</p>
       <ul class="space-y-0.5">
         <template x-for="schema in schemas" :key="schema.id">
           <li>
-            <button
-              @click="selectSchema(schema.id)"
-              :class="{ 'active': activeSchema === schema.id }"
-              class="tweak-action nav-row schema-row w-full flex items-center gap-2 px-2 py-2.5 text-[14px] font-medium"
-            >
-            <iconify-icon :icon="getIconName(schema.id)" class="tweak-icon w-3.5 h-3.5"></iconify-icon>
-            <span x-text="schema.name"></span>
-          </button>
-        </li>
-      </template>
+            <button @click="selectSchema(schema.id)" :class="{ 'active': activeSchema === schema.id }" class="tweak-action nav-row schema-row w-full flex items-center gap-2 px-2 py-2.5 text-[14px] font-medium">
+              <iconify-icon :icon="getIconName(schema.id)" class="tweak-icon w-3.5 h-3.5"></iconify-icon>
+              <span x-text="schema.name"></span>
+            </button>
+          </li>
+        </template>
       </ul>
     </div>
 
-    <div class="px-3 pt-4 pb-1">
+    <div class="pt-4 pb-1">
       <ul class="space-y-0.5">
         <li>
-          <button
-            class="tweak-action nav-row w-full flex items-center gap-2 px-2 py-3 text-[14px] font-medium"
-          >
+          <button @click="selectConversations()" :class="{ 'active': activeView === 'conversations' }" class="tweak-action nav-row w-full flex items-center gap-2 px-2 py-3 text-[14px] font-medium">
+            <iconify-icon :icon="getIconName('chat')" class="tweak-icon w-3.5 h-3.5"></iconify-icon>
+            <span class="conv-text">Conversations</span>
+            <span x-show="hasUnreadDiscussions" class="status-dot ml-auto" style="background: var(--foreground)"></span>
+          </button>
+        </li>
+      </ul>
+    </div>
+
+    <div class="pt-3 pb-1">
+      <ul class="space-y-0.5">
+        <li>
+          <button class="tweak-action nav-row w-full flex items-center gap-2 px-2 py-3 text-[14px] font-medium">
             <iconify-icon :icon="getIconName('help-circle')" class="tweak-icon w-3.5 h-3.5"></iconify-icon>
             <span>Help</span>
           </button>
         </li>
         <li>
-          <button
-            class="tweak-action nav-row w-full flex items-center gap-2 px-2 py-3 text-[14px] font-medium"
-          >
+          <button class="tweak-action nav-row w-full flex items-center gap-2 px-2 py-3 text-[14px] font-medium">
             <iconify-icon :icon="getIconName('trash')" class="tweak-icon w-3.5 h-3.5"></iconify-icon>
             <span>Trash</span>
           </button>

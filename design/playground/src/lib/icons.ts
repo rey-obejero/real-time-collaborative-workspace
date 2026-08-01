@@ -1,5 +1,10 @@
 export const ICONS: Record<string, string> = {
   search: "mingcute:search-2-line",
+  back: "mingcute:left-line",
+  next: "mingcute:right-line",
+  recent: "mingcute:time-line",
+  star: "mingcute:pin-line",
+  ai: "mingcute:ai-line",
   chat: "mingcute:chat-2-line",
   settings: "mingcute:settings-3-line",
   tweaks: "mingcute:settings-4-line",

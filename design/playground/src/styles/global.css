@@ -132,6 +132,9 @@ body {
   background: var(--accent);
   color: var(--foreground);
 }
+.conv-text {
+  color: color-mix(in oklab, var(--foreground) 40%, var(--muted-foreground));
+}
 .row-item {
   border-radius: 9999px;
 }
@@ -178,6 +181,19 @@ body {
 .create-btn:hover,
 .dark .create-btn:hover {
   background: var(--hover);
+}
+
+.new-pill {
+  background: var(--primary);
+}
+.new-pill button:hover {
+  background: var(--ink-strong);
+}
+.new-label {
+  color: var(--primary-foreground);
+}
+.new-chevron {
+  color: color-mix(in oklab, var(--primary-foreground) 75%, transparent);
 }
 
 .field-tab {
