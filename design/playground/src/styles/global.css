@@ -152,7 +152,7 @@ body {
 }
 
 .lv-icon {
-  border-radius: 8px;
+  border-radius: 9999px;
   color: var(--muted-foreground);
 }
 .lv-icon:hover {
@@ -508,17 +508,30 @@ iconify-icon {
 }
 
 /* Icon stroke width */
-.tweak-icon svg, .tweak-icon svg * {
+.tweak-icon svg,
+.tweak-icon svg * {
   stroke-width: var(--tweak-stroke) !important;
 }
 
 /* Element hover backgrounds — 4 special sidebar elements */
-.tweaks-element-bg-default .tweak-special:hover { background: var(--hover); }
-.tweaks-element-bg-hover-low .tweak-special:hover { background: #fafafa; }
-.dark .tweaks-element-bg-hover-low .tweak-special:hover { background: #202020; }
-.tweaks-element-bg-hover-medium .tweak-special:hover { background: #f5f5f5; }
-.dark .tweaks-element-bg-hover-medium .tweak-special:hover { background: #2a2a2a; }
-.tweaks-element-bg-hover-high .tweak-special:hover { background: var(--hover); }
+.tweaks-element-bg-default .tweak-special:hover {
+  background: var(--hover);
+}
+.tweaks-element-bg-hover-low .tweak-special:hover {
+  background: #fafafa;
+}
+.dark .tweaks-element-bg-hover-low .tweak-special:hover {
+  background: #202020;
+}
+.tweaks-element-bg-hover-medium .tweak-special:hover {
+  background: #f5f5f5;
+}
+.dark .tweaks-element-bg-hover-medium .tweak-special:hover {
+  background: #2a2a2a;
+}
+.tweaks-element-bg-hover-high .tweak-special:hover {
+  background: var(--hover);
+}
 
 /* Element icon/text colors on hover */
 .tweaks-element-icon-default .tweak-special:hover iconify-icon,
@@ -526,11 +539,17 @@ iconify-icon {
   color: var(--foreground);
 }
 .tweaks-element-icon-hover-low .tweak-special:hover iconify-icon,
-.tweaks-element-icon-hover-low .tweak-special:hover span { color: #525252; }
+.tweaks-element-icon-hover-low .tweak-special:hover span {
+  color: #525252;
+}
 .tweaks-element-icon-hover-medium .tweak-special:hover iconify-icon,
-.tweaks-element-icon-hover-medium .tweak-special:hover span { color: #404040; }
+.tweaks-element-icon-hover-medium .tweak-special:hover span {
+  color: #404040;
+}
 .tweaks-element-icon-hover-high .tweak-special:hover iconify-icon,
-.tweaks-element-icon-hover-high .tweak-special:hover span { color: var(--foreground); }
+.tweaks-element-icon-hover-high .tweak-special:hover span {
+  color: var(--foreground);
+}
 
 /* Search button — background locked to the medium hover level */
 .tweak-special.tweak-search,
@@ -570,5 +589,3 @@ iconify-icon {
 .vp2-divider {
   display: none;
 }
-
-
