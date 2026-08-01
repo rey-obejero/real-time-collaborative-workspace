@@ -14,28 +14,28 @@
         </h1>
       </div>
       <div class="flex items-center gap-1.5">
-        <button class="lv-icon w-7 h-7 flex items-center justify-center focus-ring" title="Search">
+        <button class="w-7 h-7 flex items-center justify-center rounded-[7px] text-muted-foreground hover:bg-hover hover:text-foreground focus-ring" title="Search">
           <iconify-icon :icon="getIconName('search')" class="w-3.5 h-3.5"></iconify-icon>
         </button>
-        <button class="lv-icon w-7 h-7 flex items-center justify-center focus-ring" title="Filter">
+        <button class="w-7 h-7 flex items-center justify-center rounded-[7px] text-muted-foreground hover:bg-hover hover:text-foreground focus-ring" title="Filter">
           <iconify-icon :icon="getIconName('filter')" class="w-3.5 h-3.5"></iconify-icon>
         </button>
-        <button class="lv-icon w-7 h-7 flex items-center justify-center focus-ring" title="Sort">
+        <button class="w-7 h-7 flex items-center justify-center rounded-[7px] text-muted-foreground hover:bg-hover hover:text-foreground focus-ring" title="Sort">
           <iconify-icon :icon="getIconName('sort')" class="w-3.5 h-3.5"></iconify-icon>
         </button>
-        <button class="lv-icon w-7 h-7 flex items-center justify-center focus-ring" title="Settings">
+        <button class="w-7 h-7 flex items-center justify-center rounded-[7px] text-muted-foreground hover:bg-hover hover:text-foreground focus-ring" title="Settings">
           <iconify-icon :icon="getIconName('settings')" class="w-3.5 h-3.5"></iconify-icon>
         </button>
-        <div class="new-pill flex items-center overflow-hidden rounded-[7px]">
+        <div class="bg-primary flex items-center overflow-hidden rounded-[7px]">
           <button
             @click="createNewEntryOfType()"
-            class="new-label flex items-center gap-1 pl-3 pr-1 h-7 text-[12px] font-medium"
+            class="flex items-center gap-1 pl-3 pr-1 h-7 text-[12px] font-medium text-primary-foreground hover:bg-[var(--ink-strong)]"
           >
             <span class="text-[14px] leading-none">+</span>
             <span>New</span>
           </button>
           <button
-            class="new-chevron w-7 h-7 flex items-center justify-center"
+            class="w-7 h-7 flex items-center justify-center text-primary-foreground/75 hover:bg-[var(--ink-strong)]"
             title="New options"
           >
             <iconify-icon :icon="getIconName('chevron-down')" class="w-3.5 h-3.5"></iconify-icon>
@@ -66,8 +66,8 @@
         <ul>
           <template x-for="item in filteredEntries" :key="item.id">
             <li
-              class="row-item cursor-pointer"
-              :class="{ 'active': currentSelectedId === item.id }"
+              class="rounded-[7px] cursor-pointer hover:bg-accent"
+              :class="currentSelectedId === item.id ? 'bg-accent' : ''"
               @click="loadEntryToEditor(item.id)"
             >
               <div
@@ -91,7 +91,7 @@
                   x-show="item.status"
                 >
                   <span
-                    class="status-dot"
+                    class="status-dot w-2 h-2 rounded-full shrink-0"
                     :style="'background: var(--status-' + item.status + ')'"
                   ></span>
                   <span
@@ -107,7 +107,7 @@
                     x-for="tag in (item.tags || []).slice(0, 2)"
                     :key="tag"
                   >
-                    <span class="tag-pill" x-text="'#' + tag"></span>
+                    <span class="tag-pill inline-flex items-center px-2 py-0.5 text-[12px] text-muted-foreground bg-secondary rounded-full" x-text="'#' + tag"></span>
                   </template>
                   <template x-if="(item.tags || []).length > 2">
                     <span

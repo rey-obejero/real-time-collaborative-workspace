@@ -209,7 +209,7 @@
           <button @click="selectConversations()" :class="{ 'active': activeView === 'conversations' }" :aria-label="hasUnreadDiscussions ? 'Conversations with unread messages' : 'Conversations'" :aria-current="activeView === 'conversations' ? 'page' : undefined" class="tweak-action nav-row sub-nav w-full flex items-center gap-2 px-2 py-3 text-[14px] font-medium">
             <iconify-icon :icon="getIconName('chat')" class="tweak-icon w-3.5 h-3.5"></iconify-icon>
             <span class="conv-text">Conversations</span>
-            <span x-show="hasUnreadDiscussions" aria-hidden="true" class="status-dot ml-auto" style="background: var(--foreground)"></span>
+            <span x-show="hasUnreadDiscussions" aria-hidden="true" class="status-dot ml-auto w-2 h-2 rounded-full shrink-0" style="background: var(--foreground)"></span>
           </button>
         </li>
       </ul>

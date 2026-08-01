@@ -135,16 +135,6 @@ body {
 .conv-text {
   color: color-mix(in oklab, var(--foreground) 40%, var(--muted-foreground));
 }
-.row-item {
-  border-radius: 7px;
-}
-.row-item:hover {
-  background: var(--accent);
-}
-.row-item.active {
-  background: var(--accent);
-}
-
 /* Footer utility rows (Conversations, Help, Trash) use the Search/Create slab's horizontal padding,
    independent of the sidebar pad-x tweak, so they read as separate from the schema/nav section */
 .tweak-action.sub-nav.nav-row {
@@ -159,15 +149,6 @@ body {
 }
 .ghost-btn:hover {
   background: var(--hover);
-}
-
-.lv-icon {
-  border-radius: 7px;
-  color: var(--muted-foreground);
-}
-.lv-icon:hover {
-  background: var(--hover);
-  color: var(--foreground);
 }
 
 .primary-btn {
@@ -188,19 +169,6 @@ body {
 .create-btn:hover,
 .dark .create-btn:hover {
   background: var(--hover);
-}
-
-.new-pill {
-  background: var(--primary);
-}
-.new-pill button:hover {
-  background: var(--ink-strong);
-}
-.new-label {
-  color: var(--primary-foreground);
-}
-.new-chevron {
-  color: color-mix(in oklab, var(--primary-foreground) 75%, transparent);
 }
 
 .field-tab {
@@ -273,13 +241,6 @@ textarea:focus,
   color: var(--foreground);
 }
 
-.status-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  flex-shrink: 0;
-}
-
 .property-chip {
   display: inline-flex;
   align-items: center;
@@ -297,16 +258,6 @@ textarea:focus,
 .property-chip .value {
   font-weight: 500;
   color: var(--foreground);
-}
-
-.tag-pill {
-  display: inline-flex;
-  align-items: center;
-  padding: 2px 8px;
-  font-size: 12px;
-  color: var(--muted-foreground);
-  background: var(--secondary);
-  border-radius: 9999px;
 }
 
 .type-pill {
@@ -350,16 +301,6 @@ textarea:focus,
   display: none;
   position: absolute;
   z-index: 50;
-}
-
-.ask-ai-pill {
-  background: var(--secondary);
-  color: var(--foreground);
-  border-radius: 7px;
-  cursor: pointer;
-}
-.ask-ai-pill:hover {
-  background: var(--hover);
 }
 
 iconify-icon {
