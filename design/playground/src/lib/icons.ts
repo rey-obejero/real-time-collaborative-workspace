@@ -1,0 +1,34 @@
+export const ICONS: Record<string, string> = {
+  search: "mingcute:search-2-line",
+  chat: "mingcute:chat-2-line",
+  settings: "mingcute:settings-3-line",
+  tweaks: "mingcute:settings-4-line",
+  moon: "mingcute:moon-line",
+  sun: "mingcute:sun-line",
+  "chevron-down": "mingcute:down-line",
+  "chevron-left": "mingcute:left-line",
+  x: "mingcute:close-line",
+  plus: "mingcute:plus-line",
+  add: "mingcute:add-line",
+  grid: "mingcute:grid-2-line",
+  clock: "mingcute:time-line",
+  pin: "mingcute:pin-line",
+  trash: "mingcute:delete-2-line",
+  sort: "mingcute:sort-ascending-line",
+  filter: "mingcute:filter-2-line",
+  send: "mingcute:send-plane-line",
+  sparkles: "mingcute:sparkles-line",
+  page: "mingcute:document-line",
+  task: "mingcute:task-line",
+  project: "mingcute:folder-line",
+  note: "mingcute:notebook-line",
+  bookmark: "mingcute:bookmark-line",
+  discuss: "mingcute:message-2-line",
+  user: "mingcute:user-3-line",
+  briefcase: "mingcute:briefcase-2-line",
+  "help-circle": "mingcute:question-line",
+};
+
+export function getIconName(name: string): string {
+  return ICONS[name] || "";
+}

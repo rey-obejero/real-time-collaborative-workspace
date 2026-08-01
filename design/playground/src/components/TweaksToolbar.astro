@@ -25,9 +25,7 @@
       </button>
     </div>
 
-    <div
-      x-data="{ sidebarOpen: true }"
-    >
+    <div x-data="{ sidebarOpen: true }">
       <button
         @click="sidebarOpen = !sidebarOpen"
         class="w-full flex items-center gap-2 text-[12px] font-medium text-muted-foreground uppercase tracking-wider cursor-pointer"
@@ -39,97 +37,21 @@
       </button>
 
       <div x-show="sidebarOpen" x-transition:enter.duration.100 class="pt-3 space-y-4">
-
-        <div>
-          <p class="text-[12px] font-medium text-foreground mb-2">Action Height</p>
-          <div class="flex gap-1">
-            <template x-for="(label, val) in { low: 'Low', medium: 'Med', high: 'High' }">
-              <button
-                @click="toggleTweak('sidebarActionHeight', val)"
-                :class="tweaks.sidebarActionHeight === val ? 'bg-primary text-primary-foreground' : 'bg-secondary text-muted-foreground hover:bg-accent'"
-                class="flex-1 px-2 py-1 text-[12px] rounded-full cursor-pointer"
-                x-text="label"
-              ></button>
-            </template>
+        <template x-for="group in tweakGroups" :key="group.key">
+          <div>
+            <p class="text-[12px] font-medium text-foreground mb-2" x-text="group.label"></p>
+            <div class="flex gap-1">
+              <template x-for="opt in group.options" :key="opt.val">
+                <button
+                  @click="toggleTweak(group.key, opt.val)"
+                  :class="tweaks[group.key] === opt.val ? 'bg-primary text-primary-foreground' : 'bg-secondary text-muted-foreground hover:bg-accent'"
+                  class="flex-1 px-2 py-1 text-[12px] rounded-full cursor-pointer"
+                  x-text="opt.label"
+                ></button>
+              </template>
+            </div>
           </div>
-        </div>
-
-        <div>
-          <p class="text-[12px] font-medium text-foreground mb-2">Hover BG</p>
-          <div class="flex gap-1">
-            <template x-for="(label, val) in { low: 'Low', medium: 'Med', high: 'High' }">
-              <button
-                @click="toggleTweak('sidebarHover', val)"
-                :class="tweaks.sidebarHover === val ? 'bg-primary text-primary-foreground' : 'bg-secondary text-muted-foreground hover:bg-accent'"
-                class="flex-1 px-2 py-1 text-[12px] rounded-full cursor-pointer"
-                x-text="label"
-              ></button>
-            </template>
-          </div>
-        </div>
-
-        <div>
-          <p class="text-[12px] font-medium text-foreground mb-2">Avatar Shape</p>
-          <div class="flex gap-1">
-            <button
-              @click="toggleTweak('avatarShape', 'circle')"
-              :class="tweaks.avatarShape === 'circle' ? 'bg-primary text-primary-foreground' : 'bg-secondary text-muted-foreground hover:bg-accent'"
-              class="flex-1 px-2 py-1 text-[12px] rounded-full cursor-pointer"
-            >Circle</button>
-            <button
-              @click="toggleTweak('avatarShape', 'square')"
-              :class="tweaks.avatarShape === 'square' ? 'bg-primary text-primary-foreground' : 'bg-secondary text-muted-foreground hover:bg-accent'"
-              class="flex-1 px-2 py-1 text-[12px] rounded-full cursor-pointer"
-            >Square</button>
-          </div>
-        </div>
-
-        <div>
-          <p class="text-[12px] font-medium text-foreground mb-2">Search Shape</p>
-          <div class="flex gap-1">
-            <button
-              @click="toggleTweak('searchShape', 'pill')"
-              :class="tweaks.searchShape === 'pill' ? 'bg-primary text-primary-foreground' : 'bg-secondary text-muted-foreground hover:bg-accent'"
-              class="flex-1 px-2 py-1 text-[12px] rounded-full cursor-pointer"
-            >Pill</button>
-            <button
-              @click="toggleTweak('searchShape', 'rect')"
-              :class="tweaks.searchShape === 'rect' ? 'bg-primary text-primary-foreground' : 'bg-secondary text-muted-foreground hover:bg-accent'"
-              class="flex-1 px-2 py-1 text-[12px] rounded-full cursor-pointer"
-            >Rect</button>
-          </div>
-        </div>
-
-        <div>
-          <p class="text-[12px] font-medium text-foreground mb-2">Search Border</p>
-          <div class="flex gap-1">
-            <button
-              @click="toggleTweak('searchBorder', 'hairline')"
-              :class="tweaks.searchBorder === 'hairline' ? 'bg-primary text-primary-foreground' : 'bg-secondary text-muted-foreground hover:bg-accent'"
-              class="flex-1 px-2 py-1 text-[12px] rounded-full cursor-pointer"
-            >Hairline</button>
-            <button
-              @click="toggleTweak('searchBorder', 'none')"
-              :class="tweaks.searchBorder === 'none' ? 'bg-primary text-primary-foreground' : 'bg-secondary text-muted-foreground hover:bg-accent'"
-              class="flex-1 px-2 py-1 text-[12px] rounded-full cursor-pointer"
-            >None</button>
-          </div>
-        </div>
-
-        <div>
-          <p class="text-[12px] font-medium text-foreground mb-2">Action Pad X</p>
-          <div class="flex gap-1">
-            <template x-for="(label, val) in { low: 'Low', medium: 'Med', high: 'High' }">
-              <button
-                @click="toggleTweak('sidebarPadX', val)"
-                :class="tweaks.sidebarPadX === val ? 'bg-primary text-primary-foreground' : 'bg-secondary text-muted-foreground hover:bg-accent'"
-                class="flex-1 px-2 py-1 text-[12px] rounded-full cursor-pointer"
-                x-text="label"
-              ></button>
-            </template>
-          </div>
-        </div>
-
+        </template>
       </div>
     </div>
   </div>

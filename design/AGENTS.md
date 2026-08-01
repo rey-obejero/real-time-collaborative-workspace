@@ -15,8 +15,13 @@ cd design/playground && pnpm add <pkg>
 design/
   assets/           — Reference screenshots
   playground/       — Astro 7 PKM workspace prototype
-    src/            — Components, layouts, pages, styles
-    public/scripts/ — Alpine.js workspace data
+    src/
+      data/         — Typed mock data (types, schemas, entries, discussions, members)
+      lib/          — Icon map, date helpers, tweaks config
+      scripts/      — Alpine store (workspace.ts) + mixins (editor, modals)
+      components/   — Alpine-driven UI components
+      layouts/      — WorkspaceLayout (root x-data)
+    public/         — Static assets only (no scripts)
 ```
 
 ## Tech Stack
@@ -25,7 +30,8 @@ design/
 |---|---|
 | Astro 7 | Builder / component framework |
 | Tailwind CSS v4 | `@tailwindcss/vite` plugin |
-| Alpine.js 3.x | Client reactivity (CDN) |
+| Alpine.js 3.x | Client reactivity (bundled via pnpm) |
+| TypeScript | All logic + mock data under `src/` |
 | iconify-icon | Icon web component |
 | pnpm | Package manager |
 
@@ -39,6 +45,7 @@ cd design/playground
 pnpm install                   # Install deps
 pnpm dev                       # Dev server (localhost:4321)
 pnpm astro dev --background    # Background mode
+pnpm check                     # Type-check all Astro + TS files
 pnpm build                     # Production build → dist/
 pnpm preview                   # Preview build
 ```
@@ -64,7 +71,18 @@ Import in `WorkspaceLayout.astro`:
 
 Do not wrap in Astro component — dimension collapse, breaks `currentColor`. The `display: inline-flex; align-items: center;` is handled globally in CSS.
 
-Sets: Feather (default) → Heroicons → Phosphor → HugeIcons → Mage. Mappings in `workspace.js`.
+**Single icon set: `mingcute` only.** Mappings live in `src/lib/icons.ts` via `getIconName()`.
+
+## Client Store
+
+Alpine is bundled via pnpm (`alpinejs`), not CDN. The global store lives in `src/scripts/`:
+
+- `workspace.ts` — `Alpine.data('workspace')` factory (state, getters, init, `Alpine.start()`)
+- `editor.ts` — editor/slash/floating-format actions
+- `modals.ts` — modal/search/conversation/settings actions
+- `store.ts` — `WorkspaceStore` interface (full store contract)
+
+Root `x-data="workspace()"` sits on `<html>` in `WorkspaceLayout.astro`. Templates never import store internals — they call store methods via Alpine bindings. `getIconName`, `formatDate`, `formatRelativeTime` are also exposed on the store for template use.
 
 ## Rules
 

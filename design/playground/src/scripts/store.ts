@@ -1,0 +1,87 @@
+import type { Discussion, Entry, Member, Schema, SchemaId } from "../data/types";
+import type { Tweaks, TweakGroup } from "../lib/tweaks";
+
+export type ActiveView = "list" | "editor" | "conversations";
+export type ConversationFilter = "all" | "unread";
+
+export interface WorkspaceStore {
+  isDarkMode: boolean;
+  isNewMenuOpen: boolean;
+  activeCollection: string;
+  activeSchema: SchemaId | null;
+  activeView: ActiveView;
+  currentSelectedId: string | null;
+  hasUnreadDiscussions: boolean;
+  selectedDiscussionId: number | null;
+  conversationFilter: ConversationFilter;
+  isLibraryDropdownOpen: boolean;
+  isSettingsModalOpen: boolean;
+  isSearchModalOpen: boolean;
+  searchQuery: string;
+  activeEditorSection: string;
+  isInviteBoxExpanded: boolean;
+  inviteEmail: string;
+  tweaksOpen: boolean;
+  tweaks: Tweaks;
+  workspaceNameInput: string;
+  currentLibrary: string;
+  editorTitle: string;
+  syncStatus: string;
+  activeSettingsSection: string;
+  chatReplyInput: string;
+
+  schemas: Schema[];
+  entries: Entry[];
+  discussions: Discussion[];
+  members: Member[];
+  tweakGroups: TweakGroup[];
+
+  $refs?: Record<string, HTMLElement>;
+  $nextTick?: (cb: () => void) => void;
+
+  headerCrumb: string;
+  bodyTweakClass: string;
+  bodyTweakStyle: string;
+  filteredEntries: Entry[];
+  searchResults: Entry[];
+  activeEntry: Entry | null;
+  activeDiscussion: Discussion | null;
+  filteredDiscussions: Discussion[];
+
+  init(): void;
+  countByType(type: SchemaId): number;
+  getSchemaName(typeId: string | null | undefined): string;
+  getSchemaSubtitle(typeId: string | null | undefined): string;
+  getIconName(name: string): string;
+  formatDate(dateObj: Date): string;
+  formatRelativeTime(dateObj: Date): string;
+  selectCollection(collectionId: string): void;
+  selectSchema(schemaId: SchemaId): void;
+  loadEntryToEditor(id: string): void;
+  exitToListView(): void;
+  syncEditorTitle(): void;
+  syncEditorContent(): void;
+  triggerStatusSaveFeedback(): void;
+  handleSelectionChange(): void;
+  hideFloatingFormatMenu(): void;
+  formatSelection(command: string): void;
+  createDiscussionFromSelection(): void;
+  handleEditorKeyUp(e: KeyboardEvent): void;
+  showSlashMenu(): void;
+  hideSlashMenu(): void;
+  insertBlockType(type: string): void;
+  handleEditorClick(e: MouseEvent): void;
+  createNewEntryOfType(typeId?: SchemaId): void;
+  selectConversations(): void;
+  closeConversations(): void;
+  submitChatReply(): void;
+  openSettingsModal(): void;
+  closeSettingsModal(): void;
+  addMember(): void;
+  scrollToSection(sectionId: string): void;
+  saveWorkspaceSettings(): void;
+  selectLibrary(name: string): void;
+  openSearchModal(): void;
+  closeSearchModal(): void;
+  toggleTweak(key: keyof Tweaks, value: string): void;
+}

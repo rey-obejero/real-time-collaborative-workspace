@@ -68,7 +68,7 @@
               <span class="label">Status</span>
               <span
                 class="status-dot"
-                :style="`background: var(--status-${activeEntry.status})`"
+                :style="'background: var(--status-' + activeEntry.status + ')'"
               ></span>
               <span
                 class="value capitalize"
@@ -99,7 +99,7 @@
               <span class="label">Timeline</span>
               <span
                 class="value"
-                x-text="`${activeEntry.start} → ${activeEntry.end}`"
+                x-text="activeEntry.start + ' → ' + activeEntry.end"
               ></span>
             </div>
           </template>
@@ -140,7 +140,7 @@
             <div class="property-chip">
               <span class="label">Tags</span>
               <template x-for="tag in activeEntry.tags" :key="tag">
-                <span class="tag-pill" x-text="`#${tag}`"></span>
+                <span class="tag-pill" x-text="'#' + tag"></span>
               </template>
             </div>
           </template>
@@ -163,7 +163,6 @@
           @keyup="handleEditorKeyUp($event)"
           @mouseup="handleSelectionChange($event)"
           class="prose-readable w-full bg-transparent border-none outline-none text-foreground"
-          placeholder="Press / to insert blocks..."
         ></div>
       </div>
     </div>

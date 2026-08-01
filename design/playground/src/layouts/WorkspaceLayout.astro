@@ -13,45 +13,14 @@ import "../styles/global.css";
       href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600&family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap"
       rel="stylesheet"
     />
-    <script defer src="/scripts/workspace.js"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script>import "../scripts/workspace";</script>
     <script>import 'iconify-icon';</script>
   </head>
   <body
     class="h-full overflow-hidden text-foreground"
-    :class="{
-      'tweaks-compact': tweaks.density === 'compact',
-      'tweaks-card-flat': tweaks.cardEdge === 'flat',
-      'tweaks-sidebar-soft': tweaks.sidebarFill === 'soft',
-      'tweaks-chips-bordered': tweaks.chipStyle === 'bordered',
-      'tweaks-status-label': tweaks.statusStyle === 'label',
-      'tweaks-sidebar-height-low': tweaks.sidebarActionHeight === 'low',
-      'tweaks-sidebar-height-medium': tweaks.sidebarActionHeight === 'medium',
-      'tweaks-sidebar-height-high': tweaks.sidebarActionHeight === 'high',
-      'tweaks-sidebar-hover-low': tweaks.sidebarHover === 'low',
-      'tweaks-sidebar-hover-medium': tweaks.sidebarHover === 'medium',
-      'tweaks-sidebar-hover-high': tweaks.sidebarHover === 'high',
-      'tweaks-avatar-circle': tweaks.avatarShape === 'circle',
-      'tweaks-avatar-square': tweaks.avatarShape === 'square',
-      [`tweaks-search-${tweaks.searchShape}`]: true,
-      [`tweaks-search-border-${tweaks.searchBorder}`]: true,
-      'tweaks-sidebar-pad-x-low': tweaks.sidebarPadX === 'low',
-      'tweaks-sidebar-pad-x-medium': tweaks.sidebarPadX === 'medium',
-      'tweaks-sidebar-pad-x-high': tweaks.sidebarPadX === 'high',
-    'tweaks-icon-size-sm': tweaks.iconSize === 'sm',
-    'tweaks-icon-size-md': tweaks.iconSize === 'md',
-    'tweaks-icon-size-lg': tweaks.iconSize === 'lg',
-    'tweaks-element-bg-default': tweaks.elementBg === 'default',
-    'tweaks-element-bg-hover-low': tweaks.elementBg === 'hover-low',
-    'tweaks-element-bg-hover-medium': tweaks.elementBg === 'hover-medium',
-    'tweaks-element-bg-hover-high': tweaks.elementBg === 'hover-high',
-    'tweaks-element-icon-default': tweaks.elementIcon === 'default',
-    'tweaks-element-icon-hover-low': tweaks.elementIcon === 'hover-low',
-    'tweaks-element-icon-hover-medium': tweaks.elementIcon === 'hover-medium',
-    'tweaks-element-icon-hover-high': tweaks.elementIcon === 'hover-high',
-  }"
-  :style="`--tweak-stroke: ${['thin':'1','normal':'1.5','thick':'2'][tweaks.iconStroke] || '1.5'}`"
->
+    :class="bodyTweakClass"
+    :style="bodyTweakStyle"
+  >
     <slot />
   </body>
 </html>
