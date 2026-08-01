@@ -10,13 +10,13 @@
 >
   <div
     @click="closeSettingsModal()"
-    class="absolute inset-0 bg-black/20"
+    class="absolute inset-0 bg-black/20 backdrop-blur-[3px]"
   ></div>
 
   <div
-    class="relative w-full max-w-2xl flex flex-col z-10 h-[80vh] max-h-[640px] bg-popover border border-border rounded-lg overflow-hidden"
+    class="relative w-full max-w-2xl flex flex-col z-10 max-h-[80vh] bg-popover border border-border rounded-lg overflow-hidden"
   >
-    <div class="wv-header shrink-0 border-b border-border">
+    <div class="wv-header shrink-0">
       <div class="flex items-center justify-between">
         <h2 class="text-[20px] font-display font-medium text-foreground">Settings</h2>
         <button
@@ -34,15 +34,13 @@
     >
       <section id="sec-general" class="settings-section">
         <h4 class="wv-sec-h">General</h4>
-        <div class="wv-row">
-          <label class="wv-row-label">Workspace Name</label>
-          <input type="text" x-model="workspaceNameInput" class=" ghost-btn wv-btn wv-row-input px-3 py-1.5 text-[12px] font-medium focus-ring text-foreground" />
-        </div>
-        <div class="wv-row">
-          <label class="wv-row-label">Namespace</label>
-          <input type="text" value="personal.any" class=" ghost-btn wv-btn wv-row-input px-3 py-1.5 text-[12px] font-medium focus-ring text-foreground" />
+        <div class="wv-field">
+          <label class="wv-field-label">Workspace Name</label>
+          <input type="text" x-model="workspaceNameInput" class="ghost-btn wv-btn wv-input px-3 py-1.5 text-[12px] font-medium focus-ring text-foreground" />
         </div>
       </section>
+
+      <div class="wv-rule"></div>
 
       <section id="sec-members" class="settings-section">
         <h4 class="wv-sec-h">Members</h4>
@@ -79,9 +77,10 @@
         </template>
       </section>
 
+      <div class="wv-rule"></div>
+
       <section id="sec-schemas" class="settings-section">
         <h4 class="wv-sec-h">Schemas</h4>
-        <p class="wv-row-meta mb-1">Object types defined in this workspace.</p>
         <template x-for="schema in schemas" :key="schema.id">
           <div class="wv-row">
             <div class="flex items-center gap-2 min-w-0">

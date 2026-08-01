@@ -666,11 +666,31 @@ iconify-icon {
   border-radius: 9999px;
 }
 .wv-header {
-  padding: 12px 28px;
+  padding: 24px 24px 0;
 }
 .wv-scroll {
-  padding: 4px 28px 16px;
+  padding: 24px;
 }
 .settings-section:first-child .wv-sec-h {
+  margin-top: 16px;
+}
+/* Settings modal — accepted variant 2 (subtitle, stacked fields, section dividers) */
+.wv-subtitle {
+  font-size: 13px;
+  color: var(--muted-foreground);
   margin-top: 2px;
+}
+.wv-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 14px;
+}
+.wv-field-label {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--muted-foreground);
+}
+.wv-input {
+  width: 240px;
 }
