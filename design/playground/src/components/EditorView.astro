@@ -13,6 +13,15 @@
       <span>Back</span>
     </button>
     <div class="flex items-center gap-3 text-[12px] text-muted-foreground">
+      <button
+        @click="openProperties()"
+        :class="rightRailMode === 'properties' ? 'bg-secondary text-foreground' : 'hover:bg-secondary hover:text-foreground'"
+        class="flex items-center gap-1.5 rounded-full px-2 py-1"
+        title="Properties"
+      >
+        <iconify-icon :icon="getIconName('tweaks')" class="w-3.5 h-3.5"></iconify-icon>
+        <span>Properties</span>
+      </button>
       <span class="flex items-center gap-1.5" x-show="activeEntry">
         <iconify-icon :icon="getIconName(activeEntry?.type || 'page')" class="w-3.5 h-3.5 text-muted-foreground"></iconify-icon>
         <span

@@ -6,7 +6,7 @@ document.addEventListener("alpine:init", () => {
     activeSchema: null,
     activeView: "list",
     currentSelectedId: null,
-    isConversationsPanelOpen: false,
+    rightRailMode: null,
     hasUnreadDiscussions: true,
     selectedDiscussionId: null,
     isLibraryDropdownOpen: false,
@@ -368,6 +368,9 @@ document.addEventListener("alpine:init", () => {
 
     get activeEntry() {
       return this.entries.find((e) => e.id === this.currentSelectedId) || null;
+    },
+    get isRightRailOpen() {
+      return this.rightRailMode !== null;
     },
     get activeDiscussion() {
       return (
@@ -743,7 +746,8 @@ document.addEventListener("alpine:init", () => {
     createDiscussionFromSelection() {
       const selectionText = window.getSelection().toString().trim();
       if (!selectionText) return;
-      if (!this.isConversationsPanelOpen) this.toggleConversations();
+      if (this.rightRailMode !== "conversations")
+        this.toggleConversations();
       this.selectedDiscussionId = 1;
       setTimeout(() => {
         this.chatReplyInput = `Discussing: "${selectionText}" — `;
@@ -826,8 +830,17 @@ document.addEventListener("alpine:init", () => {
     },
 
     toggleConversations() {
-      this.isConversationsPanelOpen = !this.isConversationsPanelOpen;
-      if (this.isConversationsPanelOpen) this.hasUnreadDiscussions = false;
+      this.rightRailMode =
+        this.rightRailMode === "conversations" ? null : "conversations";
+      if (this.rightRailMode === "conversations") this.hasUnreadDiscussions = false;
+    },
+
+    openProperties() {
+      this.rightRailMode = "properties";
+    },
+
+    closeRightRail() {
+      this.rightRailMode = null;
     },
 
     submitChatReply() {
