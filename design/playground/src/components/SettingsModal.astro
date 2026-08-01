@@ -16,88 +16,41 @@
   <div
     class="relative w-full max-w-2xl flex flex-col z-10 h-[80vh] max-h-[640px] bg-popover border border-border rounded-lg overflow-hidden"
   >
-    <div class="px-7 py-5 shrink-0 border-b border-border">
-      <div class="flex items-center justify-between mb-4">
-        <div>
-          <p class="text-[12px] text-muted-foreground mb-0.5">Workspace</p>
-          <h2
-            class="text-[20px] font-display font-medium text-foreground"
-          >
-            Settings
-          </h2>
-        </div>
+    <div class="wv-header shrink-0 border-b border-border">
+      <div class="flex items-center justify-between">
+        <h2 class="text-[20px] font-display font-medium text-foreground">Settings</h2>
         <button
           @click="closeSettingsModal()"
-          class="w-7 h-7 flex items-center justify-center rounded-lg hover:bg-accent focus-ring"
+          class="wv-close flex items-center justify-center hover:bg-accent focus-ring"
         >
           <iconify-icon :icon="getIconName('x')" class="w-3.5 h-3.5"></iconify-icon>
-        </button>
-      </div>
-
-      <div class="flex items-center gap-1 p-1 bg-secondary rounded-lg">
-        <button
-          @click="scrollToSection('sec-general')"
-          :class="activeSettingsSection === 'sec-general' ? 'bg-popover text-foreground border border-border' : 'text-muted-foreground hover:text-foreground'"
-          class="flex-1 px-3 py-1 text-[14px] font-medium rounded-lg"
-        >
-          General
-        </button>
-        <button
-          @click="scrollToSection('sec-members')"
-          :class="activeSettingsSection === 'sec-members' ? 'bg-popover text-foreground border border-border' : 'text-muted-foreground hover:text-foreground'"
-          class="flex-1 px-3 py-1 text-[14px] font-medium rounded-lg"
-        >
-          Members
-          <span class="ml-1 text-muted-foreground" x-text="'(' + members.length + ')'"
-            >0</span
-          >
-        </button>
-        <button
-          @click="scrollToSection('sec-schemas')"
-          :class="activeSettingsSection === 'sec-schemas' ? 'bg-popover text-foreground border border-border' : 'text-muted-foreground hover:text-foreground'"
-          class="flex-1 px-3 py-1 text-[14px] font-medium rounded-lg"
-        >
-          Schemas
         </button>
       </div>
     </div>
 
     <div
       id="modal-scroll-canvas"
-      class="flex-1 overflow-y-auto no-scrollbar scroll-smooth px-7 py-6 space-y-8"
+      class="wv-scroll flex-1 overflow-y-auto no-scrollbar scroll-smooth"
     >
-      <section id="sec-general" class="settings-section space-y-4">
-        <h4 class="text-[14px] font-medium text-foreground">General</h4>
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-          <div class="space-y-1.5">
-            <label class="text-[12px] font-medium text-muted-foreground"
-              >Workspace Name</label
-            >
-            <input
-              type="text"
-              x-model="workspaceNameInput"
-              class=" ghost-btn w-full px-3 py-1.5 text-[12px] font-medium focus-ring text-foreground"
-            />
-          </div>
-          <div class="space-y-1.5">
-            <label class="text-[12px] font-medium text-muted-foreground"
-              >Namespace</label
-            >
-            <input
-              type="text"
-              value="personal.any"
-              class=" ghost-btn w-full px-3 py-1.5 text-[12px] font-medium focus-ring text-foreground"
-            />
-          </div>
+      <section id="sec-general" class="settings-section">
+        <h4 class="wv-sec-h">General</h4>
+        <div class="wv-row">
+          <label class="wv-row-label">Workspace Name</label>
+          <input type="text" x-model="workspaceNameInput" class=" ghost-btn wv-btn wv-row-input px-3 py-1.5 text-[12px] font-medium focus-ring text-foreground" />
+        </div>
+        <div class="wv-row">
+          <label class="wv-row-label">Namespace</label>
+          <input type="text" value="personal.any" class=" ghost-btn wv-btn wv-row-input px-3 py-1.5 text-[12px] font-medium focus-ring text-foreground" />
         </div>
       </section>
 
-      <section id="sec-members" class="settings-section space-y-4">
-        <div class="flex items-end justify-between">
-          <h4 class="text-[14px] font-medium text-foreground">Members</h4>
+      <section id="sec-members" class="settings-section">
+        <h4 class="wv-sec-h">Members</h4>
+        <div class="wv-row">
+          <span class="wv-row-label">Invite teammate</span>
           <button
             @click="isInviteBoxExpanded = !isInviteBoxExpanded"
-            class="ghost-btn px-3 py-1.5 text-[12px] font-medium focus-ring"
+            class="ghost-btn wv-btn px-2.5 py-1 text-[12px] font-medium focus-ring"
           >
             + Invite
           </button>
@@ -108,102 +61,40 @@
           class="p-2 space-y-2 rounded-lg bg-secondary"
         >
           <div class="flex gap-2">
-            <input
-              x-model="inviteEmail"
-              type="email"
-              placeholder="teammate@email.co"
-              class="ghost-btn flex-1 px-3 py-1.5 text-[12px] focus-ring text-foreground"
-            />
-            <button
-              @click="addMember()"
-              class="primary-btn px-3 py-1.5 text-[12px] font-medium"
-            >
-              Send
-            </button>
+            <input x-model="inviteEmail" type="email" placeholder="teammate@email.co" class="ghost-btn wv-btn flex-1 px-3 py-1.5 text-[12px] focus-ring text-foreground" />
+            <button @click="addMember()" class="primary-btn wv-btn px-3 py-1.5 text-[12px] font-medium">Send</button>
           </div>
         </div>
-        <ul class="space-y-0.5">
-          <template x-for="m in members" :key="m.email">
-            <li
-              class="flex items-center justify-between gap-3 py-2 px-2 rounded-lg hover:bg-hover"
-            >
-              <div class="flex items-center gap-2 min-w-0">
-                <span class="avatar-chip" x-text="m.initials">ME</span>
-                <div class="truncate">
-                  <p
-                    class="text-[14px] font-medium leading-tight text-foreground"
-                    x-text="m.name"
-                  ></p>
-                  <p
-                    class="text-[12px] text-muted-foreground"
-                    x-text="m.email"
-                  ></p>
-                </div>
+        <template x-for="m in members" :key="m.email">
+          <div class="wv-row">
+            <div class="flex items-center gap-2 min-w-0">
+              <span class="avatar-chip" x-text="m.initials">ME</span>
+              <div class="truncate">
+                <p class="text-[14px] font-medium leading-tight text-foreground" x-text="m.name"></p>
+                <p class="wv-row-meta" x-text="m.email"></p>
               </div>
-              <span
-                class="text-[12px] font-medium text-muted-foreground"
-                x-text="m.role"
-                >OWNER</span
-              >
-            </li>
-          </template>
-        </ul>
+            </div>
+            <span class="wv-row-meta font-medium" x-text="m.role">OWNER</span>
+          </div>
+        </template>
       </section>
 
-      <section id="sec-schemas" class="settings-section space-y-4">
-        <div>
-          <h4 class="text-[14px] font-medium text-foreground">Schemas</h4>
-          <p class="text-[12px] mt-1 text-muted-foreground">
-            Object types defined in this workspace.
-          </p>
-        </div>
-        <ul class="space-y-0.5">
-          <template x-for="schema in schemas" :key="schema.id">
-            <li
-              class="flex items-center justify-between gap-3 py-2.5 px-2 rounded-lg hover:bg-hover"
-            >
-              <div class="flex items-center gap-2 min-w-0">
-                <iconify-icon :icon="getIconName(schema.id)" class="w-4 h-4 text-muted-foreground"></iconify-icon>
-                <div>
-                  <p
-                    class="text-[14px] font-medium leading-tight text-foreground"
-                    x-text="schema.name"
-                  ></p>
-                  <p
-                    class="text-[12px] text-muted-foreground"
-                    x-text="schema.id + ' · ' + countByType(schema.id) + ' entries'"
-                  >
-                    page · 0 entries
-                  </p>
-                </div>
-              </div>
-              <button
-                class="ghost-btn px-2.5 py-1 text-[12px] font-medium focus-ring"
-              >
-                Edit
-              </button>
-            </li>
-          </template>
-        </ul>
+      <section id="sec-schemas" class="settings-section">
+        <h4 class="wv-sec-h">Schemas</h4>
+        <p class="wv-row-meta mb-1">Object types defined in this workspace.</p>
+        <template x-for="schema in schemas" :key="schema.id">
+          <div class="wv-row">
+            <div class="flex items-center gap-2 min-w-0">
+              <iconify-icon :icon="getIconName(schema.id)" class="w-4 h-4 text-muted-foreground"></iconify-icon>
+              <span class="wv-row-label truncate" x-text="schema.name"></span>
+            </div>
+            <div class="flex items-center gap-3">
+              <span class="wv-row-meta" x-text="countByType(schema.id) + ' entries'"></span>
+              <button class="ghost-btn wv-btn px-2.5 py-1 text-[12px] font-medium focus-ring">Edit</button>
+            </div>
+          </div>
+        </template>
       </section>
-
-    </div>
-
-    <div
-      class="px-7 py-3 flex justify-end gap-2 shrink-0 border-t border-border"
-    >
-      <button
-        @click="closeSettingsModal()"
-        class="ghost-btn px-3 py-1.5 text-[14px] font-medium focus-ring"
-      >
-        Cancel
-      </button>
-      <button
-        @click="saveWorkspaceSettings()"
-        class="primary-btn px-3 py-1.5 text-[14px] font-medium"
-      >
-        Save
-      </button>
     </div>
   </div>
 </div>

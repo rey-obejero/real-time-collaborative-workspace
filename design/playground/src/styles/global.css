@@ -605,3 +605,72 @@ iconify-icon {
 .vp2-divider {
   display: none;
 }
+/* Sidebar — accepted variant 1 (hairline divider in Create menu) */
+.wv-rule {
+  height: 1px;
+  background: var(--border);
+  margin: 8px 4px;
+}
+
+/* Settings modal — accepted variant 4 (native-style row list, density comfortable, row dividers on) */
+.wv-row-sec:first-child .wv-row-h {
+  margin-top: 0;
+}
+.wv-row-h {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--muted-foreground);
+  margin: 24px 0 4px;
+}
+.wv-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 10px 0;
+}
+.wv-row-label {
+  font-size: 14px;
+  color: var(--foreground);
+}
+.wv-row-value {
+  font-size: 14px;
+  color: var(--foreground);
+}
+.wv-row-meta {
+  font-size: 12px;
+  color: var(--muted-foreground);
+}
+.wv-row-divider {
+  height: 1px;
+  background: var(--border);
+}
+.wv-row-input {
+  width: 200px;
+  flex-shrink: 0;
+}
+/* Settings modal — accepted variant 1 (flat rows, eyebrow removed, button radius 7px) */
+.wv-btn {
+  border-radius: 7px;
+}
+.wv-sec-h {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--muted-foreground);
+  margin: 24px 0 4px;
+}
+/* Settings modal — accepted variant 1 (circular close, no footer, tight header gap) */
+.wv-close {
+  width: 28px;
+  height: 28px;
+  border-radius: 9999px;
+}
+.wv-header {
+  padding: 12px 28px;
+}
+.wv-scroll {
+  padding: 4px 28px 16px;
+}
+.settings-section:first-child .wv-sec-h {
+  margin-top: 2px;
+}
