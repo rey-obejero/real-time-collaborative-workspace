@@ -13,25 +13,35 @@
         </h1>
       </div>
       <div class="flex items-center gap-1.5">
-        <button
-          @click="createNewEntryOfType()"
-          class="primary-btn flex items-center gap-1 px-2.5 py-1 text-[12px] font-medium h-7"
-        >
-          <span class="text-[14px] leading-none">+</span>
-          <span>New</span>
+      <div class="flex items-center gap-1.5">
+        <button class="lv-icon w-7 h-7 flex items-center justify-center focus-ring" title="Search">
+          <iconify-icon :icon="getIconName('search')" class="w-3.5 h-3.5"></iconify-icon>
         </button>
-        <button
-          class="ghost-btn w-7 h-7 flex items-center justify-center rounded-full focus-ring"
-          title="Sort"
-        >
-          <iconify-icon :icon="getIconName('sort')" class="w-3.5 h-3.5"></iconify-icon>
-        </button>
-        <button
-          class="ghost-btn w-7 h-7 flex items-center justify-center rounded-full focus-ring"
-          title="Filter"
-        >
+        <button class="lv-icon w-7 h-7 flex items-center justify-center focus-ring" title="Filter">
           <iconify-icon :icon="getIconName('filter')" class="w-3.5 h-3.5"></iconify-icon>
         </button>
+        <button class="lv-icon w-7 h-7 flex items-center justify-center focus-ring" title="Sort">
+          <iconify-icon :icon="getIconName('sort')" class="w-3.5 h-3.5"></iconify-icon>
+        </button>
+        <button class="lv-icon w-7 h-7 flex items-center justify-center focus-ring" title="Settings">
+          <iconify-icon :icon="getIconName('settings')" class="w-3.5 h-3.5"></iconify-icon>
+        </button>
+        <div class="flex items-center overflow-hidden rounded-[8px] bg-secondary">
+          <button
+            @click="createNewEntryOfType()"
+            class="flex items-center gap-1 pl-3 pr-1 h-7 text-[12px] font-medium text-foreground hover:bg-hover"
+          >
+            <span class="text-[14px] leading-none">+</span>
+            <span>New</span>
+          </button>
+          <button
+            class="w-7 h-7 flex items-center justify-center text-muted-foreground hover:bg-hover hover:text-foreground"
+            title="New options"
+          >
+            <iconify-icon :icon="getIconName('chevron-down')" class="w-3.5 h-3.5"></iconify-icon>
+          </button>
+        </div>
+      </div>
       </div>
     </div>
 

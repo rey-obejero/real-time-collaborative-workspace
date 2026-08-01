@@ -117,7 +117,7 @@ body {
 
 .nav-row {
   color: var(--muted-foreground);
-  border-radius: 9999px;
+  border-radius: 12px;
   cursor: pointer;
 }
 .nav-row:focus-visible {
@@ -149,6 +149,15 @@ body {
 }
 .ghost-btn:hover {
   background: var(--hover);
+}
+
+.lv-icon {
+  border-radius: 8px;
+  color: var(--muted-foreground);
+}
+.lv-icon:hover {
+  background: var(--hover);
+  color: var(--foreground);
 }
 
 .primary-btn {
@@ -316,7 +325,7 @@ textarea:focus,
 .ask-ai-pill {
   background: var(--secondary);
   color: var(--foreground);
-  border-radius: 9999px;
+  border-radius: 12px;
   cursor: pointer;
 }
 .ask-ai-pill:hover {
