@@ -73,6 +73,7 @@ document.addEventListener("alpine:init", () => {
         type: "page",
         title: "Q3 brand strategy",
         status: "draft",
+        pinned: true,
         tags: ["strategy", "brand"],
         updatedAt: new Date(2026, 6, 25),
         content:
@@ -91,6 +92,7 @@ document.addEventListener("alpine:init", () => {
         type: "page",
         title: "Product principles",
         status: "published",
+        pinned: true,
         tags: ["product"],
         updatedAt: new Date(2026, 6, 18),
       },
@@ -127,6 +129,7 @@ document.addEventListener("alpine:init", () => {
         title: "Design tokens audit",
         status: "doing",
         priority: "medium",
+        pinned: true,
         due: "2026-07-30",
         assignee: "jane",
         tags: ["design"],
@@ -303,8 +306,9 @@ document.addEventListener("alpine:init", () => {
       if (this.activeSchema) return this.getSchemaName(this.activeSchema);
       return (
         {
-          all: "All",
+          pinned: "Pinned",
           recent: "Recent",
+          all: "All",
           drafts: "Drafts",
           "in-progress": "In Progress",
         }[this.activeCollection] || "All"
@@ -315,8 +319,9 @@ document.addEventListener("alpine:init", () => {
       if (this.activeSchema) return this.getSchemaName(this.activeSchema);
       return (
         {
-          all: "All",
+          pinned: "Pinned",
           recent: "Recent",
+          all: "All",
           drafts: "Drafts",
           "in-progress": "In Progress",
         }[this.activeCollection] || "All"
@@ -330,8 +335,9 @@ document.addEventListener("alpine:init", () => {
       }
       return (
         {
-          all: "All entries across schemas",
+          pinned: "Entries you've pinned",
           recent: "Most recently updated",
+          all: "All entries across schemas",
           drafts: "Entries with status = draft",
           "in-progress": "Tasks in progress",
         }[this.activeCollection] || ""
@@ -342,7 +348,9 @@ document.addEventListener("alpine:init", () => {
       let result = [...this.entries];
       if (this.activeSchema)
         result = result.filter((e) => e.type === this.activeSchema);
-      if (this.activeCollection === "recent") {
+      if (this.activeCollection === "pinned") {
+        result = result.filter((e) => e.pinned);
+      } else if (this.activeCollection === "recent") {
         result = result
           .sort((a, b) => (b.updatedAt || 0) - (a.updatedAt || 0))
           .slice(0, 8);
@@ -412,6 +420,7 @@ document.addEventListener("alpine:init", () => {
           add: "feather:plus",
           grid: "feather:grid",
           clock: "feather:clock",
+          pin: "feather:pin",
           trash: "feather:trash-2",
           sort: "feather:arrow-up-down",
           filter: "feather:filter",
@@ -439,6 +448,7 @@ document.addEventListener("alpine:init", () => {
           add: "heroicons-outline:plus",
           grid: "heroicons-outline:squares-2x2",
           clock: "heroicons-outline:clock",
+          pin: "heroicons-outline:pin",
           trash: "heroicons-outline:trash",
           sort: "heroicons-outline:arrows-up-down",
           filter: "heroicons-outline:funnel",
@@ -466,6 +476,7 @@ document.addEventListener("alpine:init", () => {
           add: "ph:plus",
           grid: "ph:squares-four",
           clock: "ph:clock",
+          pin: "ph:push-pin",
           trash: "ph:trash",
           sort: "ph:arrows-down-up",
           filter: "ph:funnel",
@@ -493,6 +504,7 @@ document.addEventListener("alpine:init", () => {
           add: "hugeicons:plus-sign",
           grid: "hugeicons:grid",
           clock: "hugeicons:clock-01",
+          pin: "hugeicons:pin",
           trash: "hugeicons:delete-02",
           sort: "hugeicons:sorting-01",
           filter: "hugeicons:filter",
@@ -520,6 +532,7 @@ document.addEventListener("alpine:init", () => {
           add: "mage:plus",
           grid: "mage:grid",
           clock: "mage:clock",
+          pin: "mage:pin",
           trash: "mage:trash",
           sort: "mage:arrow-up-down",
           filter: "mage:filter",
@@ -547,6 +560,7 @@ document.addEventListener("alpine:init", () => {
           add: "mingcute:add-line",
           grid: "mingcute:grid-2-line",
           clock: "mingcute:time-line",
+          pin: "mingcute:pin-line",
           trash: "mingcute:delete-2-line",
           sort: "mingcute:sort-ascending-line",
           filter: "mingcute:filter-2-line",
@@ -578,6 +592,7 @@ document.addEventListener("alpine:init", () => {
           add: "tabler:plus",
           grid: "tabler:layout-grid",
           clock: "tabler:clock",
+          pin: "tabler:pin",
           trash: "tabler:trash",
           sort: "tabler:arrows-sort",
           filter: "tabler:filter",

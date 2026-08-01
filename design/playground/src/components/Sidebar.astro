@@ -135,12 +135,12 @@
       <ul class="space-y-0.5">
         <li>
           <button
-            @click="selectCollection('all')"
-            :class="{ 'active': activeCollection === 'all' }"
+            @click="selectCollection('pinned')"
+            :class="{ 'active': activeCollection === 'pinned' }"
             class="tweak-action nav-row w-full flex items-center gap-2 px-2 py-3 text-[14px] font-medium"
           >
-            <iconify-icon :icon="getIconName('grid')" class="tweak-icon w-3.5 h-3.5"></iconify-icon>
-            <span>All</span>
+            <iconify-icon :icon="getIconName('pin')" class="tweak-icon w-3.5 h-3.5"></iconify-icon>
+            <span>Pinned</span>
           </button>
         </li>
         <li>
@@ -151,6 +151,16 @@
           >
             <iconify-icon :icon="getIconName('clock')" class="tweak-icon w-3.5 h-3.5"></iconify-icon>
             <span>Recent</span>
+          </button>
+        </li>
+        <li>
+          <button
+            @click="selectCollection('all')"
+            :class="{ 'active': activeCollection === 'all' }"
+            class="tweak-action nav-row w-full flex items-center gap-2 px-2 py-3 text-[14px] font-medium"
+          >
+            <iconify-icon :icon="getIconName('grid')" class="tweak-icon w-3.5 h-3.5"></iconify-icon>
+            <span>All</span>
           </button>
         </li>
         </ul>
