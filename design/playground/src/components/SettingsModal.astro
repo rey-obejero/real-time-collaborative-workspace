@@ -28,36 +28,34 @@
         </div>
         <button
           @click="closeSettingsModal()"
-          class="w-7 h-7 flex items-center justify-center rounded-full hover:bg-secondary focus-ring"
+          class="w-7 h-7 flex items-center justify-center rounded-lg hover:bg-accent focus-ring"
         >
           <iconify-icon :icon="getIconName('x')" class="w-3.5 h-3.5"></iconify-icon>
         </button>
       </div>
 
-      <div class="flex items-center gap-3 border-b border-border -mb-px">
+      <div class="flex items-center gap-1 p-1 bg-secondary rounded-lg">
         <button
           @click="scrollToSection('sec-general')"
-          :class="activeSettingsSection === 'sec-general' ? 'field-tab active' : 'field-tab'"
-          class="px-2 pb-2 text-[14px] font-medium"
+          :class="activeSettingsSection === 'sec-general' ? 'bg-popover text-foreground border border-border' : 'text-muted-foreground hover:text-foreground'"
+          class="flex-1 px-3 py-1 text-[14px] font-medium rounded-lg"
         >
           General
         </button>
         <button
           @click="scrollToSection('sec-members')"
-          :class="activeSettingsSection === 'sec-members' ? 'field-tab active' : 'field-tab'"
-          class="px-2 pb-2 text-[14px] font-medium"
+          :class="activeSettingsSection === 'sec-members' ? 'bg-popover text-foreground border border-border' : 'text-muted-foreground hover:text-foreground'"
+          class="flex-1 px-3 py-1 text-[14px] font-medium rounded-lg"
         >
           Members
-          <span
-            class="ml-1 text-muted-foreground"
-            x-text="'(' + members.length + ')'"
+          <span class="ml-1 text-muted-foreground" x-text="'(' + members.length + ')'"
             >0</span
           >
         </button>
         <button
           @click="scrollToSection('sec-schemas')"
-          :class="activeSettingsSection === 'sec-schemas' ? 'field-tab active' : 'field-tab'"
-          class="px-2 pb-2 text-[14px] font-medium"
+          :class="activeSettingsSection === 'sec-schemas' ? 'bg-popover text-foreground border border-border' : 'text-muted-foreground hover:text-foreground'"
+          class="flex-1 px-3 py-1 text-[14px] font-medium rounded-lg"
         >
           Schemas
         </button>
@@ -127,7 +125,7 @@
         <ul class="space-y-0.5">
           <template x-for="m in members" :key="m.email">
             <li
-              class="flex items-center justify-between gap-3 py-2 px-2 rounded-full hover:bg-secondary"
+              class="flex items-center justify-between gap-3 py-2 px-2 rounded-lg hover:bg-hover"
             >
               <div class="flex items-center gap-2 min-w-0">
                 <span class="avatar-chip" x-text="m.initials">ME</span>
@@ -162,7 +160,7 @@
         <ul class="space-y-0.5">
           <template x-for="schema in schemas" :key="schema.id">
             <li
-              class="flex items-center justify-between gap-3 py-2.5 px-2 rounded-full hover:bg-secondary"
+              class="flex items-center justify-between gap-3 py-2.5 px-2 rounded-lg hover:bg-hover"
             >
               <div class="flex items-center gap-2 min-w-0">
                 <iconify-icon :icon="getIconName(schema.id)" class="w-4 h-4 text-muted-foreground"></iconify-icon>
