@@ -5,6 +5,9 @@
     <button
       @click="isLibraryDropdownOpen = !isLibraryDropdownOpen"
       class="tweak-special tweak-action w-full flex items-center gap-2 px-2 py-1.5 rounded-full hover:bg-hover cursor-pointer"
+      :aria-expanded="isLibraryDropdownOpen"
+      aria-haspopup="menu"
+      aria-controls="library-dropdown"
     >
       <img
         src="https://api.dicebear.com/10.x/initials/svg?initialsVariant=alt:1&lettersVariant=single:0&backgroundColor=000000&textColor=ffffff&seed=Personal%20Space"
@@ -23,15 +26,19 @@
 
     <div class="relative">
       <div
+        id="library-dropdown"
         x-show="isLibraryDropdownOpen"
         @click.outside="isLibraryDropdownOpen = false"
         x-transition
+        role="menu"
         class="absolute top-full left-0 right-0 mt-1 z-30 rounded-lg overflow-hidden bg-background border border-border p-1.5"
       >
         <div class="space-y-0.5">
           <button
             @click="selectLibrary('Personal Space')"
             :class="currentLibrary === 'Personal Space' ? 'bg-accent' : ''"
+            :aria-current="currentLibrary === 'Personal Space' ? 'true' : undefined"
+            role="menuitem"
             class="w-full text-left px-3 py-1.5 text-[14px] flex items-center gap-2.5 hover:bg-hover rounded-lg"
           >
             <img
@@ -44,6 +51,8 @@
           <button
             @click="selectLibrary('Team Space')"
             :class="currentLibrary === 'Team Space' ? 'bg-accent' : ''"
+            :aria-current="currentLibrary === 'Team Space' ? 'true' : undefined"
+            role="menuitem"
             class="w-full text-left px-3 py-1.5 text-[14px] flex items-center gap-2.5 hover:bg-hover rounded-lg"
           >
             <img
@@ -56,6 +65,7 @@
           <div class="wv-rule"></div>
           <button
             @click="openSettingsModal()"
+            role="menuitem"
             class="w-full text-left px-3 py-1.5 text-[14px] flex items-center gap-2.5 hover:bg-hover text-muted-foreground rounded-lg"
           >
             <iconify-icon :icon="getIconName('settings')" class="w-3.5 h-3.5"></iconify-icon>
@@ -63,6 +73,7 @@
           </button>
           <button
             @click="selectLibrary('New Workspace')"
+            role="menuitem"
             class="w-full text-left px-3 py-1.5 text-[14px] flex items-center gap-2.5 hover:bg-hover text-muted-foreground rounded-lg"
           >
             <iconify-icon :icon="getIconName('add')" class="w-3.5 h-3.5"></iconify-icon>
@@ -89,6 +100,9 @@
       <button
         @click="isNewMenuOpen = !isNewMenuOpen"
         class="vp2-row w-full flex items-center gap-2 px-2.5 py-1.5 text-[14px] cursor-pointer"
+        :aria-expanded="isNewMenuOpen"
+        aria-haspopup="menu"
+        aria-controls="new-menu"
       >
         <iconify-icon :icon="getIconName('add')" class="w-3.5 h-3.5"></iconify-icon>
         <span>Create</span>
@@ -97,14 +111,17 @@
         </span>
       </button>
       <div
+        id="new-menu"
         x-show="isNewMenuOpen"
         x-transition
+        role="menu"
         class="absolute top-full left-0 right-0 mt-1 z-30 rounded-lg overflow-hidden bg-background border border-border p-1.5"
       >
         <div class="space-y-0.5">
           <template x-for="schema in schemas" :key="schema.id">
             <button
               @click="createNewEntryOfType(schema.id); isNewMenuOpen = false"
+              role="menuitem"
               class="w-full text-left px-3 py-1.5 text-[14px] flex items-center gap-2.5 hover:bg-hover text-foreground rounded-lg"
             >
               <iconify-icon :icon="getIconName(schema.id)" class="w-3.5 h-3.5"></iconify-icon>
@@ -114,11 +131,11 @@
         </div>
         <div class="wv-rule"></div>
         <div class="space-y-0.5">
-          <button class="w-full text-left px-3 py-1.5 text-[14px] flex items-center gap-2.5 hover:bg-hover text-muted-foreground rounded-lg">
+          <button role="menuitem" class="w-full text-left px-3 py-1.5 text-[14px] flex items-center gap-2.5 hover:bg-hover text-muted-foreground rounded-lg">
             <iconify-icon :icon="getIconName('grid')" class="w-3.5 h-3.5"></iconify-icon>
             <span>New Collection</span>
           </button>
-          <button class="w-full text-left px-3 py-1.5 text-[14px] flex items-center gap-2.5 hover:bg-hover text-muted-foreground rounded-lg">
+          <button role="menuitem" class="w-full text-left px-3 py-1.5 text-[14px] flex items-center gap-2.5 hover:bg-hover text-muted-foreground rounded-lg">
             <iconify-icon :icon="getIconName('add')" class="w-3.5 h-3.5"></iconify-icon>
             <span>New Schema</span>
           </button>
@@ -134,19 +151,19 @@
       <p class="text-[12px] font-medium text-muted-foreground px-2 mb-1">Overview</p>
       <ul class="space-y-0.5">
         <li>
-          <button @click="selectCollection('pinned')" :class="{ 'active': activeCollection === 'pinned' }" class="tweak-action nav-row w-full flex items-center gap-2 px-2 py-3 text-[14px] font-medium">
+          <button @click="selectCollection('pinned')" :class="{ 'active': activeCollection === 'pinned' }" :aria-current="activeCollection === 'pinned' ? 'page' : undefined" class="tweak-action nav-row w-full flex items-center gap-2 px-2 py-3 text-[14px] font-medium">
             <iconify-icon :icon="getIconName('pin')" class="tweak-icon w-3.5 h-3.5"></iconify-icon>
             <span>Pinned</span>
           </button>
         </li>
         <li>
-          <button @click="selectCollection('recent')" :class="{ 'active': activeCollection === 'recent' }" class="tweak-action nav-row w-full flex items-center gap-2 px-2 py-3 text-[14px] font-medium">
+          <button @click="selectCollection('recent')" :class="{ 'active': activeCollection === 'recent' }" :aria-current="activeCollection === 'recent' ? 'page' : undefined" class="tweak-action nav-row w-full flex items-center gap-2 px-2 py-3 text-[14px] font-medium">
             <iconify-icon :icon="getIconName('clock')" class="tweak-icon w-3.5 h-3.5"></iconify-icon>
             <span>Recent</span>
           </button>
         </li>
         <li>
-          <button @click="selectCollection('all')" :class="{ 'active': activeCollection === 'all' }" class="tweak-action nav-row w-full flex items-center gap-2 px-2 py-3 text-[14px] font-medium">
+          <button @click="selectCollection('all')" :class="{ 'active': activeCollection === 'all' }" :aria-current="activeCollection === 'all' ? 'page' : undefined" class="tweak-action nav-row w-full flex items-center gap-2 px-2 py-3 text-[14px] font-medium">
             <iconify-icon :icon="getIconName('grid')" class="tweak-icon w-3.5 h-3.5"></iconify-icon>
             <span>All</span>
           </button>
@@ -177,7 +194,7 @@
       <ul class="space-y-0.5">
         <template x-for="schema in schemas" :key="schema.id">
           <li>
-            <button @click="selectSchema(schema.id)" :class="{ 'active': activeSchema === schema.id }" class="tweak-action nav-row schema-row w-full flex items-center gap-2 px-2 py-2.5 text-[14px] font-medium">
+            <button @click="selectSchema(schema.id)" :class="{ 'active': activeSchema === schema.id }" :aria-current="activeSchema === schema.id ? 'page' : undefined" class="tweak-action nav-row schema-row w-full flex items-center gap-2 px-2 py-2.5 text-[14px] font-medium">
               <iconify-icon :icon="getIconName(schema.id)" class="tweak-icon w-3.5 h-3.5"></iconify-icon>
               <span x-text="schema.name"></span>
             </button>
@@ -186,28 +203,28 @@
       </ul>
     </div>
 
-    <div class="pt-4 pb-1">
+    <div class="px-3 pt-4 pb-1">
       <ul class="space-y-0.5">
         <li>
-          <button @click="selectConversations()" :class="{ 'active': activeView === 'conversations' }" class="tweak-action nav-row w-full flex items-center gap-2 px-2 py-3 text-[14px] font-medium">
+          <button @click="selectConversations()" :class="{ 'active': activeView === 'conversations' }" :aria-label="hasUnreadDiscussions ? 'Conversations with unread messages' : 'Conversations'" :aria-current="activeView === 'conversations' ? 'page' : undefined" class="tweak-action nav-row sub-nav w-full flex items-center gap-2 px-2 py-3 text-[14px] font-medium">
             <iconify-icon :icon="getIconName('chat')" class="tweak-icon w-3.5 h-3.5"></iconify-icon>
             <span class="conv-text">Conversations</span>
-            <span x-show="hasUnreadDiscussions" class="status-dot ml-auto" style="background: var(--foreground)"></span>
+            <span x-show="hasUnreadDiscussions" aria-hidden="true" class="status-dot ml-auto" style="background: var(--foreground)"></span>
           </button>
         </li>
       </ul>
     </div>
 
-    <div class="pt-3 pb-1">
+    <div class="px-3 pt-3 pb-1">
       <ul class="space-y-0.5">
         <li>
-          <button class="tweak-action nav-row w-full flex items-center gap-2 px-2 py-3 text-[14px] font-medium">
+          <button class="tweak-action nav-row sub-nav w-full flex items-center gap-2 px-2 py-3 text-[14px] font-medium">
             <iconify-icon :icon="getIconName('help-circle')" class="tweak-icon w-3.5 h-3.5"></iconify-icon>
             <span>Help</span>
           </button>
         </li>
         <li>
-          <button class="tweak-action nav-row w-full flex items-center gap-2 px-2 py-3 text-[14px] font-medium">
+          <button class="tweak-action nav-row sub-nav w-full flex items-center gap-2 px-2 py-3 text-[14px] font-medium">
             <iconify-icon :icon="getIconName('trash')" class="tweak-icon w-3.5 h-3.5"></iconify-icon>
             <span>Trash</span>
           </button>
@@ -228,7 +245,7 @@
       <div class="min-w-0 flex-1">
         <p class="text-[14px] font-medium truncate">My Profile</p>
       </div>
-      <iconify-icon :icon="getIconName('settings')" class="tweak-icon w-3.5 h-3.5"></iconify-icon>
+      <iconify-icon :icon="getIconName('settings')" class="tweak-icon w-3.5 h-3.5 text-muted-foreground"></iconify-icon>
     </div>
   </div>
 </aside>

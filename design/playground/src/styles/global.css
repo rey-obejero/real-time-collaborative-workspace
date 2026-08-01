@@ -45,7 +45,7 @@
   --secondary: #eae9e6;
   --secondary-foreground: #1c1917;
   --muted: #eae9e6;
-  --muted-foreground: #78716c;
+  --muted-foreground: #6d675f;
   --accent: #eae9e6;
   --accent-foreground: #1c1917;
   --destructive: #ff5f56;
@@ -117,7 +117,7 @@ body {
 
 .nav-row {
   color: var(--muted-foreground);
-  border-radius: 12px;
+  border-radius: 7px;
   cursor: pointer;
 }
 .nav-row:focus-visible {
@@ -136,13 +136,20 @@ body {
   color: color-mix(in oklab, var(--foreground) 40%, var(--muted-foreground));
 }
 .row-item {
-  border-radius: 9999px;
+  border-radius: 7px;
 }
 .row-item:hover {
   background: var(--accent);
 }
 .row-item.active {
   background: var(--accent);
+}
+
+/* Footer utility rows (Conversations, Help, Trash) use the Search/Create slab's horizontal padding,
+   independent of the sidebar pad-x tweak, so they read as separate from the schema/nav section */
+.tweak-action.sub-nav.nav-row {
+  padding-left: 0.625rem;
+  padding-right: 0.625rem;
 }
 
 .ghost-btn {
@@ -155,7 +162,7 @@ body {
 }
 
 .lv-icon {
-  border-radius: 9999px;
+  border-radius: 7px;
   color: var(--muted-foreground);
 }
 .lv-icon:hover {
@@ -242,6 +249,13 @@ body {
 
 .focus-ring:focus-within {
   border-color: var(--ring) !important;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.5);
+}
+
+.vp2-row:focus-visible,
+[role="menuitem"]:focus-visible,
+.tweak-special:focus-visible {
+  outline: none;
   box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.5);
 }
 
@@ -341,7 +355,7 @@ textarea:focus,
 .ask-ai-pill {
   background: var(--secondary);
   color: var(--foreground);
-  border-radius: 12px;
+  border-radius: 7px;
   cursor: pointer;
 }
 .ask-ai-pill:hover {
@@ -441,24 +455,27 @@ iconify-icon {
   padding-right: 1.25rem;
 }
 
-/* Sidebar hover background intensity */
+/* Sidebar hover background intensity — hover steps one notch darker (light) / lighter (dark) than the level's active fill */
 .tweaks-sidebar-hover-high .tweak-action:not(.primary-btn):hover {
-  background: var(--hover);
+  background: #d5d3cf;
+}
+.dark .tweaks-sidebar-hover-high .tweak-action:not(.primary-btn):hover {
+  background: #33302c;
 }
 .tweaks-sidebar-hover-medium .tweak-action:not(.primary-btn):hover {
-  background: #e8e6e3;
+  background: #dcdad6;
 }
 .dark .tweaks-sidebar-hover-medium .tweak-action:not(.primary-btn):hover {
-  background: #2f2d2a;
+  background: #37342f;
 }
 .tweaks-sidebar-hover-low .tweak-action:not(.primary-btn):hover {
-  background: #eeedea;
+  background: #e2e1de;
 }
 .dark .tweaks-sidebar-hover-low .tweak-action:not(.primary-btn):hover {
-  background: #262522;
+  background: #2f2d2a;
 }
 
-/* Active rows use the hover background color of the selected level */
+/* Active rows keep the level's base fill — persistent, quieter than hover */
 .tweaks-sidebar-hover-high .nav-row.active {
   background: var(--hover);
 }
