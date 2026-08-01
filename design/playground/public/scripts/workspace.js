@@ -6,9 +6,9 @@ document.addEventListener("alpine:init", () => {
     activeSchema: null,
     activeView: "list",
     currentSelectedId: null,
-    rightRailMode: null,
     hasUnreadDiscussions: true,
     selectedDiscussionId: null,
+    conversationFilter: "all",
     isLibraryDropdownOpen: false,
     isSettingsModalOpen: false,
     isSearchModalOpen: false,
@@ -250,6 +250,8 @@ document.addEventListener("alpine:init", () => {
         id: 1,
         title: "PKM v2 launch",
         preview: "Reviewing launch criteria...",
+        time: "2h",
+        unread: true,
         messages: [
           { sender: "Jane", text: "When is the public beta?" },
           { sender: "Me", text: "Targeting end of August." },
@@ -303,6 +305,7 @@ document.addEventListener("alpine:init", () => {
     get headerCrumb() {
       if (this.activeView === "editor")
         return this.getSchemaName(this.activeEntry?.type) || "Entry";
+      if (this.activeView === "conversations") return "Conversations";
       if (this.activeSchema) return this.getSchemaName(this.activeSchema);
       return (
         {
@@ -316,6 +319,7 @@ document.addEventListener("alpine:init", () => {
     },
 
     get listHeaderTitle() {
+      if (this.activeView === "conversations") return "Conversations";
       if (this.activeSchema) return this.getSchemaName(this.activeSchema);
       return (
         {
@@ -377,13 +381,15 @@ document.addEventListener("alpine:init", () => {
     get activeEntry() {
       return this.entries.find((e) => e.id === this.currentSelectedId) || null;
     },
-    get isRightRailOpen() {
-      return this.rightRailMode !== null;
-    },
     get activeDiscussion() {
       return (
         this.discussions.find((c) => c.id === this.selectedDiscussionId) || null
       );
+    },
+    get filteredDiscussions() {
+      if (this.conversationFilter === "unread")
+        return this.discussions.filter((c) => c.unread);
+      return this.discussions;
     },
 
     countByType(type) {
@@ -761,8 +767,7 @@ document.addEventListener("alpine:init", () => {
     createDiscussionFromSelection() {
       const selectionText = window.getSelection().toString().trim();
       if (!selectionText) return;
-      if (this.rightRailMode !== "conversations")
-        this.toggleConversations();
+      this.selectConversations();
       this.selectedDiscussionId = 1;
       setTimeout(() => {
         this.chatReplyInput = `Discussing: "${selectionText}" — `;
@@ -844,18 +849,20 @@ document.addEventListener("alpine:init", () => {
       this.loadEntryToEditor(newId);
     },
 
-    toggleConversations() {
-      this.rightRailMode =
-        this.rightRailMode === "conversations" ? null : "conversations";
-      if (this.rightRailMode === "conversations") this.hasUnreadDiscussions = false;
+    selectConversations() {
+      this.activeView = "conversations";
+      this.currentSelectedId = null;
+      this.hasUnreadDiscussions = false;
+      if (this.selectedDiscussionId === null && this.discussions.length > 0) {
+        this.selectedDiscussionId = this.discussions[0].id;
+      }
+      this.hideFloatingFormatMenu();
+      this.hideSlashMenu();
     },
 
-    openProperties() {
-      this.rightRailMode = "properties";
-    },
-
-    closeRightRail() {
-      this.rightRailMode = null;
+    closeConversations() {
+      this.activeView = "list";
+      this.selectedDiscussionId = null;
     },
 
     submitChatReply() {

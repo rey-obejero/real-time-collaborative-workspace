@@ -20,19 +20,6 @@
       </span>
     </button>
     <button
-      @click="toggleConversations()"
-      class="w-7 h-7 flex items-center justify-center rounded-full hover:bg-secondary focus-ring relative"
-      title="Discussions"
-    >
-      <iconify-icon :icon="getIconName('chat')" class="w-3.5 h-3.5"></iconify-icon>
-      <span
-        x-show="hasUnreadDiscussions"
-        class="absolute top-1 right-1 status-dot"
-        style="background: var(--foreground)"
-      ></span>
-    </button>
-
-    <button
       class="ask-ai-pill flex items-center gap-1.5 px-4 py-1.5 text-[14px] font-medium"
     >
       <iconify-icon :icon="getIconName('sparkles')" class="w-3.5 h-3.5"></iconify-icon>

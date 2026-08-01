@@ -163,6 +163,21 @@
             <span>All</span>
           </button>
         </li>
+        <li>
+          <button
+            @click="selectConversations()"
+            :class="{ 'active': activeView === 'conversations' }"
+            class="tweak-action nav-row w-full flex items-center gap-2 px-2 py-3 text-[14px] font-medium"
+          >
+            <iconify-icon :icon="getIconName('chat')" class="tweak-icon w-3.5 h-3.5"></iconify-icon>
+            <span>Conversations</span>
+            <span
+              x-show="hasUnreadDiscussions"
+              class="status-dot ml-auto"
+              style="background: var(--foreground)"
+            ></span>
+          </button>
+        </li>
         </ul>
     </div>
 
