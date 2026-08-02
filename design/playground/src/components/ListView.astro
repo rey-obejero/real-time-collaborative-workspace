@@ -2,52 +2,49 @@
   x-show="activeView === 'list'"
   class="flex-1 flex flex-col h-full overflow-y-auto no-scrollbar"
 >
-  <div class="w-full px-8 py-8">
-
-    <div class="flex items-center justify-between mb-4">
-      <div class="flex items-baseline gap-1.5">
-        <h1
-          class="text-[20px] font-medium font-display text-foreground"
-          x-text="headerCrumb"
-        >
-          All
-        </h1>
-      </div>
-      <div class="flex items-center gap-1.5">
-        <button class="w-7 h-7 flex items-center justify-center rounded-[7px] text-muted-foreground hover:bg-hover hover:text-foreground focus-ring" title="Search">
-          <iconify-icon :icon="getIconName('search')" class="w-3.5 h-3.5"></iconify-icon>
-        </button>
-        <button class="w-7 h-7 flex items-center justify-center rounded-[7px] text-muted-foreground hover:bg-hover hover:text-foreground focus-ring" title="Filter">
-          <iconify-icon :icon="getIconName('filter')" class="w-3.5 h-3.5"></iconify-icon>
-        </button>
-        <button class="w-7 h-7 flex items-center justify-center rounded-[7px] text-muted-foreground hover:bg-hover hover:text-foreground focus-ring" title="Sort">
-          <iconify-icon :icon="getIconName('sort')" class="w-3.5 h-3.5"></iconify-icon>
-        </button>
-        <button class="w-7 h-7 flex items-center justify-center rounded-[7px] text-muted-foreground hover:bg-hover hover:text-foreground focus-ring" title="Settings">
-          <iconify-icon :icon="getIconName('settings')" class="w-3.5 h-3.5"></iconify-icon>
-        </button>
-        <div class="bg-primary flex items-center overflow-hidden rounded-[7px]">
-          <button
-            @click="createNewEntryOfType()"
-            class="flex items-center gap-1 pl-3 pr-1 h-7 text-[12px] font-medium text-primary-foreground hover:bg-[var(--ink-strong)]"
+  <div class="w-[85%] mx-auto px-8 py-8">
+    <div class="tweak-card border border-border rounded-lg overflow-hidden">
+      <div class="flex items-center justify-between pl-3 pr-3 py-2">
+        <div class="flex items-baseline gap-1.5">
+          <h1
+            class="text-[20px] font-medium font-display text-foreground"
+            x-text="headerCrumb"
           >
-            <span class="text-[14px] leading-none">+</span>
-            <span>New</span>
+            All
+          </h1>
+        </div>
+        <div class="flex items-center gap-1">
+          <button class="w-7 h-7 flex items-center justify-center rounded-[7px] text-muted-foreground hover:bg-hover hover:text-foreground cursor-pointer" title="Search">
+            <iconify-icon :icon="getIconName('search')" class="w-3.5 h-3.5"></iconify-icon>
           </button>
-          <button
-            class="w-7 h-7 flex items-center justify-center text-primary-foreground/75 hover:bg-[var(--ink-strong)]"
-            title="New options"
-          >
-            <iconify-icon :icon="getIconName('chevron-down')" class="w-3.5 h-3.5"></iconify-icon>
+          <button class="w-7 h-7 flex items-center justify-center rounded-[7px] text-muted-foreground hover:bg-hover hover:text-foreground cursor-pointer" title="Filter">
+            <iconify-icon :icon="getIconName('filter')" class="w-3.5 h-3.5"></iconify-icon>
           </button>
+          <button class="w-7 h-7 flex items-center justify-center rounded-[7px] text-muted-foreground hover:bg-hover hover:text-foreground cursor-pointer" title="Sort">
+            <iconify-icon :icon="getIconName('sort')" class="w-3.5 h-3.5"></iconify-icon>
+          </button>
+          <button class="w-7 h-7 flex items-center justify-center rounded-[7px] text-muted-foreground hover:bg-hover hover:text-foreground cursor-pointer" title="Settings">
+            <iconify-icon :icon="getIconName('settings')" class="w-3.5 h-3.5"></iconify-icon>
+          </button>
+          <div class="bg-primary flex items-center overflow-hidden rounded-[7px]">
+            <button
+              @click="createNewEntryOfType()"
+              class="flex items-center gap-1 pl-3 pr-1 h-7 text-[12px] font-medium text-primary-foreground cursor-pointer hover:bg-primary-foreground/25"
+            >
+              <span class="text-[14px] leading-none">+</span>
+              <span>New</span>
+            </button>
+            <button
+              class="w-7 h-7 flex items-center justify-center text-primary-foreground/75 cursor-pointer hover:bg-primary-foreground/25"
+              title="New options"
+            >
+              <iconify-icon :icon="getIconName('chevron-down')" class="w-3.5 h-3.5"></iconify-icon>
+            </button>
+          </div>
         </div>
       </div>
-      </div>
-    </div>
 
-
-    <div class="tweak-card border border-border rounded-lg overflow-hidden bg-card">
-      <div class="grid grid-cols-[20px_1fr_120px_140px_80px] items-center pl-3 pr-3 py-2">
+      <div class="grid grid-cols-[20px_1fr_120px_140px_80px] items-center pl-3 pr-3 py-2 border-t border-border">
         <div class="pr-3"></div>
         <div class="pr-3 text-[12px] font-medium text-muted-foreground">Title</div>
         <div class="pr-3 text-[12px] font-medium text-muted-foreground">Status</div>
@@ -63,10 +60,10 @@
       </template>
 
       <template x-if="filteredEntries.length > 0">
-        <ul>
+        <ul class="m-0 p-0 list-none">
           <template x-for="item in filteredEntries" :key="item.id">
             <li
-              class="rounded-[7px] cursor-pointer hover:bg-accent"
+              class="cursor-pointer hover:bg-accent"
               :class="currentSelectedId === item.id ? 'bg-accent' : ''"
               @click="loadEntryToEditor(item.id)"
             >
@@ -81,12 +78,12 @@
                   <iconify-icon :icon="getIconName(item.type)" class="w-4 h-4 text-muted-foreground"></iconify-icon>
                 </span>
                 <span
-                  class="pr-3 text-[14px] font-medium truncate text-foreground"
+                  class="pr-3 text-[14px] truncate text-table-entry"
                   :class="{ 'border-r border-border': tweaks.tableStyle === 'divided' || tweaks.tableStyle === 'grid' }"
                   x-text="item.title || 'Untitled'"
                 ></span>
                 <span
-                  class="pr-3 text-[12px] flex items-center gap-1.5 text-muted-foreground"
+                  class="pr-3 text-[12px] flex items-center gap-1.5 text-table-entry"
                   :class="{ 'border-r border-border': tweaks.tableStyle === 'divided' || tweaks.tableStyle === 'grid' }"
                   x-show="item.status"
                 >
@@ -107,17 +104,17 @@
                     x-for="tag in (item.tags || []).slice(0, 2)"
                     :key="tag"
                   >
-                    <span class="tag-pill inline-flex items-center px-2 py-0.5 text-[12px] text-muted-foreground bg-secondary rounded-full" x-text="'#' + tag"></span>
+                    <span class="tag-pill inline-flex items-center px-2 py-0.5 text-[12px] text-table-entry bg-secondary rounded-full" x-text="'#' + tag"></span>
                   </template>
                   <template x-if="(item.tags || []).length > 2">
                     <span
-                      class="text-[12px] text-muted-foreground"
+                      class="text-[12px] text-table-entry"
                       x-text="'+' + (item.tags.length - 2)"
                     ></span>
                   </template>
                 </div>
                 <span
-                  class="text-[12px] tabular-nums text-right text-muted-foreground"
+                  class="text-[12px] tabular-nums text-right text-table-entry"
                   :class="{ 'border-r border-border': tweaks.tableStyle === 'divided' || tweaks.tableStyle === 'grid' }"
                   x-text="formatRelativeTime(item.updatedAt)"
                 ></span>
@@ -126,17 +123,17 @@
           </template>
           <li class="cursor-pointer" @click="createNewEntryOfType()">
             <div
-              class="grid grid-cols-[20px_1fr_120px_140px_80px] items-center pl-3 pr-3 py-2 text-muted-foreground hover:text-foreground hover:bg-accent"
+              class="grid grid-cols-[20px_1fr_120px_140px_80px] items-center pl-3 pr-3 py-2 text-table-entry hover:bg-accent"
               :class="{ 'border-b border-border': !tweaks.tableStyle || tweaks.tableStyle === 'default' || tweaks.tableStyle === 'grid' }"
             >
               <span
                 class="pr-3 inline-flex items-center"
                 :class="{ 'border-r border-border': tweaks.tableStyle === 'divided' || tweaks.tableStyle === 'grid' }"
               >
-                <iconify-icon :icon="getIconName('plus')" class="w-4 h-4"></iconify-icon>
+                <span class="text-[14px] leading-none">+</span>
               </span>
               <span
-                class="pr-3 text-[14px] font-medium"
+                class="pr-3 text-[14px]"
                 :class="{ 'border-r border-border': tweaks.tableStyle === 'divided' || tweaks.tableStyle === 'grid' }"
               >New entry</span>
               <div
