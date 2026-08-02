@@ -40,7 +40,7 @@
             :class="currentLibrary === 'Personal Space' ? 'bg-accent' : ''"
             :aria-current="currentLibrary === 'Personal Space' ? 'true' : undefined"
             role="menuitem"
-            class="w-full text-left px-3 py-1.5 text-[14px] flex items-center gap-2.5 hover:bg-hover rounded-[4px]"
+            class="w-full text-left px-3 py-1.5 text-[14px] flex items-center gap-2.5 hover:bg-hover cursor-pointer rounded-[4px]"
           >
             <img
               src="https://api.dicebear.com/10.x/initials/svg?backgroundColor=000000&textColor=ffffff&seed=Personal%20Space"
@@ -54,7 +54,7 @@
             :class="currentLibrary === 'Team Space' ? 'bg-accent' : ''"
             :aria-current="currentLibrary === 'Team Space' ? 'true' : undefined"
             role="menuitem"
-            class="w-full text-left px-3 py-1.5 text-[14px] flex items-center gap-2.5 hover:bg-hover rounded-[4px]"
+            class="w-full text-left px-3 py-1.5 text-[14px] flex items-center gap-2.5 hover:bg-hover cursor-pointer rounded-[4px]"
           >
             <img
               src="https://api.dicebear.com/10.x/initials/svg?backgroundColor=000000&textColor=ffffff&seed=Team%20Space"
@@ -67,7 +67,7 @@
           <button
             @click="openSettingsModal()"
             role="menuitem"
-            class="w-full text-left px-3 py-1.5 text-[14px] flex items-center gap-2.5 hover:bg-hover text-muted-foreground rounded-[4px]"
+            class="w-full text-left px-3 py-1.5 text-[14px] flex items-center gap-2.5 hover:bg-hover cursor-pointer text-muted-foreground rounded-[4px]"
           >
             <iconify-icon :icon="getIconName('settings')" class="w-3.5 h-3.5"></iconify-icon>
             <span>Settings</span>
@@ -75,7 +75,7 @@
           <button
             @click="selectLibrary('New Workspace')"
             role="menuitem"
-            class="w-full text-left px-3 py-1.5 text-[14px] flex items-center gap-2.5 hover:bg-hover text-muted-foreground rounded-[4px]"
+            class="w-full text-left px-3 py-1.5 text-[14px] flex items-center gap-2.5 hover:bg-hover cursor-pointer text-muted-foreground rounded-[4px]"
           >
             <iconify-icon :icon="getIconName('add')" class="w-3.5 h-3.5"></iconify-icon>
             <span>New Workspace</span>
@@ -124,7 +124,7 @@
             <button
               @click="createNewEntryOfType(schema.id); isNewMenuOpen = false"
               role="menuitem"
-              class="w-full text-left px-3 py-1.5 text-[14px] flex items-center gap-2.5 hover:bg-hover text-foreground rounded-[4px]"
+              class="w-full text-left px-3 py-1.5 text-[14px] flex items-center gap-2.5 hover:bg-hover cursor-pointer text-foreground rounded-[4px]"
             >
               <iconify-icon :icon="getIconName(schema.id)" class="w-3.5 h-3.5"></iconify-icon>
               <span x-text="schema.name"></span>
@@ -133,11 +133,11 @@
         </div>
         <div class="wv-rule"></div>
         <div class="space-y-0.5">
-          <button role="menuitem" class="w-full text-left px-3 py-1.5 text-[14px] flex items-center gap-2.5 hover:bg-hover text-muted-foreground rounded-[4px]">
+          <button role="menuitem" class="w-full text-left px-3 py-1.5 text-[14px] flex items-center gap-2.5 hover:bg-hover cursor-pointer text-muted-foreground rounded-[4px]">
             <iconify-icon :icon="getIconName('grid')" class="w-3.5 h-3.5"></iconify-icon>
             <span>New Collection</span>
           </button>
-          <button role="menuitem" class="w-full text-left px-3 py-1.5 text-[14px] flex items-center gap-2.5 hover:bg-hover text-muted-foreground rounded-[4px]">
+          <button role="menuitem" class="w-full text-left px-3 py-1.5 text-[14px] flex items-center gap-2.5 hover:bg-hover cursor-pointer text-muted-foreground rounded-[4px]">
             <iconify-icon :icon="getIconName('add')" class="w-3.5 h-3.5"></iconify-icon>
             <span>New Schema</span>
           </button>
