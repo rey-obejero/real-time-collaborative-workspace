@@ -2,6 +2,10 @@
 
 @custom-variant dark (&:is(.dark *));
 
+[x-cloak] {
+  display: none !important;
+}
+
 @theme inline {
   --font-sans: "Geist", ui-sans-serif, system-ui, sans-serif;
   --font-display: "Nunito", system-ui, sans-serif;
@@ -550,14 +554,14 @@ iconify-icon {
 /* Unified action cluster — accepted variant 2 (muted tonal slab, divider hidden, plain kbd) */
 .vp2-shell {
   background: #eae9e6;
-  border-radius: var(--radius);
+  border-radius: var(--radius-md);
 }
 .dark .vp2-shell {
   background: #292524;
 }
 .vp2-row {
   color: var(--foreground);
-  border-radius: 8px;
+  border-radius: calc(var(--radius-md) / 2);
 }
 .vp2-row:hover {
   background: #e2e1de;
