@@ -57,6 +57,7 @@
   --hover: #e2e1de;
   --hairline-strong: #cfceca;
   --ink-strong: #000000;
+  --unread-dot: #57534e;
 
   --type-page: #78716c;
   --type-task: #78716c;
@@ -98,6 +99,8 @@
   --ring: rgba(59, 130, 246, 0.5);
   --hover: #292524;
 
+  --unread-dot: #a8a29e;
+
   --status-todo: #44403c;
   --status-doing: #a8a29e;
   --status-done: #f5f5f4;
@@ -131,9 +134,6 @@ body {
 .nav-row.active {
   background: var(--accent);
   color: var(--foreground);
-}
-.conv-text {
-  color: color-mix(in oklab, var(--foreground) 40%, var(--muted-foreground));
 }
 /* Footer utility rows (Conversations, Help, Trash) use the Search/Create slab's horizontal padding,
    independent of the sidebar pad-x tweak, so they read as separate from the schema/nav section */

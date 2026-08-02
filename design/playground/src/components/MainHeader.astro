@@ -2,26 +2,27 @@
 <header
   class="h-14 px-6 grid grid-cols-[1fr_auto_1fr] items-center shrink-0 border-b border-border select-none"
 >
-  <div class="flex items-center gap-2">
-    <button class="w-7 h-7 flex items-center justify-center rounded-[7px] hover:bg-accent focus-ring" title="Go back">
+  <div class="flex items-center gap-1.5">
+    <button class="w-7 h-7 flex items-center justify-center rounded-[7px] hover:bg-accent" title="Go back">
       <iconify-icon :icon="getIconName('back')" class="w-3.5 h-3.5"></iconify-icon>
     </button>
-    <button class="w-7 h-7 flex items-center justify-center rounded-[7px] hover:bg-accent focus-ring" title="Go forward">
+    <button class="w-7 h-7 flex items-center justify-center rounded-[7px] hover:bg-accent" title="Go forward">
       <iconify-icon :icon="getIconName('next')" class="w-3.5 h-3.5"></iconify-icon>
     </button>
-    <button class="w-7 h-7 flex items-center justify-center rounded-[7px] hover:bg-accent focus-ring" title="Recently opened">
+    <button class="w-7 h-7 flex items-center justify-center rounded-[7px] hover:bg-accent" title="Recently opened">
       <iconify-icon :icon="getIconName('recent')" class="w-3.5 h-3.5"></iconify-icon>
     </button>
   </div>
 
   <div class="flex items-center justify-center text-[14px]">
+    <iconify-icon :icon="getIconName(headerIcon)" class="w-3.5 h-3.5 text-muted-foreground mr-2"></iconify-icon>
     <span class="text-foreground font-medium" x-text="headerCrumb">All</span>
   </div>
 
-  <div class="flex items-center justify-end gap-2">
+  <div class="flex items-center justify-end gap-1.5">
     <button
       @click="isDarkMode = !isDarkMode"
-      class="w-7 h-7 flex items-center justify-center rounded-[7px] hover:bg-accent focus-ring"
+      class="w-7 h-7 flex items-center justify-center rounded-[7px] hover:bg-accent"
       title="Toggle theme"
     >
       <span x-show="!isDarkMode" class="inline-flex items-center w-3.5 h-3.5">
@@ -31,7 +32,7 @@
         <iconify-icon :icon="getIconName('sun')" class="w-full h-full"></iconify-icon>
       </span>
     </button>
-    <button class="w-7 h-7 flex items-center justify-center rounded-[7px] hover:bg-accent focus-ring" title="Pin to favorites">
+    <button class="w-7 h-7 flex items-center justify-center rounded-[7px] hover:bg-accent" title="Pin to favorites">
       <iconify-icon :icon="getIconName('star')" class="w-3.5 h-3.5"></iconify-icon>
     </button>
     <button class="ask-ai-pill flex items-center h-7 gap-1.5 px-3 text-[14px] font-medium bg-secondary text-foreground rounded-[7px] cursor-pointer hover:bg-hover">

@@ -19,6 +19,14 @@ const COLLECTION_TITLES: Record<string, string> = {
   "in-progress": "In Progress",
 };
 
+const COLLECTION_ICONS: Record<string, string> = {
+  pinned: "pin",
+  recent: "clock",
+  all: "grid",
+  drafts: "page",
+  "in-progress": "task",
+};
+
 const state = {
   isDarkMode: false,
   isNewMenuOpen: false,
@@ -107,6 +115,13 @@ Alpine.data(
       if (this.activeView === "conversations") return "Conversations";
       if (this.activeSchema) return this.getSchemaName(this.activeSchema);
       return COLLECTION_TITLES[this.activeCollection] || "All";
+    },
+
+    get headerIcon(): string {
+      if (this.activeView === "editor") return this.activeEntry?.type || "page";
+      if (this.activeView === "conversations") return "chat";
+      if (this.activeSchema) return this.activeSchema;
+      return COLLECTION_ICONS[this.activeCollection] || "grid";
     },
 
     get filteredEntries(): Entry[] {

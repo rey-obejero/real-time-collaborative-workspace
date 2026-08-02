@@ -40,6 +40,7 @@ export interface WorkspaceStore {
   $nextTick?: (cb: () => void) => void;
 
   headerCrumb: string;
+  headerIcon: string;
   bodyTweakClass: string;
   bodyTweakStyle: string;
   filteredEntries: Entry[];
