@@ -18,9 +18,9 @@ discuss entries in threaded conversations, and maintain a shared knowledge base.
 ## Product Purpose
 
 A personal knowledge management system that serves as a second brain. It
-provides a structured way to classify and organize information, combining the
-PARA methodology (Projects, Areas, Resources, Archives) with Getting Things Done
-(GTD) task management.
+provides a flexible way to structure and organize information: you decide what
+kinds of items your workspace holds instead of being locked into generic pages
+and templates.
 
 The product replaces scattered tools — notes apps, task managers, bookmark
 managers — with one workspace organized around typed objects and freeform
@@ -28,12 +28,13 @@ editing.
 
 ## Positioning
 
-**Hybrid structure: schemas + freeform.** Combines AnyType-style typed objects
-(Page, Task, Project, Note, Bookmark) with Notion-style rich document editing.
-Each entry type carries its own properties (status, priority, assignee, due
-date, URL) while remaining a freeform canvas for prose, lists, headings, and
-quotations. Competitors force a choice between structured databases and
-freeform pages — this product does both in the same entry.
+**Opinionated structure, defined by you.** Notion gives you pages and
+templates and leaves everything else open; this product flips that: it lets you
+define the kinds of items your workspace holds (Page, Task, Project, Note,
+Bookmark) and gives you an opinionated flow for capturing, classifying, and
+organizing them. Each entry type carries its own properties (status, priority,
+assignee, due date, URL) while remaining a freeform canvas for prose, lists,
+headings, and quotations. Structure stays flexible, but the flow guides you.
 
 ## Operating Context
 
@@ -67,7 +68,7 @@ freeform pages — this product does both in the same entry.
 
 - OAuth provider strategy (OIDC compliance planned, specific scheme TBD)
 - API key generation for programmatic access
-- Browser extension for GTD inbox
+- Browser extension for quick capture
 - Entry sharing for non-workspace members
 - Real-time collaboration model
 
