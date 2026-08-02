@@ -111,7 +111,7 @@ Alpine.data(
 
     get headerCrumb(): string {
       if (this.activeView === "editor")
-        return this.getSchemaName(this.activeEntry?.type) || "Entry";
+        return this.activeEntry?.title || "Entry";
       if (this.activeView === "conversations") return "Conversations";
       if (this.activeSchema) return this.getSchemaName(this.activeSchema);
       return COLLECTION_TITLES[this.activeCollection] || "All";

@@ -364,6 +364,15 @@ iconify-icon {
   text-transform: capitalize;
 }
 
+.ask-ai-pill {
+  background: var(--hover);
+}
+.ask-ai-pill:hover {
+  background: #dcdad6;
+}
+.dark .ask-ai-pill:hover {
+  background: #2f2d2a;
+}
 .ask-ai-pill iconify-icon svg {
   stroke-width: 2px;
 }
