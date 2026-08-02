@@ -24,10 +24,9 @@ api: database-up ## Starts the API
 
 .PHONY: database-up
 database-up: ## Starts database container
-	@docker compose up -d database
+	@docker compose up -d --remove-orphans database
 	@docker compose ps database
 
 .PHONY: database-down
 database-down: ## Kills the database container
-	@docker compose up -d database
-	@docker compose ps database
+	@docker compose down database
