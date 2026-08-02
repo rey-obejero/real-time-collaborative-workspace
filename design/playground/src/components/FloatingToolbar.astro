@@ -1,37 +1,67 @@
 <div
   id="floating-format-menu"
-  class="absolute z-50 px-1 py-1 flex items-center gap-0.5 select-none bg-popover border border-border rounded-lg"
+  class="absolute z-50 select-none bg-background border border-border rounded-md overflow-hidden"
 >
-  <button
-    @click="formatSelection('bold')"
-    class="w-7 h-7 flex items-center justify-center text-[12px] font-semibold rounded-full hover:bg-secondary text-foreground"
-  >
-    B
-  </button>
-  <button
-    @click="formatSelection('italic')"
-    class="w-7 h-7 flex items-center justify-center text-[12px] italic rounded-full hover:bg-secondary text-foreground"
-  >
-    I
-  </button>
-  <button
-    @click="formatSelection('strikeThrough')"
-    class="w-7 h-7 flex items-center justify-center text-[12px] line-through rounded-full hover:bg-secondary text-foreground"
-  >
-    S
-  </button>
-  <button
-    @click="formatSelection('code')"
-    class="w-7 h-7 flex items-center justify-center text-[10px] font-mono rounded-full hover:bg-secondary text-foreground"
-  >
-    &lt;/&gt;
-  </button>
-  <div class="w-px h-4 bg-border mx-1"></div>
-  <button
-    @click="createDiscussionFromSelection()"
-    class="px-2.5 h-7 flex items-center gap-1 text-[12px] font-medium rounded-full hover:bg-secondary text-foreground"
-  >
-    <iconify-icon :icon="getIconName('discuss')" class="w-3 h-3"></iconify-icon>
-    <span>Discuss</span>
-  </button>
+  <div class="flex items-center justify-between gap-1 px-1 py-1">
+    <button
+      @click="formatSelection('bold')"
+      title="Bold"
+      class="w-7 h-7 flex items-center justify-center rounded-[4px] text-foreground hover:bg-hover cursor-pointer"
+    >
+      <iconify-icon :icon="getIconName('bold')" class="w-3.5 h-3.5"></iconify-icon>
+    </button>
+    <button
+      @click="formatSelection('italic')"
+      title="Italic"
+      class="w-7 h-7 flex items-center justify-center rounded-[4px] text-foreground hover:bg-hover cursor-pointer"
+    >
+      <iconify-icon :icon="getIconName('italic')" class="w-3.5 h-3.5"></iconify-icon>
+    </button>
+    <button
+      @click="formatSelection('underline')"
+      title="Underline"
+      class="w-7 h-7 flex items-center justify-center rounded-[4px] text-foreground hover:bg-hover cursor-pointer"
+    >
+      <iconify-icon :icon="getIconName('underline')" class="w-3.5 h-3.5"></iconify-icon>
+    </button>
+  </div>
+  <div class="flex items-center justify-between gap-1 px-1 py-1">
+    <button
+      @click="formatSelection('strikeThrough')"
+      title="Strikethrough"
+      class="w-7 h-7 flex items-center justify-center rounded-[4px] text-foreground hover:bg-hover cursor-pointer"
+    >
+      <iconify-icon :icon="getIconName('strikethrough')" class="w-3.5 h-3.5"></iconify-icon>
+    </button>
+    <button
+      @click="formatSelection('createLink')"
+      title="Link"
+      class="w-7 h-7 flex items-center justify-center rounded-[4px] text-foreground hover:bg-hover cursor-pointer"
+    >
+      <iconify-icon :icon="getIconName('link')" class="w-3.5 h-3.5"></iconify-icon>
+    </button>
+    <button
+      @click="formatSelection('code')"
+      title="Code"
+      class="w-7 h-7 flex items-center justify-center rounded-[4px] text-foreground hover:bg-hover cursor-pointer"
+    >
+      <iconify-icon :icon="getIconName('code')" class="w-3.5 h-3.5"></iconify-icon>
+    </button>
+  </div>
+  <div class="wv-rule"></div>
+  <div class="flex items-center gap-2 px-1 py-1">
+    <button
+      @click="createDiscussionFromSelection()"
+      class="flex items-center justify-center gap-1.5 px-2 h-7 text-[12px] font-medium text-foreground rounded-[4px] hover:bg-hover cursor-pointer"
+    >
+      <iconify-icon :icon="getIconName('chat')" class="w-3.5 h-3.5"></iconify-icon>
+      <span>Discuss</span>
+    </button>
+    <button
+      title="Ask AI"
+      class="w-7 h-7 flex items-center justify-center rounded-[4px] text-foreground hover:bg-hover cursor-pointer"
+    >
+      <iconify-icon :icon="getIconName('ai')" class="w-3.5 h-3.5"></iconify-icon>
+    </button>
+  </div>
 </div>

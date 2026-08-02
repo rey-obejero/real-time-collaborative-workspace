@@ -21,6 +21,13 @@
 
   <div class="flex items-center justify-end gap-1.5">
     <button
+      x-show="activeView === 'editor'"
+      class="w-7 h-7 flex items-center justify-center rounded-[7px] hover:bg-hover cursor-pointer"
+      title="Pin to favorites"
+    >
+      <iconify-icon :icon="getIconName('star')" class="w-3.5 h-3.5"></iconify-icon>
+    </button>
+    <button
       @click="isDarkMode = !isDarkMode"
       class="w-7 h-7 flex items-center justify-center rounded-[7px] hover:bg-hover cursor-pointer"
       title="Toggle theme"
@@ -31,9 +38,6 @@
       <span x-show="isDarkMode" class="inline-flex items-center w-3.5 h-3.5">
         <iconify-icon :icon="getIconName('sun')" class="w-full h-full"></iconify-icon>
       </span>
-    </button>
-    <button class="w-7 h-7 flex items-center justify-center rounded-[7px] hover:bg-hover cursor-pointer" title="Pin to favorites">
-      <iconify-icon :icon="getIconName('star')" class="w-3.5 h-3.5"></iconify-icon>
     </button>
     <button class="ask-ai-pill flex items-center h-7 gap-1.5 px-3 text-[14px] font-medium text-foreground rounded-[7px] cursor-pointer">
       <iconify-icon :icon="getIconName('ai')" class="w-3.5 h-3.5"></iconify-icon>

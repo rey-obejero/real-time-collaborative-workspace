@@ -72,6 +72,9 @@ export interface WorkspaceStore {
   hideSlashMenu(): void;
   insertBlockType(type: string): void;
   handleEditorClick(e: MouseEvent): void;
+  handleEditorMouseMove(e: MouseEvent): void;
+  hideBlockHandle(): void;
+  insertBlockAfterLine(): void;
   createNewEntryOfType(typeId?: SchemaId): void;
   selectConversations(): void;
   closeConversations(): void;

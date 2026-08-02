@@ -1,6 +1,8 @@
 import type { SchemaId } from "../data/types";
 import type { WorkspaceStore } from "./store";
 
+let hoveredBlock: Element | null = null;
+
 export const editorActions = {
   loadEntryToEditor(this: WorkspaceStore, id: string): void {
     const entry = this.entries.find((e) => e.id === id);
@@ -13,6 +15,7 @@ export const editorActions = {
       if (body) body.innerHTML = entry.content || "";
     });
     this.triggerStatusSaveFeedback();
+    this.hideBlockHandle();
   },
 
   exitToListView(this: WorkspaceStore): void {
@@ -20,6 +23,7 @@ export const editorActions = {
     this.currentSelectedId = null;
     this.hideFloatingFormatMenu();
     this.hideSlashMenu();
+    this.hideBlockHandle();
   },
 
   syncEditorTitle(this: WorkspaceStore): void {
@@ -77,7 +81,25 @@ export const editorActions = {
   },
 
   formatSelection(this: WorkspaceStore, command: string): void {
-    document.execCommand(command, false, undefined);
+    if (command === "createLink") {
+      const url = window.prompt("Enter URL");
+      if (url) document.execCommand("createLink", false, url);
+    } else if (command === "code") {
+      const selection = window.getSelection();
+      if (selection && selection.rangeCount) {
+        const range = selection.getRangeAt(0);
+        if (!range.collapsed) {
+          const code = document.createElement("code");
+          try {
+            range.surroundContents(code);
+          } catch {
+            // range spans partial nodes — fall through without changes
+          }
+        }
+      }
+    } else {
+      document.execCommand(command, false, undefined);
+    }
     this.syncEditorContent();
     this.hideFloatingFormatMenu();
   },
@@ -148,6 +170,49 @@ export const editorActions = {
           this.hideFloatingFormatMenu();
       }, 50);
     }
+  },
+
+  handleEditorMouseMove(this: WorkspaceStore, e: MouseEvent): void {
+    if (this.activeView !== "editor") return;
+    const body = document.getElementById("editor-content-body");
+    const handle = document.getElementById("block-handle");
+    if (!body || !handle) return;
+    const target = e.target as Element;
+    if (handle.contains(target)) return;
+    if (!body.contains(target)) return;
+    if (target === body) return;
+    let block: Element = target;
+    while (block.parentElement && block.parentElement !== body) block = block.parentElement;
+    hoveredBlock = block;
+    const base = handle.offsetParent as HTMLElement | null;
+    const baseTop = base ? base.getBoundingClientRect().top : 0;
+    handle.style.display = "flex";
+    handle.style.top = `${e.clientY - baseTop - 12}px`;
+  },
+
+  hideBlockHandle(this: WorkspaceStore): void {
+    const handle = document.getElementById("block-handle");
+    if (handle) handle.style.display = "none";
+    hoveredBlock = null;
+  },
+
+  insertBlockAfterLine(this: WorkspaceStore): void {
+    const body = document.getElementById("editor-content-body");
+    if (!body || !hoveredBlock || !body.contains(hoveredBlock)) return;
+    const block = document.createElement("div");
+    block.innerHTML = "<br>";
+    hoveredBlock.insertAdjacentElement("afterend", block);
+    this.hideBlockHandle();
+    this.syncEditorContent();
+    const selection = window.getSelection();
+    if (selection) {
+      const range = document.createRange();
+      range.setStart(block, 0);
+      range.collapse(true);
+      selection.removeAllRanges();
+      selection.addRange(range);
+    }
+    body.focus();
   },
 
   createNewEntryOfType(this: WorkspaceStore, typeId?: SchemaId): void {
