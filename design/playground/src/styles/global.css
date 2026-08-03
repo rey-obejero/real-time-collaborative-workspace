@@ -666,7 +666,7 @@ iconify-icon {
   border-radius: 7px;
 }
 .wv-sec-h {
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 500;
   color: var(--muted-foreground);
   margin: 24px 0 4px;
@@ -717,7 +717,7 @@ iconify-icon {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  padding: 10px 0 2px;
+  padding-bottom: 2px;
 }
 .inv-inline-opts {
   display: flex;

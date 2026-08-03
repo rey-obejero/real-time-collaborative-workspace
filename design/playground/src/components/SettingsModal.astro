@@ -18,14 +18,14 @@
     class="relative w-full max-w-2xl flex flex-col z-10 max-h-[80vh] bg-popover border border-border rounded-lg overflow-hidden"
   >
     <div class="wv-header shrink-0">
-      <div class="flex items-center justify-between">
+      <div class="flex items-start justify-between">
         <div>
           <h2 class="text-[20px] font-display font-medium text-foreground">Settings</h2>
           <p class="wv-subtitle">Customize your workspace experience.</p>
         </div>
         <button
           @click="closeSettingsModal()"
-          class="wv-close flex items-center justify-center hover:bg-accent focus-ring"
+          class="wv-close flex items-center justify-center hover:bg-accent focus-ring cursor-pointer"
         >
           <iconify-icon :icon="getIconName('x')" class="w-3.5 h-3.5"></iconify-icon>
         </button>
@@ -53,19 +53,19 @@
             <span class="wv-row-label">Invite member</span>
             <button
               @click="inviteLink = 'workspace.app/invite/' + Math.random().toString(36).slice(2, 10); copied = false"
-              class="primary-btn wv-btn px-3 py-1.5 text-[12px] font-medium focus-ring"
+              class="wv-btn flex items-center gap-1 px-3 py-1.5 text-[12px] font-medium bg-primary text-primary-foreground cursor-pointer hover:bg-primary-foreground/25 focus-ring"
             >
               Generate link
             </button>
           </div>
           <div class="inv-inline-opts">
             <input type="text" x-model="inviteUsername" placeholder="Username" aria-label="Username to add" class="ghost-btn wv-btn wv-input-invite px-3 py-1.5 text-[12px] focus-ring text-foreground" />
-            <select x-model="inviteRole" aria-label="Invitation role" class="ghost-btn wv-btn px-2.5 py-1 text-[12px] focus-ring text-foreground">
+            <select x-model="inviteRole" aria-label="Invitation role" class="ghost-btn wv-btn px-2.5 py-1 text-[12px] focus-ring text-foreground cursor-pointer">
               <option value="owner">Owner</option>
               <option value="editor">Editor</option>
               <option value="member">Member</option>
             </select>
-            <select x-model="inviteExpiry" aria-label="Invitation link expiry" class="ghost-btn wv-btn px-2.5 py-1 text-[12px] focus-ring text-foreground">
+            <select x-model="inviteExpiry" aria-label="Invitation link expiry" class="ghost-btn wv-btn px-2.5 py-1 text-[12px] focus-ring text-foreground cursor-pointer">
               <option value="24h">24h</option>
               <option value="7d">7 days</option>
               <option value="30d">30 days</option>
@@ -76,7 +76,7 @@
               <button
                 @click="copied = true; navigator.clipboard?.writeText(inviteLink)"
                 aria-label="Copy invitation link"
-                class="ghost-btn wv-btn px-2.5 py-1 text-[12px] font-medium focus-ring"
+                class="ghost-btn wv-btn px-2.5 py-1 text-[12px] font-medium focus-ring cursor-pointer"
                 x-text="copied ? 'Copied' : 'Copy'"
               >Copy</button>
             </div>
@@ -107,7 +107,7 @@
               <span class="wv-row-label truncate" x-text="schema.name"></span>
             </div>
             <div class="flex items-center gap-3">
-              <button class="wv-btn px-2.5 py-1 text-[12px] font-medium focus-ring border border-border bg-transparent hover:bg-hover">Edit</button>
+              <button class="wv-btn px-2.5 py-1 text-[12px] font-medium focus-ring border border-border bg-transparent hover:bg-hover cursor-pointer">Edit</button>
             </div>
           </div>
         </template>
