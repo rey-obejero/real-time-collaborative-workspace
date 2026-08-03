@@ -48,52 +48,65 @@
 
       <section id="sec-members" class="settings-section">
         <h4 class="wv-sec-h">Members</h4>
-        <div class="inv-inline" x-data="{ inviteUsername: '', inviteRole: 'editor', inviteExpiry: '7d', inviteLink: '', copied: false }">
-          <div class="inv-row">
-            <span class="wv-row-label">Invite member</span>
+
+        <div x-data="{ inviteUsername: '', inviteRole: 'editor', inviteExpiry: '7d', inviteLink: '', copied: false }">
+          <div class="flex items-center gap-2 mb-3 flex-wrap">
+            <input type="text" x-model="inviteUsername" placeholder="Username" aria-label="Username to add" class="ghost-btn wv-btn wv-input-invite px-3 py-1.5 text-[12px] focus-ring text-foreground" />
+            <button class="ghost-btn wv-btn px-3 py-1.5 text-[12px] font-medium focus-ring cursor-pointer border border-border hover:bg-hover">
+              <iconify-icon :icon="getIconName('user')" class="w-3.5 h-3.5"></iconify-icon>
+              Add
+            </button>
+            <span class="text-muted-foreground text-[12px]">or</span>
             <button
               @click="inviteLink = 'workspace.app/invite/' + Math.random().toString(36).slice(2, 10); copied = false"
-              class="wv-btn flex items-center gap-1 px-3 py-1.5 text-[12px] font-medium bg-primary text-primary-foreground cursor-pointer hover:bg-primary-foreground/25 focus-ring"
+              class="ghost-btn wv-btn px-3 py-1.5 text-[12px] font-medium focus-ring cursor-pointer border border-border hover:bg-hover"
             >
+              <iconify-icon :icon="getIconName('link')" class="w-3.5 h-3.5"></iconify-icon>
               Generate link
             </button>
-          </div>
-          <div class="inv-inline-opts">
-            <input type="text" x-model="inviteUsername" placeholder="Username" aria-label="Username to add" class="ghost-btn wv-btn wv-input-invite px-3 py-1.5 text-[12px] focus-ring text-foreground" />
-            <select x-model="inviteRole" aria-label="Invitation role" class="ghost-btn wv-btn px-2.5 py-1 text-[12px] focus-ring text-foreground cursor-pointer">
-              <option value="owner">Owner</option>
-              <option value="editor">Editor</option>
-              <option value="member">Member</option>
-            </select>
-            <select x-model="inviteExpiry" aria-label="Invitation link expiry" class="ghost-btn wv-btn px-2.5 py-1 text-[12px] focus-ring text-foreground cursor-pointer">
+            <select x-model="inviteExpiry" aria-label="Link expiry" class="ghost-btn wv-btn px-2.5 py-1 text-[12px] focus-ring text-foreground cursor-pointer">
               <option value="24h">24h</option>
-              <option value="7d">7 days</option>
-              <option value="30d">30 days</option>
+              <option value="7d">7d</option>
+              <option value="30d">30d</option>
               <option value="never">Never</option>
             </select>
-            <div class="inv-inline-link" x-show="inviteLink !== ''">
-              <span class="inv-link" x-text="inviteLink"></span>
-              <button
-                @click="copied = true; navigator.clipboard?.writeText(inviteLink)"
-                aria-label="Copy invitation link"
-                class="ghost-btn wv-btn px-2.5 py-1 text-[12px] font-medium focus-ring cursor-pointer"
-                x-text="copied ? 'Copied' : 'Copy'"
-              >Copy</button>
-            </div>
           </div>
-        </div>
-        <template x-for="m in members" :key="m.email">
-          <div class="wv-row">
-            <div class="flex items-center gap-2 min-w-0">
-              <span class="avatar-chip" x-text="m.initials">ME</span>
-              <div class="truncate">
-                <p class="text-[14px] font-medium leading-tight text-foreground" x-text="m.name"></p>
-                <p class="wv-row-meta" x-text="m.email"></p>
+          <div class="flex items-center gap-2 mb-3" x-show="inviteLink !== ''" x-cloak>
+            <span class="inv-link" x-text="inviteLink"></span>
+            <button
+              @click="copied = true; navigator.clipboard?.writeText(inviteLink)"
+              aria-label="Copy invitation link"
+              class="ghost-btn wv-btn px-2.5 py-1 text-[12px] font-medium focus-ring cursor-pointer"
+              x-text="copied ? 'Copied' : 'Copy'"
+            >Copy</button>
+          </div>
+          <template x-for="m in members" :key="m.email">
+            <div class="wv-member-row" x-data="{ role: m.role }">
+              <div class="flex items-center gap-2.5 min-w-0">
+                <span class="avatar-chip" x-text="m.initials">ME</span>
+                <div class="truncate">
+                  <p class="text-[14px] font-medium leading-tight text-foreground" x-text="m.name"></p>
+                  <p class="wv-row-meta" x-text="m.email"></p>
+                </div>
+              </div>
+              <div class="flex items-center gap-2 shrink-0">
+                <select
+                  x-model="role"
+                  aria-label="Member role"
+                  class="wv-role-badge cursor-pointer focus-ring"
+                  :class="role.toLowerCase() === 'owner' ? 'role-owner' : ''"
+                >
+                  <option value="owner">Owner</option>
+                  <option value="editor">Editor</option>
+                  <option value="member">Member</option>
+                </select>
+                <button class="wv-row-icon-btn" aria-label="Member actions">
+                  <iconify-icon :icon="getIconName('more-fill')" class="w-4 h-4"></iconify-icon>
+                </button>
               </div>
             </div>
-            <span class="wv-row-meta font-medium" x-text="m.role.charAt(0).toUpperCase() + m.role.slice(1).toLowerCase()">Owner</span>
-          </div>
-        </template>
+          </template>
+        </div>
       </section>
 
       <div class="wv-rule"></div>
