@@ -32,7 +32,7 @@
         @click.outside="isLibraryDropdownOpen = false"
         x-transition
         role="menu"
-        class="absolute top-full left-0 right-0 mt-1 z-30 rounded-md overflow-hidden bg-background border border-border p-1.5"
+        class="floating-pop absolute top-full left-0 right-0 mt-1 z-30 rounded-md overflow-hidden bg-background border border-border p-1.5"
       >
         <div class="space-y-0.5">
           <button
@@ -117,7 +117,7 @@
         x-cloak
         x-transition
         role="menu"
-        class="absolute top-full left-0 right-0 mt-1 z-30 rounded-md overflow-hidden bg-background border border-border p-1.5"
+        class="floating-pop absolute top-full left-0 right-0 mt-1 z-30 rounded-md overflow-hidden bg-background border border-border p-1.5"
       >
         <div class="space-y-0.5">
           <template x-for="schema in schemas" :key="schema.id">

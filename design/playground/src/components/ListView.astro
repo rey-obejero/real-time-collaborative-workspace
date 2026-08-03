@@ -14,17 +14,21 @@
           </h1>
         </div>
         <div class="flex items-center gap-1">
-          <button class="w-7 h-7 flex items-center justify-center rounded-[7px] text-muted-foreground hover:bg-hover hover:text-foreground cursor-pointer" title="Search">
+          <button class="header-btn w-7 h-7 flex items-center justify-center rounded-[7px] text-muted-foreground hover:bg-hover hover:text-foreground cursor-pointer" title="Search">
             <iconify-icon :icon="getIconName('search')" class="w-3.5 h-3.5"></iconify-icon>
+            <span class="header-tooltip">Search</span>
           </button>
-          <button class="w-7 h-7 flex items-center justify-center rounded-[7px] text-muted-foreground hover:bg-hover hover:text-foreground cursor-pointer" title="Filter">
+          <button class="header-btn w-7 h-7 flex items-center justify-center rounded-[7px] text-muted-foreground hover:bg-hover hover:text-foreground cursor-pointer" title="Filter">
             <iconify-icon :icon="getIconName('filter')" class="w-3.5 h-3.5"></iconify-icon>
+            <span class="header-tooltip">Filter</span>
           </button>
-          <button class="w-7 h-7 flex items-center justify-center rounded-[7px] text-muted-foreground hover:bg-hover hover:text-foreground cursor-pointer" title="Sort">
+          <button class="header-btn w-7 h-7 flex items-center justify-center rounded-[7px] text-muted-foreground hover:bg-hover hover:text-foreground cursor-pointer" title="Sort">
             <iconify-icon :icon="getIconName('sort')" class="w-3.5 h-3.5"></iconify-icon>
+            <span class="header-tooltip">Sort</span>
           </button>
-          <button class="w-7 h-7 flex items-center justify-center rounded-[7px] text-muted-foreground hover:bg-hover hover:text-foreground cursor-pointer" title="Settings">
-            <iconify-icon :icon="getIconName('settings')" class="w-3.5 h-3.5"></iconify-icon>
+          <button class="header-btn w-7 h-7 flex items-center justify-center rounded-[7px] text-muted-foreground hover:bg-hover hover:text-foreground cursor-pointer" title="Settings">
+            <iconify-icon :icon="getIconName('settings-codicon')" class="w-3.5 h-3.5"></iconify-icon>
+            <span class="header-tooltip">Settings</span>
           </button>
           <div class="bg-primary flex items-center overflow-hidden rounded-[7px]">
             <button

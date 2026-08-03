@@ -366,17 +366,60 @@ iconify-icon {
   text-transform: capitalize;
 }
 
-.ask-ai-pill {
+.ask-ai-text {
+  background: transparent;
+}
+.ask-ai-text:hover {
   background: var(--hover);
 }
-.ask-ai-pill:hover {
-  background: #dcdad6;
-}
-.dark .ask-ai-pill:hover {
-  background: #2f2d2a;
-}
-.ask-ai-pill iconify-icon svg {
+.ask-ai-text iconify-icon svg {
   stroke-width: 2px;
+}
+
+.header-btn {
+  position: relative;
+}
+.floating-pop {
+  box-shadow: 0 2px 8px rgb(0 0 0 / 0.06);
+}
+.dark .floating-pop {
+  box-shadow: 0 2px 8px rgb(0 0 0 / 0.4);
+}
+.header-tooltip {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 50;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 8px;
+  border-radius: var(--radius-md);
+  background: var(--background);
+  border: 1px solid var(--border);
+  font-size: 12px;
+  color: var(--foreground);
+  white-space: nowrap;
+  box-shadow: 0 2px 8px rgb(0 0 0 / 0.06);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 120ms ease, visibility 120ms ease;
+}
+.dark .header-tooltip {
+  box-shadow: 0 2px 8px rgb(0 0 0 / 0.4);
+}
+.header-btn:hover .header-tooltip,
+.header-btn:focus-visible .header-tooltip {
+  opacity: 1;
+  visibility: visible;
+}
+.header-tooltip-kbd {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  color: var(--muted-foreground);
 }
 
 /* --- Sidebar Tweak Overrides --- */
