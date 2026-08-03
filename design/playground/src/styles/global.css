@@ -706,3 +706,50 @@ iconify-icon {
 .wv-input {
   width: 240px;
 }
+/* Settings modal — accepted variant 3 (standalone invite, outlined Edit, mono link) */
+.inv-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.inv-inline {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 10px 0 2px;
+}
+.inv-inline-opts {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.wv-input-invite {
+  width: 150px;
+  flex-shrink: 1;
+  min-width: 0;
+}
+.inv-inline-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 4px;
+  min-width: 0;
+  flex: 1 1 100%;
+}
+.inv-link {
+  font-size: 12px;
+  color: var(--foreground);
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  background: var(--hover);
+  padding: 4px 10px;
+  border-radius: 7px;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.inv-inline-link .inv-link {
+  flex: 1 1 auto;
+}
