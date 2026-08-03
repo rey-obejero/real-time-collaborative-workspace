@@ -14,6 +14,10 @@ help: ## Display usage instructions
 		printf "  %-20s %s\n", $$1, $$2 \
 	}' $(MAKEFILE_LIST)
 
+.PHONE: application
+application: ## Starts the application
+	@$(MAKE) -j2 web api
+
 .PHONY: web
 web: ## Starts the web client
 	@npm run --prefix ${WEB_DIRECTORY} dev
