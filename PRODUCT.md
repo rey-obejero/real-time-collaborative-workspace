@@ -76,7 +76,7 @@ headings, and quotations. Structure stays flexible, but the flow guides you.
 
 - Product name: "Workspace"
 - Current design (anti-reference): bold, high-contrast, visually assertive.
-  Being replaced by an Ollama-inspired minimal design language.
+  Being replaced by a quiet, muted, tame minimal design language.
 - Target visual world: quiet, muted, tame. Minimalist design chosen to mask
   AI-generated content and avoid corporate "AI slop" aesthetic.
 

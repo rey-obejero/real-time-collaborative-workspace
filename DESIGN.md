@@ -1,539 +1,345 @@
 ---
-version: alpha
-name: Ollama-design-analysis
-description: |
-  An almost defiantly minimal documentation-first system that treats the home page like a Markdown README — paper-white canvas, 36px center-aligned heading, a single black pill CTA, an inline terminal install snippet, and a hand-drawn llama mascot as the only ornamental element. No gradient, no hero photography, no marketing pyrotechnics. The chrome is a tiny utility palette of pure black, pure white, and three neutral grays; every interactive element is fully rounded into a pill (`{rounded.full}`); typography is SF Pro Rounded for headings paired with system sans for body and ui-monospace for code. Pricing tiers, FAQs, and "your data stays yours" guarantees all sit on the same flat canvas inside thin-border cards — the system is the documentation, and the documentation is the system.
-
+name: Workspace
+description: A quiet, muted, tame PKM workspace on warm-stone neutrals.
 colors:
-  primary: "#000000"
-  on-primary: "#ffffff"
-  ink: "#000000"
-  ink-deep: "#090909"
-  charcoal: "#525252"
-  body: "#737373"
-  mute: "#a3a3a3"
-  canvas: "#ffffff"
-  surface-soft: "#fafafa"
-  surface-card: "#ffffff"
-  hairline: "#e5e5e5"
-  hairline-strong: "#d4d4d4"
-  on-dark: "#ffffff"
-  on-dark-mute: "rgba(255,255,255,0.7)"
-  surface-dark: "#171717"
-  focus-ring: "rgba(59,130,246,0.5)"
-  link: "#000000"
-  link-mute: "#737373"
-  terminal-red: "#ff5f56"
-  terminal-yellow: "#ffbd2e"
-  terminal-green: "#27c93f"
-
+  warm-paper: "#f4f4f1"
+  ink: "#1c1917"
+  ink-soft: "#f5f5f4"
+  soft-stone: "#eae9e6"
+  muted-clay: "#6d675f"
+  hairline: "#e0dfdb"
+  hairline-strong: "#cfceca"
+  input-surface: "#fdfdfc"
+  hover-stone: "#e2e1de"
+  panel-dark: "#292524"
+  border-dark: "#44403c"
+  destructive: "#ff5f56"
+  focus-ring: "rgba(59, 130, 246, 0.5)"
 typography:
-  display-xl:
-    fontFamily: SF Pro Rounded
-    fontSize: 36px
-    fontWeight: 500
-    lineHeight: 1.11
-    letterSpacing: 0
-  display-lg:
-    fontFamily: SF Pro Rounded
-    fontSize: 30px
+  display:
+    fontFamily: "Nunito, ui-sans-serif, system-ui, sans-serif"
+    fontSize: "20px"
     fontWeight: 500
     lineHeight: 1.2
-    letterSpacing: 0
-  heading-lg:
-    fontFamily: SF Pro Rounded
-    fontSize: 24px
-    fontWeight: 600
-    lineHeight: 1.33
-    letterSpacing: 0
-  heading-md:
-    fontFamily: ui-sans-serif
-    fontSize: 20px
-    fontWeight: 500
-    lineHeight: 1.4
-    letterSpacing: 0
-  heading-sm:
-    fontFamily: ui-sans-serif
-    fontSize: 18px
-    fontWeight: 500
-    lineHeight: 1.56
-    letterSpacing: 0
-  body-md:
-    fontFamily: ui-sans-serif
-    fontSize: 16px
+  body:
+    fontFamily: "Geist, ui-sans-serif, system-ui, sans-serif"
+    fontSize: "16px"
     fontWeight: 400
     lineHeight: 1.5
-    letterSpacing: 0
-  body-strong:
-    fontFamily: ui-sans-serif
-    fontSize: 16px
+  label:
+    fontFamily: "Geist, ui-sans-serif, system-ui, sans-serif"
+    fontSize: "12px"
     fontWeight: 500
-    lineHeight: 1.5
-    letterSpacing: 0
-  body-sm:
-    fontFamily: ui-sans-serif
-    fontSize: 14px
+  code:
+    fontFamily: "Geist Mono, ui-monospace, monospace"
+    fontSize: "12px"
     fontWeight: 400
-    lineHeight: 1.43
-    letterSpacing: 0
-  body-sm-strong:
-    fontFamily: ui-sans-serif
-    fontSize: 14px
-    fontWeight: 500
-    lineHeight: 1.43
-    letterSpacing: 0
-  caption-sm:
-    fontFamily: ui-sans-serif
-    fontSize: 12px
-    fontWeight: 400
-    lineHeight: 1.33
-    letterSpacing: 0
-  code-md:
-    fontFamily: ui-monospace
-    fontSize: 16px
-    fontWeight: 400
-    lineHeight: 1.5
-    letterSpacing: 0
-  code-sm:
-    fontFamily: ui-monospace
-    fontSize: 14px
-    fontWeight: 400
-    lineHeight: 1.43
-    letterSpacing: 0
-  button-md:
-    fontFamily: ui-sans-serif
-    fontSize: 14px
-    fontWeight: 500
-    lineHeight: 1
-    letterSpacing: 0
-
 rounded:
-  none: 0px
-  sm: 6px
-  md: 8px
-  lg: 12px
-  full: 9999px
-
+  sm: "6px"
+  md: "8px"
+  lg: "12px"
+  control: "7px"
+  full: "9999px"
 spacing:
-  xxs: 2px
-  xs: 4px
-  sm: 8px
-  md: 12px
-  lg: 16px
-  xl: 24px
-  xxl: 32px
-  section: 88px
-
+  xs: "4px"
+  sm: "8px"
+  md: "12px"
+  lg: "24px"
 components:
   button-primary:
-    backgroundColor: "{colors.primary}"
-    textColor: "{colors.on-primary}"
-    typography: "{typography.button-md}"
+    backgroundColor: "{colors.ink}"
+    textColor: "{colors.ink-soft}"
     rounded: "{rounded.full}"
-    padding: 8px 20px
-    height: 36px
-  button-primary-active:
-    backgroundColor: "{colors.ink-deep}"
-    textColor: "{colors.on-primary}"
-    typography: "{typography.button-md}"
+  button-primary-hover:
+    backgroundColor: "#0c0a09"
+    textColor: "{colors.ink-soft}"
     rounded: "{rounded.full}"
-  button-secondary:
-    backgroundColor: "{colors.canvas}"
-    textColor: "{colors.ink}"
-    typography: "{typography.button-md}"
-    rounded: "{rounded.full}"
-    padding: 8px 20px
-    height: 36px
-  button-pill-on-dark:
-    backgroundColor: "{colors.canvas}"
-    textColor: "{colors.ink}"
-    typography: "{typography.button-md}"
-    rounded: "{rounded.full}"
-    padding: 8px 20px
-  button-disabled:
-    backgroundColor: "{colors.surface-soft}"
-    textColor: "{colors.mute}"
-    rounded: "{rounded.full}"
-  search-pill:
-    backgroundColor: "{colors.surface-soft}"
-    textColor: "{colors.ink}"
-    typography: "{typography.body-sm}"
-    rounded: "{rounded.full}"
-    padding: 8px 16px
-    height: 36px
-  search-pill-focused:
-    backgroundColor: "{colors.canvas}"
+  button-ghost:
+    backgroundColor: "{colors.warm-paper}"
     textColor: "{colors.ink}"
     rounded: "{rounded.full}"
-  text-input:
-    backgroundColor: "{colors.canvas}"
-    textColor: "{colors.ink}"
-    typography: "{typography.body-md}"
-    rounded: "{rounded.full}"
-    padding: 8px 16px
-    height: 40px
-  text-input-focused:
-    backgroundColor: "{colors.canvas}"
+  button-ghost-hover:
+    backgroundColor: "{colors.hover-stone}"
     textColor: "{colors.ink}"
     rounded: "{rounded.full}"
-  install-snippet:
-    backgroundColor: "{colors.surface-soft}"
+  button-outline:
+    backgroundColor: "transparent"
     textColor: "{colors.ink}"
-    typography: "{typography.code-md}"
     rounded: "{rounded.full}"
-    padding: 12px 20px
-    height: 48px
-  command-tag:
-    backgroundColor: "{colors.surface-soft}"
+  control-icon:
+    backgroundColor: "transparent"
+    textColor: "{colors.muted-clay}"
+    rounded: "{rounded.control}"
+    height: "28px"
+    width: "28px"
+  input-field:
+    backgroundColor: "{colors.input-surface}"
     textColor: "{colors.ink}"
-    typography: "{typography.code-sm}"
+    rounded: "{rounded.control}"
+    padding: "6px 12px"
+  chip:
+    backgroundColor: "{colors.warm-paper}"
+    textColor: "{colors.ink}"
     rounded: "{rounded.full}"
-    padding: 6px 12px
-  terminal-card:
-    backgroundColor: "{colors.canvas}"
+  nav-row:
+    backgroundColor: "transparent"
+    textColor: "{colors.muted-clay}"
+    rounded: "{rounded.control}"
+  nav-row-active:
+    backgroundColor: "{colors.soft-stone}"
     textColor: "{colors.ink}"
-    typography: "{typography.code-sm}"
+    rounded: "{rounded.control}"
+  card:
+    backgroundColor: "{colors.warm-paper}"
+    textColor: "{colors.ink}"
     rounded: "{rounded.lg}"
-    padding: 16px
-  terminal-traffic-lights:
-    rounded: "{rounded.full}"
-    size: 12px
-  pricing-card:
-    backgroundColor: "{colors.canvas}"
-    textColor: "{colors.ink}"
-    typography: "{typography.body-md}"
-    rounded: "{rounded.lg}"
-    padding: 32px
-  pricing-card-dark:
-    backgroundColor: "{colors.surface-dark}"
-    textColor: "{colors.on-dark}"
-    typography: "{typography.body-md}"
-    rounded: "{rounded.lg}"
-    padding: 32px
-  feature-bullet:
-    textColor: "{colors.charcoal}"
-    typography: "{typography.body-sm}"
-  faq-row:
-    backgroundColor: "{colors.canvas}"
-    textColor: "{colors.ink}"
-    typography: "{typography.body-md}"
-    rounded: "{rounded.none}"
-    padding: 16px 0px
-  link-inline:
-    textColor: "{colors.ink}"
-    typography: "{typography.body-md}"
-  link-mute:
-    textColor: "{colors.body}"
-    typography: "{typography.body-sm}"
-  primary-nav:
-    backgroundColor: "{colors.canvas}"
-    textColor: "{colors.ink}"
-    typography: "{typography.body-sm-strong}"
-    rounded: "{rounded.none}"
-    height: 56px
-  footer-section:
-    backgroundColor: "{colors.canvas}"
-    textColor: "{colors.body}"
-    typography: "{typography.caption-sm}"
-    rounded: "{rounded.none}"
-    padding: 32px 24px
-  cta-strip-dark:
-    backgroundColor: "{colors.surface-dark}"
-    textColor: "{colors.on-dark}"
-    typography: "{typography.heading-lg}"
-    rounded: "{rounded.lg}"
-    padding: 24px 32px
 ---
+
+# Design System: Workspace
 
 ## Overview
 
-Ollama's site is the most aggressively under-designed marketing surface in the AI tooling space, and that is the entire point. The home page reads like a Markdown README rendered with care: a 36px center-aligned heading sits above an inline `curl` install snippet inside a soft-gray pill, a single black "Download" CTA, and a hand-drawn llama mascot as the only ornament. Everything else — automate-your-work block, "Start local. Scale cloud." pricing pair, "Your data stays yours" guarantee strip, FAQ wall on `/pricing` — sits on the same paper-white canvas (`{colors.canvas}`) with quiet `{colors.body}` neutrals carrying the prose. The system is the documentation, and the documentation is the system.
+**Creative North Star: "The Quiet Workbench"**
 
-The design philosophy is geometric: every interactive element collapses to `{rounded.full}` (9999px) — buttons, search pills, install-snippet pills, text inputs, and the terminal-traffic-light dots. There are no decorative drop shadows, no gradients, no hero illustrations beyond the llama. Cards (the rare ones, on `/pricing`) use a soft `{rounded.lg}` (12px) and a 1px hairline. The single inverted moment in the entire system is the dark "Max" pricing tier — `{colors.surface-dark}` with white text — which acts as the only attention-grabbing surface in an otherwise studiously flat layout.
+Workspace is a second brain — a calm warm-stone workbench where the tools sit
+quiet until you reach for them. The system is built on monochrome warmth: paper-
+white-warm surfaces (`--background: #f4f4f1`), stone-gray neutrals, and pure ink
+(`#1c1917`) used sparingly. Nothing shouts; the interface recedes so the work —
+writing, organizing, thinking — is the loudest thing on screen.
 
-Typography pairs SF Pro Rounded (display headings, weight 500–600) with the operating system's default sans (`ui-sans-serif`) for body and `ui-monospace` for code. The roundness of the heading face is the only "personality" the chrome carries — it gently echoes the `{rounded.full}` button geometry without being decorative about it.
+The aesthetic is deliberately tame and muted. This is a rejection of the
+product's earlier high-contrast, visually assertive chrome and of the corporate
+"AI slop" look: no gradients, no saturated accent colors, no glowing buttons.
+Every surface is flat, every divider is a 1px hairline, and every interactive
+element is a small rounded control that wakes only on interaction.
+
+Controls are refined and restrained. Interactive elements use soft pill geometry
+(`border-radius: 9999px`) and compact 28px icon buttons with 7px corners. Hover
+fills are one quiet step of stone (`--hover: #e2e1de`); the primary action on a
+cluster is the single ink pill, and the rest of the cluster stays ghosted until
+it earns attention.
 
 **Key Characteristics:**
-- Paper-white `{colors.canvas}` end-to-end with no surface alternation — the whole page is one continuous sheet
-- Center-aligned hero with `{typography.display-xl}` SF Pro Rounded headline, no eyebrow, no subhead beyond a small "Power OpenClaw with Ollama" line under the llama
-- Pill geometry everywhere: every button and pill input is `{rounded.full}`; cards use `{rounded.lg}`; nothing is sharp-cornered except section dividers
-- Single-color CTA system: pure black `{colors.primary}` pills carry every action; "Get Pro" / "Get Max" inside pricing cards are the only variations
-- Inline `curl` install snippet rendered as a pill with `{typography.code-md}` — the most signature element, sitting directly under the hero headline
-- Terminal-mockup card with macOS traffic-light dots and inline `ollama launch openclaw` example — the home page's only "product preview"
-- Inverted dark `{component.pricing-card-dark}` for the highest-tier "Max" plan, breaking the flat-white rhythm exactly once per page
+- Warm-stone monochrome neutrals; pure ink for primary actions, never bright hues.
+- Fully flat surfaces; structure comes from 1px hairlines and tonal layering, never shadows.
+- Pill geometry for interactive controls; 12px corners for cards; 7px for small controls and rows.
+- Geist for body, Nunito for display headings, Geist Mono for labels and code.
+- Quiet chrome: muted-clay secondary text, hairline borders, restrained hover fills.
+- Dark mode inverts the same token system without changing the geometry.
 
 ## Colors
 
-> **Source pages:** `/` (home) and `/pricing`. The chrome palette is identical across both — only content changes.
+The palette is monochrome warmth — a warm stone family with a single ink accent
+and a reserved red for destructive actions. There is no chromatic accent color;
+differentiation comes from tonal steps, not hue.
 
-### Brand & Accent
-- **Pure Black** (`{colors.primary}` — `#000000`): the brand. Every primary CTA, every black pill, every link in the nav, and every solid icon. There is no other "brand color."
-- **Ink Deep** (`{colors.ink-deep}` — `#090909`): pressed-state black for the primary pill — a single notch below pure.
+### Primary
+- **Ink** (#1c1917): Foreground text and the one strong surface. The primary
+  button (`.primary-btn`), active emphasis, and the inverted "owner" badge all
+  use ink. In dark mode ink becomes the background and `ink-soft` (#f5f5f4) the
+  foreground. Ink is scarce — it marks the primary action per cluster, nothing else.
 
-### Surface
-- **Canvas** (`{colors.canvas}` — `#ffffff`): the page itself. Nearly every surface in the system.
-- **Soft Surface** (`{colors.surface-soft}` — `#fafafa`): install-snippet pill background, search pill, secondary chip backgrounds, alternating row fill where one is needed.
-- **Surface Dark** (`{colors.surface-dark}` — `#171717`): the dark "Max" pricing card and dark CTA strips. The single inverted surface in the system.
-- **Hairline** (`{colors.hairline}` — `#e5e5e5`): 1px card border, divider line above footer, divider between FAQ rows.
-- **Hairline Strong** (`{colors.hairline-strong}` — `#d4d4d4`): rare slightly stronger divider where extra separation is needed (e.g., between unrelated FAQ groups).
+### Neutral
+- **Warm Paper** (#f4f4f1): The canvas. Background, card, and popover surfaces in
+  light mode (dark: `#1c1917`). Slightly warmer than pure white by design; never
+  use `#ffffff` for a surface.
+- **Soft Stone** (#eae9e6): Muted fills — secondary and accent surfaces, active
+  sidebar rows, the search/create slab. Dark: `#292524`.
+- **Hover Stone** (#e2e1de): The one-step hover fill. Every quiet control (ghost
+  buttons, nav rows, icon buttons, chips) fills with hover-stone on hover.
+- **Muted Clay** (#6d675f): Secondary text — metadata, placeholders, section
+  headings. Contrast on warm-paper is comfortable but unmistakably secondary.
+- **Hairline** (#e0dfdb): 1px borders and dividers. Structure is drawn in
+  hairline, never in shadow. **Hairline Strong** (#cfceca) for emphasized edges.
+- **Input Surface** (#fdfdfc): The faintly brighter field background for inputs
+  and search fields (dark: `#1c1917`).
+- **Destructive** (#ff5f56): Reserved for delete/revoke actions only, used
+  sparingly.
 
-### Text
-- **Ink** (`{colors.ink}` — `#000000`): all headlines, primary nav links, button text on light surfaces, prices on pricing cards.
-- **Charcoal** (`{colors.charcoal}` — `#525252`): list-item text and disabled-state secondary copy.
-- **Body** (`{colors.body}` — `#737373`): default body color for paragraph copy, FAQ answers, footer link text — the system's most-used text color after pure black.
-- **Mute** (`{colors.mute}` — `#a3a3a3`): caption text, command-line "comment" gray inside terminal mockups, lowest-emphasis utility text.
-- **On Dark** (`{colors.on-dark}` — `#ffffff`): primary text on `{colors.surface-dark}`.
-- **On Dark Mute** (`{colors.on-dark-mute}` — `rgba(255,255,255,0.7)`): secondary copy inside the dark "Max" pricing card.
+### Named Rules
+**The Workbench Rule.** Ink appears once per viewport cluster. The single black
+pill is the primary action; everything else on the workbench is hairline and
+muted until interacted with. The restraint is the design.
 
-### Semantic
-The system has effectively no error/success/warning palette in its public marketing surfaces — there are no validation states, no destructive flows, no banners. The only "semantic" colors are the macOS terminal traffic lights inside the terminal mockup:
-
-- **Terminal Red** (`{colors.terminal-red}` — `#ff5f56`): close-window dot.
-- **Terminal Yellow** (`{colors.terminal-yellow}` — `#ffbd2e`): minimize dot.
-- **Terminal Green** (`{colors.terminal-green}` — `#27c93f`): zoom dot.
-
-These appear only inside `{component.terminal-card}` and have no other use.
-
-### Focus
-- **Focus Ring** (`{colors.focus-ring}` — `rgba(59,130,246,0.5)`): translucent blue browser-default focus ring around interactive elements. The only blue in the system.
+**The Hairline Rule.** Structure is drawn with 1px `var(--border)` hairlines and
+tonal fills, never with shadows. If a section needs separation, reach for a
+hairline first and a fill second.
 
 ## Typography
 
-### Font Family
-- **SF Pro Rounded** (display headings) — Apple's rounded geometric sans, used at weights 500 and 600 for headlines from `{typography.display-xl}` (36px) down to `{typography.heading-lg}` (24px). Falls back to `system-ui` → `-apple-system`.
-- **ui-sans-serif** (body, links, buttons, captions) — the operating system's default sans-serif. Carries every non-display text role at 12–20px. Falls back through `system-ui` and platform emoji families.
-- **ui-monospace** (code, install snippet, command tags) — the OS default monospace. Used inside the terminal mockup, the inline `curl` install pill, and any inline `<code>` formatting. Falls back to SFMono-Regular → Menlo → Monaco → Consolas.
+**Display Font:** Nunito (with ui-sans-serif, system-ui fallback)
+**Body Font:** Geist (with ui-sans-serif, system-ui fallback)
+**Label/Mono Font:** Geist Mono (with ui-monospace fallback)
 
-The pairing of SF Pro Rounded display + system sans body + system mono code is intentionally "stock Apple" — the design decision is to not have a typography decision. Branded display faces would compete with the system's documentation feel.
+**Character:** A rounded geometric display paired with a clean, neutral sans body
+— friendly but not childish, precise but not stiff. Geist keeps long-form reading
+calm; Nunito gives the rare heading a soft, approachable curve. Geist Mono marks
+system identities: invite links, keyboard hints, and code.
 
 ### Hierarchy
+- **Display** (Nunito 500, 20px, 1.2): Surface titles — the modal heading
+  ("Settings"). The only face that carries Nunito.
+- **Body** (Geist 400, 16px, 1.5): Default text, prose, entry content
+  (`.prose-readable`).
+- **Title / Row Label** (Geist 400, 14px): Row and list labels (`.wv-row-label`,
+  `.nav-row` items, header actions).
+- **Label** (Geist 500, 12px): Field labels (`.wv-field-label`), buttons, chips,
+  property values, keyboard hints.
+- **Meta** (Geist 400, 12px): Secondary metadata — emails, timestamps,
+  counts (`.wv-row-meta`).
+- **Micro** (Geist 500, 11px): Badges and status labels (`.wv-role-badge`,
+  `.status-label-only`).
 
-| Token | Size | Weight | Line Height | Letter Spacing | Use |
-|---|---|---|---|---|---|
-| `{typography.display-xl}` | 36px | 500 | 1.11 | 0 | Hero headline ("The easiest way to build with open models") |
-| `{typography.display-lg}` | 30px | 500 | 1.2 | 0 | Major section headlines ("Pricing", "Frequently asked questions") |
-| `{typography.heading-lg}` | 24px | 600 | 1.33 | 0 | Section subheading inside body ("Automate your work", "Start local. Scale cloud.") |
-| `{typography.heading-md}` | 20px | 500 | 1.4 | 0 | Pricing tier name ("Free", "Pro", "Max"), card title |
-| `{typography.heading-sm}` | 18px | 500 | 1.56 | 0 | FAQ question label, in-card subtitle |
-| `{typography.body-md}` | 16px | 400 | 1.5 | 0 | Default body, FAQ answers, paragraph copy |
-| `{typography.body-strong}` | 16px | 500 | 1.5 | 0 | Inline emphasis, primary-nav link |
-| `{typography.body-sm}` | 14px | 400 | 1.43 | 0 | Feature bullet ("Access larger models on data-center-grade hardware"), footer link |
-| `{typography.body-sm-strong}` | 14px | 500 | 1.43 | 0 | Button label, pricing-card eyebrow ("Solve harder tasks, faster") |
-| `{typography.caption-sm}` | 12px | 400 | 1.33 | 0 | Footer copyright row, smallest meta text |
-| `{typography.code-md}` | 16px | 400 | 1.5 | 0 | Install-snippet `curl` line, in-terminal command |
-| `{typography.code-sm}` | 14px | 400 | 1.43 | 0 | Terminal output line, inline `<code>` chips |
-| `{typography.button-md}` | 14px | 500 | 1 | 0 | Every button label across the system |
-
-### Principles
-The typography is built for legibility at small sizes on a flat-white canvas. SF Pro Rounded's softened terminals on the heading face do almost all of the brand expression; everything below 20px collapses into the operating system's default sans, which renders identically to the way docs.ollama.com and the Ollama CLI's own help text would appear in a terminal. There is almost no letter-spacing variation, no display-only weights, no italic, and the heading-to-body ratio compresses tightly (36 → 30 → 24 → 20 → 16) so the page reads as a single readable column rather than a marketing pyramid.
-
-### Note on Font Substitutes
-SF Pro Rounded is Apple-licensed and ships only on macOS/iOS. On other systems it falls back to `system-ui` (Segoe UI / Roboto / DejaVu Sans depending on platform) — Ollama explicitly accepts that the heading face will look slightly different on Windows/Linux. The closest open-source substitute is **Nunito** (rounded geometric sans, weights 500/600). For the body face, **Inter** is a near-perfect match for `system-ui` rendered metrics. For code, **JetBrains Mono** or **Fira Code** are the canonical open-source substitutes for `ui-monospace`.
+### Named Rules
+**The Type Ratio Rule.** Display (20px Nunito) → section head (14px 500 muted) →
+row label (14px 400) → metadata (12px muted). Each step down both shrinks and
+mutes; never let a section heading read smaller or weaker than the row labels it
+leads.
 
 ## Layout
 
-### Spacing System
-- **Base unit:** 8px (with finer 2/4/6px steps available for tight inline gaps)
-- **Tokens (front matter):** `{spacing.xxs}` (2px) · `{spacing.xs}` (4px) · `{spacing.sm}` (8px) · `{spacing.md}` (12px) · `{spacing.lg}` (16px) · `{spacing.xl}` (24px) · `{spacing.xxl}` (32px) · `{spacing.section}` (88px)
-- **Universal section rhythm:** every page uses `{spacing.section}` (88px) as the vertical gap between major content blocks (hero → automate → start local/scale cloud → your data stays yours → get-started footer call). This is the single largest spacing token in the system and it is used liberally.
-- **Card internal padding:** pricing cards sit at `{spacing.xxl}` (32px) all around; FAQ rows use `{spacing.lg}` (16px) vertical with no horizontal padding.
+A single full-height workspace frame: a fixed sidebar and a main column that
+holds the header bar and the content surface, with overlays (floating toolbar,
+slash menu, modals) stacked above.
 
-### Grid & Container
-- **Max width:** ~720px content column on the home page (the whole page is laid out as a single narrow reading column with optional 2-column splits inside specific sections).
-- **Pricing grid:** 3-up cards at desktop with a max content width of ~960px; collapses to 1-up below 768px.
-- **Automate-your-work split:** desktop 50/50 left-text/right-terminal-mockup; mobile stacks vertical with the terminal below the text.
-- **FAQ:** single-column stacked rows, full-width within the 720px content column.
-- **Footer:** single-row of small body-sm links, center-aligned at desktop, wrapping to two rows on narrow screens.
-
-### Whitespace Philosophy
-Whitespace is the entire layout. Sections are separated by 88px of plain white air, never by decorative dividers, never by colored bands. Inside a section, content sits in a tight reading column with no decorative columns, callout boxes, or lifted cards. The site treats the page as a long-form Markdown document, and the air between sections is the equivalent of a blank line in Markdown source.
+- **Frame:** `h-full w-full flex` — sidebar + `<main class="flex-1 flex flex-col">`.
+- **Header bar:** 56px tall (`h-14`), `px-6`, `grid grid-cols-[1fr_auto_1fr]`,
+  hairline bottom border. Left: back/forward/recent. Center: breadcrumb.
+  Right: theme toggle, share, Ask AI.
+- **Content column:** List view is a bordered card at `w-[85%] mx-auto px-8 py-8`;
+  the editor surface sits full-width below the list.
+- **Spacing rhythm:** a 4/8/12/24px scale — `gap-1`(4px) inside icon clusters,
+  `gap-2`(8px) between related controls, `px-3`(12px) button padding,
+  `24px` section margins and modal padding. Section headings sit at
+  `24px 0 4px`.
+- **Density:** comfortable. Rows pad `8px` vertically, controls are 28px tall,
+  small buttons `h-7` (28px) with `px-2` (8px). No cramped 6px-vertical rows.
+- **Responsive:** no breakpoint system is implemented; the workspace is
+  desktop-first. Long fields shrink (`min-width: 0`, ellipsis) before wrapping.
 
 ## Elevation & Depth
 
-| Level | Treatment | Use |
-|---|---|---|
-| 0 — Flat | No border, no shadow | Hero, automate-your-work, your-data-stays-yours, footer — the dominant treatment across the page |
-| 1 — Hairline border | 1px solid `{colors.hairline}` | Pricing cards, FAQ row dividers, terminal mockup card |
-| 2 — Inverted dark | `{colors.surface-dark}` fill | Dark "Max" pricing card and dark CTA strip — the system's only "elevated" surfaces use color, not shadow |
+Fully flat. There are no elevation shadows in the system. Depth is conveyed
+entirely by 1px hairlines and tonal layering: a card is warm-paper on
+warm-paper, separated by a hairline border; a hover state is one stone step
+darker; a floating menu (`.floating-pop`, tooltips) sits above by carrying a
+hairline border and its own background, not a shadow.
 
-The system has no drop-shadow elevation at all. Nothing lifts, nothing floats, nothing layers. The only depth cue beyond hairline borders is the single dark surface used on the highest-tier pricing card to draw attention to it.
+The only `box-shadow` in the codebase is the accessibility focus ring — a 3px
+blue ring (`0 0 0 3px rgba(59, 130, 246, 0.5)`, `--ring`) on focused controls
+and menu items. Focus rings are an accessibility affordance, not an elevation
+mechanism; they are the sole chromatic element permitted.
 
-### Decorative Depth
-The site has effectively zero decorative depth in the traditional sense. The "depth" comes entirely from two recurring devices:
-- **The hand-drawn llama mascot** — appearing once at the top of the hero, once at the top of each pricing card, and once next to the lock icon in the "Your data stays yours" section. It is the only illustration in the system.
-- **A single line-drawn lock icon** — used in the data-privacy section. Stroke-only, no fill, drawn in `{colors.ink}`.
+### Named Rules
+**The Flat-By-Default Rule.** No surface casts a shadow. If an element needs to
+read above another, give it a hairline border and a background — never a drop
+shadow. Do not reintroduce elevation as a decorative layer.
 
 ## Shapes
 
-### Border Radius Scale
+The form language is gentle circles and soft rectangles on a flat plane.
 
-| Token | Value | Use |
-|---|---|---|
-| `{rounded.none}` | 0px | Nav, footer, FAQ row dividers — flat structural lines |
-| `{rounded.sm}` | 6px | Inline code chips, command tags |
-| `{rounded.md}` | 8px | Rare medium-radius surfaces (e.g., dropdown panels) |
-| `{rounded.lg}` | 12px | Pricing cards, terminal mockup card |
-| `{rounded.full}` | 9999px | Every button, every pill input, install-snippet pill, search pill, traffic-light dots |
+- **Pills** (`9999px`): every interactive control that carries a label — buttons,
+  chips, badges, search pills, the circular close and avatar.
+- **Controls** (7px): compact square-ish controls and rows — nav rows, header
+  icon buttons, small buttons, inputs, the floating-menu rows, invite links.
+- **Cards** (12px, `--radius: 0.75rem`): the entry table card, modal card.
+- **Inner slabs** (8px, `--radius-md`): tooltips, the search/create cluster
+  (`.vp2-shell`), dropdown panels.
+- **Borders:** 1px hairlines only. No double borders, no embossed edges.
+- **Avatars:** circular (`border-radius: 9999px`), 18px inline in rows, 20–24px
+  in headers and menus.
 
-The dominant shape vocabulary is just two values: pills (`{rounded.full}`) for everything interactive and 12px (`{rounded.lg}`) for the few cards in the system. There are no medium-radius "soft cards" — surfaces are either pills or rectangles with corners large enough to read as deliberately soft.
-
-### Photography Geometry
-There is no photography. The only image-like elements are:
-- **The llama mascot** — a hand-drawn line illustration, ~80–120px on the hero, ~32–48px when it appears as a pricing-card eyebrow icon.
-- **The lock icon** — single stroke line drawing in the privacy section.
-- **macOS traffic-light dots** — three filled circles at 12px (`{rounded.full}`) inside the terminal mockup card.
+### Named Rules
+**The Pill Rule.** If it's interactive, it's a pill or a 7px control — never a
+sharp square, never a playful squircle. Radius choice signals affordance: pills
+for labeled actions, 7px for quiet square controls, 12px for containers.
 
 ## Components
 
-> **No hover states documented** per system policy. Each spec covers Default and Active/Pressed only.
-
 ### Buttons
+- **Shape:** labeled actions are pills (`9999px`); compact controls are 7px.
+  Small buttons are `h-7 px-2`, `text-[12px]`–`text-[14px]`, medium `px-3 py-1.5`.
+- **Primary** (`.primary-btn`): ink pill, `ink-soft` text. Hover: `#0c0a09`
+  (dark: `#e7e5e4`). Reserved for the one action per cluster.
+- **Ghost** (`.ghost-btn`): warm-paper pill, ink text. Hover: hover-stone fill.
+- **Outline** (header Share, settings Edit): transparent, 1px hairline border,
+  ink text, hover-stone fill on hover.
+- **Text** (`.ask-ai-text`): transparent, ink/muted text, hover-stone fill on
+  hover, icons at 2px stroke.
+- **Icon** (`.header-btn`, `.wv-row-icon-btn`): 28×28, 7px radius, muted-clay
+  icon; hover-stone fill and ink icon on hover. Never bare squares.
 
-**`button-primary`** — the universal Ollama CTA
-- Background `{colors.primary}`, text `{colors.on-primary}`, type `{typography.button-md}`, padding `8px 20px`, height `36px`, rounded `{rounded.full}`.
-- Used for "Download" (top nav), "Sign in" (top nav, paired with Download), "Create account", "Get Pro", "Get Max" — every primary action in the system.
-- Pressed state lives in `button-primary-active` — background drops to `{colors.ink-deep}`.
+### Chips / Badges
+- **Property chip** (`.property-chip`): 12px pill, warm-paper fill, muted-clay
+  label + ink value, 4px inner gap.
+- **Type pill** (`.type-pill`): 12px 500 pill distinguishing entry types.
+- **Status badge** (`.status-label-only`): 12px 500 pill, capitalized label.
+- **Role badge** (`.wv-role-badge`): 11px 500 pill, hairline border, warm-paper
+  fill; the owner role inverts to ink fill with warm-paper text.
+- **Avatar chip** (`.avatar-chip`): 18px circle, 10px 600 initials, soft-stone fill.
 
-**`button-secondary`** — outline alternative on light canvas
-- Background `{colors.canvas}`, text `{colors.ink}`, 1px solid `{colors.hairline-strong}`, type `{typography.button-md}`, padding `8px 20px`, height `36px`, rounded `{rounded.full}`.
-- Used as a secondary affordance — e.g., the "Sign in" pill in the top nav when paired with the black "Download" pill, "See more apps →" arrow link in compact form.
-
-**`button-pill-on-dark`** — white pill on dark surface
-- Background `{colors.canvas}`, text `{colors.ink}`, type `{typography.button-md}`, rounded `{rounded.full}`.
-- Sits inside the dark "Max" pricing card as the "Get Max" CTA — inverts the standard primary so the dark card itself becomes the visual anchor and the white pill reads as the CTA.
-
-**`button-disabled`**
-- Background `{colors.surface-soft}`, text `{colors.mute}`, rounded `{rounded.full}` — flat soft gray.
-
-### Inputs & Forms
-
-**`search-pill`** + **`search-pill-focused`**
-- Default: background `{colors.surface-soft}`, text `{colors.ink}`, type `{typography.body-sm}`, padding `8px 16px`, height `36px`, rounded `{rounded.full}`. Anchored in the center of the primary nav with a small magnifier icon prefix and "Search models" placeholder.
-- Focused: background flips to `{colors.canvas}` and the browser-default `{colors.focus-ring}` translucent blue ring appears.
-
-**`text-input`** + **`text-input-focused`**
-- Default: background `{colors.canvas}`, 1px solid `{colors.hairline}`, type `{typography.body-md}`, padding `8px 16px`, height `40px`, rounded `{rounded.full}`.
-- Focused: 1px ink border + browser-default focus ring.
-
-**`install-snippet`** — the signature install pill
-- Background `{colors.surface-soft}`, text `{colors.ink}` rendered in `{typography.code-md}`, padding `12px 20px`, height `48px`, rounded `{rounded.full}`.
-- Contains the literal `curl -fsSL https://ollama.com/install.sh | sh` install command with a small copy-icon at the right edge. Sits directly below the hero headline as the page's most prominent "CTA."
-
-**`command-tag`** — small inline command chip
-- Background `{colors.surface-soft}`, text `{colors.ink}` in `{typography.code-sm}`, padding `6px 12px`, rounded `{rounded.full}`.
-- Used inside the "Automate your work" section for the `ollama launch openclaw` example chip and similar inline-command demos.
-
-### Cards & Containers
-
-**`terminal-card`** — the home page's only "product preview"
-- Container: background `{colors.canvas}`, 1px solid `{colors.hairline}`, padding `{spacing.lg}` (16px), rounded `{rounded.lg}`.
-- Header: three `{component.terminal-traffic-lights}` dots (red/yellow/green at 12px) anchored to the top-left of the card.
-- Body: terminal output rendered in `{typography.code-sm}` with comments in `{colors.mute}` and active commands in `{colors.ink}`.
-
-**`terminal-traffic-lights`**
-- Three 12px filled circles at `{rounded.full}`: `{colors.terminal-red}`, `{colors.terminal-yellow}`, `{colors.terminal-green}`. Sits as a row of three with `{spacing.xs}` gaps between dots inside the terminal card header.
-
-**`pricing-card`** — Free / Pro tiers
-- Container: background `{colors.canvas}`, 1px solid `{colors.hairline}`, padding `{spacing.xxl}` (32px), rounded `{rounded.lg}`.
-- Layout: small llama mascot icon (~32px) at top, tier name in `{typography.heading-md}`, one-line tier description, large price in `{typography.display-lg}` (`$0` / `$20`), single `{component.button-primary}` CTA, divider, `{typography.body-sm-strong}` "Everything in Free, plus:" header, list of `{component.feature-bullet}` rows.
-
-**`pricing-card-dark`** — Max tier (inverted)
-- Identical layout to `pricing-card` but with `{colors.surface-dark}` background, `{colors.on-dark}` text, `{colors.on-dark-mute}` secondary text, and `{component.button-pill-on-dark}` CTA. The inversion is the system's single "look here" cue.
-
-**`feature-bullet`** — pricing card list item
-- Inline `✓` checkmark at `{colors.ink}` followed by `{typography.body-sm}` text in `{colors.charcoal}`. No background, no border, just stacked rows with `{spacing.sm}` between them.
-
-**`faq-row`** — `/pricing` FAQ entry
-- Container: background `{colors.canvas}`, padding `16px 0`, 1px bottom border `{colors.hairline}`.
-- Question: `{typography.heading-sm}` (18px / 500) in `{colors.ink}`.
-- Answer: `{typography.body-md}` (16px / 400) in `{colors.body}`, sitting directly below the question with `{spacing.xs}` gap. Always expanded — no accordion collapse.
-
-**`cta-strip-dark`** — rare dark CTA band
-- Background `{colors.surface-dark}`, text `{colors.on-dark}` in `{typography.heading-lg}`, padding `24px 32px`, rounded `{rounded.lg}`. Used sparingly between sections.
-
-### Inline
-
-**`link-inline`** — body-prose anchor link
-- `{colors.ink}` text with underline. Default decoration is `text-decoration: underline`.
-
-**`link-mute`** — secondary anchor in long-form prose
-- `{colors.body}` text with underline appearing on default — used in FAQ answers ("see [hello@ollama.com](mailto:)") and footer.
+### Inputs / Fields
+- **Style:** 12px text, 7px radius, `--input` background (input-surface / dark
+  `#1c1917`), hairline border. Widths: 240px standard, 150px inline invite,
+  200px settings rows.
+- **Focus:** 3px blue ring (`--ring`) via `.focus-ring`; text controls drop
+  their default outline in favor of the ring.
 
 ### Navigation
+- **Sidebar rows** (`.nav-row`): 7px radius, muted-clay text; hover fills
+  hover-stone and darkens to ink; the active row fills soft-stone with ink text.
+- **Tabs:** `.field-tab` — ink underline on active; `.section-tab` — soft-stone
+  pill fill on active.
+- **Header controls:** 28px icon buttons with hover tooltips (12px, 8px radius,
+  hairline border, warm-paper fill) and keyboard hints in Geist Mono.
 
-**`primary-nav`**
-- Background `{colors.canvas}`, text `{colors.ink}`, height 56px, type `{typography.body-sm-strong}`, rounded `{rounded.none}`.
-- Layout (desktop): llama icon (left) followed by "Models · Docs · Pricing" text links, centered `{component.search-pill}`, and a right cluster of "Sign in" + black `{component.button-primary}` "Download".
+### Cards / Containers
+- **Corner Style:** 12px (entry table `rounded-t-lg`, modal `rounded-lg`).
+- **Background:** warm-paper (`--card`).
+- **Border:** 1px hairline (`var(--border)`).
+- **Shadow Strategy:** none — see Elevation & Depth.
+- **Internal Padding:** 24px modal canvas, `px-8 py-8` list, 12px inner panels.
 
-**Top Nav (Mobile)**
-- Llama icon at left, hamburger drawer trigger at right. Search pill expands to full-width when triggered. The drawer lists "Models · Docs · Pricing · Sign in · Download" stacked vertically with `{spacing.lg}` row gaps.
-
-### Footer
-
-**`footer-section`**
-- Background `{colors.canvas}`, 1px top border `{colors.hairline}`, padding `32px 24px`, type `{typography.caption-sm}` `{colors.body}`.
-- Single horizontal row of small links: "Download · Blog · Docs · GitHub · Discord · X · Contact · Privacy · Terms" + a "© 2026 Ollama" copyright at the right edge. Wraps to two rows on narrow screens.
+### Signature Component: The Settings Modal
+A `max-w-2xl` card, `rounded-lg`, hairline border, `bg-popover` (warm-paper).
+Header stacks a 20px Nunito title over a 13px muted subtitle, close button
+aligned to the title line. Sections separated by 1px rules; rows are
+`wv-row` label/value pairs with 10px vertical padding and hairline dividers
+between member rows. The invitation row is an action-first cluster: username
+input, outline Add button, "or", outline Generate-link button, expiry select —
+with the generated link appearing as a 12px Geist Mono chip.
 
 ## Do's and Don'ts
 
-### Do
-- Treat the page like a Markdown document: single reading column, plenty of `{spacing.section}` air between sections, no decorative dividers.
-- Use `{component.button-primary}` (black pill) for every primary action. There is no green, no blue, no brand-tinted CTA.
-- Default to `{rounded.full}` for any interactive element. Cards get `{rounded.lg}` (12px) and that is the only exception.
-- Use `{typography.display-xl}` SF Pro Rounded for the hero headline and `{typography.body-md}` system sans for everything else. Avoid intermediate display sizes.
-- Reserve `{component.pricing-card-dark}` (the inverted dark surface) for exactly one "look here" moment per page — never use it twice.
-- Render install commands and CLI examples inside `{component.install-snippet}` or `{component.terminal-card}` with `{typography.code-md}` / `{typography.code-sm}`. Code is a first-class component.
-- Keep the llama mascot the only illustration in the system. It is the brand.
+### Do:
+- **Do** keep chrome quiet: warm-paper surfaces, hairline borders, muted-clay
+  secondary text, ink reserved for primary actions.
+- **Do** draw structure with 1px hairlines (`var(--border)`) and tonal fills,
+  never shadows.
+- **Do** use pill geometry for labeled actions and 7px for compact controls.
+- **Do** use one ink element per cluster — the primary action; ghost everything
+  else until hover.
+- **Do** use Nunito for display headings, Geist for body, Geist Mono for links,
+  code, and keyboard hints.
+- **Do** keep focus visible with the 3px blue ring on every interactive element.
+- **Do** use warm-paper (`#f4f4f1`) for surfaces; it is warmer than `#ffffff` by
+  design.
+- **Do** give every quiet control a hover-stone fill so affordances are
+  discoverable without being loud.
 
-### Don't
-- Don't introduce gradients, drop shadows, or atmospheric backgrounds. The canvas is pure `{colors.canvas}`.
-- Don't add brand colors. The system is `{colors.primary}` (black) on `{colors.canvas}` (white) with `{colors.body}` (gray) text. That is it.
-- Don't soften pills or sharpen cards — pills stay `{rounded.full}`, cards stay `{rounded.lg}`. Don't introduce `{rounded.md}` for buttons or `{rounded.full}` for cards.
-- Don't lift cards with shadows. Use a 1px `{colors.hairline}` border or invert to `{colors.surface-dark}` — those are the only two card treatments.
-- Don't replace `ui-sans-serif` with a branded display body face. The system relies on `system-ui` rendering to feel native.
-- Don't fill long-form pages with marketing chrome. FAQ answers stay in `{colors.body}` body-md prose with no decorative containers.
-
-## Responsive Behavior
-
-### Breakpoints
-
-| Name | Width | Key Changes |
-|---|---|---|
-| desktop-large | 1280px+ | Default desktop — 720px content column, 3-up pricing grid |
-| desktop | 1024px | Same layout; nav remains horizontal |
-| tablet | 850px | Pricing collapses from 3-up to 2-up + 1; nav search pill compresses |
-| tablet-narrow | 768px | Pricing collapses to 1-up stacked; primary nav becomes hamburger |
-| mobile | 640px | Hero headline drops from `{typography.display-xl}` (36px) to ~28px; install-snippet wraps; section padding tightens |
-
-### Touch Targets
-All interactive elements meet WCAG AA at the 36–40px height range. `{component.button-primary}` and `{component.button-secondary}` sit at 36px height with 20px horizontal padding, giving an effective tappable area of ~36×80px which exceeds the 44×44px AAA threshold via the inline padding. `{component.text-input}` sits at 40px. `{component.search-pill}` sits at 36px height with 16px padding. Footer links use `{typography.caption-sm}` (12px) but receive ~12px line-height + ~8px vertical padding for a tappable row of ~32–36px.
-
-### Collapsing Strategy
-- **Primary nav:** desktop horizontal → tablet-narrow hamburger drawer at 768px. The black "Download" CTA stays visible at all widths; it never collapses into the menu.
-- **Search pill:** desktop fixed width ~360px → tablet compressed to ~240px → mobile collapses to icon-only with a full-width overlay on tap.
-- **Pricing grid:** 3-up → 2+1 → 1-up stacked at 850, 768, and below. The dark "Max" card stays in its inverted treatment at every breakpoint.
-- **Automate-your-work split:** desktop 50/50 → tablet stacks vertical with text above terminal mockup.
-- **Hero headline:** `{typography.display-xl}` (36px) at desktop, scaling to ~28px at mobile with line-height holding at ~1.15.
-- **Section spacing:** `{spacing.section}` (88px) desktop → 64px tablet → 48px mobile.
-- **Install-snippet pill:** wraps `curl` text to a second line on narrow screens rather than truncating; the copy-icon stays anchored to the right edge.
-
-### Image Behavior
-The only image asset is the llama mascot (raster PNG at multiple resolutions: 16/32/48/64/180/192/512px). It is rendered at fixed pixel sizes on the hero and pricing cards rather than scaling responsively — the brand asset is treated like a logo, not a hero image.
-
-## Iteration Guide
-
-1. Focus on ONE component at a time. Pull its YAML entry from the front matter and verify every property resolves.
-2. Reference component names and tokens directly (`{colors.primary}`, `{component.button-primary-active}`, `{rounded.full}`) — do not paraphrase.
-3. Run `npx @google/design.md lint DESIGN.md` after edits — `broken-ref`, `contrast-ratio`, and `orphaned-tokens` warnings flag issues automatically.
-4. Add new variants as separate component entries (`-active`, `-disabled`, `-focused`) — do not bury them inside prose.
-5. Default body to `{typography.body-md}`; reach for `{typography.body-sm}` for footer/utility text; reserve `{typography.display-xl}` strictly for the page-top headline.
-6. Keep `{colors.primary}` scarce per viewport — there should be at most one black pill per fold (counting nav, hero CTA, and pricing-card CTA together). The design's restraint is the design.
-7. When introducing a new component, ask whether it can be expressed with the existing pill + flat-card + terminal-mockup vocabulary before adding new tokens. The system's strength is that it almost never needs new ones.
-
-## Known Gaps
-
-- **Mobile screenshots not captured** — responsive behavior synthesizes Ollama's known mobile pattern (hamburger drawer, 1-up pricing stack, install-snippet wrap) from desktop evidence and the extracted breakpoint stack.
-- **Hover states not documented** by system policy.
-- **Form field styling** beyond search and install-snippet is not present in the captured surfaces — there is no visible long-form form on the home or pricing pages.
-- **Authenticated chrome** (account dropdown, billing settings, model dashboard) not in the captured pages.
-- **Models / Docs pages** not in the captured set — those surfaces likely add a sidebar and a docs typography tier that this document does not describe.
+### Don't:
+- **Don't** use shadows, gradients, or hover transforms (scale/translate) for
+  elevation or feedback.
+- **Don't** introduce a chromatic accent color — the palette is monochrome warm
+  stone; red is reserved for destructive actions.
+- **Don't** use pure `#ffffff` surfaces or pure-black shadows.
+- **Don't** bring back bold, high-contrast, visually assertive chrome — the
+  anti-reference the system is replacing.
+- **Don't** let a section heading read smaller than its row labels (14px 500
+  muted is the floor for section heads).
+- **Don't** hardcode colors outside the token system; reference
+  `var(--background)`, `var(--foreground)`, `var(--border)`, etc.
+- **Don't** add kickers/eyebrows or decorative labels — restraint extends to
+  copy hierarchy.
+- **Don't** render text below 11px.
