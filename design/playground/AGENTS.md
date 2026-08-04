@@ -2,7 +2,7 @@
 
 ## Project Overview
 
-Astro 7 prototype of the workspace UI under `design/playground/`. Used to explore and validate the workspace interface before implementation in the main app.
+Astro 7 prototype of the Workspace UI under `design/playground/`. Used to explore and validate the interface before implementation in the main app.
 
 ## Mandatory Tools
 
@@ -18,14 +18,14 @@ pnpm add -D <pkg>             # Add a dev dependency
 
 ## Tech Stack
 
-| Technology | Role |
-|---|---|
-| Astro 7 | Builder / component framework |
+| Technology      | Role                                     |
+| --------------- | ---------------------------------------- |
+| Astro 7         | Builder / component framework            |
 | Tailwind CSS v4 | All styling (`@tailwindcss/vite` plugin) |
-| Alpine.js 3.x | Client reactivity (bundled via pnpm) |
-| TypeScript | All logic + mock data under `src/` |
-| iconify-icon | Icon web component |
-| pnpm | Package manager (only one allowed) |
+| Alpine.js 3.x   | Client reactivity (bundled via pnpm)     |
+| TypeScript      | All logic + mock data under `src/`       |
+| iconify-icon    | Icon web component                       |
+| pnpm            | Package manager (only one allowed)       |
 
 Design token reference: `/DESIGN.md`.
 
@@ -47,13 +47,13 @@ astro dev --background
 
 Manage the background server with `astro dev stop`, `astro dev status`, and `astro dev logs`.
 
-| Command | Description |
-|---|---|
-| `pnpm dev` | Dev server (localhost:4321) |
-| `pnpm astro dev --background` | Background mode dev server |
-| `pnpm check` | Type-check all Astro + TS files |
-| `pnpm build` | Production build → `dist/` |
-| `pnpm preview` | Preview production build |
+| Command                       | Description                     |
+| ----------------------------- | ------------------------------- |
+| `pnpm dev`                    | Dev server (localhost:4321)     |
+| `pnpm astro dev --background` | Background mode dev server      |
+| `pnpm check`                  | Type-check all Astro + TS files |
+| `pnpm build`                  | Production build → `dist/`      |
+| `pnpm preview`                | Preview production build        |
 
 ## Project Structure
 
@@ -108,7 +108,9 @@ pnpm add iconify-icon
 Import in `WorkspaceLayout.astro`:
 
 ```html
-<script>import 'iconify-icon';</script>
+<script>
+  import "iconify-icon";
+</script>
 ```
 
 Pattern — single `<iconify-icon>` element (no Astro wrapper, no custom SVGs):
@@ -132,7 +134,7 @@ The `display: inline-flex; align-items: center;` is handled globally in CSS.
 
 ## Documentation
 
-Full documentation: https://docs.astro.build
+Full documentation: <https://docs.astro.build>
 
 Consult these guides before working on related tasks:
 
