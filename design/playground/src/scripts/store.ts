@@ -6,6 +6,7 @@ export type ConversationFilter = "all" | "unread";
 
 export interface WorkspaceStore {
   isDarkMode: boolean;
+  isSidebarOpen: boolean;
   isNewMenuOpen: boolean;
   activeCollection: string;
   activeSchema: SchemaId | null;
@@ -82,7 +83,6 @@ export interface WorkspaceStore {
   openSettingsModal(): void;
   closeSettingsModal(): void;
   addMember(): void;
-  scrollToSection(sectionId: string): void;
   saveWorkspaceSettings(): void;
   selectLibrary(name: string): void;
   openSearchModal(): void;

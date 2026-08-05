@@ -14,6 +14,9 @@ export const ICONS: Record<string, string> = {
   ai: "mingcute:ai-line",
   chat: "mingcute:chat-2-line",
   settings: "mingcute:settings-3-line",
+  "settings-6": "mingcute:settings-6-line",
+  puzzle: "mingcute:puzzle-2-line",
+  "list-check": "mingcute:list-check-line",
   tweaks: "mingcute:settings-4-line",
   moon: "mingcute:moon-line",
   sun: "mingcute:sun-line",
@@ -46,6 +49,8 @@ export const ICONS: Record<string, string> = {
   user: "mingcute:user-3-line",
   briefcase: "mingcute:briefcase-2-line",
   "help-circle": "mingcute:question-line",
+  menu: "mingcute:menu-line",
+  plugin: "mingcute:plugin-2-line",
 };
 
 export function getIconName(name: string): string {

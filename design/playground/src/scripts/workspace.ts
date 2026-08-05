@@ -38,6 +38,7 @@ const state = {
   selectedDiscussionId: null as number | null,
   conversationFilter: "all" as "all" | "unread",
   isLibraryDropdownOpen: false,
+  isSidebarOpen: true,
   isSettingsModalOpen: false,
   isSearchModalOpen: false,
   searchQuery: "",
@@ -189,21 +190,6 @@ Alpine.data(
         }
       });
 
-      this.$nextTick?.(() => {
-        const canvas = document.getElementById("modal-scroll-canvas");
-        if (canvas) {
-          canvas.addEventListener("scroll", () => {
-            const sections = document.querySelectorAll(".settings-section");
-            sections.forEach((sec) => {
-              const top =
-                (sec as HTMLElement).offsetTop - canvas.offsetTop - 50;
-              if (canvas.scrollTop >= top) {
-                this.activeSettingsSection = sec.id;
-              }
-            });
-          });
-        }
-      });
     },
 
     countByType(type: SchemaId): number {

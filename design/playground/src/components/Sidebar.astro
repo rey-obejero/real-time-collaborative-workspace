@@ -1,5 +1,7 @@
 <aside
-      class="w-80 shrink-0 flex flex-col h-full border-r border-border bg-background select-none"
+  x-show="isSidebarOpen"
+  x-cloak
+  class="w-80 shrink-0 flex flex-col h-full border-r border-border bg-background select-none"
 >
   <div class="px-3 pt-3 pb-4">
     <button
@@ -32,7 +34,7 @@
         @click.outside="isLibraryDropdownOpen = false"
         x-transition
         role="menu"
-        class="floating-pop absolute top-full left-0 right-0 mt-1 z-30 rounded-md overflow-hidden bg-background border border-border p-1.5"
+        class="floating-pop absolute top-full left-3 mt-1 z-30 w-[calc(100%+20px)] rounded-md overflow-hidden bg-background border border-border p-1.5"
       >
         <div class="space-y-0.5">
           <button
@@ -117,7 +119,7 @@
         x-cloak
         x-transition
         role="menu"
-        class="floating-pop absolute top-full left-0 right-0 mt-1 z-30 rounded-md overflow-hidden bg-background border border-border p-1.5"
+        class="floating-pop absolute top-full left-3 mt-1 z-30 w-[calc(100%+20px)] rounded-md overflow-hidden bg-background border border-border p-1.5"
       >
         <div class="space-y-0.5">
           <template x-for="schema in schemas" :key="schema.id">

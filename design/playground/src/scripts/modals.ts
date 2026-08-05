@@ -54,18 +54,6 @@ export const modalActions = {
     this.isInviteBoxExpanded = false;
   },
 
-  scrollToSection(this: WorkspaceStore, sectionId: string): void {
-    this.activeSettingsSection = sectionId;
-    const el = document.getElementById(sectionId);
-    const canvas = document.getElementById("modal-scroll-canvas");
-    if (el && canvas) {
-      canvas.scrollTo({
-        top: el.offsetTop - canvas.offsetTop - 24,
-        behavior: "smooth",
-      });
-    }
-  },
-
   saveWorkspaceSettings(this: WorkspaceStore): void {
     if (this.workspaceNameInput.trim())
       this.currentLibrary = this.workspaceNameInput.trim();

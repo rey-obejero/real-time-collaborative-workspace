@@ -666,22 +666,20 @@ iconify-icon {
   border-radius: 7px;
 }
 .wv-sec-h {
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 500;
   color: var(--muted-foreground);
   margin: 24px 0 4px;
 }
 /* Settings modal — accepted variant 1 (circular close, no footer, tight header gap) */
-.wv-close {
-  width: 28px;
-  height: 28px;
-  border-radius: 9999px;
-}
-.wv-header {
-  padding: 24px 24px 0;
-}
 .wv-scroll {
-  padding: 24px;
+  padding: 28px;
+}
+.modal-pop {
+  box-shadow: 0 8px 40px rgb(0 0 0 / 0.12);
+}
+.dark .modal-pop {
+  box-shadow: 0 8px 40px rgb(0 0 0 / 0.5);
 }
 .settings-section:first-child .wv-sec-h {
   margin-top: 16px;
@@ -723,40 +721,6 @@ iconify-icon {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-}
-.wv-role-badge {
-  display: inline-flex;
-  align-items: center;
-  padding: 2px 8px;
-  font-size: 11px;
-  font-weight: 500;
-  border-radius: 9999px;
-  border: 1px solid var(--border);
-  background: var(--background);
-  color: var(--foreground);
-  white-space: nowrap;
-  line-height: 1.4;
-}
-.wv-role-badge.role-owner {
-  background: var(--foreground);
-  color: var(--background);
-  border-color: var(--foreground);
-}
-.wv-row-icon-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 28px;
-  height: 28px;
-  border-radius: 7px;
-  color: var(--muted-foreground);
-  background: transparent;
-  border: 1px solid transparent;
-  cursor: pointer;
-}
-.wv-row-icon-btn:hover {
-  background: var(--hover);
-  color: var(--foreground);
 }
 .wv-member-row {
   display: flex;
