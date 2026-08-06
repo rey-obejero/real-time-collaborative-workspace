@@ -35,8 +35,9 @@ export const modalActions = {
     }
   },
 
-  openSettingsModal(this: WorkspaceStore): void {
+  openSettingsModal(this: WorkspaceStore, section?: string): void {
     this.isLibraryDropdownOpen = false;
+    if (section) this.activeSettingsSection = section;
     this.isSettingsModalOpen = true;
   },
 
@@ -44,14 +45,23 @@ export const modalActions = {
     this.isSettingsModalOpen = false;
   },
 
+  openAddMemberModal(this: WorkspaceStore): void {
+    this.addMemberInput = "";
+    this.isAddMemberModalOpen = true;
+  },
+
+  closeAddMemberModal(this: WorkspaceStore): void {
+    this.isAddMemberModalOpen = false;
+  },
+
   addMember(this: WorkspaceStore): void {
-    if (!this.inviteEmail.trim()) return;
-    const email = this.inviteEmail.trim();
+    if (!this.addMemberInput.trim()) return;
+    const email = this.addMemberInput.trim();
     const name = email.split("@")[0];
     const initials = name.slice(0, 2).toUpperCase();
-    this.members.push({ name, email, initials, role: "MEMBER" });
-    this.inviteEmail = "";
-    this.isInviteBoxExpanded = false;
+    this.members.push({ name, email, initials, role: "member" });
+    this.addMemberInput = "";
+    this.isAddMemberModalOpen = false;
   },
 
   saveWorkspaceSettings(this: WorkspaceStore): void {

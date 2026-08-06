@@ -108,7 +108,7 @@
 
           <p class="text-[13px] text-muted-foreground mt-2 mb-3">Invite and manage members who can access this workspace.</p>
 
-          <button class="primary-btn wv-btn inline-flex items-center px-3 py-1.5 text-[12px] font-medium cursor-pointer mb-5">
+          <button @click="openAddMemberModal()" class="primary-btn wv-btn inline-flex items-center px-3 py-1.5 text-[12px] font-medium cursor-pointer mb-5">
             Add members
           </button>
 
@@ -197,6 +197,55 @@
         <section id="sec-properties" class="settings-section" x-show="activeSettingsSection === 'sec-properties'" x-cloak>
           <h4 class="wv-sec-h">Properties</h4>
         </section>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  x-show="isAddMemberModalOpen"
+  x-cloak
+  x-transition:enter="transition ease-out duration-150"
+  x-transition:enter-start="opacity-0"
+  x-transition:enter-end="opacity-100"
+  x-transition:leave="transition ease-in duration-100"
+  x-transition:leave-start="opacity-100"
+  x-transition:leave-end="opacity-0"
+  class="fixed inset-0 z-50 flex items-center justify-center p-6"
+>
+  <div
+    @click="closeAddMemberModal()"
+    class="absolute inset-0 bg-black/20 backdrop-blur-[3px]"
+  ></div>
+
+  <div
+    class="relative w-full max-w-sm flex flex-col z-10 bg-background border border-border rounded-lg overflow-hidden modal-pop"
+  >
+    <div class="wv-scroll">
+      <h4 class="wv-sec-h !mt-0">Add member</h4>
+      <p class="text-[13px] text-muted-foreground mb-4">Enter a username or email to send an invite.</p>
+      <div class="wv-field">
+        <input
+          type="text"
+          x-model="addMemberInput"
+          @keydown.enter="addMember()"
+          placeholder="Username or email"
+          class="wv-btn wv-input bg-input px-3 py-1.5 text-[12px] font-medium text-foreground w-full"
+        />
+      </div>
+      <div class="flex items-center gap-2 mt-2">
+        <button
+          @click="addMember()"
+          class="primary-btn wv-btn inline-flex items-center px-3 py-1.5 text-[12px] font-medium cursor-pointer"
+        >
+          Add member
+        </button>
+        <button
+          @click="closeAddMemberModal()"
+          class="wv-btn inline-flex items-center px-3 py-1.5 text-[12px] font-medium border border-border bg-transparent hover:bg-hover cursor-pointer"
+        >
+          Cancel
+        </button>
       </div>
     </div>
   </div>

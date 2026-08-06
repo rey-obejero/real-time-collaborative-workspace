@@ -22,6 +22,8 @@ export interface WorkspaceStore {
   activeEditorSection: string;
   isInviteBoxExpanded: boolean;
   inviteEmail: string;
+  isAddMemberModalOpen: boolean;
+  addMemberInput: string;
   tweaksOpen: boolean;
   tweaks: Tweaks;
   workspaceNameInput: string;
@@ -80,8 +82,10 @@ export interface WorkspaceStore {
   selectConversations(): void;
   closeConversations(): void;
   submitChatReply(): void;
-  openSettingsModal(): void;
+  openSettingsModal(section?: string): void;
   closeSettingsModal(): void;
+  openAddMemberModal(): void;
+  closeAddMemberModal(): void;
   addMember(): void;
   saveWorkspaceSettings(): void;
   selectLibrary(name: string): void;

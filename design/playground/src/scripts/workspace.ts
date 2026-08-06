@@ -45,6 +45,8 @@ const state = {
   activeEditorSection: "fields",
   isInviteBoxExpanded: false,
   inviteEmail: "",
+  isAddMemberModalOpen: false,
+  addMemberInput: "",
   tweaksOpen: false,
   tweaks: defaultTweaks,
   workspaceNameInput: "Personal Space",
