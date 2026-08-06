@@ -104,88 +104,79 @@
         </section>
 
         <section id="sec-members" class="settings-section" x-show="activeSettingsSection === 'sec-members'" x-cloak>
-          <h4 class="wv-sec-h">Members</h4>
+          <h4 class="wv-sec-h !my-0">Members</h4>
 
-          <div x-data="{ inviteUsername: '', inviteLink: '', copied: false }">
-            <div class="wv-field">
-              <label class="wv-field-label">Add member by username or email</label>
-              <div class="flex items-center gap-2">
-                <input type="text" x-model="inviteUsername" placeholder="Username or email" aria-label="Username or email to add" class="wv-btn wv-input-invite bg-input px-3 py-1.5 text-[12px] text-foreground" />
-                <button class="primary-btn wv-btn px-3 py-1.5 text-[12px] font-medium cursor-pointer">
-                  Add
-                </button>
-              </div>
-            </div>
+          <p class="text-[13px] text-muted-foreground mt-2 mb-3">Invite and manage members who can access this workspace.</p>
 
-            <div class="wv-field">
-              <label class="wv-field-label">Invite via link</label>
-              <div>
-                <button
-                  class="wv-btn px-3 py-1.5 text-[12px] font-medium border border-border bg-transparent hover:bg-hover cursor-pointer"
-                >
-                  <iconify-icon :icon="getIconName('link')" class="w-3.5 h-3.5"></iconify-icon>
-                  Copy link
-                </button>
-                <div class="flex items-center gap-2 mt-2" x-show="inviteLink !== ''" x-cloak>
-                  <span class="inv-link" x-text="inviteLink"></span>
-                  <button
-                    @click="copied = true; navigator.clipboard?.writeText(inviteLink)"
-                    aria-label="Copy invitation link"
-                    class="ghost-btn wv-btn px-2.5 py-1 text-[12px] font-medium cursor-pointer"
-                    x-text="copied ? 'Copied' : 'Copy'"
-                  >Copy</button>
-                </div>
-              </div>
-            </div>
+          <button class="primary-btn wv-btn inline-flex items-center px-3 py-1.5 text-[12px] font-medium cursor-pointer mb-5">
+            Add members
+          </button>
 
-            <template x-for="m in members" :key="m.email">
-              <div class="wv-member-row" x-data="{ role: m.role, roleDropdownOpen: false }">
-                <div class="flex items-center gap-2.5 min-w-0">
-                  <img
-                    :src="'https://api.dicebear.com/10.x/initials/svg?initialsVariant=alt:1&lettersVariant=single:0&backgroundColor=000000&textColor=ffffff&seed=' + m.name"
-                    alt=""
-                    class="w-5 h-5 rounded shrink-0"
-                  />
-                  <div class="truncate">
-                    <p class="text-[14px] font-medium leading-tight text-foreground" x-text="m.name"></p>
-                    <p class="wv-row-meta" x-text="m.email"></p>
-                  </div>
-                </div>
-                <div class="relative flex items-center shrink-0">
-                  <button
-                    @click="roleDropdownOpen = !roleDropdownOpen"
-                    class="flex items-center gap-1 text-[12px] font-medium text-foreground cursor-pointer px-2 py-1 rounded hover:bg-hover"
-                  >
-                    <span x-text="role.charAt(0).toUpperCase() + role.slice(1)"></span>
-                    <iconify-icon :icon="getIconName('chevron-down')" class="w-3 h-3 text-muted-foreground"></iconify-icon>
-                  </button>
-                  <div
-                    x-show="roleDropdownOpen"
-                    @click.outside="roleDropdownOpen = false"
-                    x-cloak
-                    x-transition
-                    class="floating-pop absolute top-full right-0 mt-1 z-30 rounded-md overflow-hidden bg-background border border-border p-1.5 min-w-[100px]"
-                  >
-                    <button
-                      @click="role = 'owner'; roleDropdownOpen = false"
-                      :class="role === 'owner' ? 'bg-accent' : ''"
-                      class="w-full text-left px-3 py-1.5 text-[12px] flex items-center hover:bg-hover cursor-pointer rounded-[4px]"
-                    >Owner</button>
-                    <button
-                      @click="role = 'editor'; roleDropdownOpen = false"
-                      :class="role === 'editor' ? 'bg-accent' : ''"
-                      class="w-full text-left px-3 py-1.5 text-[12px] flex items-center hover:bg-hover cursor-pointer rounded-[4px]"
-                    >Editor</button>
-                    <button
-                      @click="role = 'member'; roleDropdownOpen = false"
-                      :class="role === 'member' ? 'bg-accent' : ''"
-                      class="w-full text-left px-3 py-1.5 text-[12px] flex items-center hover:bg-hover cursor-pointer rounded-[4px]"
-                    >Member</button>
-                  </div>
-                </div>
-              </div>
-            </template>
+          <p class="text-[12px] text-muted-foreground mb-2">Other options</p>
+
+          <div class="flex flex-wrap items-center gap-2 mb-4">
+            <button class="wv-btn inline-flex items-center gap-1.5 px-3 py-1.5 text-[12px] font-medium border border-border bg-transparent hover:bg-hover cursor-pointer">
+              <iconify-icon :icon="getIconName('link')" class="w-3.5 h-3.5"></iconify-icon>
+              Copy link
+            </button>
+            <button class="wv-btn inline-flex items-center gap-1.5 px-3 py-1.5 text-[12px] font-medium border border-border bg-transparent hover:bg-hover cursor-pointer">
+              <iconify-icon :icon="getIconName('qrcode')" class="w-3.5 h-3.5"></iconify-icon>
+              QR code
+            </button>
+            <button class="wv-btn inline-flex items-center gap-1.5 px-3 py-1.5 text-[12px] font-medium border border-border bg-transparent hover:bg-hover cursor-pointer">
+              <iconify-icon :icon="getIconName('settings')" class="w-3.5 h-3.5"></iconify-icon>
+              Manage link
+            </button>
           </div>
+
+          <p class="text-[12px] text-muted-foreground mb-2">All <span x-text="members.length"></span></p>
+
+          <template x-for="m in members" :key="m.email">
+            <div class="wv-member-row" x-data="{ role: m.role, roleDropdownOpen: false }">
+              <div class="flex items-center gap-2.5 min-w-0">
+                <img
+                  :src="'https://api.dicebear.com/10.x/initials/svg?initialsVariant=alt:1&lettersVariant=single:0&backgroundColor=000000&textColor=ffffff&seed=' + m.name"
+                  alt=""
+                  class="w-5 h-5 rounded shrink-0"
+                />
+                <div class="truncate">
+                  <p class="text-[14px] font-medium leading-tight text-foreground" x-text="m.name"></p>
+                </div>
+              </div>
+              <div class="relative flex items-center shrink-0">
+                <button
+                  @click="roleDropdownOpen = !roleDropdownOpen"
+                  class="flex items-center gap-1 text-[12px] font-medium text-foreground cursor-pointer px-2 py-1 rounded hover:bg-hover"
+                >
+                  <span x-text="role.charAt(0).toUpperCase() + role.slice(1)"></span>
+                  <iconify-icon :icon="getIconName('chevron-down')" class="w-3 h-3 text-muted-foreground"></iconify-icon>
+                </button>
+                <div
+                  x-show="roleDropdownOpen"
+                  @click.outside="roleDropdownOpen = false"
+                  x-cloak
+                  x-transition
+                  class="floating-pop absolute top-full right-0 mt-1 z-30 rounded-md overflow-hidden bg-background border border-border p-1.5 min-w-[100px]"
+                >
+                  <button
+                    @click="role = 'owner'; roleDropdownOpen = false"
+                    :class="role === 'owner' ? 'bg-accent' : ''"
+                    class="w-full text-left px-3 py-1.5 text-[12px] flex items-center hover:bg-hover cursor-pointer rounded-[4px]"
+                  >Owner</button>
+                  <button
+                    @click="role = 'editor'; roleDropdownOpen = false"
+                    :class="role === 'editor' ? 'bg-accent' : ''"
+                    class="w-full text-left px-3 py-1.5 text-[12px] flex items-center hover:bg-hover cursor-pointer rounded-[4px]"
+                  >Editor</button>
+                  <button
+                    @click="role = 'member'; roleDropdownOpen = false"
+                    :class="role === 'member' ? 'bg-accent' : ''"
+                    class="w-full text-left px-3 py-1.5 text-[12px] flex items-center hover:bg-hover cursor-pointer rounded-[4px]"
+                  >Member</button>
+                </div>
+              </div>
+            </div>
+          </template>
         </section>
 
         <section id="sec-schemas" class="settings-section" x-show="activeSettingsSection === 'sec-schemas'" x-cloak>

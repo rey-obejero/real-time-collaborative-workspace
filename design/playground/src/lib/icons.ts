@@ -51,6 +51,7 @@ export const ICONS: Record<string, string> = {
   "help-circle": "mingcute:question-line",
   menu: "mingcute:menu-line",
   plugin: "mingcute:plugin-2-line",
+  qrcode: "mingcute:qrcode-line",
 };
 
 export function getIconName(name: string): string {
