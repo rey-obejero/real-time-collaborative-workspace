@@ -1,0 +1,851 @@
+---
+import WorkspaceLayout from "../layouts/WorkspaceLayout.astro";
+import { ICONS } from "../lib/icons";
+---
+
+<WorkspaceLayout>
+  <div class="h-full flex flex-col overflow-hidden bg-background text-foreground">
+    <header class="shrink-0 border-b border-border px-6 py-3 flex items-center gap-6">
+      <h1 class="text-[20px] font-medium">UI Kitchen Sink</h1>
+      <span class="text-[12px] text-muted-foreground">Design system reference</span>
+      <div class="ml-auto flex items-center gap-2">
+        <button
+          @click="isDarkMode = !isDarkMode"
+          class="w-7 h-7 flex items-center justify-center rounded-[7px] hover:bg-hover cursor-pointer"
+          title="Toggle theme"
+        >
+          <span x-show="!isDarkMode" class="inline-flex items-center w-3.5 h-3.5">
+            <iconify-icon icon="mingcute:moon-line" class="w-full h-full"></iconify-icon>
+          </span>
+          <span x-show="isDarkMode" class="inline-flex items-center w-3.5 h-3.5">
+            <iconify-icon icon="mingcute:sun-line" class="w-full h-full"></iconify-icon>
+          </span>
+        </button>
+      </div>
+    </header>
+
+    <nav class="shrink-0 border-b border-border px-6 py-2 flex items-center gap-4 overflow-x-auto no-scrollbar">
+      {[
+        ["color-tokens", "Colors"],
+        ["typography", "Typography"],
+        ["radii-spacing", "Radii & Spacing"],
+        ["buttons", "Buttons"],
+        ["chips-badges", "Chips & Badges"],
+        ["inputs-fields", "Inputs & Fields"],
+        ["navigation", "Navigation"],
+        ["cards-containers", "Cards"],
+        ["overlays", "Overlays"],
+        ["icons", "Icons"],
+        ["dark-mode", "Dark Mode"],
+      ].map(([id, label]) => (
+        <a href={`#${id}`} class="text-[12px] text-muted-foreground hover:text-foreground whitespace-nowrap">{label}</a>
+      ))}
+    </nav>
+
+    <main class="flex-1 overflow-y-auto scroll-thin">
+      <div class="max-w-4xl mx-auto px-8 py-10 space-y-16">
+
+        <section id="color-tokens">
+          <h2 class="text-[20px] font-medium mb-1">Color Tokens</h2>
+          <p class="text-[14px] text-muted-foreground mb-6">The full palette. Light mode left, dark mode right.</p>
+          <div class="space-y-2">
+            <div class="grid grid-cols-[160px_1fr_1fr] gap-3 items-center">
+              <span class="text-[12px] font-medium text-muted-foreground">Token</span>
+              <span class="text-[12px] font-medium text-muted-foreground">Light</span>
+              <span class="text-[12px] font-medium text-muted-foreground">Dark</span>
+            </div>
+            {[
+              ["background", "oklch(0.965 0.004 85)", "oklch(0.220 0.006 60)"],
+              ["foreground", "#1c1917", "#f5f5f4"],
+              ["card", "#f4f4f1", "#1c1917"],
+              ["sidebar", "oklch(0.955 0.005 85)", "oklch(0.205 0.006 60)"],
+              ["sidebar-accent", "#e5e3df", "#2f2d2a"],
+              ["primary", "#1c1917", "#f5f5f4"],
+              ["secondary", "#eae9e6", "#292524"],
+              ["muted", "#eae9e6", "#292524"],
+              ["muted-foreground", "#6d675f", "rgba(250,250,249,0.65)"],
+              ["hover", "#e2e1de", "#292524"],
+              ["border", "#e0dfdb", "#44403c"],
+              ["destructive", "#ff5f56", "#ff5f56"],
+              ["unread-dot", "#57534e", "#a8a29e"],
+              ["table-entry", "#525252", "#d6d3d1"],
+            ].map(([name, light, dark]) => (
+              <div class="grid grid-cols-[160px_1fr_1fr] gap-3 items-center">
+                <span class="text-[12px]">{name}</span>
+                <div class="h-8 rounded-[7px] border border-border" style={`background: ${light}`}></div>
+                <div class="h-8 rounded-[7px] border border-border" style={`background: ${dark}`}></div>
+              </div>
+            ))}
+          </div>
+          <p class="text-[12px] text-muted-foreground mt-6 mb-3">Status tokens</p>
+          <div class="space-y-2">
+            {[
+              ["status-todo", "#e0dfdb", "#44403c"],
+              ["status-doing", "#57534e", "#a8a29e"],
+              ["status-done", "#1c1917", "#f5f5f4"],
+              ["status-blocked", "#a8a29e", "#78716c"],
+              ["status-draft", "#e0dfdb", "#44403c"],
+              ["status-published", "#1c1917", "#f5f5f4"],
+              ["status-planning", "#78716c", "#a8a29e"],
+              ["status-active", "#57534e", "#a8a29e"],
+              ["status-paused", "#e0dfdb", "#44403c"],
+            ].map(([name, light, dark]) => (
+              <div class="grid grid-cols-[160px_1fr_1fr] gap-3 items-center">
+                <span class="text-[12px]">{name}</span>
+                <div class="h-8 rounded-[7px] border border-border" style={`background: ${light}`}></div>
+                <div class="h-8 rounded-[7px] border border-border" style={`background: ${dark}`}></div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section id="typography">
+          <h2 class="text-[20px] font-medium mb-1">Typography</h2>
+          <p class="text-[14px] text-muted-foreground mb-6">Hierarchy steps from display to meta. DM Sans for body/display, Geist Mono for code.</p>
+          <div class="space-y-6">
+            {[
+              ["Display — 20px / 500 / 1.2", "text-[20px] font-medium leading-[1.2]", "The Quiet Workbench"],
+              ["Body — 16px / 400 / 1.5", "text-[16px] leading-[1.5]", "Workspace is a second brain — a calm warm-stone workbench where the tools sit quiet until you reach for them."],
+              ["Title / Row Label — 14px / 400", "text-[14px]", "All entries"],
+              ["Label — 12px / 500", "text-[12px] font-medium", "Status"],
+              ["Meta — 12px / 400", "text-[12px]", "Modified 2 hours ago"],
+              ["Micro — 11px / 500", "text-[11px] font-medium uppercase tracking-wide", "Owner"],
+              ["Code / Mono — 12px / Geist Mono", "text-[12px] font-mono", "Ctrl + K"],
+            ].map(([label, classes, sample]) => (
+              <div>
+                <span class="text-[12px] font-medium text-muted-foreground">{label}</span>
+                <p class={`${classes} mt-1`}>{sample}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section id="radii-spacing">
+          <h2 class="text-[20px] font-medium mb-1">Radii & Spacing</h2>
+          <p class="text-[14px] text-muted-foreground mb-6">Shape language and spacing scale.</p>
+          <div class="space-y-8">
+            <div>
+              <span class="text-[12px] font-medium text-muted-foreground">Border Radius</span>
+              <div class="flex items-end gap-4 mt-3">
+                {[
+                  ["sm · 6px", "6px"],
+                  ["md · 8px", "8px"],
+                  ["lg · 12px", "12px"],
+                  ["control · 7px", "7px"],
+                  ["menu · 4px", "4px"],
+                  ["full · pill", "9999px"],
+                ].map(([label, radius]) => (
+                  <div class="text-center">
+                    <div class="w-12 h-12 bg-card border border-border" style={`border-radius: ${radius}`}></div>
+                    <span class="text-[12px] text-muted-foreground mt-1 block">{label}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div>
+              <span class="text-[12px] font-medium text-muted-foreground">Spacing Scale</span>
+              <div class="flex items-end gap-4 mt-3">
+                {[
+                  ["xs · 4px", "4px"],
+                  ["sm · 8px", "8px"],
+                  ["md · 12px", "12px"],
+                  ["lg · 24px", "24px"],
+                ].map(([label, height]) => (
+                  <div class="text-center">
+                    <div class="w-4 bg-muted-foreground rounded" style={`height: ${height}`}></div>
+                    <span class="text-[12px] text-muted-foreground mt-1 block">{label}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="buttons">
+          <h2 class="text-[20px] font-medium mb-1">Buttons</h2>
+          <p class="text-[14px] text-muted-foreground mb-6">Interactive controls and button variants.</p>
+          <div class="space-y-8">
+            <div>
+              <span class="text-[12px] font-medium text-muted-foreground">Primary — Ink pill</span>
+              <div class="flex items-center gap-2 mt-3">
+                <button class="primary-btn inline-flex items-center px-3 py-1.5 text-[12px] font-medium cursor-pointer">Primary</button>
+                <button class="primary-btn inline-flex items-center gap-1.5 px-3 py-1.5 text-[12px] font-medium cursor-pointer">
+                  <iconify-icon icon="mingcute:add-line" class="w-3.5 h-3.5"></iconify-icon>
+                  <span>New entry</span>
+                </button>
+                <button class="primary-btn inline-flex items-center px-2 py-1 text-[12px] font-medium cursor-pointer h-7">Small</button>
+              </div>
+            </div>
+            <div>
+              <span class="text-[12px] font-medium text-muted-foreground">Ghost — Warm-paper pill</span>
+              <div class="flex items-center gap-2 mt-3">
+                <button class="ghost-btn inline-flex items-center px-3 py-1.5 text-[12px] font-medium cursor-pointer">Ghost</button>
+                <button class="ghost-btn inline-flex items-center gap-1.5 px-3 py-1.5 text-[12px] font-medium cursor-pointer">
+                  <iconify-icon icon="mingcute:filter-2-line" class="w-3.5 h-3.5"></iconify-icon>
+                  <span>Filter</span>
+                </button>
+              </div>
+            </div>
+            <div>
+              <span class="text-[12px] font-medium text-muted-foreground">Outline — Transparent with hairline</span>
+              <div class="flex items-center gap-2 mt-3">
+                <button class="inline-flex items-center px-3 py-1.5 text-[12px] font-medium border border-border bg-transparent hover:bg-hover rounded-[7px] cursor-pointer">Outline</button>
+                <button class="inline-flex items-center gap-1.5 px-3 py-1.5 text-[12px] font-medium border border-border bg-transparent hover:bg-hover rounded-[7px] cursor-pointer">
+                  <iconify-icon icon="mingcute:link-2-line" class="w-3.5 h-3.5"></iconify-icon>
+                  <span>Copy link</span>
+                </button>
+              </div>
+            </div>
+            <div>
+              <span class="text-[12px] font-medium text-muted-foreground">Text — Transparent, no border</span>
+              <div class="flex items-center gap-2 mt-3">
+                <button class="ask-ai-text inline-flex items-center gap-1.5 px-2 h-7 text-[14px] font-medium text-foreground rounded-[7px] cursor-pointer">
+                  <iconify-icon icon="mingcute:ai-fill" class="w-3.5 h-3.5"></iconify-icon>
+                  <span>Ask AI</span>
+                </button>
+              </div>
+            </div>
+            <div>
+              <span class="text-[12px] font-medium text-muted-foreground">Icon — 28×28, 7px radius</span>
+              <div class="flex items-center gap-2 mt-3">
+                <button class="w-7 h-7 flex items-center justify-center rounded-[7px] text-muted-foreground hover:bg-hover hover:text-foreground cursor-pointer" title="Search">
+                  <iconify-icon icon="mingcute:search-2-line" class="w-3.5 h-3.5"></iconify-icon>
+                </button>
+                <button class="w-7 h-7 flex items-center justify-center rounded-[7px] text-muted-foreground hover:bg-hover hover:text-foreground cursor-pointer" title="Filter">
+                  <iconify-icon icon="mingcute:filter-2-line" class="w-3.5 h-3.5"></iconify-icon>
+                </button>
+                <button class="w-7 h-7 flex items-center justify-center rounded-[7px] text-muted-foreground hover:bg-hover hover:text-foreground cursor-pointer" title="Sort">
+                  <iconify-icon icon="mingcute:sort-ascending-line" class="w-3.5 h-3.5"></iconify-icon>
+                </button>
+                <button class="w-7 h-7 flex items-center justify-center rounded-[7px] text-muted-foreground hover:bg-hover hover:text-foreground cursor-pointer" title="Settings">
+                  <iconify-icon icon="mingcute:settings-3-line" class="w-3.5 h-3.5"></iconify-icon>
+                </button>
+                <button class="w-7 h-7 flex items-center justify-center rounded-[7px] text-muted-foreground hover:bg-hover hover:text-foreground cursor-pointer" title="More">
+                  <iconify-icon icon="mingcute:more-1-fill" class="w-5 h-5"></iconify-icon>
+                </button>
+              </div>
+            </div>
+            <div>
+              <span class="text-[12px] font-medium text-muted-foreground">New cluster — Primary action with dropdown</span>
+              <div class="flex items-center gap-2 mt-3">
+                <div class="bg-primary flex items-center overflow-hidden rounded-[7px]">
+                  <button class="flex items-center gap-1 pl-3 pr-1 h-7 text-[12px] font-medium text-primary-foreground cursor-pointer hover:bg-primary-foreground/25">
+                    <span class="text-[14px] leading-none">+</span>
+                    <span>New</span>
+                  </button>
+                  <button class="w-7 h-7 flex items-center justify-center text-primary-foreground/75 cursor-pointer hover:bg-primary-foreground/25">
+                    <iconify-icon icon="mingcute:down-line" class="w-3.5 h-3.5"></iconify-icon>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div>
+              <span class="text-[12px] font-medium text-muted-foreground">Disabled state</span>
+              <div class="flex items-center gap-2 mt-3">
+                <button class="primary-btn inline-flex items-center px-3 py-1.5 text-[12px] font-medium opacity-50 cursor-not-allowed" disabled>Primary</button>
+                <button class="ghost-btn inline-flex items-center px-3 py-1.5 text-[12px] font-medium opacity-50 cursor-not-allowed" disabled>Ghost</button>
+                <button class="inline-flex items-center px-3 py-1.5 text-[12px] font-medium border border-border bg-transparent opacity-50 cursor-not-allowed rounded-[7px]" disabled>Outline</button>
+                <button class="w-7 h-7 flex items-center justify-center rounded-[7px] text-muted-foreground opacity-50 cursor-not-allowed" disabled>
+                  <iconify-icon icon="mingcute:right-line" class="w-3.5 h-3.5"></iconify-icon>
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="chips-badges">
+          <h2 class="text-[20px] font-medium mb-1">Chips & Badges</h2>
+          <p class="text-[14px] text-muted-foreground mb-6">Property chips, type pills, status indicators, avatars, and role badges.</p>
+          <div class="space-y-8">
+            <div>
+              <span class="text-[12px] font-medium text-muted-foreground">Property chips</span>
+              <div class="flex flex-wrap items-center gap-2 mt-3">
+                <div class="property-chip">
+                  <span class="label">Status</span>
+                  <span class="status-dot" style="background: var(--status-doing)"></span>
+                  <span class="value capitalize">Doing</span>
+                </div>
+                <div class="property-chip">
+                  <span class="label">Priority</span>
+                  <span class="value capitalize">High</span>
+                </div>
+                <div class="property-chip">
+                  <span class="label">Due</span>
+                  <span class="value capitalize">Tomorrow</span>
+                </div>
+                <div class="property-chip">
+                  <span class="label">Assignee</span>
+                  <span class="avatar-chip">JD</span>
+                </div>
+                <div class="property-chip">
+                  <span class="label">Owner</span>
+                  <span class="avatar-chip">AK</span>
+                </div>
+              </div>
+            </div>
+            <div>
+              <span class="text-[12px] font-medium text-muted-foreground">Bordered variant</span>
+              <div class="flex flex-wrap items-center gap-2 mt-3 tweaks-chips-bordered">
+                <div class="property-chip">
+                  <span class="label">Status</span>
+                  <span class="status-dot" style="background: var(--status-done)"></span>
+                  <span class="value capitalize">Done</span>
+                </div>
+                <div class="property-chip">
+                  <span class="label">Priority</span>
+                  <span class="value capitalize">Medium</span>
+                </div>
+              </div>
+            </div>
+            <div>
+              <span class="text-[12px] font-medium text-muted-foreground">Type pills</span>
+              <div class="flex flex-wrap items-center gap-2 mt-3">
+                {[
+                  ["Page", "page"],
+                  ["Task", "task"],
+                  ["Project", "project"],
+                  ["Note", "note"],
+                  ["Bookmark", "bookmark"],
+                ].map(([label, type]) => (
+                  <span class="type-pill">
+                    <iconify-icon icon={`mingcute:${type === "page" ? "document" : type === "task" ? "task" : type === "project" ? "folder" : type === "note" ? "notebook" : "bookmark"}-line`} class="w-3.5 h-3.5 text-muted-foreground"></iconify-icon>
+                    <span>{label}</span>
+                  </span>
+                ))}
+              </div>
+            </div>
+            <div>
+              <span class="text-[12px] font-medium text-muted-foreground">Status dots</span>
+              <div class="flex flex-wrap items-center gap-3 mt-3">
+                {[
+                  ["Todo", "todo"],
+                  ["Doing", "doing"],
+                  ["Done", "done"],
+                  ["Blocked", "blocked"],
+                  ["Draft", "draft"],
+                  ["Published", "published"],
+                  ["Planning", "planning"],
+                  ["Active", "active"],
+                ].map(([label, status]) => (
+                  <div class="flex items-center gap-1.5">
+                    <span class="status-dot w-2 h-2 rounded-full shrink-0" style={`background: var(--status-${status})`}></span>
+                    <span class="text-[12px] text-table-entry capitalize">{label}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div>
+              <span class="text-[12px] font-medium text-muted-foreground">Tag pills</span>
+              <div class="flex flex-wrap items-center gap-1.5 mt-3">
+                {["design", "research", "sprint-12", "blocked"].map((tag) => (
+                  <span class="inline-flex items-center px-2 py-0.5 text-[12px] text-table-entry bg-secondary rounded-full">#{tag}</span>
+                ))}
+              </div>
+            </div>
+            <div>
+              <span class="text-[12px] font-medium text-muted-foreground">Avatars</span>
+              <div class="flex flex-wrap items-center gap-3 mt-3">
+                <div class="flex items-center gap-2">
+                  <span class="avatar-chip">JD</span>
+                  <span class="text-[12px] text-muted-foreground">18px · rows</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <img src="https://api.dicebear.com/10.x/initials/svg?initialsVariant=alt:1&lettersVariant=single:0&backgroundColor=000000&textColor=ffffff&seed=John" alt="" class="w-5 h-5 rounded-full" />
+                  <span class="text-[12px] text-muted-foreground">20px · sidebar</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <img src="https://api.dicebear.com/10.x/initials/svg?initialsVariant=alt:1&lettersVariant=single:0&backgroundColor=000000&textColor=ffffff&seed=John" alt="" class="w-7 h-7 rounded-full" />
+                  <span class="text-[12px] text-muted-foreground">28px · settings</span>
+                </div>
+              </div>
+            </div>
+            <div>
+              <span class="text-[12px] font-medium text-muted-foreground">Role badges</span>
+              <div class="flex flex-wrap items-center gap-2 mt-3">
+                <span class="inline-flex items-center px-2 py-0.5 text-[11px] font-medium rounded-full bg-foreground text-background">Owner</span>
+                <span class="inline-flex items-center px-2 py-0.5 text-[11px] font-medium rounded-full border border-border text-foreground">Editor</span>
+                <span class="inline-flex items-center px-2 py-0.5 text-[11px] font-medium rounded-full border border-border text-foreground">Member</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="inputs-fields">
+          <h2 class="text-[20px] font-medium mb-1">Inputs & Fields</h2>
+          <p class="text-[14px] text-muted-foreground mb-6">Text inputs, search fields, and textareas with focus states.</p>
+          <div class="space-y-8">
+            <div>
+              <span class="text-[12px] font-medium text-muted-foreground">Text input — 240px, 7px radius, input surface</span>
+              <div class="mt-3">
+                <input
+                  type="text"
+                  placeholder="Workspace name"
+                  class="w-60 bg-input px-3 py-1.5 text-[12px] text-foreground border border-border focus-ring rounded-[7px]"
+                />
+              </div>
+            </div>
+            <div>
+              <span class="text-[12px] font-medium text-muted-foreground">Text input with value</span>
+              <div class="mt-3">
+                <input
+                  type="text"
+                  value="My Workspace"
+                  class="w-60 bg-input px-3 py-1.5 text-[12px] text-foreground border border-border focus-ring rounded-[7px]"
+                />
+              </div>
+            </div>
+            <div>
+              <span class="text-[12px] font-medium text-muted-foreground">Search field — Tonal slab</span>
+              <div class="mt-3">
+                <div class="vp2-shell relative p-1 w-72">
+                  <button class="vp2-row w-full flex items-center gap-2 px-2.5 py-1.5 text-[14px] focus-ring cursor-pointer">
+                    <iconify-icon icon="mingcute:search-2-line" class="w-3.5 h-3.5"></iconify-icon>
+                    <span>Search</span>
+                    <span class="vp2-kbd ml-auto">Ctrl K</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div>
+              <span class="text-[12px] font-medium text-muted-foreground">Textarea</span>
+              <div class="mt-3">
+                <textarea
+                  placeholder="Write a description..."
+                  rows="3"
+                  class="w-80 bg-input px-3 py-2 text-[14px] text-foreground border border-border focus-ring rounded-[7px] resize-none leading-[1.5]"
+                ></textarea>
+              </div>
+            </div>
+            <div>
+              <span class="text-[12px] font-medium text-muted-foreground">Editor title — 30px display</span>
+              <div class="mt-3">
+                <input
+                  type="text"
+                  value="The Quiet Workbench"
+                  class="w-full text-[30px] leading-[1.2] font-medium bg-transparent border-none outline-none text-foreground"
+                />
+              </div>
+            </div>
+            <div>
+              <span class="text-[12px] font-medium text-muted-foreground">Field with label</span>
+              <div class="mt-3 wv-field">
+                <label class="wv-field-label">Workspace Name</label>
+                <input
+                  type="text"
+                  value="My Workspace"
+                  class="wv-btn wv-input bg-input px-3 py-1.5 text-[12px] text-foreground border border-border focus-ring"
+                />
+              </div>
+            </div>
+            <div>
+              <span class="text-[12px] font-medium text-muted-foreground">Invite link — Monospace</span>
+              <div class="mt-3">
+                <span class="inv-link inline-block">https://workspace.app/invite/abc123</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="navigation">
+          <h2 class="text-[20px] font-medium mb-1">Navigation</h2>
+          <p class="text-[14px] text-muted-foreground mb-6">Sidebar rows, tabs, the search/create slab, and header controls.</p>
+          <div class="space-y-8">
+            <div>
+              <span class="text-[12px] font-medium text-muted-foreground">Nav rows — Sidebar style</span>
+              <div class="mt-3 w-64 space-y-0.5">
+                <button class="nav-row w-full flex items-center gap-2 px-2 py-2.5 text-[14px] font-medium">
+                  <iconify-icon icon="mingcute:pin-line" class="w-3.5 h-3.5"></iconify-icon>
+                  <span>Pinned</span>
+                </button>
+                <button class="nav-row active w-full flex items-center gap-2 px-2 py-2.5 text-[14px] font-medium">
+                  <iconify-icon icon="mingcute:time-line" class="w-3.5 h-3.5"></iconify-icon>
+                  <span>Recent</span>
+                </button>
+                <button class="nav-row w-full flex items-center gap-2 px-2 py-2.5 text-[14px] font-medium">
+                  <iconify-icon icon="mingcute:grid-2-line" class="w-3.5 h-3.5"></iconify-icon>
+                  <span>All</span>
+                </button>
+                <div class="wv-rule"></div>
+                <button class="nav-row w-full flex items-center gap-2 px-2 py-2.5 text-[14px] font-medium">
+                  <iconify-icon icon="mingcute:document-line" class="w-3.5 h-3.5"></iconify-icon>
+                  <span>Pages</span>
+                </button>
+                <button class="nav-row w-full flex items-center gap-2 px-2 py-2.5 text-[14px] font-medium">
+                  <iconify-icon icon="mingcute:task-line" class="w-3.5 h-3.5"></iconify-icon>
+                  <span>Tasks</span>
+                </button>
+              </div>
+            </div>
+            <div>
+              <span class="text-[12px] font-medium text-muted-foreground">Tabs</span>
+              <div class="flex items-center gap-4 mt-3">
+                <button class="field-tab pb-1 text-[12px] font-medium">Overview</button>
+                <button class="field-tab active pb-1 text-[12px] font-medium">Content</button>
+                <button class="field-tab pb-1 text-[12px] font-medium">Activity</button>
+              </div>
+            </div>
+            <div>
+              <span class="text-[12px] font-medium text-muted-foreground">Section tabs</span>
+              <div class="flex items-center gap-1 mt-3 p-1 bg-secondary rounded-full w-fit">
+                <button class="section-tab px-3 py-1 text-[12px] font-medium rounded-full">All</button>
+                <button class="section-tab active px-3 py-1 text-[12px] font-medium rounded-full">Unread</button>
+              </div>
+            </div>
+            <div>
+              <span class="text-[12px] font-medium text-muted-foreground">Header controls — Icon buttons with tooltips</span>
+              <div class="flex items-center gap-1.5 mt-3">
+                <button class="header-btn relative w-7 h-7 flex items-center justify-center rounded-[7px] hover:bg-hover cursor-pointer" title="Go back">
+                  <iconify-icon icon="mingcute:left-line" class="w-3.5 h-3.5"></iconify-icon>
+                  <span class="header-tooltip">Back <kbd class="header-tooltip-kbd">Alt <iconify-icon icon="mingcute:arrow-left-line" class="w-3 h-3"></iconify-icon></kbd></span>
+                </button>
+                <button class="header-btn relative w-7 h-7 flex items-center justify-center rounded-[7px] text-muted-foreground hover:bg-transparent cursor-default" title="Go forward (disabled)">
+                  <iconify-icon icon="mingcute:right-line" class="w-3.5 h-3.5"></iconify-icon>
+                  <span class="header-tooltip">Forward <kbd class="header-tooltip-kbd">Alt <iconify-icon icon="mingcute:arrow-right-line" class="w-3 h-3"></iconify-icon></kbd></span>
+                </button>
+                <button class="header-btn relative w-7 h-7 flex items-center justify-center rounded-[7px] hover:bg-hover cursor-pointer" title="Recently opened">
+                  <iconify-icon icon="mingcute:time-line" class="w-3.5 h-3.5"></iconify-icon>
+                  <span class="header-tooltip">Recents</span>
+                </button>
+              </div>
+            </div>
+            <div>
+              <span class="text-[12px] font-medium text-muted-foreground">Search/Create slab</span>
+              <div class="mt-3 w-64">
+                <div class="vp2-shell relative p-1">
+                  <button class="vp2-row w-full flex items-center gap-2 px-2.5 py-1.5 text-[14px] focus-ring cursor-pointer">
+                    <iconify-icon icon="mingcute:search-2-line" class="w-3.5 h-3.5"></iconify-icon>
+                    <span>Search</span>
+                    <span class="vp2-kbd ml-auto">Ctrl K</span>
+                  </button>
+                  <div class="vp2-divider h-px my-1"></div>
+                  <button class="vp2-row w-full flex items-center gap-2 px-2.5 py-1.5 text-[14px] cursor-pointer">
+                    <iconify-icon icon="mingcute:add-line" class="w-3.5 h-3.5"></iconify-icon>
+                    <span>Create</span>
+                    <span class="ml-auto inline-flex items-center">
+                      <iconify-icon icon="mingcute:down-line" class="w-3.5 h-3.5"></iconify-icon>
+                    </span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="cards-containers">
+          <h2 class="text-[20px] font-medium mb-1">Cards & Containers</h2>
+          <p class="text-[14px] text-muted-foreground mb-6">Card surfaces, modal shells, and container patterns.</p>
+          <div class="space-y-8">
+            <div>
+              <span class="text-[12px] font-medium text-muted-foreground">Entry table card — 12px radius, hairline border, warm-paper</span>
+              <div class="mt-3">
+                <div class="tweak-card border border-border rounded-t-lg overflow-hidden">
+                  <div class="flex items-center justify-between pl-4 pr-4 py-2">
+                    <h1 class="text-[20px] font-medium text-foreground">All</h1>
+                    <div class="flex items-center gap-1">
+                      <button class="header-btn w-7 h-7 flex items-center justify-center rounded-[7px] text-muted-foreground hover:bg-hover hover:text-foreground cursor-pointer">
+                        <iconify-icon icon="mingcute:search-2-line" class="w-3.5 h-3.5"></iconify-icon>
+                      </button>
+                      <button class="header-btn w-7 h-7 flex items-center justify-center rounded-[7px] text-muted-foreground hover:bg-hover hover:text-foreground cursor-pointer">
+                        <iconify-icon icon="mingcute:filter-2-line" class="w-3.5 h-3.5"></iconify-icon>
+                      </button>
+                    </div>
+                  </div>
+                  <div class="grid grid-cols-[1fr_120px_80px] items-center pl-4 pr-4 py-2 border-t border-b border-border">
+                    <div class="pr-3 text-[12px] font-medium text-muted-foreground">Title</div>
+                    <div class="pr-3 text-[12px] font-medium text-muted-foreground">Status</div>
+                    <div class="text-[12px] font-medium text-muted-foreground text-right">Updated</div>
+                  </div>
+                  <ul class="m-0 p-0 list-none">
+                    {[
+                      ["Research notes", "doing", "2h ago"],
+                      ["Sprint planning", "todo", "1d ago"],
+                      ["Design review", "done", "3d ago"],
+                    ].map(([title, status, time]) => (
+                      <li class="cursor-pointer hover:bg-accent">
+                        <div class="grid grid-cols-[1fr_120px_80px] items-center pl-4 pr-4 py-2 border-b border-border">
+                          <span class="pr-3 flex items-center gap-2 min-w-0">
+                            <iconify-icon icon="mingcute:document-line" class="w-4 h-4 text-muted-foreground shrink-0"></iconify-icon>
+                            <span class="text-[14px] truncate text-table-entry">{title}</span>
+                          </span>
+                          <span class="pr-3 text-[12px] flex items-center gap-1.5 text-table-entry">
+                            <span class="status-dot w-2 h-2 rounded-full shrink-0" style={`background: var(--status-${status})`}></span>
+                            <span class="capitalize">{status}</span>
+                          </span>
+                          <span class="text-[12px] tabular-nums text-right text-table-entry">{time}</span>
+                        </div>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div>
+              <span class="text-[12px] font-medium text-muted-foreground">Modal card — bg-background, modal shadow, rounded-lg</span>
+              <div class="mt-3">
+                <div class="relative w-full max-w-sm flex flex-col bg-background border border-border rounded-lg overflow-hidden modal-pop">
+                  <button class="absolute top-3 right-3 z-20 w-7 h-7 flex items-center justify-center rounded-full hover:bg-hover text-muted-foreground hover:text-foreground cursor-pointer" aria-label="Close">
+                    <iconify-icon icon="mingcute:close-line" class="w-3.5 h-3.5"></iconify-icon>
+                  </button>
+                  <div class="wv-scroll">
+                    <h4 class="text-[20px] font-medium text-foreground !mt-0">New workspace</h4>
+                    <p class="wv-subtitle mb-4">Create a new space to organize your work.</p>
+                    <div class="wv-field">
+                      <input type="text" placeholder="Workspace name" class="wv-btn wv-input bg-input px-3 py-1.5 text-[12px] text-foreground border border-border focus-ring w-full" />
+                    </div>
+                    <div class="flex items-center gap-2 mt-2">
+                      <button class="primary-btn wv-btn inline-flex items-center px-3 py-1.5 text-[12px] font-medium cursor-pointer">Create workspace</button>
+                      <button class="wv-btn inline-flex items-center px-3 py-1.5 text-[12px] font-medium border border-border bg-transparent hover:bg-hover cursor-pointer">Cancel</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div>
+              <span class="text-[12px] font-medium text-muted-foreground">Settings panel — Two-column layout</span>
+              <div class="mt-3">
+                <div class="relative w-full max-w-2xl flex flex-col min-h-[300px] bg-background border border-border rounded-lg overflow-hidden modal-pop">
+                  <div class="flex flex-1 min-h-0">
+                    <nav class="w-[160px] shrink-0 border-r border-border overflow-y-auto no-scrollbar select-none bg-sidebar">
+                      <div class="px-2 py-3 space-y-0.5">
+                        <p class="text-[12px] font-medium text-muted-foreground px-2 mb-1">Account</p>
+                        <button class="nav-row active w-full flex items-center gap-2 px-3 py-2 text-[13px] font-medium cursor-pointer">
+                          <iconify-icon icon="mingcute:user-3-line" class="w-3.5 h-3.5"></iconify-icon>
+                          <span>Personal</span>
+                        </button>
+                        <button class="nav-row w-full flex items-center gap-2 px-3 py-2 text-[13px] font-medium cursor-pointer">
+                          <iconify-icon icon="mingcute:settings-3-line" class="w-3.5 h-3.5"></iconify-icon>
+                          <span>Preferences</span>
+                        </button>
+                        <p class="text-[12px] font-medium text-muted-foreground px-2 mt-3 mb-1">Workspace</p>
+                        <button class="nav-row w-full flex items-center gap-2 px-3 py-2 text-[13px] font-medium cursor-pointer">
+                          <iconify-icon icon="mingcute:settings-3-line" class="w-3.5 h-3.5"></iconify-icon>
+                          <span>General</span>
+                        </button>
+                        <button class="nav-row w-full flex items-center gap-2 px-3 py-2 text-[13px] font-medium cursor-pointer">
+                          <iconify-icon icon="mingcute:user-3-line" class="w-3.5 h-3.5"></iconify-icon>
+                          <span>Members</span>
+                        </button>
+                      </div>
+                    </nav>
+                    <div class="wv-scroll flex-1 min-w-0 overflow-y-auto no-scrollbar">
+                      <h4 class="wv-sec-h !mt-0">Personal</h4>
+                      <p class="wv-subtitle mb-4">Your account profile across workspaces.</p>
+                      <div class="wv-field">
+                        <label class="wv-field-label">Profile</label>
+                        <div class="flex items-center gap-3 py-2">
+                          <img src="https://api.dicebear.com/10.x/initials/svg?initialsVariant=alt:1&lettersVariant=single:0&backgroundColor=000000&textColor=ffffff&seed=John" alt="" class="w-7 h-7 rounded-full shrink-0" />
+                          <div class="min-w-0">
+                            <p class="wv-row-label truncate">John Doe</p>
+                            <p class="wv-row-meta truncate">john.doe@example.com</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="overlays">
+          <h2 class="text-[20px] font-medium mb-1">Overlays</h2>
+          <p class="text-[14px] text-muted-foreground mb-6">Floating toolbar, slash menu, tooltips, and dropdown menus.</p>
+          <div class="space-y-8">
+            <div>
+              <span class="text-[12px] font-medium text-muted-foreground">Floating format toolbar</span>
+              <div class="mt-3">
+                <div class="inline-flex flex-col floating-pop bg-background border border-border rounded-md overflow-hidden">
+                  <div class="flex items-center justify-between gap-1 px-1 py-1">
+                    <button class="w-7 h-7 flex items-center justify-center rounded-[4px] text-foreground hover:bg-hover cursor-pointer">
+                      <iconify-icon icon="mingcute:bold-line" class="w-3.5 h-3.5"></iconify-icon>
+                    </button>
+                    <button class="w-7 h-7 flex items-center justify-center rounded-[4px] text-foreground hover:bg-hover cursor-pointer">
+                      <iconify-icon icon="mingcute:italic-line" class="w-3.5 h-3.5"></iconify-icon>
+                    </button>
+                    <button class="w-7 h-7 flex items-center justify-center rounded-[4px] text-foreground hover:bg-hover cursor-pointer">
+                      <iconify-icon icon="mingcute:underline-line" class="w-3.5 h-3.5"></iconify-icon>
+                    </button>
+                  </div>
+                  <div class="flex items-center justify-between gap-1 px-1 py-1">
+                    <button class="w-7 h-7 flex items-center justify-center rounded-[4px] text-foreground hover:bg-hover cursor-pointer">
+                      <iconify-icon icon="mingcute:strikethrough-line" class="w-3.5 h-3.5"></iconify-icon>
+                    </button>
+                    <button class="w-7 h-7 flex items-center justify-center rounded-[4px] text-foreground hover:bg-hover cursor-pointer">
+                      <iconify-icon icon="mingcute:link-line" class="w-3.5 h-3.5"></iconify-icon>
+                    </button>
+                    <button class="w-7 h-7 flex items-center justify-center rounded-[4px] text-foreground hover:bg-hover cursor-pointer">
+                      <iconify-icon icon="mingcute:code-line" class="w-3.5 h-3.5"></iconify-icon>
+                    </button>
+                  </div>
+                  <div class="wv-rule"></div>
+                  <div class="flex items-center gap-2 px-1 py-1">
+                    <button class="flex items-center justify-center gap-1.5 px-2 h-7 text-[12px] font-medium text-foreground rounded-[4px] hover:bg-hover cursor-pointer">
+                      <iconify-icon icon="mingcute:chat-2-line" class="w-3.5 h-3.5"></iconify-icon>
+                      <span>Discuss</span>
+                    </button>
+                    <button class="w-7 h-7 flex items-center justify-center rounded-[4px] text-foreground hover:bg-hover cursor-pointer">
+                      <iconify-icon icon="mingcute:ai-line" class="w-3.5 h-3.5"></iconify-icon>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div>
+              <span class="text-[12px] font-medium text-muted-foreground">Slash command menu</span>
+              <div class="mt-3">
+                <div class="inline-flex flex-col w-64 p-1.5 select-none bg-background border border-border rounded-md">
+                  <div class="px-3 py-1.5 text-[12px] font-medium text-muted-foreground">Blocks</div>
+                  {[
+                    ["H1", "Heading 1"],
+                    ["H2", "Heading 2"],
+                    ["H3", "Heading 3"],
+                    ["•", "Bullet list"],
+                    ["❝", "Quote"],
+                  ].map(([kbd, label]) => (
+                    <button class="w-full text-left px-3 py-1.5 text-[14px] flex items-center gap-3 rounded-[4px] hover:bg-hover cursor-pointer text-foreground">
+                      <span class="text-[12px] font-mono text-muted-foreground">{kbd}</span>
+                      <span>{label}</span>
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </div>
+            <div>
+              <span class="text-[12px] font-medium text-muted-foreground">Dropdown menu</span>
+              <div class="mt-3">
+                <div class="inline-flex flex-col floating-pop w-48 bg-background border border-border rounded-md overflow-hidden p-1.5">
+                  <div class="space-y-0.5">
+                    {[
+                      ["Page", "document"],
+                      ["Task", "task"],
+                      ["Project", "folder"],
+                      ["Note", "notebook"],
+                      ["Bookmark", "bookmark"],
+                    ].map(([label, icon]) => (
+                      <button class="w-full text-left px-3 py-1.5 text-[14px] flex items-center gap-2.5 hover:bg-hover cursor-pointer text-foreground rounded-[4px]">
+                        <iconify-icon icon={`mingcute:${icon}-line`} class="w-3.5 h-3.5"></iconify-icon>
+                        <span>{label}</span>
+                      </button>
+                    ))}
+                  </div>
+                  <div class="wv-rule"></div>
+                  <div class="space-y-0.5">
+                    <button class="w-full text-left px-3 py-1.5 text-[14px] flex items-center gap-2.5 hover:bg-hover cursor-pointer text-muted-foreground rounded-[4px]">
+                      <iconify-icon icon="mingcute:grid-2-line" class="w-3.5 h-3.5"></iconify-icon>
+                      <span>New Collection</span>
+                    </button>
+                    <button class="w-full text-left px-3 py-1.5 text-[14px] flex items-center gap-2.5 hover:bg-hover cursor-pointer text-muted-foreground rounded-[4px]">
+                      <iconify-icon icon="mingcute:add-line" class="w-3.5 h-3.5"></iconify-icon>
+                      <span>New Schema</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div>
+              <span class="text-[12px] font-medium text-muted-foreground">Role dropdown</span>
+              <div class="mt-3">
+                <div class="inline-flex flex-col floating-pop bg-background border border-border rounded-md overflow-hidden p-1.5 min-w-[100px]">
+                  <button class="w-full text-left px-3 py-1.5 text-[12px] flex items-center hover:bg-hover cursor-pointer rounded-[4px] bg-accent">Owner</button>
+                  <button class="w-full text-left px-3 py-1.5 text-[12px] flex items-center hover:bg-hover cursor-pointer rounded-[4px]">Editor</button>
+                  <button class="w-full text-left px-3 py-1.5 text-[12px] flex items-center hover:bg-hover cursor-pointer rounded-[4px]">Member</button>
+                </div>
+              </div>
+            </div>
+            <div>
+              <span class="text-[12px] font-medium text-muted-foreground">Tooltips</span>
+              <div class="flex items-center gap-4 mt-3">
+                <div class="inline-flex items-center gap-1 px-2 py-1 rounded-[8px] bg-background border border-border text-[12px] text-foreground" style="box-shadow: 0 2px 8px rgb(0 0 0 / 0.06)">
+                  Hide sidebar
+                </div>
+                <div class="inline-flex items-center gap-1 px-2 py-1 rounded-[8px] bg-background border border-border text-[12px] text-foreground" style="box-shadow: 0 2px 8px rgb(0 0 0 / 0.06)">
+                  Back <kbd class="header-tooltip-kbd">Alt <iconify-icon icon="mingcute:arrow-left-line" class="w-3 h-3"></iconify-icon></kbd>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="icons">
+          <h2 class="text-[20px] font-medium mb-1">Icons</h2>
+          <p class="text-[14px] text-muted-foreground mb-6">All icons from the icon map, rendered with iconify-icon.</p>
+          <div class="grid grid-cols-6 gap-2">
+            {Object.entries(ICONS).map(([key, icon]) => (
+              <div class="flex flex-col items-center gap-1.5 p-3 rounded-[7px] hover:bg-hover">
+                <iconify-icon icon={icon} class="w-4 h-4 text-muted-foreground"></iconify-icon>
+                <span class="text-[11px] text-muted-foreground text-center">{key}</span>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section id="dark-mode">
+          <h2 class="text-[20px] font-medium mb-1">Dark Mode</h2>
+          <p class="text-[14px] text-muted-foreground mb-6">Toggle the theme using the button in the header. The full token set inverts.</p>
+          <div class="space-y-8">
+            <div>
+              <span class="text-[12px] font-medium text-muted-foreground">Token comparison — Light vs Dark</span>
+              <div class="mt-3 grid grid-cols-2 gap-4">
+                <div class="p-4 rounded-lg border border-border" style="background: oklch(0.965 0.004 85)">
+                  <p class="text-[12px] font-medium mb-2" style="color: #6d675f">Light</p>
+                  <p class="text-[14px] font-medium mb-2" style="color: #1c1917">The Quiet Workbench</p>
+                  <p class="text-[12px] mb-3" style="color: #6d675f">A calm warm-stone workbench.</p>
+                  <div class="flex items-center gap-2">
+                    <button class="inline-flex items-center px-3 py-1.5 text-[12px] font-medium rounded-full cursor-pointer" style="background: #1c1917; color: #fafaf9">Primary</button>
+                    <button class="inline-flex items-center px-3 py-1.5 text-[12px] font-medium rounded-full cursor-pointer" style="background: #f4f4f1; color: #1c1917">Ghost</button>
+                  </div>
+                </div>
+                <div class="p-4 rounded-lg border" style="background: oklch(0.220 0.006 60); border-color: #44403c">
+                  <p class="text-[12px] font-medium mb-2" style="color: rgba(250,250,249,0.65)">Dark</p>
+                  <p class="text-[14px] font-medium mb-2" style="color: #f5f5f4">The Quiet Workbench</p>
+                  <p class="text-[12px] mb-3" style="color: rgba(250,250,249,0.65)">A calm warm-stone workbench.</p>
+                  <div class="flex items-center gap-2">
+                    <button class="inline-flex items-center px-3 py-1.5 text-[12px] font-medium rounded-full cursor-pointer" style="background: #f5f5f4; color: #1c1917">Primary</button>
+                    <button class="inline-flex items-center px-3 py-1.5 text-[12px] font-medium rounded-full cursor-pointer" style="background: #1c1917; color: #f5f5f4">Ghost</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div>
+              <span class="text-[12px] font-medium text-muted-foreground">Component preview — Both themes side by side</span>
+              <div class="mt-3 grid grid-cols-2 gap-4">
+                <div class="p-4 rounded-lg border border-border space-y-3" style="background: oklch(0.965 0.004 85)">
+                  <p class="text-[12px] font-medium" style="color: #6d675f">Light</p>
+                  <div class="flex items-center gap-2">
+                    <span class="status-dot w-2 h-2 rounded-full" style="background: var(--status-doing)"></span>
+                    <span class="text-[12px] capitalize" style="color: #525252">Doing</span>
+                  </div>
+                  <div class="property-chip">
+                    <span class="label">Status</span>
+                    <span class="value">Active</span>
+                  </div>
+                  <div class="flex items-center gap-1.5">
+                    <span class="inline-flex items-center px-2 py-0.5 text-[12px] rounded-full" style="background: #eae9e6; color: #525252">#design</span>
+                    <span class="inline-flex items-center px-2 py-0.5 text-[12px] rounded-full" style="background: #eae9e6; color: #525252">#sprint-12</span>
+                  </div>
+                </div>
+                <div class="p-4 rounded-lg border space-y-3" style="background: oklch(0.220 0.006 60); border-color: #44403c">
+                  <p class="text-[12px] font-medium" style="color: rgba(250,250,249,0.65)">Dark</p>
+                  <div class="flex items-center gap-2">
+                    <span class="status-dot w-2 h-2 rounded-full" style="background: var(--status-doing)"></span>
+                    <span class="text-[12px] capitalize" style="color: #d6d3d1">Doing</span>
+                  </div>
+                  <div class="property-chip">
+                    <span class="label">Status</span>
+                    <span class="value">Active</span>
+                  </div>
+                  <div class="flex items-center gap-1.5">
+                    <span class="inline-flex items-center px-2 py-0.5 text-[12px] rounded-full" style="background: #292524; color: #d6d3d1">#design</span>
+                    <span class="inline-flex items-center px-2 py-0.5 text-[12px] rounded-full" style="background: #292524; color: #d6d3d1">#sprint-12</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </main>
+  </div>
+</WorkspaceLayout>
