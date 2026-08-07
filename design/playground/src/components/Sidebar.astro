@@ -37,34 +37,22 @@
         class="floating-pop absolute top-full left-3 mt-1 z-30 w-[calc(100%+20px)] rounded-md overflow-hidden bg-background border border-border p-1.5"
       >
         <div class="space-y-0.5">
-          <button
-            @click="selectLibrary('Workspace 1')"
-            :class="currentLibrary === 'Workspace 1' ? 'bg-accent' : ''"
-            :aria-current="currentLibrary === 'Workspace 1' ? 'true' : undefined"
-            role="menuitem"
-            class="w-full text-left px-3 py-1.5 text-[14px] flex items-center gap-2.5 hover:bg-hover cursor-pointer rounded-[4px]"
-          >
-      <img
-        src="https://api.dicebear.com/10.x/initials/svg?initialsVariant=alt:1&lettersVariant=single:0&backgroundColor=000000&textColor=ffffff&seed=Workspace"
-        alt="Workspace"
-        class="tweak-avatar w-5 h-5 rounded"
-      />
-            <span>Workspace 1</span>
-          </button>
-          <button
-            @click="selectLibrary('Workspace 2')"
-            :class="currentLibrary === 'Workspace 2' ? 'bg-accent' : ''"
-            :aria-current="currentLibrary === 'Workspace 2' ? 'true' : undefined"
-            role="menuitem"
-            class="w-full text-left px-3 py-1.5 text-[14px] flex items-center gap-2.5 hover:bg-hover cursor-pointer rounded-[4px]"
-          >
-      <img
-        src="https://api.dicebear.com/10.x/initials/svg?initialsVariant=alt:1&lettersVariant=single:0&backgroundColor=000000&textColor=ffffff&seed=Workspace"
-        alt="Workspace"
-        class="tweak-avatar w-5 h-5 rounded"
-      />
-            <span>Workspace 2</span>
-          </button>
+          <template x-for="ws in workspaces" :key="ws">
+            <button
+              @click="selectLibrary(ws)"
+              :class="currentLibrary === ws ? 'bg-accent' : ''"
+              :aria-current="currentLibrary === ws ? 'true' : undefined"
+              role="menuitem"
+              class="w-full text-left px-3 py-1.5 text-[14px] flex items-center gap-2.5 hover:bg-hover cursor-pointer rounded-[4px]"
+            >
+              <img
+                :src="'https://api.dicebear.com/10.x/initials/svg?initialsVariant=alt:1&lettersVariant=single:0&backgroundColor=000000&textColor=ffffff&seed=' + encodeURIComponent(ws)"
+                :alt="ws"
+                class="tweak-avatar w-5 h-5 rounded"
+              />
+              <span x-text="ws"></span>
+            </button>
+          </template>
           <div class="wv-rule"></div>
           <button
       @click="openSettingsModal()"
@@ -75,7 +63,7 @@
             <span>Settings</span>
           </button>
           <button
-            @click="selectLibrary('New Workspace')"
+            @click="openNewWorkspaceModal()"
             role="menuitem"
             class="w-full text-left px-3 py-1.5 text-[14px] flex items-center gap-2.5 hover:bg-hover cursor-pointer text-muted-foreground rounded-[4px]"
           >
@@ -253,3 +241,60 @@
     </div>
   </div>
 </aside>
+
+<div
+  x-show="isNewWorkspaceModalOpen"
+  x-cloak
+  x-transition:enter="transition ease-out duration-150"
+  x-transition:enter-start="opacity-0"
+  x-transition:enter-end="opacity-100"
+  x-transition:leave="transition ease-in duration-100"
+  x-transition:leave-start="opacity-100"
+  x-transition:leave-end="opacity-0"
+  class="fixed inset-0 z-50 flex items-center justify-center p-6"
+>
+  <div
+    @click="closeNewWorkspaceModal()"
+    class="absolute inset-0 bg-black/20 backdrop-blur-[3px]"
+  ></div>
+
+  <div
+    class="relative w-full max-w-sm flex flex-col z-10 bg-background border border-border rounded-lg overflow-hidden modal-pop"
+  >
+    <button
+      @click="closeNewWorkspaceModal()"
+      class="absolute top-3 right-3 z-20 w-7 h-7 flex items-center justify-center rounded-full hover:bg-hover text-muted-foreground hover:text-foreground cursor-pointer"
+      aria-label="Close"
+    >
+      <iconify-icon :icon="getIconName('x')" class="w-3.5 h-3.5"></iconify-icon>
+    </button>
+
+    <div class="wv-scroll">
+      <h4 class="text-[20px] font-medium text-foreground !mt-0">New workspace</h4>
+      <p class="wv-subtitle mb-4">Create a new space to organize your work.</p>
+      <div class="wv-field">
+        <input
+          type="text"
+          x-model="newWorkspaceNameInput"
+          @keydown.enter="createWorkspace()"
+          placeholder="Workspace name"
+          class="wv-btn wv-input bg-input px-3 py-1.5 text-[12px] text-foreground border border-border focus-ring w-full"
+        />
+      </div>
+      <div class="flex items-center gap-2 mt-2">
+        <button
+          @click="createWorkspace()"
+          class="primary-btn wv-btn inline-flex items-center px-3 py-1.5 text-[12px] font-medium cursor-pointer"
+        >
+          Create workspace
+        </button>
+        <button
+          @click="closeNewWorkspaceModal()"
+          class="wv-btn inline-flex items-center px-3 py-1.5 text-[12px] font-medium border border-border bg-transparent hover:bg-hover cursor-pointer"
+        >
+          Cancel
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

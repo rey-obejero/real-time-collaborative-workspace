@@ -49,7 +49,7 @@ export const ICONS: Record<string, string> = {
   user: "mingcute:user-3-line",
   briefcase: "mingcute:briefcase-2-line",
   "help-circle": "mingcute:question-line",
-  menu: "mingcute:menu-line",
+  menu: "ci:menu-duo-md",
   plugin: "mingcute:plugin-2-line",
   qrcode: "mingcute:qrcode-line",
 };

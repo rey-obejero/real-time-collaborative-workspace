@@ -64,6 +64,25 @@ export const modalActions = {
     this.isAddMemberModalOpen = false;
   },
 
+  openNewWorkspaceModal(this: WorkspaceStore): void {
+    this.isLibraryDropdownOpen = false;
+    this.newWorkspaceNameInput = "";
+    this.isNewWorkspaceModalOpen = true;
+  },
+
+  closeNewWorkspaceModal(this: WorkspaceStore): void {
+    this.isNewWorkspaceModalOpen = false;
+  },
+
+  createWorkspace(this: WorkspaceStore): void {
+    const name = this.newWorkspaceNameInput.trim();
+    if (!name) return;
+    this.workspaces.push(name);
+    this.selectLibrary(name);
+    this.newWorkspaceNameInput = "";
+    this.isNewWorkspaceModalOpen = false;
+  },
+
   saveWorkspaceSettings(this: WorkspaceStore): void {
     if (this.workspaceNameInput.trim())
       this.currentLibrary = this.workspaceNameInput.trim();

@@ -47,6 +47,9 @@ const state = {
   inviteEmail: "",
   isAddMemberModalOpen: false,
   addMemberInput: "",
+  isNewWorkspaceModalOpen: false,
+  newWorkspaceNameInput: "",
+  workspaces: ["Workspace 1", "Workspace 2"],
   tweaksOpen: false,
   tweaks: defaultTweaks,
   workspaceNameInput: "Personal Space",
@@ -183,6 +186,7 @@ Alpine.data(
         if (e.key === "Escape") {
           this.closeSearchModal();
           this.closeSettingsModal();
+          this.closeNewWorkspaceModal();
           this.hideFloatingFormatMenu();
           this.hideSlashMenu();
         }

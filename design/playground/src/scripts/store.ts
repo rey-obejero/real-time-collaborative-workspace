@@ -24,6 +24,9 @@ export interface WorkspaceStore {
   inviteEmail: string;
   isAddMemberModalOpen: boolean;
   addMemberInput: string;
+  isNewWorkspaceModalOpen: boolean;
+  newWorkspaceNameInput: string;
+  workspaces: string[];
   tweaksOpen: boolean;
   tweaks: Tweaks;
   workspaceNameInput: string;
@@ -87,6 +90,9 @@ export interface WorkspaceStore {
   openAddMemberModal(): void;
   closeAddMemberModal(): void;
   addMember(): void;
+  openNewWorkspaceModal(): void;
+  closeNewWorkspaceModal(): void;
+  createWorkspace(): void;
   saveWorkspaceSettings(): void;
   selectLibrary(name: string): void;
   openSearchModal(): void;
