@@ -22,7 +22,7 @@ colors:
   table-entry: "#525252"
 typography:
   display:
-    fontFamily: "Nunito, ui-sans-serif, system-ui, sans-serif"
+    fontFamily: "Geist, ui-sans-serif, system-ui, sans-serif"
     fontSize: "20px"
     fontWeight: 500
     lineHeight: 1.2
