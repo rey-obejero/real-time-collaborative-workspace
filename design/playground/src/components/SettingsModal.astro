@@ -17,6 +17,14 @@
   <div
     class="relative w-full max-w-2xl flex flex-col z-10 min-h-[60vh] max-h-[80vh] bg-background border border-border rounded-lg overflow-hidden modal-pop"
   >
+    <button
+      @click="closeSettingsModal()"
+      class="absolute top-3 right-3 z-20 w-7 h-7 flex items-center justify-center rounded-full hover:bg-hover text-muted-foreground hover:text-foreground cursor-pointer"
+      aria-label="Close settings"
+    >
+      <iconify-icon :icon="getIconName('x')" class="w-3.5 h-3.5"></iconify-icon>
+    </button>
+
     <div class="flex flex-1 min-h-0">
       <nav
         class="w-[200px] shrink-0 border-r border-border overflow-y-auto no-scrollbar select-none bg-sidebar"
@@ -87,26 +95,116 @@
       </nav>
 
       <div class="wv-scroll flex-1 min-w-0 overflow-y-auto no-scrollbar">
-        <section id="sec-personal-info" class="settings-section" x-show="activeSettingsSection === 'sec-personal-info'" x-cloak>
-          <h4 class="wv-sec-h">Personal</h4>
-        </section>
-
-        <section id="sec-preferences" class="settings-section" x-show="activeSettingsSection === 'sec-preferences'" x-cloak>
-          <h4 class="wv-sec-h">Preferences</h4>
-        </section>
-
-        <section id="sec-general" class="settings-section" x-show="activeSettingsSection === 'sec-general'" x-cloak>
-          <h4 class="wv-sec-h">General</h4>
+        <section
+          id="sec-personal-info"
+          class="settings-section"
+          x-show="activeSettingsSection === 'sec-personal-info'"
+          x-cloak
+          x-transition:enter="transition ease-out duration-150"
+          x-transition:enter-start="opacity-0"
+          x-transition:enter-end="opacity-100"
+          x-transition:leave="transition ease-in duration-100"
+          x-transition:leave-start="opacity-100"
+          x-transition:leave-end="opacity-0"
+        >
+          <h4 class="wv-sec-h !mt-0">Personal</h4>
+          <p class="wv-subtitle mb-4">Your account profile across workspaces.</p>
           <div class="wv-field">
-            <label class="wv-field-label">Workspace Name</label>
-            <input type="text" x-model="workspaceNameInput" class="wv-btn wv-input bg-input px-3 py-1.5 text-[12px] font-medium text-foreground" />
+            <label class="wv-field-label">Profile</label>
+            <div class="flex items-center gap-3 py-2">
+              <img
+                src="https://api.dicebear.com/10.x/initials/svg?initialsVariant=alt:1&lettersVariant=single:0&backgroundColor=000000&textColor=ffffff&seed=John"
+                alt=""
+                class="w-8 h-8 rounded-full shrink-0"
+              />
+              <div class="min-w-0">
+                <p class="wv-row-label truncate">John Doe</p>
+                <p class="wv-row-meta truncate">john.doe@example.com</p>
+              </div>
+            </div>
           </div>
         </section>
 
-        <section id="sec-members" class="settings-section" x-show="activeSettingsSection === 'sec-members'" x-cloak>
-          <h4 class="wv-sec-h !my-0">Members</h4>
+        <section
+          id="sec-preferences"
+          class="settings-section"
+          x-show="activeSettingsSection === 'sec-preferences'"
+          x-cloak
+          x-transition:enter="transition ease-out duration-150"
+          x-transition:enter-start="opacity-0"
+          x-transition:enter-end="opacity-100"
+          x-transition:leave="transition ease-in duration-100"
+          x-transition:leave-start="opacity-100"
+          x-transition:leave-end="opacity-0"
+        >
+          <h4 class="wv-sec-h !mt-0">Preferences</h4>
+          <p class="wv-subtitle mb-4">Interface and behavior settings.</p>
+          <div class="wv-row !py-3">
+            <div class="flex flex-col gap-1 min-w-0">
+              <span class="wv-row-label">Appearance</span>
+              <span class="wv-row-meta">Switch between light and dark mode</span>
+            </div>
+            <button
+              @click="isDarkMode = !isDarkMode; document.documentElement.classList.toggle('dark', isDarkMode)"
+              class="wv-btn inline-flex items-center gap-1.5 px-3 py-1.5 text-[12px] font-medium border border-border bg-transparent hover:bg-hover cursor-pointer"
+            >
+              <iconify-icon :icon="isDarkMode ? getIconName('moon') : getIconName('sun')" class="w-3.5 h-3.5"></iconify-icon>
+              <span x-text="isDarkMode ? 'Dark' : 'Light'"></span>
+            </button>
+          </div>
+          <div class="wv-row-divider"></div>
+          <div class="wv-row !py-3">
+            <div class="flex flex-col gap-1 min-w-0">
+              <span class="wv-row-label">Density</span>
+              <span class="wv-row-meta">Compact or comfortable spacing</span>
+            </div>
+            <button
+              @click="toggleTweak('density', tweaks.density === 'compact' ? 'comfortable' : 'compact')"
+              class="wv-btn inline-flex items-center gap-1.5 px-3 py-1.5 text-[12px] font-medium border border-border bg-transparent hover:bg-hover cursor-pointer"
+            >
+              <span x-text="tweaks.density === 'compact' ? 'Compact' : 'Comfortable'"></span>
+            </button>
+          </div>
+        </section>
 
-          <p class="text-[13px] text-muted-foreground mt-2 mb-3">Invite and manage members who can access this workspace.</p>
+        <section
+          id="sec-general"
+          class="settings-section"
+          x-show="activeSettingsSection === 'sec-general'"
+          x-cloak
+          x-transition:enter="transition ease-out duration-150"
+          x-transition:enter-start="opacity-0"
+          x-transition:enter-end="opacity-100"
+          x-transition:leave="transition ease-in duration-100"
+          x-transition:leave-start="opacity-100"
+          x-transition:leave-end="opacity-0"
+        >
+          <h4 class="wv-sec-h !mt-0">General</h4>
+          <p class="wv-subtitle mb-4">Workspace identity and defaults.</p>
+          <div class="wv-field">
+            <label class="wv-field-label">Workspace Name</label>
+            <input
+              type="text"
+              x-model="workspaceNameInput"
+              class="wv-btn wv-input bg-input px-3 py-1.5 text-[12px] text-foreground border border-border focus-ring"
+            />
+          </div>
+        </section>
+
+        <section
+          id="sec-members"
+          class="settings-section"
+          x-show="activeSettingsSection === 'sec-members'"
+          x-cloak
+          x-transition:enter="transition ease-out duration-150"
+          x-transition:enter-start="opacity-0"
+          x-transition:enter-end="opacity-100"
+          x-transition:leave="transition ease-in duration-100"
+          x-transition:leave-start="opacity-100"
+          x-transition:leave-end="opacity-0"
+        >
+          <h4 class="wv-sec-h !mt-0">Members</h4>
+          <p class="wv-subtitle mb-3">Invite and manage members who can access this workspace.</p>
 
           <button @click="openAddMemberModal()" class="primary-btn wv-btn inline-flex items-center px-3 py-1.5 text-[12px] font-medium cursor-pointer mb-5">
             Add members
@@ -137,16 +235,17 @@
                 <img
                   :src="'https://api.dicebear.com/10.x/initials/svg?initialsVariant=alt:1&lettersVariant=single:0&backgroundColor=000000&textColor=ffffff&seed=' + m.name"
                   alt=""
-                  class="w-5 h-5 rounded shrink-0"
+                  class="w-5 h-5 rounded-full shrink-0"
                 />
                 <div class="truncate">
                   <p class="text-[14px] font-medium leading-tight text-foreground" x-text="m.name"></p>
+                  <p class="text-[12px] text-muted-foreground leading-tight" x-text="m.email"></p>
                 </div>
               </div>
               <div class="relative flex items-center shrink-0">
                 <button
                   @click="roleDropdownOpen = !roleDropdownOpen"
-                  class="flex items-center gap-1 text-[12px] font-medium text-foreground cursor-pointer px-2 py-1 rounded hover:bg-hover"
+                  class="wv-btn flex items-center gap-1 text-[12px] font-medium text-foreground cursor-pointer px-2 py-1 border border-border bg-transparent hover:bg-hover"
                 >
                   <span x-text="role.charAt(0).toUpperCase() + role.slice(1)"></span>
                   <iconify-icon :icon="getIconName('chevron-down')" class="w-3 h-3 text-muted-foreground"></iconify-icon>
@@ -179,23 +278,98 @@
           </template>
         </section>
 
-        <section id="sec-schemas" class="settings-section" x-show="activeSettingsSection === 'sec-schemas'" x-cloak>
-          <h4 class="wv-sec-h">Schemas</h4>
+        <section
+          id="sec-schemas"
+          class="settings-section"
+          x-show="activeSettingsSection === 'sec-schemas'"
+          x-cloak
+          x-transition:enter="transition ease-out duration-150"
+          x-transition:enter-start="opacity-0"
+          x-transition:enter-end="opacity-100"
+          x-transition:leave="transition ease-in duration-100"
+          x-transition:leave-start="opacity-100"
+          x-transition:leave-end="opacity-0"
+        >
+          <h4 class="wv-sec-h !mt-0">Schemas</h4>
+          <p class="wv-subtitle mb-4">Entry types available in this workspace.</p>
           <template x-for="schema in schemas" :key="schema.id">
-            <div class="wv-row">
-              <div class="flex items-center gap-2 min-w-0">
-                <iconify-icon :icon="getIconName(schema.id)" class="w-4 h-4 text-muted-foreground"></iconify-icon>
-                <span class="wv-row-label truncate" x-text="schema.name"></span>
+            <div>
+              <div class="wv-row">
+                <div class="flex items-center gap-2 min-w-0">
+                  <iconify-icon :icon="getIconName(schema.id)" class="w-4 h-4 text-muted-foreground"></iconify-icon>
+                  <span class="wv-row-label truncate" x-text="schema.name"></span>
+                </div>
+                <div class="flex items-center gap-3">
+                  <button class="wv-btn px-2.5 py-1 text-[12px] font-medium border border-border bg-transparent hover:bg-hover cursor-pointer">Edit</button>
+                </div>
               </div>
-              <div class="flex items-center gap-3">
-                <button class="wv-btn px-2.5 py-1 text-[12px] font-medium border border-border bg-transparent hover:bg-hover cursor-pointer">Edit</button>
-              </div>
+              <div class="wv-row-divider"></div>
             </div>
           </template>
         </section>
 
-        <section id="sec-properties" class="settings-section" x-show="activeSettingsSection === 'sec-properties'" x-cloak>
-          <h4 class="wv-sec-h">Properties</h4>
+        <section
+          id="sec-properties"
+          class="settings-section"
+          x-show="activeSettingsSection === 'sec-properties'"
+          x-cloak
+          x-transition:enter="transition ease-out duration-150"
+          x-transition:enter-start="opacity-0"
+          x-transition:enter-end="opacity-100"
+          x-transition:leave="transition ease-in duration-100"
+          x-transition:leave-start="opacity-100"
+          x-transition:leave-end="opacity-0"
+        >
+          <h4 class="wv-sec-h !mt-0">Properties</h4>
+          <p class="wv-subtitle mb-4">Properties available on entry types across this workspace.</p>
+          <div class="wv-row">
+            <div class="flex flex-col gap-0.5 min-w-0">
+              <span class="wv-row-label">Status</span>
+              <span class="wv-row-meta">Page, Task, Project</span>
+            </div>
+          </div>
+          <div class="wv-row-divider"></div>
+          <div class="wv-row">
+            <div class="flex flex-col gap-0.5 min-w-0">
+              <span class="wv-row-label">Priority</span>
+              <span class="wv-row-meta">Task, Project</span>
+            </div>
+          </div>
+          <div class="wv-row-divider"></div>
+          <div class="wv-row">
+            <div class="flex flex-col gap-0.5 min-w-0">
+              <span class="wv-row-label">Due date</span>
+              <span class="wv-row-meta">Task, Project</span>
+            </div>
+          </div>
+          <div class="wv-row-divider"></div>
+          <div class="wv-row">
+            <div class="flex flex-col gap-0.5 min-w-0">
+              <span class="wv-row-label">Assignee</span>
+              <span class="wv-row-meta">Task, Project</span>
+            </div>
+          </div>
+          <div class="wv-row-divider"></div>
+          <div class="wv-row">
+            <div class="flex flex-col gap-0.5 min-w-0">
+              <span class="wv-row-label">Owner</span>
+              <span class="wv-row-meta">Page, Note</span>
+            </div>
+          </div>
+          <div class="wv-row-divider"></div>
+          <div class="wv-row">
+            <div class="flex flex-col gap-0.5 min-w-0">
+              <span class="wv-row-label">URL</span>
+              <span class="wv-row-meta">Bookmark</span>
+            </div>
+          </div>
+          <div class="wv-row-divider"></div>
+          <div class="wv-row">
+            <div class="flex flex-col gap-0.5 min-w-0">
+              <span class="wv-row-label">Tags</span>
+              <span class="wv-row-meta">All types</span>
+            </div>
+          </div>
         </section>
       </div>
     </div>
@@ -221,16 +395,24 @@
   <div
     class="relative w-full max-w-sm flex flex-col z-10 bg-background border border-border rounded-lg overflow-hidden modal-pop"
   >
+    <button
+      @click="closeAddMemberModal()"
+      class="absolute top-3 right-3 z-20 w-7 h-7 flex items-center justify-center rounded-full hover:bg-hover text-muted-foreground hover:text-foreground cursor-pointer"
+      aria-label="Close"
+    >
+      <iconify-icon :icon="getIconName('x')" class="w-3.5 h-3.5"></iconify-icon>
+    </button>
+
     <div class="wv-scroll">
-      <h4 class="wv-sec-h !mt-0">Add member</h4>
-      <p class="text-[13px] text-muted-foreground mb-4">Enter a username or email to send an invite.</p>
+      <h4 class="font-display text-[20px] font-medium text-foreground !mt-0">Add member</h4>
+      <p class="wv-subtitle mb-4">Enter a username or email to send an invite.</p>
       <div class="wv-field">
         <input
           type="text"
           x-model="addMemberInput"
           @keydown.enter="addMember()"
           placeholder="Username or email"
-          class="wv-btn wv-input bg-input px-3 py-1.5 text-[12px] font-medium text-foreground w-full"
+          class="wv-btn wv-input bg-input px-3 py-1.5 text-[12px] text-foreground border border-border focus-ring w-full"
         />
       </div>
       <div class="flex items-center gap-2 mt-2">
