@@ -7,8 +7,8 @@
 }
 
 @theme inline {
-  --font-sans: "Geist", ui-sans-serif, system-ui, sans-serif;
-  --font-display: "Geist", system-ui, sans-serif;
+  --font-sans: "DM Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "DM Sans", system-ui, sans-serif;
   --font-mono: "Geist Mono", ui-monospace, monospace;
 
   --color-background: var(--background);
@@ -132,7 +132,7 @@
 }
 
 body {
-  font-family: "Geist", ui-sans-serif, system-ui, sans-serif;
+  font-family: "DM Sans", ui-sans-serif, system-ui, sans-serif;
   font-size: 16px;
   line-height: 1.5;
 }
@@ -253,7 +253,7 @@ textarea:focus,
 }
 
 .prose-readable {
-  font-family: "Geist", ui-sans-serif, system-ui, sans-serif;
+  font-family: "DM Sans", ui-sans-serif, system-ui, sans-serif;
   font-size: 16px;
   line-height: 1.5;
   font-weight: 400;
