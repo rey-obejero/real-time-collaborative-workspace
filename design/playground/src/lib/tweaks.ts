@@ -24,7 +24,7 @@ export interface Tweaks {
 }
 
 export const defaultTweaks: Tweaks = {
-  density: "default",
+  density: "compact",
   cardEdge: "flat",
   sidebarFill: "canvas",
   chipStyle: "bordered",

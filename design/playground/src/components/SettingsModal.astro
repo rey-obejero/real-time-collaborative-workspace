@@ -115,7 +115,7 @@
               <img
                 src="https://api.dicebear.com/10.x/initials/svg?initialsVariant=alt:1&lettersVariant=single:0&backgroundColor=000000&textColor=ffffff&seed=John"
                 alt=""
-                class="w-8 h-8 rounded-full shrink-0"
+                class="w-7 h-7 rounded-full shrink-0"
               />
               <div class="min-w-0">
                 <p class="wv-row-label truncate">John Doe</p>
@@ -150,19 +150,6 @@
             >
               <iconify-icon :icon="isDarkMode ? getIconName('moon') : getIconName('sun')" class="w-3.5 h-3.5"></iconify-icon>
               <span x-text="isDarkMode ? 'Dark' : 'Light'"></span>
-            </button>
-          </div>
-          <div class="wv-row-divider"></div>
-          <div class="wv-row !py-3">
-            <div class="flex flex-col gap-1 min-w-0">
-              <span class="wv-row-label">Density</span>
-              <span class="wv-row-meta">Compact or comfortable spacing</span>
-            </div>
-            <button
-              @click="toggleTweak('density', tweaks.density === 'compact' ? 'comfortable' : 'compact')"
-              class="wv-btn inline-flex items-center gap-1.5 px-3 py-1.5 text-[12px] font-medium border border-border bg-transparent hover:bg-hover cursor-pointer"
-            >
-              <span x-text="tweaks.density === 'compact' ? 'Compact' : 'Comfortable'"></span>
             </button>
           </div>
         </section>
@@ -235,7 +222,7 @@
                 <img
                   :src="'https://api.dicebear.com/10.x/initials/svg?initialsVariant=alt:1&lettersVariant=single:0&backgroundColor=000000&textColor=ffffff&seed=' + m.name"
                   alt=""
-                  class="w-5 h-5 rounded-full shrink-0"
+                  class="w-7 h-7 rounded-full shrink-0"
                 />
                 <div class="truncate">
                   <p class="text-[14px] font-medium leading-tight text-foreground" x-text="m.name"></p>
@@ -404,7 +391,7 @@
     </button>
 
     <div class="wv-scroll">
-      <h4 class="font-display text-[20px] font-medium text-foreground !mt-0">Add member</h4>
+      <h4 class="text-[20px] font-medium text-foreground !mt-0">Add member</h4>
       <p class="wv-subtitle mb-4">Enter a username or email to send an invite.</p>
       <div class="wv-field">
         <input
