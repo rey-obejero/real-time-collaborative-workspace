@@ -22,17 +22,17 @@ colors:
   table-entry: "#525252"
 typography:
   display:
-    fontFamily: "Geist, ui-sans-serif, system-ui, sans-serif"
+    fontFamily: "DM Sans, ui-sans-serif, system-ui, sans-serif"
     fontSize: "20px"
     fontWeight: 500
     lineHeight: 1.2
   body:
-    fontFamily: "Geist, ui-sans-serif, system-ui, sans-serif"
+    fontFamily: "DM Sans, ui-sans-serif, system-ui, sans-serif"
     fontSize: "16px"
     fontWeight: 400
     lineHeight: 1.5
   label:
-    fontFamily: "Geist, ui-sans-serif, system-ui, sans-serif"
+    fontFamily: "DM Sans, ui-sans-serif, system-ui, sans-serif"
     fontSize: "12px"
     fontWeight: 500
   code:
@@ -132,7 +132,7 @@ main canvas.
 - Warm-stone monochrome neutrals; pure ink for primary actions, never bright hues.
 - Flat surfaces; structure from 1px hairlines and tonal layering, never hard shadows.
 - Pill geometry for labeled actions; 7px for compact controls and rows; 12px for cards; 4px for menu rows.
-- Geist for body, Nunito for display headings, Geist Mono for code and keyboard hints.
+- DM Sans for body and display headings, Geist Mono for code and keyboard hints.
 - Quiet chrome: muted-clay secondary text, hairline borders, restrained hover fills.
 - Two overlapping modal planes (settings `z-40`, nested add-member `z-50`) that share the same card language.
 - Dark mode inverts the same token system without changing the geometry.
@@ -184,30 +184,30 @@ fill second.
 
 ## Typography
 
-**Display Font:** Nunito (with ui-sans-serif, system-ui fallback)
-**Body Font:** Geist (with ui-sans-serif, system-ui fallback)
+**Display Font:** DM Sans (with ui-sans-serif, system-ui fallback)
+**Body Font:** DM Sans (with ui-sans-serif, system-ui fallback)
 **Label/Mono Font:** Geist Mono (with ui-monospace fallback)
 
-**Character:** A rounded geometric display paired with a clean, neutral sans body
-— friendly but not childish, precise but not stiff. Geist keeps long-form reading
-calm; Nunito gives the rare heading a soft, approachable curve. Geist Mono marks
+**Character:** A warm, rounded geometric sans with a quiet, neutral presence —
+friendly but not childish, precise but not stiff. DM Sans keeps long-form reading
+calm and gives the rare heading a soft, approachable curve. Geist Mono marks
 system identities: invite links, keyboard hints, and code.
 
 ### Hierarchy
-- **Display** (Nunito 500, 20px, 1.2): Surface titles — the list view heading
-  ("All"), the modal heading. The only face that carries Nunito.
-- **Body** (Geist 400, 16px, 1.5): Default text, prose, entry content
+- **Display** (DM Sans 500, 20px, 1.2): Surface titles — the list view heading
+  ("All"), the modal heading. Weight and size carry the display step.
+- **Body** (DM Sans 400, 16px, 1.5): Default text, prose, entry content
   (`.prose-readable`).
-- **Title / Row Label** (Geist 400, 14px): Row and list labels (`.wv-row-label`,
+- **Title / Row Label** (DM Sans 400, 14px): Row and list labels (`.wv-row-label`,
   `.nav-row` items, header actions, entry titles).
-- **Label** (Geist 500, 12px): Field labels (`.wv-field-label`), buttons, chips,
+- **Label** (DM Sans 500, 12px): Field labels (`.wv-field-label`), buttons, chips,
   property labels, keyboard hints.
-- **Meta** (Geist 400, 12px): Secondary metadata — emails, timestamps, counts
+- **Meta** (DM Sans 400, 12px): Secondary metadata — emails, timestamps, counts
   (`.wv-row-meta`).
-- **Micro** (Geist 500, 11px): Badges and status labels.
+- **Micro** (DM Sans 500, 11px): Badges and status labels.
 
 ### Named Rules
-**The Type Ratio Rule.** Display (20px Nunito) → section head (16px 500 muted,
+**The Type Ratio Rule.** Display (20px DM Sans 500) → section head (16px 500 muted,
 `.wv-sec-h`) → row label (14px 400) → metadata (12px muted). Each step down both
 shrinks and mutes; never let a section heading read smaller or weaker than the
 row labels it leads.
@@ -372,7 +372,7 @@ as two quiet planes.
   inside menus.
 - **Do** use one ink element per cluster — the primary action; ghost everything
   else until hover.
-- **Do** use Nunito for display headings, Geist for body, Geist Mono for links,
+- **Do** use DM Sans for body and display headings, Geist Mono for links,
   code, and keyboard hints.
 - **Do** keep focus visible with the 3px blue ring on every interactive element.
 - **Do** use warm-paper or the oklch background for surfaces, never `#ffffff`.
