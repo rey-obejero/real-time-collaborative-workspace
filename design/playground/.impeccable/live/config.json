@@ -1,6 +1,0 @@
-{
-  "files": ["src/layouts/WorkspaceLayout.astro"],
-  "insertBefore": "</body>",
-  "commentSyntax": "html",
-  "cspChecked": true
-}
