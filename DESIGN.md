@@ -371,7 +371,7 @@ Owner / Editor / Member items.
 **Add members** and **New workspace** open nested modals at `z-50` (above
 settings): a `max-w-xs` card sharing the same language — 20px title, 13px muted
 description, a `bg-input` field with a placeholder, then a full-width `<hr>`
-hairline divider and a footer row (`px-7 pb-7 pt-4`, `justify-end`) holding the
+hairline divider and a footer row (`px-5 pb-5 pt-3`, `justify-end`) holding the
 outline **Cancel** button on the left and the ink primary action (**Add member**
 / **Create workspace**) on the right. They reuse the same backdrop and modal-pop
 shadow so the stack reads as two quiet planes.

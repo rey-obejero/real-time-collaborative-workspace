@@ -390,21 +390,21 @@
       <iconify-icon :icon="getIconName('x')" class="w-3.5 h-3.5"></iconify-icon>
     </button>
 
-    <div class="wv-scroll">
+    <div class="px-5 pt-5 pb-3">
       <h4 class="text-[20px] font-medium text-foreground !mt-0">Add member</h4>
-      <p class="wv-subtitle mb-4">Enter a username or email to send an invite.</p>
+      <p class="wv-subtitle mb-2">Enter a username or email to send an invite.</p>
       <div class="wv-field">
         <input
           type="text"
           x-model="addMemberInput"
           @keydown.enter="addMember()"
           placeholder="Username or email"
-          class="wv-btn wv-input bg-input px-3 py-1.5 text-[12px] text-foreground border border-border focus-ring w-full"
+          class="wv-btn bg-input px-3 py-1.5 text-[12px] text-foreground border border-border focus-ring w-full"
         />
       </div>
     </div>
-    <hr class="border-border" />
-    <div class="flex items-center justify-end gap-2 px-7 pb-7 pt-4">
+    <hr class="border-border mt-0" />
+    <div class="flex items-center justify-end gap-2 px-5 pb-5 pt-3">
       <button
         @click="closeAddMemberModal()"
         class="wv-btn inline-flex items-center px-3 py-1.5 text-[12px] font-medium border border-border bg-transparent hover:bg-hover cursor-pointer"
@@ -413,7 +413,7 @@
       </button>
       <button
         @click="addMember()"
-        class="wv-btn inline-flex items-center px-3 py-1.5 text-[12px] font-medium bg-primary text-primary-foreground rounded-md hover:bg-primary/80 cursor-pointer"
+        class="wv-btn inline-flex items-center px-3 py-1.5 text-[12px] font-medium bg-primary text-primary-foreground hover:bg-primary/80 cursor-pointer"
       >
         Add member
       </button>
