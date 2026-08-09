@@ -259,7 +259,7 @@
   ></div>
 
   <div
-    class="relative w-full max-w-sm flex flex-col z-10 bg-background border border-border rounded-lg overflow-hidden modal-pop"
+    class="relative w-full max-w-xs flex flex-col z-10 bg-background border border-border rounded-lg overflow-hidden modal-pop"
   >
     <button
       @click="closeNewWorkspaceModal()"
@@ -269,32 +269,33 @@
       <iconify-icon :icon="getIconName('x')" class="w-3.5 h-3.5"></iconify-icon>
     </button>
 
-    <div class="wv-scroll">
+    <div class="px-5 pt-5 pb-3">
       <h4 class="text-[20px] font-medium text-foreground !mt-0">New workspace</h4>
-      <p class="wv-subtitle mb-4">Create a new space to organize your work.</p>
+      <p class="wv-subtitle mb-2">Create a new space to organize your work.</p>
       <div class="wv-field">
         <input
           type="text"
           x-model="newWorkspaceNameInput"
           @keydown.enter="createWorkspace()"
           placeholder="Workspace name"
-          class="wv-btn wv-input bg-input px-3 py-1.5 text-[12px] text-foreground border border-border focus-ring w-full"
+          class="wv-btn bg-input px-3 py-1.5 text-[12px] text-foreground border border-border focus-ring w-full"
         />
       </div>
-      <div class="flex items-center gap-2 mt-2">
-        <button
-          @click="createWorkspace()"
-          class="primary-btn wv-btn inline-flex items-center px-3 py-1.5 text-[12px] font-medium cursor-pointer"
-        >
-          Create workspace
-        </button>
-        <button
-          @click="closeNewWorkspaceModal()"
-          class="wv-btn inline-flex items-center px-3 py-1.5 text-[12px] font-medium border border-border bg-transparent hover:bg-hover cursor-pointer"
-        >
-          Cancel
-        </button>
-      </div>
+    </div>
+    <hr class="border-border mt-0" />
+    <div class="flex items-center justify-end gap-2 px-5 pb-5 pt-3">
+      <button
+        @click="closeNewWorkspaceModal()"
+        class="wv-btn inline-flex items-center px-3 py-1.5 text-[12px] font-medium border border-border bg-transparent hover:bg-hover cursor-pointer"
+      >
+        Cancel
+      </button>
+      <button
+        @click="createWorkspace()"
+        class="wv-btn inline-flex items-center px-3 py-1.5 text-[12px] font-medium bg-primary text-primary-foreground hover:bg-primary/80 cursor-pointer"
+      >
+        Create workspace
+      </button>
     </div>
   </div>
 </div>

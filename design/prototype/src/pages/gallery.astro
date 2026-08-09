@@ -30,7 +30,7 @@ import { ICONS } from "../lib/icons";
         ["typography", "Typography"],
         ["radii-spacing", "Radii & Spacing"],
         ["buttons", "Buttons"],
-        ["chips-badges", "Chips & Badges"],
+        ["properties", "Properties"],
         ["inputs-fields", "Inputs & Fields"],
         ["navigation", "Navigation"],
         ["cards-containers", "Cards"],
@@ -253,48 +253,34 @@ import { ICONS } from "../lib/icons";
           </div>
         </section>
 
-        <section id="chips-badges">
-          <h2 class="text-[20px] font-medium mb-1">Chips & Badges</h2>
-          <p class="text-[14px] text-muted-foreground mb-6">Property chips, type pills, status indicators, avatars, and role badges.</p>
+        <section id="properties">
+          <h2 class="text-[20px] font-medium mb-1">Properties</h2>
+          <p class="text-[14px] text-muted-foreground mb-6">Entry properties as plaintext, with status dots, type pills, tag pills, and avatars.</p>
           <div class="space-y-8">
             <div>
-              <span class="text-[12px] font-medium text-muted-foreground">Property chips</span>
-              <div class="flex flex-wrap items-center gap-2 mt-3">
-                <div class="property-chip">
-                  <span class="label">Status</span>
-                  <span class="status-dot" style="background: var(--status-doing)"></span>
-                  <span class="value capitalize">Doing</span>
-                </div>
-                <div class="property-chip">
-                  <span class="label">Priority</span>
-                  <span class="value capitalize">High</span>
-                </div>
-                <div class="property-chip">
-                  <span class="label">Due</span>
-                  <span class="value capitalize">Tomorrow</span>
-                </div>
-                <div class="property-chip">
-                  <span class="label">Assignee</span>
+              <span class="text-[12px] font-medium text-muted-foreground">Plaintext properties</span>
+              <div class="flex flex-wrap items-center gap-x-3 gap-y-1 mt-3">
+                <span class="inline-flex items-center gap-1">
+                  <span class="text-[12px] text-muted-foreground">Status</span>
+                  <span class="status-dot w-2 h-2 rounded-full shrink-0" style="background: var(--status-doing)"></span>
+                  <span class="text-[12px] font-medium text-foreground capitalize">Doing</span>
+                </span>
+                <span class="inline-flex items-center gap-1">
+                  <span class="text-[12px] text-muted-foreground">Priority</span>
+                  <span class="text-[12px] font-medium text-foreground capitalize">High</span>
+                </span>
+                <span class="inline-flex items-center gap-1">
+                  <span class="text-[12px] text-muted-foreground">Due</span>
+                  <span class="text-[12px] font-medium text-foreground capitalize">Tomorrow</span>
+                </span>
+                <span class="inline-flex items-center gap-1">
+                  <span class="text-[12px] text-muted-foreground">Assignee</span>
                   <span class="avatar-chip">JD</span>
-                </div>
-                <div class="property-chip">
-                  <span class="label">Owner</span>
+                </span>
+                <span class="inline-flex items-center gap-1">
+                  <span class="text-[12px] text-muted-foreground">Owner</span>
                   <span class="avatar-chip">AK</span>
-                </div>
-              </div>
-            </div>
-            <div>
-              <span class="text-[12px] font-medium text-muted-foreground">Bordered variant</span>
-              <div class="flex flex-wrap items-center gap-2 mt-3 tweaks-chips-bordered">
-                <div class="property-chip">
-                  <span class="label">Status</span>
-                  <span class="status-dot" style="background: var(--status-done)"></span>
-                  <span class="value capitalize">Done</span>
-                </div>
-                <div class="property-chip">
-                  <span class="label">Priority</span>
-                  <span class="value capitalize">Medium</span>
-                </div>
+                </span>
               </div>
             </div>
             <div>
@@ -347,24 +333,12 @@ import { ICONS } from "../lib/icons";
               <div class="flex flex-wrap items-center gap-3 mt-3">
                 <div class="flex items-center gap-2">
                   <span class="avatar-chip">JD</span>
-                  <span class="text-[12px] text-muted-foreground">18px · rows</span>
-                </div>
-                <div class="flex items-center gap-2">
-                  <img src="https://api.dicebear.com/10.x/initials/svg?initialsVariant=alt:1&lettersVariant=single:0&backgroundColor=000000&textColor=ffffff&seed=John" alt="" class="w-5 h-5 rounded-full" />
-                  <span class="text-[12px] text-muted-foreground">20px · sidebar</span>
+                  <span class="text-[12px] text-muted-foreground">18px · inline property</span>
                 </div>
                 <div class="flex items-center gap-2">
                   <img src="https://api.dicebear.com/10.x/initials/svg?initialsVariant=alt:1&lettersVariant=single:0&backgroundColor=000000&textColor=ffffff&seed=John" alt="" class="w-7 h-7 rounded-full" />
-                  <span class="text-[12px] text-muted-foreground">28px · settings</span>
+                  <span class="text-[12px] text-muted-foreground">28px · member / settings</span>
                 </div>
-              </div>
-            </div>
-            <div>
-              <span class="text-[12px] font-medium text-muted-foreground">Role badges</span>
-              <div class="flex flex-wrap items-center gap-2 mt-3">
-                <span class="inline-flex items-center px-2 py-0.5 text-[11px] font-medium rounded-full bg-foreground text-background">Owner</span>
-                <span class="inline-flex items-center px-2 py-0.5 text-[11px] font-medium rounded-full border border-border text-foreground">Editor</span>
-                <span class="inline-flex items-center px-2 py-0.5 text-[11px] font-medium rounded-full border border-border text-foreground">Member</span>
               </div>
             </div>
           </div>
@@ -582,20 +556,21 @@ import { ICONS } from "../lib/icons";
             <div>
               <span class="text-[12px] font-medium text-muted-foreground">Modal card — bg-background, modal shadow, rounded-lg</span>
               <div class="mt-3">
-                <div class="relative w-full max-w-sm flex flex-col bg-background border border-border rounded-lg overflow-hidden modal-pop">
+                <div class="relative w-full max-w-xs flex flex-col bg-background border border-border rounded-lg overflow-hidden modal-pop">
                   <button class="absolute top-3 right-3 z-20 w-7 h-7 flex items-center justify-center rounded-full hover:bg-hover text-muted-foreground hover:text-foreground cursor-pointer" aria-label="Close">
                     <iconify-icon icon="mingcute:close-line" class="w-3.5 h-3.5"></iconify-icon>
                   </button>
-                  <div class="wv-scroll">
+                  <div class="px-5 pt-5 pb-3">
                     <h4 class="text-[20px] font-medium text-foreground !mt-0">New workspace</h4>
-                    <p class="wv-subtitle mb-4">Create a new space to organize your work.</p>
+                    <p class="wv-subtitle mb-2">Create a new space to organize your work.</p>
                     <div class="wv-field">
-                      <input type="text" placeholder="Workspace name" class="wv-btn wv-input bg-input px-3 py-1.5 text-[12px] text-foreground border border-border focus-ring w-full" />
+                      <input type="text" placeholder="Workspace name" class="wv-btn bg-input px-3 py-1.5 text-[12px] text-foreground border border-border focus-ring w-full" />
                     </div>
-                    <div class="flex items-center gap-2 mt-2">
-                      <button class="primary-btn wv-btn inline-flex items-center px-3 py-1.5 text-[12px] font-medium cursor-pointer">Create workspace</button>
-                      <button class="wv-btn inline-flex items-center px-3 py-1.5 text-[12px] font-medium border border-border bg-transparent hover:bg-hover cursor-pointer">Cancel</button>
-                    </div>
+                  </div>
+                  <hr class="border-border mt-0" />
+                  <div class="flex items-center justify-end gap-2 px-5 pb-5 pt-3">
+                    <button class="wv-btn inline-flex items-center px-3 py-1.5 text-[12px] font-medium border border-border bg-transparent hover:bg-hover cursor-pointer">Cancel</button>
+                    <button class="wv-btn inline-flex items-center px-3 py-1.5 text-[12px] font-medium bg-primary text-primary-foreground hover:bg-primary/80 cursor-pointer">Create workspace</button>
                   </div>
                 </div>
               </div>
@@ -655,8 +630,8 @@ import { ICONS } from "../lib/icons";
             <div>
               <span class="text-[12px] font-medium text-muted-foreground">Floating format toolbar</span>
               <div class="mt-3">
-                <div class="inline-flex flex-col floating-pop bg-background border border-border rounded-md overflow-hidden">
-                  <div class="flex items-center justify-between gap-1 px-1 py-1">
+                <div class="inline-flex items-center gap-1 floating-pop bg-background border border-border rounded-md overflow-hidden px-1 py-1">
+                  <div class="flex items-center gap-1">
                     <button class="w-7 h-7 flex items-center justify-center rounded-[4px] text-foreground hover:bg-hover cursor-pointer">
                       <iconify-icon icon="mingcute:bold-line" class="w-3.5 h-3.5"></iconify-icon>
                     </button>
@@ -666,8 +641,6 @@ import { ICONS } from "../lib/icons";
                     <button class="w-7 h-7 flex items-center justify-center rounded-[4px] text-foreground hover:bg-hover cursor-pointer">
                       <iconify-icon icon="mingcute:underline-line" class="w-3.5 h-3.5"></iconify-icon>
                     </button>
-                  </div>
-                  <div class="flex items-center justify-between gap-1 px-1 py-1">
                     <button class="w-7 h-7 flex items-center justify-center rounded-[4px] text-foreground hover:bg-hover cursor-pointer">
                       <iconify-icon icon="mingcute:strikethrough-line" class="w-3.5 h-3.5"></iconify-icon>
                     </button>
@@ -678,8 +651,8 @@ import { ICONS } from "../lib/icons";
                       <iconify-icon icon="mingcute:code-line" class="w-3.5 h-3.5"></iconify-icon>
                     </button>
                   </div>
-                  <div class="wv-rule"></div>
-                  <div class="flex items-center gap-2 px-1 py-1">
+                  <div class="h-5 w-px bg-border mx-1"></div>
+                  <div class="flex items-center gap-2">
                     <button class="flex items-center justify-center gap-1.5 px-2 h-7 text-[12px] font-medium text-foreground rounded-[4px] hover:bg-hover cursor-pointer">
                       <iconify-icon icon="mingcute:chat-2-line" class="w-3.5 h-3.5"></iconify-icon>
                       <span>Discuss</span>
@@ -756,10 +729,10 @@ import { ICONS } from "../lib/icons";
             <div>
               <span class="text-[12px] font-medium text-muted-foreground">Tooltips</span>
               <div class="flex items-center gap-4 mt-3">
-                <div class="inline-flex items-center gap-1 px-2 py-1 rounded-[8px] bg-background border border-border text-[12px] text-foreground" style="box-shadow: 0 2px 8px rgb(0 0 0 / 0.06)">
+                <div class="floating-pop inline-flex items-center gap-1 px-2 py-1 rounded-md bg-background border border-border text-[12px] text-foreground">
                   Hide sidebar
                 </div>
-                <div class="inline-flex items-center gap-1 px-2 py-1 rounded-[8px] bg-background border border-border text-[12px] text-foreground" style="box-shadow: 0 2px 8px rgb(0 0 0 / 0.06)">
+                <div class="floating-pop inline-flex items-center gap-1 px-2 py-1 rounded-md bg-background border border-border text-[12px] text-foreground">
                   Back <kbd class="header-tooltip-kbd">Alt <iconify-icon icon="mingcute:arrow-left-line" class="w-3 h-3"></iconify-icon></kbd>
                 </div>
               </div>
@@ -816,9 +789,9 @@ import { ICONS } from "../lib/icons";
                     <span class="status-dot w-2 h-2 rounded-full" style="background: var(--status-doing)"></span>
                     <span class="text-[12px] capitalize" style="color: #525252">Doing</span>
                   </div>
-                  <div class="property-chip">
-                    <span class="label">Status</span>
-                    <span class="value">Active</span>
+                  <div class="flex items-center gap-1">
+                    <span class="text-[12px]" style="color: #6d675f">Status</span>
+                    <span class="text-[12px] font-medium" style="color: #525252">Active</span>
                   </div>
                   <div class="flex items-center gap-1.5">
                     <span class="inline-flex items-center px-2 py-0.5 text-[12px] rounded-full" style="background: #eae9e6; color: #525252">#design</span>
@@ -831,9 +804,9 @@ import { ICONS } from "../lib/icons";
                     <span class="status-dot w-2 h-2 rounded-full" style="background: var(--status-doing)"></span>
                     <span class="text-[12px] capitalize" style="color: #d6d3d1">Doing</span>
                   </div>
-                  <div class="property-chip">
-                    <span class="label">Status</span>
-                    <span class="value">Active</span>
+                  <div class="flex items-center gap-1">
+                    <span class="text-[12px]" style="color: rgba(250,250,249,0.65)">Status</span>
+                    <span class="text-[12px] font-medium" style="color: #d6d3d1">Active</span>
                   </div>
                   <div class="flex items-center gap-1.5">
                     <span class="inline-flex items-center px-2 py-0.5 text-[12px] rounded-full" style="background: #292524; color: #d6d3d1">#design</span>

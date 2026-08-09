@@ -260,25 +260,6 @@ textarea:focus,
   color: var(--foreground);
 }
 
-.property-chip {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  padding: 5px 6px;
-  font-size: 12px;
-  border-radius: 9999px;
-  background: var(--card);
-}
-.property-chip .label {
-  font-size: 12px;
-  color: var(--muted-foreground);
-  font-weight: 400;
-}
-.property-chip .value {
-  font-weight: 500;
-  color: var(--foreground);
-}
-
 .type-pill {
   display: inline-flex;
   align-items: center;
@@ -349,11 +330,6 @@ iconify-icon {
 
 .tweaks-sidebar-soft aside {
   background: var(--sidebar);
-}
-
-.tweaks-chips-bordered .property-chip {
-  background: var(--background);
-  border: 1px solid var(--hairline-strong);
 }
 
 .tweaks-chips-bordered .type-pill {

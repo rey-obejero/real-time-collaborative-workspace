@@ -1,8 +1,8 @@
 <div
   id="floating-format-menu"
-  class="floating-pop absolute z-50 select-none bg-background border border-border rounded-md overflow-hidden"
+  class="floating-pop absolute z-50 inline-flex items-center gap-1 select-none bg-background border border-border rounded-md overflow-hidden"
 >
-  <div class="flex items-center justify-between gap-1 px-1 py-1">
+  <div class="flex items-center gap-1 px-1 py-1">
     <button
       @click="formatSelection('bold')"
       title="Bold"
@@ -24,8 +24,6 @@
     >
       <iconify-icon :icon="getIconName('underline')" class="w-3.5 h-3.5"></iconify-icon>
     </button>
-  </div>
-  <div class="flex items-center justify-between gap-1 px-1 py-1">
     <button
       @click="formatSelection('strikeThrough')"
       title="Strikethrough"
@@ -48,7 +46,7 @@
       <iconify-icon :icon="getIconName('code')" class="w-3.5 h-3.5"></iconify-icon>
     </button>
   </div>
-  <div class="wv-rule"></div>
+  <div class="h-5 w-px bg-border mx-1"></div>
   <div class="flex items-center gap-2 px-1 py-1">
     <button
       @click="createDiscussionFromSelection()"

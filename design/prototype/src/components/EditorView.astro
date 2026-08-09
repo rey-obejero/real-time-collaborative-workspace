@@ -19,89 +19,92 @@
         />
 
         <div
-          class="flex flex-wrap items-center gap-2 pt-1"
+          class="flex flex-wrap items-center gap-x-3 gap-y-1 pt-1"
           x-show="activeEntry"
         >
           <template x-if="activeEntry?.status">
-            <div class="property-chip">
-              <span class="label">Status</span>
+            <span class="property inline-flex items-center gap-1">
+              <span class="text-[12px] text-muted-foreground">Status</span>
               <span
-                class="status-dot"
+                class="status-dot w-2 h-2 rounded-full shrink-0"
                 :style="'background: var(--status-' + activeEntry.status + ')'"
               ></span>
               <span
-                class="value capitalize"
+                class="text-[12px] font-medium text-foreground capitalize"
                 x-text="activeEntry.status"
               ></span>
-            </div>
+            </span>
           </template>
 
           <template x-if="activeEntry?.priority">
-            <div class="property-chip">
-              <span class="label">Priority</span>
+            <span class="property inline-flex items-center gap-1">
+              <span class="text-[12px] text-muted-foreground">Priority</span>
               <span
-                class="value capitalize"
+                class="text-[12px] font-medium text-foreground capitalize"
                 x-text="activeEntry.priority"
               ></span>
-            </div>
+            </span>
           </template>
 
           <template x-if="activeEntry?.due">
-            <div class="property-chip">
-              <span class="label">Due</span>
-              <span class="value capitalize" x-text="activeEntry.due"></span>
-            </div>
+            <span class="property inline-flex items-center gap-1">
+              <span class="text-[12px] text-muted-foreground">Due</span>
+              <span
+                class="text-[12px] font-medium text-foreground capitalize"
+                x-text="activeEntry.due"
+              ></span>
+            </span>
           </template>
 
           <template x-if="activeEntry?.start && activeEntry?.end">
-            <div class="property-chip">
-              <span class="label">Timeline</span>
+            <span class="property inline-flex items-center gap-1">
+              <span class="text-[12px] text-muted-foreground">Timeline</span>
               <span
-                class="value"
+                class="text-[12px] font-medium text-foreground"
                 x-text="activeEntry.start + ' → ' + activeEntry.end"
               ></span>
-            </div>
+            </span>
           </template>
 
           <template x-if="activeEntry?.url">
-            <div class="property-chip">
-              <span class="label">URL</span>
+            <span class="property inline-flex items-center gap-1 min-w-0">
+              <span class="text-[12px] text-muted-foreground">URL</span>
               <span
-                class="value text-[12px] truncate max-w-[200px]"
+                class="text-[12px] font-medium text-foreground truncate max-w-[200px]"
                 x-text="activeEntry.url"
               ></span>
-            </div>
+            </span>
           </template>
 
           <template x-if="activeEntry?.assignee">
-            <div class="property-chip">
-              <span class="label">Assignee</span>
+            <span class="property inline-flex items-center gap-1">
+              <span class="text-[12px] text-muted-foreground">Assignee</span>
               <span
                 class="avatar-chip"
                 x-text="(activeEntry.assignee || '?').slice(0, 2).toUpperCase()"
               ></span>
-            </div>
+            </span>
           </template>
 
           <template x-if="activeEntry?.owner">
-            <div class="property-chip">
-              <span class="label">Owner</span>
+            <span class="property inline-flex items-center gap-1">
+              <span class="text-[12px] text-muted-foreground">Owner</span>
               <span
                 class="avatar-chip"
                 x-text="(activeEntry.owner || '?').slice(0, 2).toUpperCase()"
               ></span>
-            </div>
+            </span>
           </template>
 
           <template
             x-if="activeEntry?.tags && activeEntry.tags.length > 0"
           >
-            <div class="property-chip">
-              <span class="label">Tags</span>
+            <span class="property inline-flex items-center gap-1">
+              <span class="text-[12px] text-muted-foreground">Tags</span>
               <template x-for="tag in activeEntry.tags" :key="tag">
                 <span class="tag-pill inline-flex items-center px-2 py-0.5 text-[12px] text-foreground bg-secondary rounded-full" x-text="'#' + tag"></span>
               </template>
-            </div>
+            </span>
           </template>
         </div>
 

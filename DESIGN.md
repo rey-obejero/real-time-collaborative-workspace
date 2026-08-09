@@ -55,19 +55,19 @@ components:
   button-primary:
     backgroundColor: "{colors.ink}"
     textColor: "{colors.ink-soft}"
-    rounded: "{rounded.full}"
+    rounded: "{rounded.control}"
   button-primary-hover:
     backgroundColor: "#292524"
     textColor: "{colors.ink-soft}"
-    rounded: "{rounded.full}"
+    rounded: "{rounded.control}"
   button-ghost:
     backgroundColor: "{colors.warm-paper}"
     textColor: "{colors.ink}"
-    rounded: "{rounded.full}"
+    rounded: "{rounded.control}"
   button-ghost-hover:
     backgroundColor: "{colors.hover-stone}"
     textColor: "{colors.ink}"
-    rounded: "{rounded.full}"
+    rounded: "{rounded.control}"
   button-outline:
     backgroundColor: "transparent"
     textColor: "{colors.ink}"
@@ -83,10 +83,16 @@ components:
     textColor: "{colors.ink}"
     rounded: "{rounded.control}"
     padding: "6px 12px"
-  chip:
+  type-pill:
     backgroundColor: "{colors.warm-paper}"
+    textColor: "{colors.muted-clay}"
+    rounded: "{rounded.full}"
+  avatar-chip:
+    backgroundColor: "{colors.soft-stone}"
     textColor: "{colors.ink}"
     rounded: "{rounded.full}"
+    height: "18px"
+    width: "18px"
   nav-row:
     backgroundColor: "transparent"
     textColor: "{colors.muted-clay}"
@@ -120,19 +126,22 @@ Surfaces are flat; structure comes from 1px hairlines and tonal layering;
 every interactive element is a small rounded control that wakes only on
 interaction.
 
-Controls are refined and restrained. Labeled actions use soft pill geometry
-(`border-radius: 9999px`); compact controls and rows use 7px corners; containers
-use 12px. Hover fills are one quiet step of stone (`--hover: #e2e1de`); the
-primary action on a cluster is the single ink pill, and the rest of the cluster
-stays ghosted until it earns attention. The sidebar carries its own one-step
-lighter surface (`--sidebar`) so the chrome reads as a distinct plane from the
-main canvas.
+Controls are refined and restrained. Labeled actions are rounded rectangles
+(7px corners); compact controls and rows use the same 7px; containers use 12px.
+Pills (`9999px`) are reserved for circular identities — avatars, status dots,
+type and tag pills, the modal close button, and the segmented conversation
+filter — never for labeled actions. Hover fills are one quiet step of stone
+(`--hover: #e2e1de`); the primary action on a cluster is the single ink
+control, and the rest of the cluster stays ghosted until it earns attention.
+The sidebar carries its own one-step lighter surface (`--sidebar`) so the
+chrome reads as a distinct plane from the main canvas.
 
 **Key Characteristics:**
 - Warm-stone monochrome neutrals; pure ink for primary actions, never bright hues.
 - Flat surfaces; structure from 1px hairlines and tonal layering, never hard shadows.
-- Pill geometry for labeled actions; 7px for compact controls and rows; 12px for cards; 4px for menu rows.
+- Rounded rectangles (7px) for labeled actions and compact controls; 12px for cards; 4px for menu rows; pills only for circular identities.
 - DM Sans for body and display headings, Geist Mono for code and keyboard hints.
+- Entry metadata is plaintext — muted label + ink value, no chip container.
 - Quiet chrome: muted-clay secondary text, hairline borders, restrained hover fills.
 - Two overlapping modal planes (settings `z-40`, nested add-member `z-50`) that share the same card language.
 - Dark mode inverts the same token system without changing the geometry.
@@ -159,13 +168,13 @@ differentiation comes from tonal steps, not hue.
 - **Sidebar Accent** (#e5e3df): The active state fill on sidebar rows, one step
   deeper than `--sidebar`. Dark: `#2f2d2a`.
 - **Soft Stone** (#eae9e6): Muted fills — secondary surfaces, the search/create
-  slab, property value emphasis. Dark: `#292524`.
+  slab, avatar chips. Dark: `#292524`.
 - **Hover Stone** (#e2e1de): The one-step hover fill for every quiet control
-  (ghost buttons, nav rows, icon buttons, chips, menu rows). Dark: `#292524`.
+  (ghost buttons, nav rows, icon buttons, menu rows). Dark: `#292524`.
 - **Muted Clay** (#6d675f): Secondary text — metadata, placeholders, section
-  headings. Dark: `rgba(250, 250, 249, 0.65)`.
+  headings, property labels. Dark: `rgba(250, 250, 249, 0.65)`.
 - **Hairline** (#e0dfdb): 1px borders and dividers. **Hairline Strong**
-  (#cfceca) for emphasized edges (bordered chips).
+  (#cfceca) for emphasized edges.
 - **Input Surface** (#eae9e6): The field background for inputs and search fields
   (dark: `#1c1917`), visually one with soft-stone.
 - **Table Entry** (#525252): Entry row text in the list view (dark: `#d6d3d1`),
@@ -175,7 +184,7 @@ differentiation comes from tonal steps, not hue.
 
 ### Named Rules
 **The Workbench Rule.** Ink appears once per viewport cluster. The single ink
-pill is the primary action; everything else on the workbench is hairline and
+control is the primary action; everything else on the workbench is hairline and
 muted until interacted with. The restraint is the design.
 
 **The Hairline Rule.** Structure is drawn with 1px `var(--border)` hairlines and
@@ -200,11 +209,11 @@ system identities: invite links, keyboard hints, and code.
   (`.prose-readable`).
 - **Title / Row Label** (DM Sans 400, 14px): Row and list labels (`.wv-row-label`,
   `.nav-row` items, header actions, entry titles).
-- **Label** (DM Sans 500, 12px): Field labels (`.wv-field-label`), buttons, chips,
+- **Label** (DM Sans 500, 12px): Field labels (`.wv-field-label`), buttons,
   property labels, keyboard hints.
 - **Meta** (DM Sans 400, 12px): Secondary metadata — emails, timestamps, counts
   (`.wv-row-meta`).
-- **Micro** (DM Sans 500, 11px): Badges and status labels.
+- **Micro** (DM Sans 500, 11px): Status labels.
 
 ### Named Rules
 **The Type Ratio Rule.** Display (20px DM Sans 500) → section head (16px 500 muted,
@@ -220,7 +229,7 @@ slash menu, modals) stacked above.
 
 - **Frame:** `h-full w-full flex` — sidebar + `<main class="flex-1 flex flex-col">`.
 - **Sidebar:** `w-80` (320px), `border-r`, `bg-sidebar`. Holds the library
-  pill, the search/create slab, grouped nav rows, and the user footer row.
+  button, the search/create slab, grouped nav rows, and the user footer row.
 - **Header bar:** 56px tall (`h-14`), `px-6`, `grid grid-cols-[1fr_auto_1fr]`,
   hairline bottom border. Left: back/forward/recent. Center: breadcrumb.
   Right: theme toggle, Ask AI, Share.
@@ -244,7 +253,7 @@ diffuse shadow to separate it from the flat workbench.
 
 **Shadow vocabulary** (`.modal-pop`, `.floating-pop`, `.header-tooltip`):
 - **Modal shadow** (`0 8px 40px rgb(0 0 0 / 0.12)`, dark `0.5`): the settings
-  modal and nested add-member modal cards.
+  modal and nested add-member/new-workspace modal cards.
 - **Menu shadow** (`0 2px 8px rgb(0 0 0 / 0.06)`, dark `0.4`): dropdown menus,
   the floating format toolbar, tooltips.
 
@@ -263,54 +272,57 @@ Do not reintroduce elevation as a decorative layer.
 
 The form language is gentle circles and soft rectangles on a flat plane.
 
-- **Pills** (`9999px`): every interactive control that carries a label — buttons,
-  chips, badges, the circular avatar and close.
-- **Controls** (7px, `--radius-control`): compact square-ish controls and rows —
-  nav rows, header icon buttons, small buttons, inputs, the settings modal's
-  primary and outline buttons, the "New" cluster.
+- **Controls** (7px, `--radius-control`): every labeled action and compact
+  control — primary/ghost/outline/text buttons, nav rows, header icon buttons,
+  inputs, the "New" cluster, settings buttons.
+- **Pills** (`9999px`): circular identities only — avatars, the modal close
+  button, status dots, type and tag pills, the segmented conversation filter.
 - **Menus** (4px): rows inside dropdown menus (`.floating-pop` items, role
   dropdown items).
 - **Cards** (12px, `--radius`): the entry table card, modal cards.
 - **Inner slabs** (8px, `--radius-md`): tooltips, the search/create cluster
   (`.vp2-shell`), dropdown panels.
 - **Borders:** 1px hairlines only. No double borders, no embossed edges.
-- **Avatars:** circular (`border-radius: 9999px`), 20px in rows and menus.
+- **Avatars:** circular (`border-radius: 9999px`). Inline property avatars are
+  18px (`.avatar-chip`); member/profile avatars are 28px; the sidebar and
+  library switcher use a 20px variant.
 
 ### Named Rules
-**The Pill Rule.** If it's interactive, it's a pill or a 7px control — never a
-sharp square, never a playful squircle. Radius choice signals affordance: pills
-for labeled actions, 7px for quiet square controls, 12px for containers, 4px
-inside menus.
+**The Radius Rule.** Radius choice signals affordance: 7px for labeled actions
+and compact controls, 9999px for circular identities (avatars, dots, type and
+tag pills), 12px for containers, 4px inside menus. Labeled actions are never
+pills — a pill shape is reserved for things that are round by nature.
 
 ## Components
 
 ### Buttons
-- **Shape:** labeled actions are pills (`9999px`); compact controls are 7px.
-  Small buttons are `h-7 px-2`, `text-[12px]`–`text-[14px]`, medium `px-3 py-1.5`.
-- **Primary** (`.primary-btn`): ink pill, `ink-soft` text. Hover: `#292524`
-  (dark: `#e7e5e4`). Reserved for the one action per cluster. In the settings
-  modal it pairs with `.wv-btn` to read as a 7px control instead of a pill.
-- **Ghost** (`.ghost-btn`): warm-paper pill, ink text. Hover: hover-stone fill.
-- **Outline** (header Share, settings Copy link / QR code / Manage link):
-  transparent, 1px hairline border, ink text, hover-stone fill on hover, 7px
-  corners.
+- **Shape:** labeled actions are rounded rectangles at 7px. Small buttons are
+  `h-7 px-2`, `text-[12px]`–`text-[14px]`, medium `px-3 py-1.5`.
+- **Primary** (`.primary-btn`): ink fill, `ink-soft` text, 7px. Hover: `#292524`
+  (dark: `#e7e5e4`). Reserved for the one action per cluster. In modal footers
+  it pairs with `.wv-btn` and reads as a 7px control.
+- **Ghost** (`.ghost-btn`): warm-paper fill, ink text, 7px. Hover: hover-stone
+  fill.
+- **Outline** (header Share, settings Copy link / QR code / Manage link, modal
+  Cancel): transparent, 1px hairline border, ink text, hover-stone fill on
+  hover, 7px corners.
 - **Text** (`.ask-ai-text`): transparent, ink/muted text, hover-stone fill on
   hover, icons at 2px stroke.
 - **Icon** (`.header-btn`): 28×28, 7px radius, muted-clay icon; hover-stone fill
   and ink icon on hover. Never bare squares.
 
-### Chips / Badges
-- **Property chip** (`.property-chip`): 12px pill, warm-paper fill, muted-clay
-  label + ink value, 4px inner gap. Bordered variant swaps fill for a
-  hairline-strong border.
-- **Type pill** (`.type-pill`): 12px 500 pill distinguishing entry types.
+### Entry Properties & Chips
+- **Plaintext properties** (`.property`): entry metadata is label + value in
+  plain text — a 12px muted-clay label beside a 12px 500 ink value, separated by
+  `gap-1` and wrapped in a `gap-x-3 gap-y-1` row. No chip container, no border,
+  no background, no pill. Status dots, tag pills, and avatars may appear inside.
+- **Type pill** (`.type-pill`): 12px 500 pill distinguishing entry types
+  (Page/Task/Project/Note/Bookmark).
 - **Tag pill** (list rows): `#tag` in a soft-stone pill, `table-entry` text.
 - **Status dot + label** (list rows): an 8px status-colored dot (per-status
   tokens like `--status-done`) beside a capitalized 12px label.
-- **Role badge** (`.wv-role-badge`): 11px 500 pill, hairline border; the owner
-  role inverts to ink fill with warm-paper text.
 - **Avatar chip** (`.avatar-chip`): 18px circle, 10px 600 initials, soft-stone
-  fill. Larger avatars in the sidebar and member rows are 20px.
+  fill. Member/profile avatars are 28px.
 
 ### Inputs / Fields
 - **Style:** 12px text, 7px radius, `--input` background (input-surface / dark
@@ -352,15 +364,17 @@ the same `nav-row` active/hover language as the sidebar. Each section opens a
 The **Members** section is the richest: a description line, a primary **Add
 members** button, a muted "Other options" sub-label over three outline buttons
 (Copy link, QR code, Manage link), an "All N" count, and member rows
-(`.wv-member-row`, hairline dividers between) pairing a 20px avatar + 14px name
+(`.wv-member-row`, hairline dividers between) pairing a 28px avatar + 14px name
 with a role dropdown — a compact trigger that opens a `floating-pop` menu with
 Owner / Editor / Member items.
 
-**Add members** opens a nested modal at `z-50` (above settings): a `max-w-sm`
-card sharing the same language — 20px title, 13px muted description, an
-`bg-input` field with a placeholder, and a primary Add member / outline Cancel
-button pair. It reuses the same backdrop and modal-pop shadow so the stack reads
-as two quiet planes.
+**Add members** and **New workspace** open nested modals at `z-50` (above
+settings): a `max-w-xs` card sharing the same language — 20px title, 13px muted
+description, a `bg-input` field with a placeholder, then a full-width `<hr>`
+hairline divider and a footer row (`px-5 pb-5 pt-3`, `justify-end`) holding the
+outline **Cancel** button on the left and the ink primary action (**Add member**
+/ **Create workspace**) on the right. They reuse the same backdrop and modal-pop
+shadow so the stack reads as two quiet planes.
 
 ## Do's and Don'ts
 
@@ -368,12 +382,13 @@ as two quiet planes.
 - **Do** keep chrome quiet: warm-paper surfaces, hairline borders, muted-clay
   secondary text, ink reserved for primary actions.
 - **Do** draw structure with 1px hairlines (`var(--border)`) and tonal fills.
-- **Do** use pill geometry for labeled actions, 7px for compact controls, 4px
-  inside menus.
+- **Do** use 7px rounded rectangles for labeled actions and compact controls,
+  4px inside menus, pills only for avatars, dots, and type/tag pills.
 - **Do** use one ink element per cluster — the primary action; ghost everything
   else until hover.
 - **Do** use DM Sans for body and display headings, Geist Mono for links,
   code, and keyboard hints.
+- **Do** render entry metadata as plaintext label + value, not chips.
 - **Do** keep focus visible with the 3px blue ring on every interactive element.
 - **Do** use warm-paper or the oklch background for surfaces, never `#ffffff`.
 - **Do** give every quiet control a hover-stone fill so affordances are
@@ -388,6 +403,9 @@ as two quiet planes.
 - **Don't** use pure `#ffffff` surfaces or pure-black shadows.
 - **Don't** bring back bold, high-contrast, visually assertive chrome — the
   anti-reference the system is replacing.
+- **Don't** use pill geometry for labeled actions — actions are 7px rounded
+  rectangles; pills belong to circular identities only.
+- **Don't** wrap entry metadata in chip containers — properties are plaintext.
 - **Don't** let a section heading read smaller than its row labels (16px 500
   muted is the floor for modal section heads).
 - **Don't** hardcode colors outside the token system; reference
