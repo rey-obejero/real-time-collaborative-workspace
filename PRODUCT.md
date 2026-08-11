@@ -83,8 +83,8 @@ headings, and quotations. Structure stays flexible, but the flow guides you.
 ## Evidence on Hand
 
 - Design prototype: `design/playground/` (Astro 7, Tailwind CSS v4, Alpine.js)
-- API: `apps/api/` (ASP.NET Core, Clean Architecture)
-- Web: `apps/web/` (React 19, Vite, shadcn/ui)
+- API: `modules/api/` (ASP.NET Core, Clean Architecture)
+- Web: `modules/web/` (React 19, Vite, shadcn/ui)
 - Root README with roadmap
 
 ## Product Principles
