@@ -1,0 +1,14 @@
+{
+	# Project-scoped admin API so `make caddy-stop` (caddy stop --address
+	# localhost:2020) targets only this project's instance. Keep in sync
+	# with CADDY_ADMIN in the Makefile.
+	admin localhost:2020
+}
+
+workspace.localhost {
+	reverse_proxy localhost:5173
+}
+
+api.workspace.localhost {
+	reverse_proxy localhost:5297
+}

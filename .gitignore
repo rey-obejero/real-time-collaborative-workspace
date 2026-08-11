@@ -1,4 +1,6 @@
 **/.impeccable/
 .playwright-cli/
 
-.env
+.env*
+!.env.example
+infrastructure/.caddy.pid

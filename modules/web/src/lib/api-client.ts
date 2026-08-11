@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { paths } from '@/config/paths';
 
-const API_BASE_URL = 'https://localhost:7100/api/v1';
+const API_BASE_URL = import.meta.env.VITE_API_URL;
 
 export const apiClient = axios.create({
   baseURL: API_BASE_URL,

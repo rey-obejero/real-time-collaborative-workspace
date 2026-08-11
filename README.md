@@ -2,11 +2,10 @@
 
 ## Project Overview
 
-Workspace is a knowledge management system (KMS) platform intended to serve as a
-"second brain." The application provides are structured way to classify and
-organize information, taking inspiration from well
-known methodologies such as Project, Areas, Resources, and Archives (PARA) and the
-Gettings Things Done (GTD).
+Workspace is a knowledge management platform that provides a flexible way to
+structure and organize information. Instead of being locked into
+generic pages, the user declares what kinds of items their workspace holds upfront.
+The structure is opinionated, but the item types are user-defined.
 
 ## Prerequisites
 
@@ -17,6 +16,7 @@ To run or develop, the following tools are required:
 - Node.js
 - .NET 10.0 SDK
 - Make
+- Caddy
 
 ## Getting Started
 
@@ -30,24 +30,55 @@ To run the project, use the Makefile at the root of the directory:
    make
    ```
 
-2. Start the web client with
+2. Run the setup target. This installs dependencies, allows Caddy to bind to ports
+   80/443, and trusts Caddy's local CA.
 
    ```console
-   make web
+   make setup
    ```
 
-3. Start the API server and the local database with
+3. Start the whole application (API server, web client, database, and the
+   Caddy reverse proxy):
+
+   ```console
+   make application
+   ```
+
+   The web client is accessible at
+   <https://workspace.localhost> and the API at
+   <https://api.workspace.localhost>.
+
+   Alternatively, start the services individually:
 
    ```console
    make api
+   make web
    ```
+
+### Browser Trust on Windows
+
+If Caddy's local CA lives inside WSL, the Windows host's browsers (Firefox, Chrome,
+Edge) do not trust it by default. Install it on the host:
+
+```console
+make caddy-trust-windows
+```
+
+This copies the CA from WSL into the Windows user root certificate store.
+For Firefox, ensure the `security.enterprise_roots.enabled` flag is set to `true`:
+
+1. Open `about:config` in Firefox.
+2. Set `security.enterprise_roots.enabled` to `true`.
+3. Restart Firefox.
+
+Without this setup, the browser may present a security warning. Dismissing this warning allows you to proceed to the web client normally, but this results in unintended behavior, such as requests to the API server served at `api.workspace.localhost` failing.
 
 ## Project Structure
 
-See the [API documentation](/apps/api/README.md) for more detailed information on
+See the [API documentation](/modules/api/README.md) for more detailed information on
 the API.
 
-See the [web client documentation](/apps/web/README.md) for more detailed
+See the [web client documentation](/modules/web/README.md) for more detailed
 information on the web client.
 
 ```text
@@ -56,13 +87,13 @@ information on the web client.
 ├── modules                       # The building blocks
 │   ├── api                       # The core back-end
 │   └── web                       # The web browser client
-├── documentation
-│   ├── architecture
-│   ├── features
-│   └── architecture-diagrams.md
-├── docker-compose.yml
+├── infrastructure                # Container and reverse proxy configuration
+│   ├── Caddyfile                 # Caddy reverse proxy configuration
+│   ├── caddy-trust.sh
+│   └── docker-compose.yml        # Docker Compose configuration
+├── documentation                 # Project documentation
 ├── Makefile                      # Build scripts
-├── README.md
+├── README.md                     # You are here
 
 ```
 

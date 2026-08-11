@@ -5,16 +5,19 @@
 Personal Knowledge Management (PKM) web application — a "second brain" tool inspired by PARA methodology and Getting Things Done (GTD).
 
 **Architecture:** Monorepo with two apps:
-- `apps/api` — ASP.NET Core REST API (C#, .NET 10.0, Clean Architecture)
-- `apps/web` — React 19 SPA (TypeScript, Vite, shadcn/ui, Tailwind CSS v4)
+- `modules/api` — ASP.NET Core REST API (C#, .NET 10.0, Clean Architecture)
+- `modules/web` — React 19 SPA (TypeScript, Vite, shadcn/ui, Tailwind CSS v4)
 
 **Database:** PostgreSQL 18 (Docker), EF Core with SQLite for dev / Npgsql for prod.
 
 ## Setup Commands
 
 ```bash
-# Install web dependencies
-cd apps/web && npm install
+# One-time setup (installs web deps + trusts Caddy's local CA)
+make setup
+
+# Start everything (Caddy proxy + web + API + DB)
+make application
 
 # Start PostgreSQL container
 make database-up
@@ -26,6 +29,10 @@ make api
 make web
 ```
 
+Local domains (via Caddy reverse proxy):
+- Web: `https://workspace.localhost`
+- API: `https://api.workspace.localhost`
+
 ## Development Workflow
 
 ### Makefile Targets (root)
@@ -33,12 +40,17 @@ make web
 | Command | Description |
 |---------|-------------|
 | `make` | Show help |
+| `make setup` | One-time per machine: install web deps + grant Caddy privileged ports (setcap) + trust Caddy local CA (`infrastructure/caddy-trust.sh`). Requires `certutil` (`libnss3-tools` on Debian/Ubuntu, `nss-tools` on Fedora/RHEL) for Firefox trust (see README) |
+| `make application` | Start Caddy proxy + web + API + database |
 | `make web` | Start web dev server (`npm run dev`) |
 | `make api` | Start API + database (`dotnet watch run` + `docker compose up`) |
+| `make caddy-start` | Start Caddy reverse proxy (`caddy start --config infrastructure/Caddyfile`) |
+| `make caddy-stop` | Stop Caddy reverse proxy |
+| `make caddy-trust` | Trust Caddy's local CA (idempotent; safe when Caddy already running) |
 | `make database-up` | Start PostgreSQL container |
 | `make database-down` | Stop PostgreSQL container |
 
-### Web (`apps/web`)
+### Web (`modules/web`)
 
 | Command | Description |
 |---------|-------------|
@@ -47,7 +59,7 @@ make web
 | `npm run lint` | Run ESLint |
 | `npm run preview` | Preview production build |
 
-### API (`apps/api`)
+### API (`modules/api`)
 
 | Command | Description |
 |---------|-------------|
@@ -65,20 +77,20 @@ Copy `.env.example` to `.env` and fill in values.
 
 ## Testing Instructions
 
-**No test framework is currently configured.** Neither `apps/api` nor `apps/web` has test files or test scripts defined.
+**No test framework is currently configured.** Neither `modules/api` nor `modules/web` has test files or test scripts defined.
 
 When adding tests:
 - **Web:** Use Vitest or Jest. Place test files as `*.test.ts` or `*.test.tsx` next to source or in `__tests__/` directories.
-- **API:** Use xUnit or NUnit. Place test projects under `apps/api/tests/` following `*.Tests.csproj` naming.
+- **API:** Use xUnit or NUnit. Place test projects under `modules/api/tests/` following `*.Tests.csproj` naming.
 
 Always run lint checks before committing:
 ```bash
-cd apps/web && npm run lint
+cd modules/web && npm run lint
 ```
 
 ## Code Style
 
-### Web (`apps/web`)
+### Web (`modules/web`)
 
 - **TypeScript:** Strict mode enabled. Path alias `@/*` maps to `src/*`.
 - **Linting:** ESLint flat config with `@typescript-eslint`, `react-hooks`, `react-refresh` plugins.
@@ -87,7 +99,7 @@ cd apps/web && npm run lint
 - **UI:** shadcn/ui components with Radix UI primitives. Lucide icons. Olive base color theme.
 - **File organization:** Vertical slice architecture under `src/features/`. Shared UI in `src/components/`.
 
-### API (`apps/api`)
+### API (`modules/api`)
 
 - **Architecture:** Clean Architecture with layers: Web → Application → Infrastructure → Domain.
 - **C# conventions:** Follow Microsoft C# Coding Conventions. PascalCase for public members, camelCase for locals.
@@ -137,33 +149,33 @@ src/
 
 ### Docker
 
-- `docker-compose.yml` defines PostgreSQL 18-alpine service only.
+- `infrastructure/docker-compose.yml` defines PostgreSQL 18-alpine service only.
 - API and Web are not containerized — run directly via Makefile during development.
 
 ### Production Build
 
 ```bash
 # Web production build
-cd apps/web && npm run build
-# Output: apps/web/dist/
+cd modules/web && npm run build
+# Output: modules/web/dist/
 
 # API publish
-cd apps/api && dotnet publish -c Release
+cd modules/api && dotnet publish -c Release
 ```
 
 ## Pull Request Guidelines
 
 - Title format: `type(scope): description` (Conventional Commits)
 - Required checks before merge:
-  - `cd apps/web && npm run lint` passes
-  - `cd apps/web && npm run build` passes
-  - `cd apps/api && dotnet build` passes
+  - `cd modules/web && npm run lint` passes
+  - `cd modules/web && npm run build` passes
+  - `cd modules/api && dotnet build` passes
 - Run all tests if tests have been added.
 
 ## Additional Notes
 
 - **Path aliases:** Web uses `@/*` → `src/*`. API uses standard .NET namespace resolution.
-- **Database migrations:** EF Core migrations managed via `dotnet ef` commands. Check `apps/api/Infrastructure/` for DbContext.
+- **Database migrations:** EF Core migrations managed via `dotnet ef` commands. Check `modules/api/Infrastructure/` for DbContext.
 - **Authentication:** JWT bearer tokens with ASP.NET Core Identity. Web client stores tokens and attaches to API requests.
 - **Rich text editor:** BlockNote used for entry content editing in web app.
 - **No CI/CD pipeline configured yet.** GitHub Actions or similar should be added for automated checks.
