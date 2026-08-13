@@ -1,6 +1,7 @@
 import { TooltipProvider } from '@/components/ui/tooltip';
 import { SidebarProvider } from '@/components/ui/sidebar';
 import { Sidebar } from '../sidebar';
+import { Header } from '@/features/workspaces/components/header';
 
 export interface RootLayoutProps {
   children: React.ReactNode;
@@ -12,7 +13,10 @@ export const RootLayout = ({ children }: RootLayoutProps) => {
       <TooltipProvider>
         <SidebarProvider>
           <Sidebar />
-          <main className='flex-1 overflow-hidden'>{children}</main>
+          <main className='flex flex-1 flex-col overflow-hidden'>
+            <Header />
+            <div className='flex-1 overflow-hidden'>{children}</div>
+          </main>
         </SidebarProvider>
       </TooltipProvider>
     </div>

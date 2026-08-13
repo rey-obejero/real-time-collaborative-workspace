@@ -106,7 +106,7 @@
   --sidebar-primary-foreground: oklch(0.985 0.001 106);
   --sidebar-accent: oklch(0.916 0.006 83);
   --sidebar-accent-foreground: oklch(0.216 0.006 56);
-  --sidebar-border: transparent;
+  --sidebar-border: oklch(0.903 0.005 93);
   --sidebar-ring: oklch(0.708 0 0);
 
   --font-serif: ui-serif, Georgia, Cambria, 'Times New Roman', Times, serif;
@@ -176,7 +176,7 @@
   --sidebar-primary-foreground: oklch(0.216 0.006 56);
   --sidebar-accent: oklch(0.298 0.006 79);
   --sidebar-accent-foreground: oklch(0.97 0.001 106);
-  --sidebar-border: transparent;
+  --sidebar-border: oklch(0.374 0.01 68);
   --sidebar-ring: oklch(0.439 0 0);
 
   --shadow-2xs: 0 1px 3px 0px hsl(0 0% 0% / 0.15);

@@ -1,19 +1,5 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import {
-  ChevronDown,
-  ChevronRight,
-  Home,
-  MessageSquare,
-  FileText,
-  Trash2,
-  Search,
-} from 'lucide-react';
-import {
-  Collapsible,
-  CollapsibleContent,
-  CollapsibleTrigger,
-} from '@/components/ui/collapsible';
+import { Icon } from '@iconify/react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import {
   Sidebar as SidebarRoot,
   SidebarContent,
@@ -24,6 +10,12 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from '@/components/ui/sidebar';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
 
 import { SidebarHeader } from './sidebar-header';
 import { SidebarFooter } from './sidebar-footer';
@@ -31,20 +23,43 @@ import { SidebarFooter } from './sidebar-footer';
 import { useWorkspace } from '@/features/workspaces/hooks/use-workspace';
 import { useCreateEntry } from '@/features/entries/hooks/use-create-entry';
 
-export function Sidebar() {
-  const [isSchemasOpen, setIsSchemasOpen] = useState(true);
+const SCHEMAS = [
+  { id: 'page', name: 'Page', icon: 'mingcute:document-line' },
+  { id: 'task', name: 'Task', icon: 'mingcute:task-line' },
+  { id: 'project', name: 'Project', icon: 'mingcute:folder-line' },
+  { id: 'note', name: 'Note', icon: 'mingcute:notebook-line' },
+  { id: 'bookmark', name: 'Bookmark', icon: 'mingcute:bookmark-line' },
+] as const;
 
+const COLLECTIONS = [
+  { name: 'Personal', icon: 'mingcute:user-3-line' },
+  { name: 'Work', icon: 'mingcute:briefcase-2-line' },
+] as const;
+
+const NAV_ICON_SIZE = 'h-[19px] w-[19px]';
+
+export function Sidebar() {
   const navigate = useNavigate();
-  const { activeWorkspaceId, activeWorkspace } = useWorkspace();
+  const { pathname, search } = useLocation();
+  const { activeWorkspaceId } = useWorkspace();
   const { mutate: createEntry } = useCreateEntry();
 
-  const handleCreateEntry = () => {
+  const activeSchema = new URLSearchParams(search).get('schema');
+  const isActiveRow = (name: string) => activeSchema === name;
+  const isEntriesView = /^\/w\/[^/]+\/entries\/?$/.test(pathname);
+
+  const goToSchema = (name: string) => {
+    if (!activeWorkspaceId) return;
+    navigate(`/w/${activeWorkspaceId}/entries?schema=${name}`);
+  };
+
+  const handleCreateEntry = (type: string) => {
     if (!activeWorkspaceId) return;
 
     createEntry(
       {
         workspaceId: activeWorkspaceId,
-        type: 'page',
+        type,
         title: 'New Entry',
         content: '',
       },
@@ -57,88 +72,158 @@ export function Sidebar() {
   };
 
   return (
-    <SidebarRoot collapsible='icon'>
-      <SidebarHeader
-        onCreateEntry={handleCreateEntry}
-        activeWorkspaceId={activeWorkspaceId}
-        workspaceName={activeWorkspace?.name}
-      />
+    <SidebarRoot collapsible='icon' className='border-sidebar-border border-r'>
+      <SidebarHeader />
 
-      <div className='group-data-[collapsible=icon]:hidden mb-9 px-2'>
-        <button className='hover:bg-background hover:border-ring border-input text-muted-foreground flex w-full cursor-pointer items-center gap-2.5 rounded-full border bg-transparent px-4 py-2.5 text-left text-sm transition-all'>
-          <Search strokeWidth={2.5} className='h-3.5 w-3.5' />
-          <span>Search Index...</span>
-        </button>
+      <div className='group-data-[collapsible=icon]:hidden px-3 pb-2'>
+        <div className='bg-secondary rounded-md p-1'>
+          <button className='hover:bg-sidebar-accent text-foreground flex w-full cursor-pointer items-center gap-2 rounded-[4px] px-2.5 py-1.5 text-left text-sm transition-colors focus:outline-none [&_svg]:!size-3.5'>
+            <Icon icon='mingcute:search-2-line' className='h-3.5 w-3.5' />
+            <span className='flex-1'>Search</span>
+            <span className='text-muted-foreground font-mono text-xs'>Ctrl K</span>
+          </button>
+
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <button className='hover:bg-sidebar-accent text-foreground flex w-full cursor-pointer items-center gap-2 rounded-[4px] px-2.5 py-1.5 text-left text-sm transition-colors focus:outline-none [&_svg]:!size-3.5'>
+                <Icon icon='mingcute:add-line' className='h-3.5 w-3.5' />
+                <span className='flex-1'>Create</span>
+                <Icon icon='mingcute:down-line' className='text-muted-foreground h-3 w-3 shrink-0' />
+              </button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent
+              align='start'
+              sideOffset={8}
+              className='border-sidebar-border rounded-md bg-background p-1.5 shadow-[0_2px_8px_rgb(0_0_0/0.06)] dark:shadow-[0_2px_8px_rgb(0_0_0/0.4)]'
+            >
+              {SCHEMAS.map((schema) => (
+                <DropdownMenuItem
+                  key={schema.id}
+                  onSelect={() => handleCreateEntry(schema.id)}
+                  className='flex cursor-pointer items-center gap-2.5 rounded-[4px] px-3 py-1.5 text-sm'
+                >
+                  <Icon icon={schema.icon} className='h-3.5 w-3.5' />
+                  <span>{schema.name}</span>
+                </DropdownMenuItem>
+              ))}
+              <div className='bg-border mx-1 my-2 h-px' />
+              <DropdownMenuItem className='text-muted-foreground cursor-pointer gap-2.5 rounded-[4px] px-3 py-1.5 text-sm'>
+                <Icon icon='mingcute:grid-2-line' className='h-3.5 w-3.5' />
+                <span>New Collection</span>
+              </DropdownMenuItem>
+              <DropdownMenuItem className='text-muted-foreground cursor-pointer gap-2.5 rounded-[4px] px-3 py-1.5 text-sm'>
+                <Icon icon='mingcute:add-line' className='h-3.5 w-3.5' />
+                <span>New Schema</span>
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </div>
       </div>
 
-      <SidebarContent className='gap-6 group-data-[collapsible=icon]:gap-2'>
-        {activeWorkspaceId && (
-          <>
-            <div className='group-data-[collapsible=icon]:hidden rounded-2xl bg-sidebar-accent p-3'>
-              <SidebarGroup className='!p-0'>
-                <SidebarMenu>
-                  <SidebarMenuItem>
-                    <SidebarMenuButton className='hover:bg-background data-active:bg-background' isActive>
-                      <Home className='h-4 w-4' />
-                      <span>Home</span>
-                    </SidebarMenuButton>
-                  </SidebarMenuItem>
-                  <SidebarMenuItem>
-                    <SidebarMenuButton className='hover:bg-background'>
-                      <MessageSquare strokeWidth={2} className='h-4 w-4' />
-                      <span>Conversations</span>
-                    </SidebarMenuButton>
-                  </SidebarMenuItem>
-                </SidebarMenu>
-              </SidebarGroup>
-            </div>
+      <SidebarContent>
+        <SidebarGroup>
+          <SidebarGroupLabel className='group-data-[collapsible=icon]:hidden text-muted-foreground px-2 mb-1 text-xs font-medium'>
+            Overview
+          </SidebarGroupLabel>
+          <SidebarGroupContent>
+            <SidebarMenu>
+              <SidebarMenuItem>
+                <SidebarMenuButton className='text-muted-foreground font-medium group-data-[collapsible=icon]:justify-center rounded-[7px] px-4 py-2 [&_svg]:!size-[19px]'>
+                  <Icon icon='mingcute:pin-line' className={NAV_ICON_SIZE} />
+                  <span>Pinned</span>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+              <SidebarMenuItem>
+                <SidebarMenuButton className='text-muted-foreground font-medium group-data-[collapsible=icon]:justify-center rounded-[7px] px-4 py-2 [&_svg]:!size-[19px]'>
+                  <Icon icon='mingcute:time-line' className={NAV_ICON_SIZE} />
+                  <span>Recent</span>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+              <SidebarMenuItem>
+                <SidebarMenuButton
+                  isActive={isEntriesView && !activeSchema}
+                  className='text-muted-foreground font-medium group-data-[collapsible=icon]:justify-center rounded-[7px] px-4 py-2 [&_svg]:!size-[19px]'
+                >
+                  <Icon icon='mingcute:grid-2-line' className={NAV_ICON_SIZE} />
+                  <span>All</span>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
 
-            <div className='group-data-[collapsible=icon]:hidden rounded-2xl bg-sidebar-accent p-3'>
-              <SidebarGroup className='!p-0'>
-                <Collapsible open={isSchemasOpen} onOpenChange={setIsSchemasOpen}>
-                  <SidebarGroupLabel asChild>
-                    <CollapsibleTrigger className='flex w-full cursor-pointer items-center gap-1.5 text-left select-none'>
-                      {isSchemasOpen ? (
-                        <ChevronDown className='h-3 w-3 shrink-0' />
-                      ) : (
-                        <ChevronRight className='h-3 w-3 shrink-0' />
-                      )}
-                      <span>Schemas</span>
-                    </CollapsibleTrigger>
-                  </SidebarGroupLabel>
-                  <CollapsibleContent>
-                    <SidebarGroupContent>
-                      <SidebarMenu>
-                        <SidebarMenuItem>
-                          <SidebarMenuButton
-                            className='hover:bg-background data-active:bg-background'
-                            onClick={() => {
-                              navigate(`/w/${activeWorkspaceId}/entries?=page`);
-                            }}
-                          >
-                            <FileText className='h-4 w-4' />
-                            <span>Pages</span>
-                          </SidebarMenuButton>
-                        </SidebarMenuItem>
-                      </SidebarMenu>
-                    </SidebarGroupContent>
-                  </CollapsibleContent>
-                </Collapsible>
-              </SidebarGroup>
-            </div>
-
-            <SidebarGroup className='group-data-[collapsible=icon]:hidden'>
-              <SidebarMenu>
-                <SidebarMenuItem>
-                  <SidebarMenuButton className='hover:bg-sidebar-accent' onClick={() => {}}>
-                    <Trash2 className='h-4 w-4' />
-                    <span>Bin</span>
+        <SidebarGroup>
+          <SidebarGroupLabel className='group-data-[collapsible=icon]:hidden text-muted-foreground px-2 mb-1 text-xs font-medium'>
+            Schemas
+          </SidebarGroupLabel>
+          <SidebarGroupContent>
+            <SidebarMenu>
+              {SCHEMAS.map((schema) => (
+                <SidebarMenuItem key={schema.id}>
+                  <SidebarMenuButton
+                    isActive={isActiveRow(schema.name)}
+                    onClick={() => goToSchema(schema.name)}
+                    className='text-muted-foreground font-medium group-data-[collapsible=icon]:justify-center rounded-[7px] px-4 py-2 [&_svg]:!size-[19px]'
+                  >
+                    <Icon icon={schema.icon} className={NAV_ICON_SIZE} />
+                    <span>{schema.name}</span>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
-              </SidebarMenu>
-            </SidebarGroup>
-          </>
-        )}
+              ))}
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
+
+        <SidebarGroup>
+          <SidebarGroupLabel className='group-data-[collapsible=icon]:hidden text-muted-foreground px-2 mb-1 text-xs font-medium'>
+            Collections
+          </SidebarGroupLabel>
+          <SidebarGroupContent>
+            <SidebarMenu>
+              {COLLECTIONS.map((collection) => (
+                <SidebarMenuItem key={collection.name}>
+                  <SidebarMenuButton className='text-muted-foreground font-medium group-data-[collapsible=icon]:justify-center rounded-[7px] px-4 py-2 [&_svg]:!size-[19px]'>
+                    <Icon icon={collection.icon} className={NAV_ICON_SIZE} />
+                    <span>{collection.name}</span>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              ))}
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
+
+        <SidebarGroup>
+          <SidebarGroupContent>
+            <SidebarMenu>
+              <SidebarMenuItem>
+                <SidebarMenuButton className='text-muted-foreground font-medium group-data-[collapsible=icon]:justify-center rounded-[7px] px-4 py-2 [&_svg]:!size-[19px]'>
+                  <Icon icon='mingcute:chat-2-line' className={NAV_ICON_SIZE} />
+                  <span>Conversations</span>
+                  <span className='bg-muted-foreground ml-auto h-1.5 w-1.5 shrink-0 rounded-full' />
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
+
+        <SidebarGroup>
+          <SidebarGroupContent>
+            <SidebarMenu>
+              <SidebarMenuItem>
+                <SidebarMenuButton className='text-muted-foreground font-medium group-data-[collapsible=icon]:justify-center rounded-[7px] px-4 py-2 [&_svg]:!size-[19px]'>
+                  <Icon icon='mingcute:question-line' className={NAV_ICON_SIZE} />
+                  <span>Help</span>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+              <SidebarMenuItem>
+                <SidebarMenuButton className='text-muted-foreground font-medium group-data-[collapsible=icon]:justify-center rounded-[7px] px-4 py-2 [&_svg]:!size-[19px]'>
+                  <Icon icon='mingcute:delete-2-line' className={NAV_ICON_SIZE} />
+                  <span>Trash</span>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
       </SidebarContent>
 
       <SidebarFooter />
