@@ -9,6 +9,7 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
+  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 
@@ -26,23 +27,26 @@ export function WorkspaceSwitcher() {
     <>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <button className='hover:bg-sidebar-accent flex w-full cursor-pointer items-center gap-2 rounded-full px-4 py-2 transition-colors focus:outline-none'>
+          <button className='group flex w-full cursor-pointer items-center gap-2 rounded-full px-4 py-2 transition-colors hover:bg-[#e2e1de] focus:outline-none dark:hover:bg-[#292524]'>
             <img
               src={dicebear(activeWorkspace?.name ?? 'Workspace')}
               alt={activeWorkspace?.name ?? 'Workspace'}
               className='h-5 w-5 rounded'
             />
-            <span className='text-foreground flex-1 truncate text-left text-sm font-medium'>
+            <span className='text-foreground flex-1 truncate text-left text-[14px] font-medium'>
               {activeWorkspace?.name ?? 'Select workspace'}
             </span>
-            <Icon icon='mingcute:down-line' className='text-muted-foreground ml-auto h-3 w-3 shrink-0' />
+            <Icon
+              icon='mingcute:down-line'
+              className='text-muted-foreground ml-auto h-3 w-3 shrink-0 transition-transform duration-200 group-data-[state=open]:rotate-180'
+            />
           </button>
         </DropdownMenuTrigger>
 
         <DropdownMenuContent
           align='start'
           sideOffset={4}
-          className='border-border overflow-hidden rounded-md bg-background p-1.5 shadow-[0_2px_8px_rgb(0_0_0/0.06)] dark:shadow-[0_2px_8px_rgb(0_0_0/0.4)] w-[calc(100%+20px)]'
+          className='!w-[calc(var(--radix-dropdown-menu-trigger-width)+20px)] !overflow-hidden !rounded-md border border-border !bg-background p-1.5 !shadow-[0_2px_8px_rgb(0_0_0/0.06)] !ring-0 dark:!shadow-[0_2px_8px_rgb(0_0_0/0.4)] dark:!ring-0'
         >
           {isLoading && (
             <div className='space-y-0.5 p-1'>
@@ -58,28 +62,32 @@ export function WorkspaceSwitcher() {
                 selectWorkspace(ws);
                 navigate(`/w/${ws.id}`);
               }}
-              className={`flex cursor-pointer items-center gap-2.5 rounded-[4px] px-3 py-1.5 text-sm ${ws.id === activeWorkspaceId ? 'bg-accent' : ''}`}
+              className={`cursor-pointer rounded-[4px] px-3 py-1.5 text-[14px] [&_svg]:!size-3.5 ${ws.id === activeWorkspaceId ? 'bg-accent' : ''}`}
             >
-              <img src={dicebear(ws.name)} alt={ws.name} className='h-5 w-5 rounded' />
+              <img
+                src={dicebear(ws.name)}
+                alt={ws.name}
+                className='h-5 w-5 rounded'
+              />
               <span className='min-w-0 flex-1 truncate'>{ws.name}</span>
             </DropdownMenuItem>
           ))}
 
-          <div className='bg-border mx-1 my-2 h-px' />
+          <DropdownMenuSeparator className='mx-1 my-2 h-px bg-border' />
 
           <DropdownMenuItem
-            className='text-muted-foreground flex cursor-pointer items-center gap-2.5 rounded-[4px] px-3 py-1.5 text-sm'
-            onSelect={() => {}}
+            onClick={() => {}}
+            className='text-muted-foreground cursor-pointer rounded-[4px] px-3 py-1.5 text-[14px] [&_svg]:!size-3.5'
           >
-            <Icon icon='mingcute:settings-3-line' className='h-3.5 w-3.5' />
+            <Icon icon='mingcute:settings-3-line' />
             <span>Settings</span>
           </DropdownMenuItem>
 
           <DropdownMenuItem
-            className='text-muted-foreground flex cursor-pointer items-center gap-2.5 rounded-[4px] px-3 py-1.5 text-sm'
-            onSelect={() => setCreateDialogOpen(true)}
+            onClick={() => setCreateDialogOpen(true)}
+            className='text-muted-foreground cursor-pointer rounded-[4px] px-3 py-1.5 text-[14px] [&_svg]:!size-3.5'
           >
-            <Icon icon='mingcute:add-line' className='h-3.5 w-3.5' />
+            <Icon icon='mingcute:add-line' />
             <span>New Workspace</span>
           </DropdownMenuItem>
         </DropdownMenuContent>
