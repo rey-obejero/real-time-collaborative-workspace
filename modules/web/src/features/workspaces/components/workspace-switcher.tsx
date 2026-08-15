@@ -27,7 +27,7 @@ export function WorkspaceSwitcher() {
     <>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <button className='group flex w-full cursor-pointer items-center gap-2 rounded-full px-4 py-2 transition-colors hover:bg-[#e2e1de] focus:outline-none dark:hover:bg-[#292524]'>
+          <button className='group flex w-full cursor-pointer items-center gap-2 rounded-full px-4 py-2 transition-colors hover:bg-sidebar-accent focus:outline-none'>
             <img
               src={dicebear(activeWorkspace?.name ?? 'Workspace')}
               alt={activeWorkspace?.name ?? 'Workspace'}

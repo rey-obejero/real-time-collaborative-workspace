@@ -42,7 +42,7 @@ export function SidebarFooter() {
         <span className='text-sidebar-foreground flex-1 truncate text-left text-sm font-medium'>
           User
         </span>
-        <Icon icon='mingcute:settings-3-line' className='text-muted-foreground ml-auto h-[18px] w-[18px]' />
+        <Icon icon='mingcute:settings-3-line' className='text-muted-foreground ml-auto size-3.5' />
       </button>
     </div>
   );
