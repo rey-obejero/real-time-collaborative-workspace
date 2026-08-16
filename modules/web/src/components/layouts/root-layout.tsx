@@ -2,6 +2,7 @@ import { TooltipProvider } from '@/components/ui/tooltip';
 import { SidebarProvider } from '@/components/ui/sidebar';
 import { Sidebar } from '../sidebar';
 import { Header } from '@/features/workspaces/components/header';
+import { SettingsDialog } from '@/components/settings/settings-dialog';
 
 export interface RootLayoutProps {
   children: React.ReactNode;
@@ -19,6 +20,7 @@ export const RootLayout = ({ children }: RootLayoutProps) => {
           </main>
         </SidebarProvider>
       </TooltipProvider>
+      <SettingsDialog />
     </div>
   );
 };

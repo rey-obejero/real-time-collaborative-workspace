@@ -5,6 +5,7 @@ import { useWorkspaces } from '../hooks/use-workspaces';
 import { useWorkspace } from '../hooks/use-workspace';
 import { CreateWorkspaceDialog } from './create-workspace-dialog';
 import { Skeleton } from '@/components/ui/skeleton';
+import { useSettingsStore } from '@/stores/settings-store';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -18,6 +19,7 @@ const dicebear = (seed: string) =>
 
 export function WorkspaceSwitcher() {
   const [createDialogOpen, setCreateDialogOpen] = useState(false);
+  const openSettings = useSettingsStore((s) => s.openSettings);
   const navigate = useNavigate();
   const { data: workspaces, isLoading } = useWorkspaces();
   const { activeWorkspace, selectWorkspace, activeWorkspaceId } =
@@ -76,7 +78,7 @@ export function WorkspaceSwitcher() {
           <DropdownMenuSeparator className='mx-1 my-2 h-px bg-border' />
 
           <DropdownMenuItem
-            onClick={() => {}}
+            onClick={() => openSettings('general')}
             className='text-muted-foreground cursor-pointer rounded-[4px] px-3 py-1.5 text-[14px] [&_svg]:!size-3.5'
           >
             <Icon icon='mingcute:settings-3-line' />
