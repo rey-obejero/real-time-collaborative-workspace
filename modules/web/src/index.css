@@ -236,8 +236,7 @@
 }
 
 .bn-shortcut,
-.bn-suggestion-menu-item-shortcut,
-kbd {
+.bn-suggestion-menu-item-shortcut {
   background-color: var(--muted) !important;
   border: none !important;
   color: var(--muted-foreground) !important;

@@ -72,10 +72,10 @@ export function Sidebar() {
   };
 
   return (
-    <SidebarRoot collapsible='icon' className='border-sidebar-border border-r'>
+    <SidebarRoot collapsible='offcanvas' className='border-sidebar-border border-r'>
       <SidebarHeader />
 
-      <div className='group-data-[collapsible=icon]:hidden px-3 pb-2'>
+      <div className='px-3 pb-2'>
         <div className='bg-secondary rounded-md p-1'>
           <button className='hover:bg-sidebar-accent text-foreground flex w-full cursor-pointer items-center gap-2 rounded-[4px] px-2.5 py-1.5 text-left text-sm transition-colors focus:outline-none [&_svg]:!size-3.5'>
             <Icon icon='mingcute:search-2-line' className='h-3.5 w-3.5' />
@@ -122,19 +122,19 @@ export function Sidebar() {
 
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel className='group-data-[collapsible=icon]:hidden text-muted-foreground px-2 mb-1 text-xs font-medium'>
+          <SidebarGroupLabel className='text-muted-foreground px-2 mb-1 text-xs font-medium'>
             Overview
           </SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               <SidebarMenuItem>
-                <SidebarMenuButton className='text-muted-foreground font-medium group-data-[collapsible=icon]:justify-center rounded-[7px] px-4 py-2 [&_svg]:!size-3.5'>
+                <SidebarMenuButton className='text-muted-foreground font-medium rounded-[7px] px-4 py-2 [&_svg]:!size-3.5'>
                   <Icon icon='mingcute:pin-line' className={NAV_ICON_SIZE} />
                   <span>Pinned</span>
                 </SidebarMenuButton>
               </SidebarMenuItem>
               <SidebarMenuItem>
-                <SidebarMenuButton className='text-muted-foreground font-medium group-data-[collapsible=icon]:justify-center rounded-[7px] px-4 py-2 [&_svg]:!size-3.5'>
+                <SidebarMenuButton className='text-muted-foreground font-medium rounded-[7px] px-4 py-2 [&_svg]:!size-3.5'>
                   <Icon icon='mingcute:time-line' className={NAV_ICON_SIZE} />
                   <span>Recent</span>
                 </SidebarMenuButton>
@@ -153,7 +153,7 @@ export function Sidebar() {
         </SidebarGroup>
 
         <SidebarGroup>
-          <SidebarGroupLabel className='group-data-[collapsible=icon]:hidden text-muted-foreground px-2 mb-1 text-xs font-medium'>
+          <SidebarGroupLabel className='text-muted-foreground px-2 mb-1 text-xs font-medium'>
             Schemas
           </SidebarGroupLabel>
           <SidebarGroupContent>
@@ -175,14 +175,14 @@ export function Sidebar() {
         </SidebarGroup>
 
         <SidebarGroup>
-          <SidebarGroupLabel className='group-data-[collapsible=icon]:hidden text-muted-foreground px-2 mb-1 text-xs font-medium'>
+          <SidebarGroupLabel className='text-muted-foreground px-2 mb-1 text-xs font-medium'>
             Collections
           </SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               {COLLECTIONS.map((collection) => (
                 <SidebarMenuItem key={collection.name}>
-                  <SidebarMenuButton className='text-muted-foreground font-medium group-data-[collapsible=icon]:justify-center rounded-[7px] px-4 py-2 [&_svg]:!size-3.5'>
+                  <SidebarMenuButton className='text-muted-foreground font-medium rounded-[7px] px-4 py-2 [&_svg]:!size-3.5'>
                     <Icon icon={collection.icon} className={NAV_ICON_SIZE} />
                     <span>{collection.name}</span>
                   </SidebarMenuButton>
@@ -196,7 +196,7 @@ export function Sidebar() {
           <SidebarGroupContent>
             <SidebarMenu>
               <SidebarMenuItem>
-                <SidebarMenuButton className='text-muted-foreground font-medium group-data-[collapsible=icon]:justify-center rounded-[7px] px-2.5 py-2 [&_svg]:!size-3.5'>
+                <SidebarMenuButton className='text-muted-foreground font-medium rounded-[7px] px-2.5 py-2 [&_svg]:!size-3.5'>
                   <Icon icon='mingcute:chat-2-line' className={NAV_ICON_SIZE} />
                   <span>Conversations</span>
                   <span className='bg-foreground/70 ml-auto h-1.5 w-1.5 shrink-0 rounded-full' />
@@ -210,13 +210,13 @@ export function Sidebar() {
           <SidebarGroupContent>
             <SidebarMenu>
               <SidebarMenuItem>
-                <SidebarMenuButton className='text-muted-foreground font-medium group-data-[collapsible=icon]:justify-center rounded-[7px] px-2.5 py-2 [&_svg]:!size-3.5'>
+                <SidebarMenuButton className='text-muted-foreground font-medium rounded-[7px] px-2.5 py-2 [&_svg]:!size-3.5'>
                   <Icon icon='mingcute:question-line' className={NAV_ICON_SIZE} />
                   <span>Help</span>
                 </SidebarMenuButton>
               </SidebarMenuItem>
               <SidebarMenuItem>
-                <SidebarMenuButton className='text-muted-foreground font-medium group-data-[collapsible=icon]:justify-center rounded-[7px] px-2.5 py-2 [&_svg]:!size-3.5'>
+                <SidebarMenuButton className='text-muted-foreground font-medium rounded-[7px] px-2.5 py-2 [&_svg]:!size-3.5'>
                   <Icon icon='mingcute:delete-2-line' className={NAV_ICON_SIZE} />
                   <span>Trash</span>
                 </SidebarMenuButton>
