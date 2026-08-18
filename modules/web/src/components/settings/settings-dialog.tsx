@@ -83,8 +83,6 @@ const PROPERTIES = [
 const dicebear = (seed: string) =>
   `https://api.dicebear.com/10.x/initials/svg?initialsVariant=alt:1&lettersVariant=single:0&backgroundColor=000000&textColor=ffffff&seed=${encodeURIComponent(seed)}`;
 
-const SMALL_BTN = 'h-7 rounded-[7px] px-2.5 text-[12px]';
-
 function SectionHeading({ title, subtitle }: { title: string; subtitle: string }) {
   return (
     <>
@@ -135,13 +133,10 @@ function PreferencesSection() {
             Switch between light and dark mode
           </div>
         </div>
-        <button
-          onClick={toggleDark}
-          className='border-border hover:bg-muted inline-flex cursor-pointer items-center gap-1.5 rounded-[7px] border bg-transparent px-3 py-1.5 text-[12px] font-medium'
-        >
-          <Icon icon={isDark ? 'mingcute:sun-line' : 'mingcute:moon-line'} className='size-3.5' />
+        <Button variant='outline' onClick={toggleDark}>
+          <Icon icon={isDark ? 'mingcute:sun-line' : 'mingcute:moon-line'} />
           {isDark ? 'Light' : 'Dark'}
-        </button>
+        </Button>
       </div>
     </div>
   );
@@ -230,16 +225,16 @@ function MembersSection({
           Other options
         </div>
         <div className='flex flex-wrap gap-2'>
-          <Button variant='outline' className={SMALL_BTN}>
-            <Icon icon='mingcute:link-line' className='size-3.5' />
+          <Button variant='outline' size='sm'>
+            <Icon icon='mingcute:link-line' />
             Copy link
           </Button>
-          <Button variant='outline' className={SMALL_BTN}>
-            <Icon icon='mingcute:qrcode-line' className='size-3.5' />
+          <Button variant='outline' size='sm'>
+            <Icon icon='mingcute:qrcode-line' />
             QR code
           </Button>
-          <Button variant='outline' className={SMALL_BTN}>
-            <Icon icon='mingcute:settings-3-line' className='size-3.5' />
+          <Button variant='outline' size='sm'>
+            <Icon icon='mingcute:settings-3-line' />
             Manage link
           </Button>
         </div>
@@ -295,7 +290,7 @@ function SchemasSection() {
                 {schema.name}
               </span>
             </div>
-            <Button variant='outline' className={SMALL_BTN}>
+            <Button variant='outline' size='sm'>
               Edit
             </Button>
           </div>

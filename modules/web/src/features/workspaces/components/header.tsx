@@ -7,11 +7,8 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from '@/components/ui/tooltip';
+import { Button } from '@/components/ui/button';
 import { useWorkspace } from '../hooks/use-workspace';
-
-const HEADER_BTN =
-  'relative w-7 h-7 flex items-center justify-center rounded-[7px] hover:bg-hover cursor-pointer';
-const HEADER_ICON = 'w-3.5 h-3.5';
 
 export function Header() {
   const { toggleSidebar } = useSidebar();
@@ -39,9 +36,9 @@ export function Header() {
       <div className='flex items-center gap-1.5'>
         <Tooltip>
           <TooltipTrigger asChild>
-            <button onClick={toggleSidebar} className={HEADER_BTN}>
-              <Icon icon='mingcute:menu-line' className={HEADER_ICON} />
-            </button>
+            <Button variant='ghost' size='icon' onClick={toggleSidebar}>
+              <Icon icon='mingcute:menu-line' />
+            </Button>
           </TooltipTrigger>
           <TooltipContent side='bottom' sideOffset={4}>
             Toggle sidebar
@@ -50,9 +47,9 @@ export function Header() {
 
         <Tooltip>
           <TooltipTrigger asChild>
-            <button onClick={() => navigate(-1)} className={HEADER_BTN}>
-              <Icon icon='mingcute:left-line' className={HEADER_ICON} />
-            </button>
+            <Button variant='ghost' size='icon' onClick={() => navigate(-1)}>
+              <Icon icon='mingcute:left-line' />
+            </Button>
           </TooltipTrigger>
           <TooltipContent side='bottom' sideOffset={4}>
             Back
@@ -61,11 +58,13 @@ export function Header() {
 
         <Tooltip>
           <TooltipTrigger asChild>
-            <button
-              className='text-muted-foreground pointer-events-none w-7 h-7 flex items-center justify-center rounded-[7px] cursor-default'
+            <Button
+              variant='ghost'
+              size='icon'
+              className='pointer-events-none text-muted-foreground'
             >
-              <Icon icon='mingcute:right-line' className={HEADER_ICON} />
-            </button>
+              <Icon icon='mingcute:right-line' />
+            </Button>
           </TooltipTrigger>
           <TooltipContent side='bottom' sideOffset={4}>
             Forward
@@ -74,9 +73,9 @@ export function Header() {
 
         <Tooltip>
           <TooltipTrigger asChild>
-            <button className={HEADER_BTN}>
-              <Icon icon='mingcute:time-line' className={HEADER_ICON} />
-            </button>
+            <Button variant='ghost' size='icon'>
+              <Icon icon='mingcute:time-line' />
+            </Button>
           </TooltipTrigger>
           <TooltipContent side='bottom' sideOffset={4}>
             Recents
@@ -94,34 +93,34 @@ export function Header() {
       <div className='flex items-center justify-end gap-1.5'>
         <Tooltip>
           <TooltipTrigger asChild>
-            <button onClick={toggleDark} className={HEADER_BTN}>
+            <Button variant='ghost' size='icon' onClick={toggleDark}>
               {isDark ? (
-                <Icon icon='mingcute:sun-line' className={HEADER_ICON} />
+                <Icon icon='mingcute:sun-line' />
               ) : (
-                <Icon icon='mingcute:moon-line' className={HEADER_ICON} />
+                <Icon icon='mingcute:moon-line' />
               )}
-            </button>
+            </Button>
           </TooltipTrigger>
           <TooltipContent side='bottom' sideOffset={4}>
             {isDark ? 'Switch to light mode' : 'Switch to dark mode'}
           </TooltipContent>
         </Tooltip>
 
-        <button className='flex h-7 items-center gap-1.5 rounded-[7px] px-2 cursor-pointer text-[14px] font-medium text-foreground hover:bg-hover'>
-          <Icon icon='mingcute:ai-fill' className='w-3.5 h-3.5' />
+        <Button variant='ghost' size='sm' className='gap-1.5 text-[14px]'>
+          <Icon icon='mingcute:ai-fill' />
           <span>Ask AI</span>
-        </button>
+        </Button>
 
-        <button className='border-border flex h-7 items-center gap-1.5 rounded-[7px] border bg-transparent px-2 cursor-pointer text-[14px] font-medium text-foreground hover:bg-hover'>
-          <Icon icon='mingcute:link-2-line' className='w-3.5 h-3.5' />
+        <Button variant='outline' size='sm' className='gap-1.5 text-[14px]'>
+          <Icon icon='mingcute:link-2-line' />
           <span>Share</span>
-        </button>
+        </Button>
 
         <Tooltip>
           <TooltipTrigger asChild>
-            <button className='relative w-8 h-8 flex items-center justify-center rounded-[7px] hover:bg-hover cursor-pointer'>
-              <Icon icon='mingcute:more-1-fill' className='w-5 h-5' />
-            </button>
+            <Button variant='ghost' size='icon-sm'>
+              <Icon icon='mingcute:more-1-fill' className='size-5' />
+            </Button>
           </TooltipTrigger>
           <TooltipContent side='bottom' sideOffset={4}>
             Menu
