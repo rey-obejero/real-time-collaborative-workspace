@@ -1,7 +1,7 @@
 @import 'tailwindcss';
 @import 'tw-animate-css';
 @import 'shadcn/tailwind.css';
-@import '@fontsource-variable/inter';
+@import '@fontsource-variable/dm-sans';
 
 @source '../node_modules/@blocknote/shadcn';
 
@@ -10,8 +10,7 @@
 @theme inline {
   --font-heading: var(--font-sans);
   --font-sans:
-    'Inter Variable', DM Sans, ui-sans-serif, system-ui, -apple-system,
-    sans-serif;
+    'DM Sans Variable', ui-sans-serif, system-ui, sans-serif;
   --font-serif: var(--font-serif);
   --font-mono:
     Geist Mono, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
@@ -51,8 +50,8 @@
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
 
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
+  --radius-sm: calc(var(--radius) - 6px);
+  --radius-md: calc(var(--radius) - 4px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
   --radius-2xl: calc(var(--radius) + 8px);
@@ -73,27 +72,27 @@
 }
 
 :root {
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(0.995 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
+  --background: oklch(0.965 0.004 85);
+  --foreground: oklch(0.216 0.006 56);
+  --card: oklch(0.966 0.004 104);
+  --card-foreground: oklch(0.216 0.006 56);
+  --popover: oklch(0.966 0.004 104);
+  --popover-foreground: oklch(0.216 0.006 56);
 
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.87 0 0);
-  --secondary-foreground: oklch(0.145 0 0);
-  --muted: oklch(0.95 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.95 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --destructive-foreground: oklch(1 0 0);
+  --primary: oklch(0.216 0.006 56);
+  --primary-foreground: oklch(0.985 0.001 106);
+  --secondary: oklch(0.934 0.004 92);
+  --secondary-foreground: oklch(0.216 0.006 56);
+  --muted: oklch(0.934 0.004 92);
+  --muted-foreground: oklch(0.517 0.014 75);
+  --accent: oklch(0.934 0.004 92);
+  --accent-foreground: oklch(0.216 0.006 56);
+  --destructive: oklch(0.693 0.197 27);
+  --destructive-foreground: oklch(0.985 0.001 106);
 
-  --border: transparent;
-  --input: oklch(0.97 0 0);
-  --ring: oklch(0.708 0 0);
+  --border: oklch(0.903 0.005 93);
+  --input: oklch(0.934 0.004 92);
+  --ring: oklch(0.623 0.214 260 / 0.5);
 
   --chart-1: oklch(0.205 0 0);
   --chart-2: oklch(0.4 0 0);
@@ -101,18 +100,18 @@
   --chart-4: oklch(0.7 0 0);
   --chart-5: oklch(0.85 0 0);
 
-  --sidebar: oklch(1 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: transparent;
+  --sidebar: oklch(0.955 0.005 85);
+  --sidebar-foreground: oklch(0.216 0.006 56);
+  --sidebar-primary: oklch(0.216 0.006 56);
+  --sidebar-primary-foreground: oklch(0.985 0.001 106);
+  --sidebar-accent: oklch(0.916 0.006 83);
+  --sidebar-accent-foreground: oklch(0.216 0.006 56);
+  --sidebar-border: oklch(0.903 0.005 93);
   --sidebar-ring: oklch(0.708 0 0);
 
   --font-serif: ui-serif, Georgia, Cambria, 'Times New Roman', Times, serif;
   --font-mono: Geist Mono, ui-monospace, monospace;
-  --radius: 0.5rem;
+  --radius: 0.75rem;
 
   --shadow-x: 0;
   --shadow-y: 1px;
@@ -143,27 +142,27 @@
 }
 
 .dark {
-  --background: oklch(0.205 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.165 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.205 0 0);
-  --popover-foreground: oklch(0.985 0 0);
+  --background: oklch(0.220 0.006 60);
+  --foreground: oklch(0.97 0.001 106);
+  --card: oklch(0.216 0.006 56);
+  --card-foreground: oklch(0.97 0.001 106);
+  --popover: oklch(0.268 0.007 34);
+  --popover-foreground: oklch(0.97 0.001 106);
 
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.371 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.704 0.191 22.216);
-  --destructive-foreground: oklch(0.985 0 0);
+  --primary: oklch(0.97 0.001 106);
+  --primary-foreground: oklch(0.216 0.006 56);
+  --secondary: oklch(0.268 0.007 34);
+  --secondary-foreground: oklch(0.97 0.001 106);
+  --muted: oklch(0.268 0.007 34);
+  --muted-foreground: oklch(0.985 0.001 106 / 0.65);
+  --accent: oklch(0.268 0.007 34);
+  --accent-foreground: oklch(0.97 0.001 106);
+  --destructive: oklch(0.693 0.197 27);
+  --destructive-foreground: oklch(0.97 0.001 106);
 
-  --border: transparent;
-  --input: oklch(0.269 0 0);
-  --ring: oklch(0.556 0 0);
+  --border: oklch(0.374 0.01 68);
+  --input: oklch(0.216 0.006 56);
+  --ring: oklch(0.623 0.214 260 / 0.5);
 
   --chart-1: oklch(0.95 0 0);
   --chart-2: oklch(0.8 0 0);
@@ -171,13 +170,13 @@
   --chart-4: oklch(0.5 0 0);
   --chart-5: oklch(0.35 0 0);
 
-  --sidebar: oklch(0.269 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.922 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: transparent;
+  --sidebar: oklch(0.205 0.006 60);
+  --sidebar-foreground: oklch(0.97 0.001 106);
+  --sidebar-primary: oklch(0.97 0.001 106);
+  --sidebar-primary-foreground: oklch(0.216 0.006 56);
+  --sidebar-accent: oklch(0.298 0.006 79);
+  --sidebar-accent-foreground: oklch(0.97 0.001 106);
+  --sidebar-border: oklch(0.374 0.01 68);
   --sidebar-ring: oklch(0.439 0 0);
 
   --shadow-2xs: 0 1px 3px 0px hsl(0 0% 0% / 0.15);
@@ -237,8 +236,7 @@
 }
 
 .bn-shortcut,
-.bn-suggestion-menu-item-shortcut,
-kbd {
+.bn-suggestion-menu-item-shortcut {
   background-color: var(--muted) !important;
   border: none !important;
   color: var(--muted-foreground) !important;

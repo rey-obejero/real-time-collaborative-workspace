@@ -1,55 +1,26 @@
-import { Globe } from 'lucide-react';
-import { useSidebar } from '@/components/ui/sidebar';
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from '@/components/ui/tooltip';
+import { Icon } from '@iconify/react';
+import { useSettingsStore } from '@/stores/settings-store';
 
 export function SidebarFooter() {
-  const { state } = useSidebar();
-  const isCollapsed = state === 'collapsed';
-
-  if (isCollapsed) {
-    return (
-      <div className='flex items-center justify-center p-2'>
-        <Tooltip>
-          <TooltipTrigger asChild>
-            <button className='flex h-7 w-7 shrink-0 cursor-default items-center justify-center rounded-full bg-sidebar-accent text-xs font-semibold'>
-              U
-            </button>
-          </TooltipTrigger>
-          <TooltipContent side='right' sideOffset={8}>
-            User
-          </TooltipContent>
-        </Tooltip>
-      </div>
-    );
-  }
+  const openSettings = useSettingsStore((s) => s.openSettings);
+  const handleOpenSettings = () => openSettings('personal');
 
   return (
-    <div className='flex items-center justify-between rounded-2xl border border-border bg-background p-3'>
-      <div className='flex items-center gap-2.5'>
-        <div className='flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-sidebar-accent text-xs font-semibold'>
-          U
-        </div>
-        <span className='flex-1 truncate text-sm font-medium text-sidebar-foreground'>
+    <div className='px-3 py-3'>
+      <button
+        onClick={handleOpenSettings}
+        className='hover:bg-sidebar-accent flex w-full cursor-pointer items-center gap-2 rounded-full px-4 py-2 transition-colors focus:outline-none'
+      >
+        <img
+          src='https://api.dicebear.com/10.x/initials/svg?initialsVariant=alt:1&lettersVariant=single:0&backgroundColor=000000&textColor=ffffff&seed=User'
+          alt='User'
+          className='h-5 w-5 shrink-0 rounded'
+        />
+        <span className='text-sidebar-foreground flex-1 truncate text-left text-sm font-medium'>
           User
         </span>
-      </div>
-
-      <div className='flex shrink-0 gap-1'>
-        <Tooltip>
-          <TooltipTrigger asChild>
-            <button className='hover:bg-sidebar-accent flex h-7 w-7 cursor-pointer items-center justify-center rounded-lg transition-colors focus:outline-none'>
-              <Globe className='text-muted-foreground h-3.5 w-3.5' />
-            </button>
-          </TooltipTrigger>
-          <TooltipContent side='top' sideOffset={4}>
-            Open Web
-          </TooltipContent>
-        </Tooltip>
-      </div>
+        <Icon icon='mingcute:settings-3-line' className='text-muted-foreground ml-auto size-3.5' />
+      </button>
     </div>
   );
 }
