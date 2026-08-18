@@ -40,7 +40,7 @@ export const SignInForm = () => {
           id='email'
           type='email'
           placeholder='Enter your email'
-          className='bg-background h-11'
+
           {...register('email')}
         />
         {errors.email && (
@@ -53,7 +53,7 @@ export const SignInForm = () => {
           id='password'
           type='password'
           placeholder='Enter your password'
-          className='bg-background h-11'
+
           {...register('password')}
         />
         <div className='flex items-center justify-end'>

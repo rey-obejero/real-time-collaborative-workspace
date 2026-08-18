@@ -133,7 +133,7 @@ function PreferencesSection() {
             Switch between light and dark mode
           </div>
         </div>
-        <Button variant='outline' className='!rounded-[7px] !px-3 !py-1.5 !text-[12px]' onClick={toggleDark}>
+        <Button variant='outline' className='!px-3 !py-1.5 !text-[12px]' onClick={toggleDark}>
           <Icon icon={isDark ? 'mingcute:moon-line' : 'mingcute:sun-line'} />
           {isDark ? 'Dark' : 'Light'}
         </Button>
@@ -159,7 +159,7 @@ function GeneralSection() {
           id='workspace-name'
           value={workspaceName}
           onChange={(e) => setWorkspaceName(e.target.value)}
-          className='!h-auto w-60 !rounded-[7px] border-border !bg-input px-3 py-1.5 !text-[12px]'
+          className='w-60'
         />
       </div>
     </div>
@@ -176,7 +176,7 @@ function RoleMenu({
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <button className='border-border hover:bg-muted inline-flex shrink-0 cursor-pointer items-center gap-1 rounded-[7px] border bg-transparent px-2.5 py-1 text-[12px] font-medium capitalize'>
+        <button className='border-border hover:bg-muted inline-flex shrink-0 cursor-pointer items-center gap-1 rounded-md border bg-transparent px-2.5 py-1 text-[12px] font-medium capitalize'>
           {value}
           <Icon icon='mingcute:down-line' className='size-3' />
         </button>
@@ -184,7 +184,7 @@ function RoleMenu({
       <DropdownMenuContent
         align='end'
         sideOffset={4}
-        className='!min-w-24 !rounded-[7px] border border-border !bg-background p-1.5 !shadow-[0_2px_8px_rgb(0_0_0/0.06)] !ring-0 dark:!shadow-[0_2px_8px_rgb(0_0_0/0.4)] dark:!ring-0'
+        className='!min-w-24 !rounded-md border border-border !bg-background p-1.5 !shadow-[0_2px_8px_rgb(0_0_0/0.06)] !ring-0 dark:!shadow-[0_2px_8px_rgb(0_0_0/0.4)] dark:!ring-0'
       >
         {MEMBER_ROLES.map((role) => (
           <DropdownMenuItem
@@ -216,7 +216,7 @@ function MembersSection({
         subtitle='Invite and manage members who can access this workspace.'
       />
 
-      <Button className='mb-5 !rounded-[7px]' onClick={onAddMembers}>
+      <Button className='mb-5' onClick={onAddMembers}>
         Add members
       </Button>
 
@@ -225,15 +225,15 @@ function MembersSection({
           Other options
         </div>
         <div className='flex flex-wrap gap-2'>
-          <Button variant='outline' size='sm' className='!rounded-[7px]'>
+          <Button variant='outline' size='sm'>
             <Icon icon='mingcute:link-line' />
             Copy link
           </Button>
-          <Button variant='outline' size='sm' className='!rounded-[7px]'>
+          <Button variant='outline' size='sm'>
             <Icon icon='mingcute:qrcode-line' />
             QR code
           </Button>
-          <Button variant='outline' size='sm' className='!rounded-[7px]'>
+          <Button variant='outline' size='sm'>
             <Icon icon='mingcute:settings-3-line' />
             Manage link
           </Button>
@@ -290,7 +290,7 @@ function SchemasSection() {
                 {schema.name}
               </span>
             </div>
-            <Button variant='outline' size='sm' className='!rounded-[7px]'>
+            <Button variant='outline' size='sm'>
               Edit
             </Button>
           </div>
@@ -382,7 +382,7 @@ export function SettingsDialog() {
                         key={item.id}
                         onClick={() => setSection(item.id)}
                         aria-current={activeSection === item.id ? 'page' : undefined}
-                        className={`flex w-full cursor-pointer items-center gap-2 rounded-[7px] px-4 py-1.5 text-[14px] font-medium transition-colors focus:outline-none ${activeSection === item.id ? 'bg-sidebar-accent text-foreground' : 'text-muted-foreground hover:bg-sidebar-accent hover:text-foreground'}`}
+                        className={`flex w-full cursor-pointer items-center gap-2 rounded-md px-4 py-1.5 text-[14px] font-medium transition-colors focus:outline-none ${activeSection === item.id ? 'bg-sidebar-accent text-foreground' : 'text-muted-foreground hover:bg-sidebar-accent hover:text-foreground'}`}
                       >
                         <Icon icon={item.icon} className='size-3.5' />
                         <span>{item.label}</span>

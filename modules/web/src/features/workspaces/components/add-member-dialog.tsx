@@ -70,19 +70,18 @@ export function AddMemberDialog({
             }
           }}
           autoFocus
-          className='!h-auto !rounded-[7px] border-border !bg-input px-3 py-1.5 !text-[12px]'
         />
 
         <DialogFooter>
           <Button
             variant='outline'
-            className='!rounded-[7px] !px-3 !py-1.5 !text-[12px]'
+            className='!px-3 !py-1.5 !text-[12px]'
             onClick={() => onOpenChange(false)}
           >
             Cancel
           </Button>
           <Button
-            className='!rounded-[7px] !px-3 !py-1.5 !text-[12px]'
+            className='!px-3 !py-1.5 !text-[12px]'
             onClick={handleAddMember}
           >
             Add member
