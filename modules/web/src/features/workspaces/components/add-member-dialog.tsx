@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Icon } from '@iconify/react';
 import {
   Dialog,
   DialogContent,
@@ -41,7 +42,16 @@ export function AddMemberDialog({
 
   return (
     <Dialog open={open} onOpenChange={handleOpenChange}>
-      <DialogContent className='gap-5 sm:max-w-xs'>
+      <DialogContent
+        showCloseButton={false}
+        className='gap-5 !rounded-lg !shadow-[0_8px_40px_rgb(0_0_0/0.12)] dark:!shadow-[0_8px_40px_rgb(0_0_0/0.5)] !ring-0 sm:max-w-xs'
+      >
+        <button
+          onClick={() => onOpenChange(false)}
+          className='absolute top-3 right-3 z-20 flex size-7 items-center justify-center rounded-full text-muted-foreground hover:bg-muted hover:text-foreground'
+        >
+          <Icon icon='mingcute:x-line' className='size-3.5' />
+        </button>
         <DialogHeader>
           <DialogTitle className='text-[20px]'>Add member</DialogTitle>
           <DialogDescription>
@@ -60,13 +70,23 @@ export function AddMemberDialog({
             }
           }}
           autoFocus
+          className='!h-auto !rounded-[7px] border-border !bg-input px-3 py-1.5 !text-[12px]'
         />
 
         <DialogFooter>
-          <Button variant='outline' onClick={() => onOpenChange(false)}>
+          <Button
+            variant='outline'
+            className='!rounded-[7px] !px-3 !py-1.5 !text-[12px]'
+            onClick={() => onOpenChange(false)}
+          >
             Cancel
           </Button>
-          <Button onClick={handleAddMember}>Add member</Button>
+          <Button
+            className='!rounded-[7px] !px-3 !py-1.5 !text-[12px]'
+            onClick={handleAddMember}
+          >
+            Add member
+          </Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>

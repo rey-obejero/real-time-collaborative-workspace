@@ -133,9 +133,9 @@ function PreferencesSection() {
             Switch between light and dark mode
           </div>
         </div>
-        <Button variant='outline' onClick={toggleDark}>
-          <Icon icon={isDark ? 'mingcute:sun-line' : 'mingcute:moon-line'} />
-          {isDark ? 'Light' : 'Dark'}
+        <Button variant='outline' className='!rounded-[7px] !px-3 !py-1.5 !text-[12px]' onClick={toggleDark}>
+          <Icon icon={isDark ? 'mingcute:moon-line' : 'mingcute:sun-line'} />
+          {isDark ? 'Dark' : 'Light'}
         </Button>
       </div>
     </div>
@@ -159,7 +159,7 @@ function GeneralSection() {
           id='workspace-name'
           value={workspaceName}
           onChange={(e) => setWorkspaceName(e.target.value)}
-          className='w-60'
+          className='!h-auto w-60 !rounded-[7px] border-border !bg-input px-3 py-1.5 !text-[12px]'
         />
       </div>
     </div>
@@ -176,7 +176,7 @@ function RoleMenu({
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <button className='border-border hover:bg-muted inline-flex shrink-0 cursor-pointer items-center gap-1 rounded-md border bg-transparent px-2.5 py-1 text-[12px] font-medium capitalize'>
+        <button className='border-border hover:bg-muted inline-flex shrink-0 cursor-pointer items-center gap-1 rounded-[7px] border bg-transparent px-2.5 py-1 text-[12px] font-medium capitalize'>
           {value}
           <Icon icon='mingcute:down-line' className='size-3' />
         </button>
@@ -184,13 +184,13 @@ function RoleMenu({
       <DropdownMenuContent
         align='end'
         sideOffset={4}
-        className='!min-w-24 !rounded-md border border-border !bg-background p-1.5 !shadow-[0_2px_8px_rgb(0_0_0/0.06)] !ring-0 dark:!shadow-[0_2px_8px_rgb(0_0_0/0.4)] dark:!ring-0'
+        className='!min-w-24 !rounded-[7px] border border-border !bg-background p-1.5 !shadow-[0_2px_8px_rgb(0_0_0/0.06)] !ring-0 dark:!shadow-[0_2px_8px_rgb(0_0_0/0.4)] dark:!ring-0'
       >
         {MEMBER_ROLES.map((role) => (
           <DropdownMenuItem
             key={role}
             onClick={() => onChange(role)}
-            className={`cursor-pointer capitalize ${role === value ? 'bg-accent' : ''}`}
+            className={`cursor-pointer rounded-[4px] px-3 py-1.5 text-[12px] capitalize ${role === value ? 'bg-accent' : ''}`}
           >
             {role}
           </DropdownMenuItem>
@@ -216,7 +216,7 @@ function MembersSection({
         subtitle='Invite and manage members who can access this workspace.'
       />
 
-      <Button className='mb-5' onClick={onAddMembers}>
+      <Button className='mb-5 !rounded-[7px]' onClick={onAddMembers}>
         Add members
       </Button>
 
@@ -225,15 +225,15 @@ function MembersSection({
           Other options
         </div>
         <div className='flex flex-wrap gap-2'>
-          <Button variant='outline' size='sm'>
+          <Button variant='outline' size='sm' className='!rounded-[7px]'>
             <Icon icon='mingcute:link-line' />
             Copy link
           </Button>
-          <Button variant='outline' size='sm'>
+          <Button variant='outline' size='sm' className='!rounded-[7px]'>
             <Icon icon='mingcute:qrcode-line' />
             QR code
           </Button>
-          <Button variant='outline' size='sm'>
+          <Button variant='outline' size='sm' className='!rounded-[7px]'>
             <Icon icon='mingcute:settings-3-line' />
             Manage link
           </Button>
@@ -285,12 +285,12 @@ function SchemasSection() {
         <div key={schema.id} className='border-b border-border py-2.5 last:border-b-0'>
           <div className='flex items-center justify-between gap-3'>
             <div className='flex min-w-0 items-center gap-2.5'>
-              <Icon icon={schema.icon} className='text-muted-foreground size-3.5 shrink-0' />
+              <Icon icon={schema.icon} className='text-muted-foreground size-4 shrink-0' />
               <span className='text-foreground truncate text-[14px] font-medium'>
                 {schema.name}
               </span>
             </div>
-            <Button variant='outline' size='sm'>
+            <Button variant='outline' size='sm' className='!rounded-[7px]'>
               Edit
             </Button>
           </div>
@@ -313,12 +313,14 @@ function PropertiesSection() {
           className='border-b border-border py-2.5 last:border-b-0'
         >
           <div className='flex items-center justify-between gap-3'>
-            <span className='text-foreground text-[14px] font-medium'>
-              {property.name}
-            </span>
-            <span className='text-muted-foreground shrink-0 text-[12px]'>
-              {property.types.join(', ')}
-            </span>
+            <div className='flex min-w-0 flex-col gap-0.5'>
+              <span className='text-foreground text-[14px] font-medium'>
+                {property.name}
+              </span>
+              <span className='text-muted-foreground text-[12px]'>
+                {property.types.join(', ')}
+              </span>
+            </div>
           </div>
         </div>
       ))}
@@ -350,35 +352,48 @@ export function SettingsDialog() {
           if (!isOpen) closeSettings();
         }}
       >
-        <DialogContent className='min-h-[60vh] max-h-[80vh] gap-0 overflow-hidden p-0 sm:max-w-2xl'>
+        <DialogContent
+          showCloseButton={false}
+          className='min-h-[60vh] max-h-[80vh] gap-0 overflow-hidden rounded-lg p-0 shadow-[0_8px_40px_rgb(0_0_0/0.12)] dark:shadow-[0_8px_40px_rgb(0_0_0/0.5)] !ring-0 sm:max-w-2xl'
+        >
+          <button
+            onClick={() => closeSettings()}
+            className='absolute top-3 right-3 z-20 flex size-7 items-center justify-center rounded-full text-muted-foreground hover:bg-muted hover:text-foreground'
+          >
+            <Icon icon='mingcute:x-line' className='size-3.5' />
+          </button>
           <DialogTitle className='sr-only'>Settings</DialogTitle>
           <DialogDescription className='sr-only'>
             Settings for your account and workspace.
           </DialogDescription>
 
           <div className='flex min-h-0 flex-1'>
-            <nav className='bg-sidebar w-50 shrink-0 overflow-y-auto border-r border-border py-4'>
-              {NAV_GROUPS.map((group) => (
-                <div key={group.label} className='mb-3'>
-                  <div className='text-muted-foreground px-2 mb-1 text-[12px] font-medium'>
-                    {group.label}
-                  </div>
-                  {group.items.map((item) => (
-                    <button
-                      key={item.id}
-                      onClick={() => setSection(item.id)}
-                      aria-current={activeSection === item.id ? 'page' : undefined}
-                      className={`flex w-full cursor-pointer items-center gap-2 px-4 py-2.5 text-[14px] font-medium transition-colors focus:outline-none ${activeSection === item.id ? 'bg-accent' : 'hover:bg-sidebar-accent'}`}
+            <nav className='bg-sidebar no-scrollbar w-50 shrink-0 overflow-y-auto border-r border-border'>
+              <div className='px-3 py-4 space-y-1.5'>
+                {NAV_GROUPS.map((group, groupIdx) => (
+                  <div key={group.label} className='space-y-1.5'>
+                    <div
+                      className={`text-muted-foreground px-2 text-[12px] font-medium ${groupIdx > 0 ? 'mt-4' : ''}`}
                     >
-                      <Icon icon={item.icon} className='size-3.5' />
-                      <span>{item.label}</span>
-                    </button>
-                  ))}
-                </div>
-              ))}
+                      {group.label}
+                    </div>
+                    {group.items.map((item) => (
+                      <button
+                        key={item.id}
+                        onClick={() => setSection(item.id)}
+                        aria-current={activeSection === item.id ? 'page' : undefined}
+                        className={`flex w-full cursor-pointer items-center gap-2 rounded-[7px] px-4 py-1.5 text-[14px] font-medium transition-colors focus:outline-none ${activeSection === item.id ? 'bg-sidebar-accent text-foreground' : 'text-muted-foreground hover:bg-sidebar-accent hover:text-foreground'}`}
+                      >
+                        <Icon icon={item.icon} className='size-3.5' />
+                        <span>{item.label}</span>
+                      </button>
+                    ))}
+                  </div>
+                ))}
+              </div>
             </nav>
 
-            <div className='flex-1 overflow-y-auto p-7'>
+            <div className='no-scrollbar flex-1 overflow-y-auto p-7'>
               {activeSection === 'personal' && <PersonalSection />}
               {activeSection === 'preferences' && <PreferencesSection />}
               {activeSection === 'general' && <GeneralSection />}
