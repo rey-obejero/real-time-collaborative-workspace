@@ -2,7 +2,7 @@ using KnowledgeManagementApp.Api.Domain.Entities;
 
 namespace KnowledgeManagementApp.Api.Application.Features.Workspaces;
 
-public static class WorkspacesRoles
+public static class WorkspaceRolesConstants
 {
     public static Role VIEWER = new Role
     {
@@ -27,4 +27,7 @@ public static class WorkspacesRoles
         Id = Guid.Parse("6c8ca538-d3cb-46e3-bf32-1e692f16013c"),
         Name = "Owner",
     };
+
+    public static IReadOnlyList<string> AllRoleNames =>
+        [VIEWER.Name, COLLABORATOR.Name, ADMINISTRATOR.Name, OWNER.Name];
 }

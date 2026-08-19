@@ -1,5 +1,7 @@
 using System.Text;
+using FluentValidation;
 using KnowledgeManagementApp.Api.Application.Interfaces;
+using KnowledgeManagementApp.Api.Web.Features.Workspaces;
 using KnowledgeManagementApp.Api.Web.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
@@ -31,6 +33,8 @@ public static class WebServiceExtensions
         {
             options.LowercaseUrls = true;
         });
+
+        services.AddValidatorsFromAssemblyContaining<AddWorkspaceMemberRequestValidator>();
 
         services
             .AddAuthentication(options =>

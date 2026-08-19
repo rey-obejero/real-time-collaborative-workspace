@@ -24,26 +24,26 @@ public class RolePermissionConfiguration : IEntityTypeConfiguration<RolePermissi
             .OnDelete(DeleteBehavior.Restrict);
 
         builder.HasData(
-            WorkspacesRolePermissions.OwnerEntriesRead,
-            WorkspacesRolePermissions.OwnerEntriesCreate,
-            WorkspacesRolePermissions.OwnerEntriesUpdate,
-            WorkspacesRolePermissions.OwnerEntriesDelete,
-            WorkspacesRolePermissions.OwnerMembersRead,
-            WorkspacesRolePermissions.OwnerMembersManage,
-            WorkspacesRolePermissions.OwnerWorkspaceManage,
-            WorkspacesRolePermissions.OwnerWorkspaceDelete,
-            WorkspacesRolePermissions.AdminEntriesRead,
-            WorkspacesRolePermissions.AdminEntriesCreate,
-            WorkspacesRolePermissions.AdminEntriesUpdate,
-            WorkspacesRolePermissions.AdminEntriesDelete,
-            WorkspacesRolePermissions.AdminMembersRead,
-            WorkspacesRolePermissions.AdminMembersManage,
-            WorkspacesRolePermissions.AdminWorkspaceManage,
-            WorkspacesRolePermissions.CollaboratorEntriesRead,
-            WorkspacesRolePermissions.CollaboratorEntriesCreate,
-            WorkspacesRolePermissions.CollaboratorEntriesUpdate,
-            WorkspacesRolePermissions.CollaboratorEntriesDelete,
-            WorkspacesRolePermissions.ViewerEntriesRead
+            WorkspaceRolePermissionConstants.OwnerEntriesRead,
+            WorkspaceRolePermissionConstants.OwnerEntriesCreate,
+            WorkspaceRolePermissionConstants.OwnerEntriesUpdate,
+            WorkspaceRolePermissionConstants.OwnerEntriesDelete,
+            WorkspaceRolePermissionConstants.OwnerMembersRead,
+            WorkspaceRolePermissionConstants.OwnerMembersManage,
+            WorkspaceRolePermissionConstants.OwnerWorkspaceManage,
+            WorkspaceRolePermissionConstants.OwnerWorkspaceDelete,
+            WorkspaceRolePermissionConstants.AdminEntriesRead,
+            WorkspaceRolePermissionConstants.AdminEntriesCreate,
+            WorkspaceRolePermissionConstants.AdminEntriesUpdate,
+            WorkspaceRolePermissionConstants.AdminEntriesDelete,
+            WorkspaceRolePermissionConstants.AdminMembersRead,
+            WorkspaceRolePermissionConstants.AdminMembersManage,
+            WorkspaceRolePermissionConstants.AdminWorkspaceManage,
+            WorkspaceRolePermissionConstants.CollaboratorEntriesRead,
+            WorkspaceRolePermissionConstants.CollaboratorEntriesCreate,
+            WorkspaceRolePermissionConstants.CollaboratorEntriesUpdate,
+            WorkspaceRolePermissionConstants.CollaboratorEntriesDelete,
+            WorkspaceRolePermissionConstants.ViewerEntriesRead
         );
     }
 }

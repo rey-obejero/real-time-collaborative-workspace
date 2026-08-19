@@ -6,6 +6,7 @@ using KnowledgeManagementApp.Api.Domain.Entities;
 using KnowledgeManagementApp.Api.Domain.Errors;
 using KnowledgeManagementApp.Api.Domain.Interfaces;
 
+
 namespace KnowledgeManagementApp.Api.Application.Services;
 
 public class WorkspaceService : IWorkspaceService
@@ -13,6 +14,7 @@ public class WorkspaceService : IWorkspaceService
     private readonly IWorkspaceRepository _workspaceRepository;
     private readonly IWorkspaceMemberRepository _workspaceMemberRepository;
     private readonly IRoleRepository _roleRepository;
+    private readonly IUserRepository _userRepository;
     private readonly IUserContext _userContext;
     private readonly IPermissionService _permissionService;
     private readonly IUnitOfWork _unitOfWork;
@@ -21,6 +23,7 @@ public class WorkspaceService : IWorkspaceService
         IWorkspaceRepository workspaceRepository,
         IWorkspaceMemberRepository workspaceMemberRepository,
         IRoleRepository roleRepository,
+        IUserRepository userRepository,
         IUserContext userContext,
         IPermissionService permissionService,
         IUnitOfWork unitOfWork
@@ -29,6 +32,7 @@ public class WorkspaceService : IWorkspaceService
         _workspaceRepository = workspaceRepository;
         _workspaceMemberRepository = workspaceMemberRepository;
         _roleRepository = roleRepository;
+        _userRepository = userRepository;
         _userContext = userContext;
         _permissionService = permissionService;
         _unitOfWork = unitOfWork;
@@ -102,7 +106,7 @@ public class WorkspaceService : IWorkspaceService
 
     public async Task<Result<WorkspaceMemberDto>> AddWorkspaceMemberAsync(
         Guid workspaceId,
-        Guid targetUserId,
+        string targetEmail,
         string role,
         CancellationToken cancellationToken = default
     )
@@ -124,14 +128,20 @@ public class WorkspaceService : IWorkspaceService
             return Result<WorkspaceMemberDto>.Failure(WorkspaceMemberErrors.UserNotMember);
         }
 
-        if (!await _permissionService.HasPermissionAsync(currentUserId, workspaceId, Permissions.MembersManage.Name))
+        if (!await _permissionService.HasPermissionAsync(currentUserId, workspaceId, WorkspacePermissionsConstants.MembersManage.Name))
         {
             return Result<WorkspaceMemberDto>.Failure(WorkspaceMemberErrors.InsufficientPermission);
         }
 
+        var targetUser = await _userRepository.FindByEmailAsync(targetEmail);
+        if (targetUser is null)
+        {
+            return Result<WorkspaceMemberDto>.Failure(WorkspaceMemberErrors.UserNotFound);
+        }
+
         var existingMembership = await _workspaceMemberRepository.FindByWorkspaceAndUserAsync(
             workspaceId,
-            targetUserId
+            targetUser.Id
         );
         if (existingMembership is not null)
         {
@@ -147,7 +157,7 @@ public class WorkspaceService : IWorkspaceService
         var member = new WorkspaceMember()
         {
             WorkspaceId = workspaceId,
-            UserId = targetUserId,
+            UserId = targetUser.Id,
             RoleId = targetRole.Id,
         };
         await _workspaceMemberRepository.AddAsync(member);

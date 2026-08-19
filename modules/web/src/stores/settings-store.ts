@@ -9,7 +9,7 @@ export type WorkspaceSettingsSection =
 export type SettingsSection = AccountSettingsSection | WorkspaceSettingsSection;
 
 interface SettingsState {
-  open: boolean;
+  isOpen: boolean;
   activeSection: SettingsSection;
   openSettings: (section?: SettingsSection) => void;
   closeSettings: () => void;
@@ -17,18 +17,18 @@ interface SettingsState {
 }
 
 export const useSettingsStore = create<SettingsState>()((set) => ({
-  open: false,
+  isOpen: false,
   activeSection: 'general',
 
   openSettings: (section) => {
     set((state) => ({
-      open: true,
+      isOpen: true,
       activeSection: section ?? state.activeSection,
     }));
   },
 
   closeSettings: () => {
-    set({ open: false });
+    set({ isOpen: false });
   },
 
   setSection: (section) => {

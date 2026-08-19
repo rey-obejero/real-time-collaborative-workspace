@@ -12,14 +12,14 @@ public class PermissionConfiguration : IEntityTypeConfiguration<Permission>
         builder.HasKey(permission => permission.Id);
         builder.HasIndex(permission => permission.Name).IsUnique();
         builder.HasData(
-            Permissions.EntriesRead,
-            Permissions.EntriesCreate,
-            Permissions.EntriesUpdate,
-            Permissions.EntriesDelete,
-            Permissions.MembersRead,
-            Permissions.MembersManage,
-            Permissions.WorkspaceManage,
-            Permissions.WorkspaceDelete
+            WorkspacePermissionsConstants.EntriesRead,
+            WorkspacePermissionsConstants.EntriesCreate,
+            WorkspacePermissionsConstants.EntriesUpdate,
+            WorkspacePermissionsConstants.EntriesDelete,
+            WorkspacePermissionsConstants.MembersRead,
+            WorkspacePermissionsConstants.MembersManage,
+            WorkspacePermissionsConstants.WorkspaceManage,
+            WorkspacePermissionsConstants.WorkspaceDelete
         );
     }
 }

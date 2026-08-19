@@ -2,7 +2,7 @@ using KnowledgeManagementApp.Api.Domain.Entities;
 
 namespace KnowledgeManagementApp.Api.Application.Features.Workspaces;
 
-public static class Permissions
+public static class WorkspacePermissionsConstants
 {
     public static Permission EntriesRead = new Permission
     {

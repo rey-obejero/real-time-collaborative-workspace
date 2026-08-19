@@ -24,7 +24,7 @@ public interface IWorkspaceService
 
     Task<Result<WorkspaceMemberDto>> AddWorkspaceMemberAsync(
         Guid workspaceId,
-        Guid targetUserId,
+        string targetEmail,
         string role,
         CancellationToken cancellationToken = default
     );

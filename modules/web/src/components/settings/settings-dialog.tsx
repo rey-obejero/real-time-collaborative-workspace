@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import type { AxiosError } from 'axios';
 import { Icon } from '@iconify/react';
 import {
   Dialog,
@@ -17,8 +18,10 @@ import {
 import { useSettingsStore } from '@/stores/settings-store';
 import type { SettingsSection } from '@/stores/settings-store';
 import { AddMemberDialog } from '@/features/workspaces/components/add-member-dialog';
+import { useAddMember } from '@/features/workspaces/hooks/use-add-member';
+import { useWorkspace } from '@/features/workspaces/hooks/use-workspace';
 
-type MemberRole = 'Owner' | 'Editor' | 'Member';
+type MemberRole = 'Viewer' | 'Collaborator' | 'Administrator' | 'Owner';
 
 type Member = {
   name: string;
@@ -56,11 +59,7 @@ const NAV_GROUPS: NavGroup[] = [
   },
 ];
 
-const MEMBER_ROLES: MemberRole[] = ['Owner', 'Editor', 'Member'];
-
-const INITIAL_MEMBERS: Member[] = [
-  { name: 'John Doe', email: 'john.doe@example.com', role: 'Owner' },
-];
+const MEMBER_ROLES: MemberRole[] = ['Viewer', 'Collaborator', 'Administrator', 'Owner'];
 
 const SCHEMAS = [
   { id: 'page', name: 'Page', icon: 'mingcute:document-line' },
@@ -329,13 +328,28 @@ function PropertiesSection() {
 }
 
 export function SettingsDialog() {
-  const { open, activeSection, closeSettings, setSection } = useSettingsStore();
-  const [members, setMembers] = useState<Member[]>(INITIAL_MEMBERS);
-  const [addMemberOpen, setAddMemberOpen] = useState(false);
+  const { isOpen: isOpenSettings, activeSection, closeSettings, setSection } = useSettingsStore();
+  const [members, setMembers] = useState<Member[]>([]);
+  const [isAddMemberDialogOpen, setIsAddMemberDialogOpen] = useState(false);
+  const { activeWorkspaceId } = useWorkspace();
+  const addMemberMutation = useAddMember();
 
-  const handleAddMember = (email: string) => {
-    const name = email.split('@')[0] || 'Member';
-    setMembers((prev) => [...prev, { name, email, role: 'Member' }]);
+  const handleAddMember = (data: { email: string; role: string }) => {
+    if (!activeWorkspaceId) return;
+
+    addMemberMutation.mutate(
+      { workspaceId: activeWorkspaceId, data },
+      {
+        onSuccess: () => {
+          const name = data.email.split('@')[0] || 'Member';
+          setMembers((prev) => [
+            ...prev,
+            { name, email: data.email, role: data.role as MemberRole },
+          ]);
+          setIsAddMemberDialogOpen(false);
+        },
+      },
+    );
   };
 
   const handleRoleChange = (email: string, role: MemberRole) => {
@@ -347,9 +361,9 @@ export function SettingsDialog() {
   return (
     <>
       <Dialog
-        open={open}
-        onOpenChange={(isOpen) => {
-          if (!isOpen) closeSettings();
+        open={isOpenSettings}
+        onOpenChange={(open) => {
+          if (!open) closeSettings();
         }}
       >
         <DialogContent
@@ -401,7 +415,7 @@ export function SettingsDialog() {
                 <MembersSection
                   members={members}
                   onRoleChange={handleRoleChange}
-                  onAddMembers={() => setAddMemberOpen(true)}
+                  onAddMembers={() => setIsAddMemberDialogOpen(true)}
                 />
               )}
               {activeSection === 'schemas' && <SchemasSection />}
@@ -412,9 +426,17 @@ export function SettingsDialog() {
       </Dialog>
 
       <AddMemberDialog
-        open={addMemberOpen}
-        onOpenChange={setAddMemberOpen}
-        onAddMember={handleAddMember}
+        isOpen={isAddMemberDialogOpen}
+        onOpenChange={setIsAddMemberDialogOpen}
+        onSubmit={handleAddMember}
+        isPending={addMemberMutation.isPending}
+        error={
+          addMemberMutation.error
+            ? (addMemberMutation.error as AxiosError<{ error: { description: string } }>)
+                .response?.data?.error?.description ??
+              addMemberMutation.error.message
+            : null
+        }
       />
     </>
   );

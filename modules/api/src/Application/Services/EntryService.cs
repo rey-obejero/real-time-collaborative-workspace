@@ -35,7 +35,7 @@ public class EntryService : IEntryService
             !await _permissionService.HasPermissionAsync(
                 userId,
                 request.WorkspaceId,
-                Permissions.EntriesCreate.Name
+                WorkspacePermissionsConstants.EntriesCreate.Name
             )
         )
         {
@@ -82,7 +82,7 @@ public class EntryService : IEntryService
             return Result<EntryResultDto>.Failure(Error.NotFound("ENTRY_NOT_FOUND", "Entry not found."));
         }
 
-        if (!await _permissionService.HasPermissionAsync(userId, entry.WorkspaceId, Permissions.EntriesRead.Name))
+        if (!await _permissionService.HasPermissionAsync(userId, entry.WorkspaceId, WorkspacePermissionsConstants.EntriesRead.Name))
         {
             return Result<EntryResultDto>.Failure(WorkspaceMemberErrors.InsufficientPermission);
         }
@@ -104,7 +104,7 @@ public class EntryService : IEntryService
             return Result.Failure(Error.NotFound("ENTRY_NOT_FOUND", "Entry not found."));
         }
 
-        if (!await _permissionService.HasPermissionAsync(userId, entry.WorkspaceId, Permissions.EntriesUpdate.Name))
+        if (!await _permissionService.HasPermissionAsync(userId, entry.WorkspaceId, WorkspacePermissionsConstants.EntriesUpdate.Name))
         {
             return Result.Failure(WorkspaceMemberErrors.InsufficientPermission);
         }
