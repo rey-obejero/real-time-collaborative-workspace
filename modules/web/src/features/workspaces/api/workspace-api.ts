@@ -1,6 +1,10 @@
 import type { Workspace } from '@/types/api';
 import { apiClient } from '@/lib/api-client';
-import type { CreateWorkspaceRequest } from '../types/workspaces.types';
+import type {
+  AddWorkspaceMemberRequest,
+  CreateWorkspaceRequest,
+  WorkspaceMember,
+} from '../types/workspaces.types';
 
 const API_WORKSPACE_URL = '/workspaces';
 
@@ -18,6 +22,17 @@ export const workspaceApi = {
   getWorkspace: async (id: string): Promise<Workspace> => {
     const response = await apiClient.get<Workspace>(
       `${API_WORKSPACE_URL}/${id}`,
+    );
+    return response.data;
+  },
+
+  addMember: async (
+    workspaceId: string,
+    data: AddWorkspaceMemberRequest,
+  ): Promise<WorkspaceMember> => {
+    const response = await apiClient.post<WorkspaceMember>(
+      `${API_WORKSPACE_URL}/${workspaceId}/members`,
+      data,
     );
     return response.data;
   },

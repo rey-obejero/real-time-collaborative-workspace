@@ -43,7 +43,7 @@ All permission checks go through `IPermissionService`:
 bool hasPermission = await _permissionService.HasPermissionAsync(
     userId,
     workspaceId,
-    Permissions.EntriesCreate
+    WorkspacePermissionsConstants.EntriesCreate
 );
 ```
 
@@ -52,16 +52,9 @@ The service returns `Error.Forbidden` (HTTP 403) when permission is denied.
 
 ## Design-Time/Compile-Time Safety
 
-The class in `Application/Features/Workspaces/Permissions.cs` defines string
+The class in `Application/Features/Workspaces/WorkspacePermissionsConstants.cs` defines string
 constants for every permission. These constants are used instead of raw strings in
 code. This typed approach mitigates the risk of invalid permission strings.
-
-## Sync Drift Mitigation
-
-The use of the constants class introduces another source of truth aside from
-the database. To mitigate, a unit test asserts `Permissions.All.Count` equals the
-number of seeded permission rows in the database. This catches instances where
-the locally-defined constants sync out of drift with the database.
 
 ## Seeding
 

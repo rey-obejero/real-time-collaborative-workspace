@@ -21,4 +21,9 @@ public static class WorkspaceMemberErrors
         "INSUFFICIENT_PERMISSION",
         "You do not have permission to perform this action."
     );
+
+    public static Error UserNotFound = Error.NotFound(
+        "USER_NOT_FOUND",
+        "User not found."
+    );
 }

@@ -1,7 +1,10 @@
 using System.Security.Claims;
+using FluentValidation;
+using KnowledgeManagementApp.Api.Application;
 using KnowledgeManagementApp.Api.Application.Dtos;
 using KnowledgeManagementApp.Api.Application.Features.Workspaces;
 using KnowledgeManagementApp.Api.Application.Interfaces;
+using KnowledgeManagementApp.Api.Domain.Errors;
 using KnowledgeManagementApp.Api.Web.Extensions;
 using KnowledgeManagementApp.Api.Web.Features.Workspaces;
 using Microsoft.AspNetCore.Authorization;
@@ -14,14 +17,17 @@ namespace KnowledgeManagementApp.Api.Web.Controllers;
 public class WorkspaceController : ControllerBase
 {
     private readonly IWorkspaceService _workspaceService;
+    private readonly IValidator<AddWorkspaceMemberRequestDto> _addMemberValidator;
     private readonly ILogger<WorkspaceController> _logger;
 
     public WorkspaceController(
         IWorkspaceService workspaceService,
+        IValidator<AddWorkspaceMemberRequestDto> addMemberValidator,
         ILogger<WorkspaceController> logger
     )
     {
         _workspaceService = workspaceService;
+        _addMemberValidator = addMemberValidator;
         _logger = logger;
     }
 
@@ -71,9 +77,17 @@ public class WorkspaceController : ControllerBase
         [FromBody] AddWorkspaceMemberRequestDto request
     )
     {
+        var validation = await _addMemberValidator.ValidateAsync(request);
+        if (!validation.IsValid)
+        {
+            return Result
+                .Failure(Error.Validation("WorkspaceMember.Invalid", "Workspace member adding failed."))
+                .ToActionResult();
+        }
+
         var result = await _workspaceService.AddWorkspaceMemberAsync(
             workspaceId,
-            request.UserId,
+            request.Email,
             request.Role
         );
 

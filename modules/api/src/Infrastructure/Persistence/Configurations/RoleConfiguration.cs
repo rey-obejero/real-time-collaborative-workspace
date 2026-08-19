@@ -12,10 +12,10 @@ public class RoleConfiguration : IEntityTypeConfiguration<Role>
         builder.HasKey(role => role.Id);
         builder.HasIndex(role => role.Name).IsUnique();
         builder.HasData(
-            WorkspacesRoles.VIEWER,
-            WorkspacesRoles.COLLABORATOR,
-            WorkspacesRoles.ADMINISTRATOR,
-            WorkspacesRoles.OWNER
+            WorkspaceRolesConstants.VIEWER,
+            WorkspaceRolesConstants.COLLABORATOR,
+            WorkspaceRolesConstants.ADMINISTRATOR,
+            WorkspaceRolesConstants.OWNER
         );
     }
 }

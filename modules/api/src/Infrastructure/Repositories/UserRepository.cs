@@ -16,4 +16,9 @@ public class UserRepository : BaseRepository<User>, IUserRepository
         _dbContext = dbContext;
         _dbSet = dbContext.Set<User>();
     }
+
+    public async Task<User?> FindByEmailAsync(string email)
+    {
+        return await _dbSet.FirstOrDefaultAsync(u => u.Email == email);
+    }
 }

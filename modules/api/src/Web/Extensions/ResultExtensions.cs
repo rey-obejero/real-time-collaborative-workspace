@@ -19,6 +19,11 @@ public static class ResultExtensions
         return result.IsSuccess ? onSuccess(result.Value) : MapError(result.Error);
     }
 
+    public static IActionResult ToActionResult(this Result result)
+    {
+        return result.IsSuccess ? new OkResult() : MapError(result.Error);
+    }
+
     private static IActionResult MapError(Error error)
     {
         return error.Type switch
