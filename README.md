@@ -99,23 +99,8 @@ information on the web client.
 
 ## Roadmap
 
-### Features
-
-- [ ] Authentication
-  - [ ] OIDC compliance
-  - [ ] OAuth schemes
-- [ ] Workspaces
-  - [ ] Workspace memberships
-  - [ ] Real-time entry collaboration (least priority)
-  - [ ] Dynamic and granular roles/permissions
-  - [ ] Worksace API key generatino for programmatic access
-- [ ] Entries
-  - Entries sharing for non-workspace members
-  - Browser extension for quick GTD-style inboxing
-- [ ] Human-readable URLs for improved bookmark and address bar autocomplete legibility
-- [ ] Conversations
-- [ ] AI
-  - [ ] Conversations assistant
+See [documentation/roadmap.md](/documentation/roadmap.md) for the planned
+features and engineering initiatives.
 
 ## Resources
 

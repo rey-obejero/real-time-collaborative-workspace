@@ -3,6 +3,7 @@
 SOURCE_DIRECTORY := modules
 WEB_DIRECTORY := $(SOURCE_DIRECTORY)/web
 API_DIRECTORY := $(SOURCE_DIRECTORY)/api/src
+TEST_DIRECTORY := $(SOURCE_DIRECTORY)/api/tests/KnowledgeManagementApp.Api.UnitTests
 CADDY_CONFIG := infrastructure/Caddyfile
 CADDY_ADMIN := localhost:2020
 DOCKER_COMPOSE := infrastructure/docker-compose.yml
@@ -30,6 +31,10 @@ setup: ## One-time machine setup (dependencies + Caddy CA trust + privileged por
 		fi; \
 	fi
 	@$(MAKE) caddy-trust
+
+.PHONY: test-unit
+test-unit: ## Runs back-end unit tests
+	@dotnet test ${TEST_DIRECTORY}
 
 .PHONY: caddy-start
 caddy-start: ## Starts the Caddy reverse proxy
