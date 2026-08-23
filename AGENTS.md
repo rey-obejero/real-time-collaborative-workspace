@@ -80,8 +80,8 @@ Copy `.env.example` to `.env` and fill in values.
 The testing strategy is documented in `documentation/testing.md` (see also `documentation/adr/0001-testing-stack.md`).
 
 - **API unit tests:** xUnit + NSubstitute, in `modules/api/tests/KnowledgeManagementApp.Api.UnitTests/`. Run with `make test-unit`.
-- **API integration tests:** `WebApplicationFactory` + Testcontainers PostgreSQL (Phase 2, planned).
-- **E2E tests:** Playwright standalone `./e2e/` (Phase 3, planned).
+- **API integration tests:** `WebApplicationFactory` + Testcontainers PostgreSQL (planned).
+- **E2E tests:** Playwright standalone `./e2e/` (planned).
 - **Web unit/component tests:** Vitest + Testing Library (deferred). Place as `*.test.ts(x)` next to source or in `__tests__/`.
 
 When adding tests, mock service dependencies with `Substitute.For<T>()`; use a hand-written `UserContextFake` for `IUserContext`.
