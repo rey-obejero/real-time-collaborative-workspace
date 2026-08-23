@@ -7,7 +7,8 @@ the API against a real database, and end-to-end (E2E) tests prove critical user
 journeys through a real browser.
 
 See [`adr/0001-testing-stack.md`](adr/0001-testing-stack.md) for the decision
-and the alternatives that were considered.
+and the alternatives that were considered. Progress tracking lives in
+[`roadmap.md`](roadmap.md).
 
 ## Test levels
 
@@ -58,9 +59,3 @@ npx playwright install   # download browser binaries (one-time)
 npx playwright test      # against `make application`
 ```
 
-## Status
-
-- Phase 1 (back-end unit): planned.
-- Phase 2 (back-end integration): planned.
-- Phase 3 (E2E): planned.
-- Front-end unit/component (Vitest): deferred.

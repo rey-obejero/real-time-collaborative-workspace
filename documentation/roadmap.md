@@ -23,12 +23,16 @@ Real-Time Collaborative Workspace.
 
 ## Engineering Initiatives
 
-- [ ] Testing foundation (see [Testing Strategy](testing.md) and
-  [ADR 0001](adr/0001-testing-stack.md))
-  - [ ] Phase 1 — Back-end unit tests (xUnit + NSubstitute)
-  - [ ] Phase 2 — Back-end integration tests (Testcontainers + PostgreSQL)
-  - [ ] Phase 3 — End-to-end tests (Playwright, standalone `./e2e/`)
-  - [ ] Front-end unit/component tests (Vitest) — deferred
+- [ ] Testing (see [Testing Strategy](testing.md) and
+      [ADR 0001](adr/0001-testing-stack.md))
+  - [ ] API unit tests (xUnit + NSubstitute)
+    - [ ] Workspaces (`WorkspaceService`)
+      - [x] `AddWorkspaceMemberAsync`: success + insufficient-permission cases
+    - [ ] Entries (`EntryService`)
+    - [ ] Permissions (`PermissionService`)
+  - [ ] API integration tests (`WebApplicationFactory` + Testcontainers PostgreSQL)
+  - [ ] End-to-end tests (Playwright, standalone `./e2e/`)
+  - [ ] Web unit/component tests (Vitest) — deferred
 
 ## Tooling & CI/CD
 
