@@ -77,11 +77,14 @@ Copy `.env.example` to `.env` and fill in values.
 
 ## Testing Instructions
 
-**No test framework is currently configured.** Neither `modules/api` nor `modules/web` has test files or test scripts defined.
+The testing strategy is documented in `documentation/testing.md` (see also `documentation/adr/0001-testing-stack.md`).
 
-When adding tests:
-- **Web:** Use Vitest or Jest. Place test files as `*.test.ts` or `*.test.tsx` next to source or in `__tests__/` directories.
-- **API:** Use xUnit or NUnit. Place test projects under `modules/api/tests/` following `*.Tests.csproj` naming.
+- **API unit tests:** xUnit + NSubstitute, in `modules/api/tests/KnowledgeManagementApp.Api.UnitTests/`. Run with `make test-unit`.
+- **API integration tests:** `WebApplicationFactory` + Testcontainers PostgreSQL (Phase 2, planned).
+- **E2E tests:** Playwright standalone `./e2e/` (Phase 3, planned).
+- **Web unit/component tests:** Vitest + Testing Library (deferred). Place as `*.test.ts(x)` next to source or in `__tests__/`.
+
+When adding tests, mock service dependencies with `Substitute.For<T>()`; use a hand-written `UserContextFake` for `IUserContext`.
 
 Always run lint checks before committing:
 ```bash
