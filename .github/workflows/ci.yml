@@ -1,0 +1,74 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  web:
+    name: Web client
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Lint
+        run: pnpm --filter knowledge-management-app-web lint
+
+      - name: Build
+        run: pnpm --filter knowledge-management-app-web build
+
+  api:
+    name: API
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-dotnet@v6
+        with:
+          dotnet-version: 10.0.x
+
+      - name: Build
+        run: dotnet build modules/api/src/KnowledgeManagementApp.Api.csproj
+
+      - name: Unit tests
+        run: dotnet test modules/api/tests/KnowledgeManagementApp.Api.UnitTests
+
+  e2e:
+    name: End-to-end
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build and start the stack
+        run: docker compose -f infrastructure/docker-compose.e2e.yml up -d --build --wait
+
+      - name: Install Playwright browser
+        run: pnpm --filter knowledge-management-app-e2e exec playwright install --with-deps chromium
+
+      - name: Run E2E tests
+        run: pnpm --filter knowledge-management-app-e2e test
+
+      - name: Tear down the stack
+        if: always()
+        run: docker compose -f infrastructure/docker-compose.e2e.yml down -v
