@@ -1,0 +1,2 @@
+[servers]
+<your-vps-ip> ansible_user=root
