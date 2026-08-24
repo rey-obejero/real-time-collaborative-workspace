@@ -1,7 +1,7 @@
 # Testing Strategy
 
 This document describes the testing approach for the Collaborative Workspace
-monorepo (`modules/api` + `modules/web`). The strategy is **back-end-first** and
+monorepo (`modules/api` + `modules/web` + `e2e`). The strategy is **back-end-first** and
 layered: unit tests prove business logic in isolation, integration tests prove
 the API against a real database, and end-to-end (E2E) tests prove critical user
 journeys through a real browser.
@@ -52,10 +52,15 @@ dotnet test modules/api/tests/KnowledgeManagementApp.Api.UnitTests/
 # Back-end integration tests (requires Docker for the PostgreSQL container)
 dotnet test modules/api/tests/KnowledgeManagementApp.Api.IntegrationTests/
 
-# End-to-end tests (standalone ./e2e package)
-cd ./e2e
-npm install
-npx playwright install   # download browser binaries (one-time)
-npx playwright test      # against `make application`
+# End-to-end tests (containerized app stack + Playwright)
+docker compose -f infrastructure/docker-compose.e2e.yml up -d --build --wait
+pnpm --filter knowledge-management-app-e2e exec playwright install chromium  # one-time
+pnpm --filter knowledge-management-app-e2e test
+docker compose -f infrastructure/docker-compose.e2e.yml down -v
 ```
+
+The E2E suite boots its own self-contained stack (PostgreSQL + API + web on
+`http://127.0.0.1:8080`, see [`ci-cd.md`](ci-cd.md)) — no dev server or
+`make application` required. The same flow runs as the `e2e` job in GitHub
+Actions.
 
