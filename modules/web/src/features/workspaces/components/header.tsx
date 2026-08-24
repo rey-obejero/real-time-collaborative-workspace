@@ -9,13 +9,11 @@ import {
 } from '@/components/ui/tooltip';
 import { Kbd } from '@/components/ui/kbd';
 import { Button } from '@/components/ui/button';
-import { useWorkspace } from '../hooks/use-workspace';
 
 export function Header() {
   const { toggleSidebar, open } = useSidebar();
   const navigate = useNavigate();
   const { pathname, search } = useLocation();
-  const { activeWorkspaceId } = useWorkspace();
   const [isDark, setIsDark] = useState(false);
 
   const toggleDark = () => {
