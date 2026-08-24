@@ -1,6 +1,8 @@
 using KnowledgeManagementApp.Api.Application.Extensions;
 using KnowledgeManagementApp.Api.Infrastructure.Extensions;
+using KnowledgeManagementApp.Api.Infrastructure.Persistence;
 using KnowledgeManagementApp.Api.Web.Extensions;
+using Microsoft.EntityFrameworkCore;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,6 +15,13 @@ builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddApplication();
 
 var app = builder.Build();
+
+if (!app.Environment.IsDevelopment())
+{
+    using var scope = app.Services.CreateScope();
+    var database = scope.ServiceProvider.GetRequiredService<KnowledgeManagementAppDbContext>();
+    await database.Database.MigrateAsync();
+}
 
 if (app.Environment.IsDevelopment())
 {
