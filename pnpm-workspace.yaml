@@ -1,0 +1,7 @@
+packages:
+  - modules/web
+  - e2e
+
+allowBuilds:
+  lefthook: true
+  msw: true

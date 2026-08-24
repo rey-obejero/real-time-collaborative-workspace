@@ -3,4 +3,13 @@
 
 .env*
 !.env.example
+node_modules/
+dist/
+test-results/
+playwright-report/
 infrastructure/.caddy.pid
+.vagrant/
+infrastructure/terraform/.terraform/
+infrastructure/terraform/.generated/
+infrastructure/terraform/.terraform.lock.hcl
+infrastructure/ansible/inventory/production.ini
