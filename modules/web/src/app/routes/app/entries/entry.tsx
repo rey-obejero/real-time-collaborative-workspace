@@ -5,18 +5,15 @@ import { Skeleton } from '@/components/ui/skeleton';
 
 export const EntryRoute = () => {
   const { entryId } = useParams<{ entryId: string }>();
-
-  if (!entryId) return null;
-
   const { data: entry, isLoading } = useEntry(entryId);
 
+  if (!entryId) return null;
   if (isLoading) return <Skeleton className='h-full w-full' />;
   if (!entry) return <div>Entry not found</div>;
 
-  console.log(entry);
-
   return (
     <EntryEditor
+      key={entry.id}
       entryId={entry.id}
       entryType={entry.type}
       initialTitle={entry.title}

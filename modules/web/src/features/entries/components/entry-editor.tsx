@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import '@blocknote/core/fonts/inter.css';
 import { useCreateBlockNote } from '@blocknote/react';
+import type { PartialBlock } from '@blocknote/core';
 import { BlockNoteSchema, defaultBlockSpecs } from '@blocknote/core';
 import { BlockNoteView } from '@blocknote/shadcn';
 import '@blocknote/shadcn/style.css';
@@ -11,7 +12,7 @@ interface EntryEditorProps {
   entryId: string;
   entryType: string;
   initialTitle?: string;
-  initialContent?: object;
+  initialContent?: PartialBlock[];
 }
 
 export const EntryEditor = ({
@@ -35,56 +36,34 @@ export const EntryEditor = ({
 
   const editor = useCreateBlockNote({
     schema,
-    initialContent: initialContent ? (initialContent as any[]) : undefined,
+    initialContent,
   });
-
-  // Sync initial content when it changes
-  useEffect(() => {
-    if (initialContent && editor) {
-      editor.replaceBlocks(editor.document, initialContent as any[]);
-      setTitle(initialTitle);
-      setIsDirty(false);
-    }
-  }, [initialContent, initialTitle, editor]);
 
   // Debounced auto-save
   useEffect(() => {
-    console.log('Effect running, isDirty:', isDirty, 'entryId:', entryId);
-
     if (!isDirty || !entryId) {
-      console.log('Skipping save — not dirty or no entryId');
       return;
     }
 
     const timeout = setTimeout(() => {
-      console.log('Timer fired, saving...');
-
       if (!editor) {
-        console.log('No editor, aborting');
         return;
       }
-
-      const content = editor.document;
-      console.log('Content:', content);
 
       updateEntry({
         id: entryId,
         type: entryType,
         title: title || 'Untitled',
-        content: JSON.stringify(content),
+        content: JSON.stringify(editor.document),
       });
 
       setIsDirty(false);
     }, 1000);
 
-    return () => {
-      console.log('Cleanup: clearing timeout');
-      clearTimeout(timeout);
-    };
+    return () => clearTimeout(timeout);
   }, [title, editor, isDirty, entryId, entryType, updateEntry]);
 
   const handleTitleChange = useCallback((value: string) => {
-    console.log('Title changed:', value);
     setTitle(value);
     setIsDirty(true);
   }, []);
@@ -94,7 +73,6 @@ export const EntryEditor = ({
     if (!editor) return;
 
     const unsubscribe = editor.onChange(() => {
-      console.log('Editor changed');
       setIsDirty(true);
     });
 

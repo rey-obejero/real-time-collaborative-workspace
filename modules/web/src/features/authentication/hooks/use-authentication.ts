@@ -1,4 +1,5 @@
 import { authenticationApi } from '../api/authentication-api';
+import { getApiErrorMessage } from '@/lib/api-error';
 import { useAuthenticationStore } from '../stores/authentication-store';
 import type {
   LoginRequest,
@@ -12,7 +13,6 @@ export const useAuthentication = () => {
     isLoading,
     error,
     setAuthentication: setAuth,
-    clearAuthentication: clearAuth,
     setLoading,
     setError,
   } = useAuthenticationStore();
@@ -31,9 +31,8 @@ export const useAuthentication = () => {
       return {
         success: true,
       };
-    } catch (error: any) {
-      const message =
-        error.response?.data?.error.description || 'Sign up failed';
+    } catch (error) {
+      const message = getApiErrorMessage(error, 'Sign up failed');
       setLoading(false);
       setError(message);
     }
@@ -53,9 +52,8 @@ export const useAuthentication = () => {
       return {
         success: true,
       };
-    } catch (error: any) {
-      const message =
-        error.response?.data?.error.description || 'Sign in failed';
+    } catch (error) {
+      const message = getApiErrorMessage(error, 'Sign in failed');
       setLoading(false);
       setError(message);
     }

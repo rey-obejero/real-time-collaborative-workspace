@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useWorkspaceStore } from '../stores/workspace-store';
 import { workspaceApi } from '../api/workspace-api';
+import { getApiErrorMessage } from '@/lib/api-error';
 import type { Workspace } from '@/types/api';
 
 export const useWorkspace = () => {
@@ -36,9 +37,8 @@ export const useWorkspace = () => {
       try {
         const workspace = await workspaceApi.getWorkspace(workspaceId);
         setActiveWorkspace(workspace);
-      } catch (err: any) {
-        const message =
-          err.response?.data?.error?.description || 'Failed to load workspace';
+      } catch (err) {
+        const message = getApiErrorMessage(err, 'Failed to load workspace');
         setError(message);
         clearActiveWorkspace();
       } finally {
@@ -47,7 +47,14 @@ export const useWorkspace = () => {
     };
 
     fetchWorkspace();
-  }, [workspaceId]);
+  }, [
+    workspaceId,
+    activeWorkspace?.id,
+    setActiveWorkspace,
+    clearActiveWorkspace,
+    setLoading,
+    setError,
+  ]);
 
   const selectWorkspace = async (workspace: Workspace) => {
     setActiveWorkspace(workspace);

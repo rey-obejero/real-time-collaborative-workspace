@@ -10,8 +10,8 @@ import { AuthenticationRoot } from './routes/authentication/root';
 import { EntriesRoute } from './routes/app/entries/entries';
 import { EntryRoute } from './routes/app/entries/entry';
 
-export const createAppRouter = () =>
-  createBrowserRouter([
+export const AppRouter = () => {
+  const router = createBrowserRouter([
     {
       path: paths.authentication.root.path,
       element: <AuthenticationRoot />,
@@ -56,8 +56,5 @@ export const createAppRouter = () =>
       ],
     },
   ]);
-
-export const AppRouter = () => {
-  const router = createAppRouter();
   return <RouterProvider router={router} />;
 };

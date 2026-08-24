@@ -1,8 +1,4 @@
-import { useNavigate } from 'react-router-dom';
-
 export const HomeRoute = () => {
-  const navigate = useNavigate();
-
   return (
     <div className='flex h-full'>
       <main className='flex flex-1 items-center justify-center'>
