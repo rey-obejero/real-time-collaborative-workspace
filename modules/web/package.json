@@ -27,6 +27,7 @@
     "react": "^19.2.5",
     "react-dom": "^19.2.5",
     "react-hook-form": "^7.75.0",
+    "react-router": "^7.15.1",
     "react-router-dom": "^7.15.0",
     "shadcn": "^4.7.0",
     "tailwind-merge": "^3.6.0",
@@ -51,7 +52,9 @@
     "typescript-eslint": "^8.58.2",
     "vite": "^8.0.10"
   },
-  "overrides": {
-    "prosemirror-model": "1.25.4"
+  "pnpm": {
+    "overrides": {
+      "prosemirror-model": "1.25.4"
+    }
   }
 }

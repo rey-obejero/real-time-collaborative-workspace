@@ -23,8 +23,9 @@ application: ## Starts the application
 	@$(MAKE) -j3 caddy-start web api
 
 .PHONY: setup
-setup: ## One-time machine setup (dependencies + Caddy CA trust + privileged ports)
-	@npm install --prefix ${WEB_DIRECTORY}
+setup: ## One-time machine setup (dependencies + git hooks + Caddy CA trust + privileged ports)
+	@pnpm install
+	@pnpm exec lefthook install
 	@if ! sudo setcap cap_net_bind_service=+ep $$(command -v caddy) 2>/dev/null; then \
 		if [ -x "$$(command -v caddy)" ]; then \
 			echo "warning: could not grant Caddy privileged ports (setcap failed) — caddy-start may fail to bind :443; re-run 'make setup' or run the setcap command manually" >&2; \
@@ -67,7 +68,7 @@ caddy-trust-windows: ## Imports Caddy's local CA into the Windows user root stor
 
 .PHONY: web
 web: ## Starts the web client
-	@npm run --prefix ${WEB_DIRECTORY} dev
+	@pnpm --filter knowledge-management-app-web dev
 
 .PHONY: api
 api: database-up ## Starts the API

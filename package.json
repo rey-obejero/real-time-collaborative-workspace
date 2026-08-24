@@ -1,0 +1,14 @@
+{
+  "name": "real-time-collaborative-workspace",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@11.17.0",
+  "scripts": {
+    "lint": "pnpm --filter knowledge-management-app-web lint"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^21.2.2",
+    "@commitlint/config-conventional": "^21.2.2",
+    "lefthook": "^2.1.10"
+  }
+}
