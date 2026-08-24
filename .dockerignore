@@ -1,0 +1,9 @@
+**
+!package.json
+!pnpm-workspace.yaml
+!pnpm-lock.yaml
+!modules/web/**
+modules/web/node_modules
+modules/web/dist
+!infrastructure/Caddyfile.prod
+!infrastructure/Caddyfile.e2e
