@@ -76,9 +76,9 @@ api: database-up ## Starts the API
 
 .PHONY: database-up
 database-up: ## Starts database container
-	@docker compose -f ${DOCKER_COMPOSE} up -d --remove-orphans database
-	@docker compose -f ${DOCKER_COMPOSE} ps database
+	@docker compose --env-file .env -f ${DOCKER_COMPOSE} up -d --remove-orphans database
+	@docker compose --env-file .env -f ${DOCKER_COMPOSE} ps database
 
 .PHONY: database-down
 database-down: ## Kills the database container
-	@docker compose -f ${DOCKER_COMPOSE} down database
+	@docker compose --env-file .env -f ${DOCKER_COMPOSE} down database
