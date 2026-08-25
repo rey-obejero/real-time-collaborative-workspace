@@ -6,7 +6,7 @@
   vars:
     deploy_mode: production # "production" or "emulation"
     app_dir: /opt/knowledge-management-app
-    db_name: knowledge_management_app_database
+    db_name: real_time_collaborative_workspace_database
     db_user: kma_app
     db_password: ""
     jwt_secret: ""
