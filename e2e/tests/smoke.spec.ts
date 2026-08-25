@@ -23,10 +23,16 @@ test('sign up lands in the app and can create a workspace', async ({ page }) => 
     .fill('E2E Workspace');
   await page.getByRole('button', { name: 'Create', exact: true }).click();
 
-  await switcher.click();
-  await expect(
-    page.getByRole('menuitem', { name: /E2E Workspace/ }),
-  ).toBeVisible();
+  const trigger = page.getByRole('button', {
+    name: /Select workspace|E2E Workspace/,
+  });
+  const created = page.getByRole('menuitem', { name: 'E2E Workspace' });
+  await expect(async () => {
+    await expect(trigger).toBeVisible();
+    await trigger.click();
+    await expect(created).toBeVisible();
+    await page.keyboard.press('Escape');
+  }).toPass({ timeout: 30_000 });
 });
 
 test('a registered user can sign in', async ({ page }) => {
