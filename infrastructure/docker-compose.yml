@@ -1,3 +1,5 @@
+name: real-time-collaborative-workspace
+
 services:
   database:
     image: postgres:18-alpine
