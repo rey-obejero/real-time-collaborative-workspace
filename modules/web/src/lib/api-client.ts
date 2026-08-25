@@ -30,5 +30,6 @@ apiClient.interceptors.response.use(
       localStorage.removeItem('authentication');
       window.location.href = paths.authentication.signIn.getHref();
     }
+    return Promise.reject(error);
   },
 );
