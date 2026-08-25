@@ -69,6 +69,14 @@ jobs:
       - name: Run E2E tests
         run: pnpm --filter knowledge-management-app-e2e test
 
+      - name: Upload Playwright artifacts
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-results
+          path: e2e/test-results/
+          retention-days: 7
+
       - name: Tear down the stack
         if: always()
         run: docker compose -f infrastructure/docker-compose.e2e.yml down -v
